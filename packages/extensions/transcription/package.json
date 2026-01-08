@@ -1,5 +1,5 @@
 {
-  "name": "@glost/extensions-transcription",
+  "name": "glost-transcription",
   "version": "0.1.0",
   "description": "Transcription extension for GLOST - adds pronunciation data",
   "type": "module",
@@ -17,9 +17,9 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@glost/core": "workspace:*",
-    "@glost/common": "workspace:*",
-    "@glost/extensions": "workspace:*"
+    "glost": "workspace:*",
+    "glost-common": "workspace:*",
+    "glost-extensions": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.8.3",

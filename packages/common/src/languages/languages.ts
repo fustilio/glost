@@ -10,7 +10,7 @@
 import type { z } from "zod";
 import { constructZodLiteralUnionType } from "../utils/zod";
 
-// Re-export core utilities
+// Re-export locale utilities
 export {
   // ISO-639 mappings
   ISO639_1_TO_3,
@@ -42,6 +42,98 @@ export {
   getLanguageInfo,
 } from "./data/locale";
 
+// Re-export proficiency utilities
+export {
+  // Core types
+  type ProficiencyLevel,
+  type ProficiencyStandard,
+  type ProficiencyInfo,
+
+  // CEFR (base reference)
+  CEFR_LEVELS,
+  type CEFRLevel,
+  CEFR_TO_NUMERIC,
+  cefrToNumeric,
+  numericToCEFR,
+
+  // ILR (US Government)
+  ILR_LEVELS,
+  type ILRLevel,
+  ilrToNumeric,
+  numericToILR,
+
+  // ACTFL (American)
+  ACTFL_LEVELS,
+  type ACTFLLevel,
+  actflToNumeric,
+  numericToACTFL,
+
+  // HSK (Chinese)
+  HSK_LEVELS,
+  type HSKLevel,
+  hskToNumeric,
+  numericToHSK,
+
+  // JLPT (Japanese)
+  JLPT_LEVELS,
+  type JLPTLevel,
+  jlptToNumeric,
+  numericToJLPT,
+
+  // TOPIK (Korean)
+  TOPIK_LEVELS,
+  type TOPIKLevel,
+  topikToNumeric,
+  numericToTOPIK,
+
+  // IELTS (English)
+  type IELTSBand,
+  ieltsToNumeric,
+  numericToIELTS,
+
+  // TOEFL (English)
+  type TOEFLScore,
+  toeflToNumeric,
+  numericToTOEFL,
+
+  // Cambridge (English)
+  CAMBRIDGE_LEVELS,
+  type CambridgeLevel,
+  cambridgeToNumeric,
+  numericToCambridge,
+
+  // DELE (Spanish)
+  DELE_LEVELS,
+  type DELELevel,
+  deleToNumeric,
+  numericToDELE,
+
+  // DELF/DALF (French)
+  DELF_LEVELS,
+  DALF_LEVELS,
+  type DELFLevel,
+  type DALFLevel,
+  type FrenchDiplomaLevel,
+  delfDalfToNumeric,
+  numericToDELFDALF,
+
+  // Goethe (German)
+  GOETHE_LEVELS,
+  type GoetheLevel,
+  goetheToNumeric,
+  numericToGoethe,
+
+  // Universal conversion
+  toNumericLevel,
+  fromNumericLevel,
+  getProficiencyInfo,
+
+  // Utility functions
+  meetsLevel,
+  levelProgress,
+  levelsBetween,
+} from "./data/proficiency";
+
 // ============================================================================
 // Type Definitions
 // ============================================================================
@@ -72,22 +164,11 @@ export const languageCodeSchema = constructZodLiteralUnionType([
 export type GlostLanguage = z.infer<typeof languageCodeSchema>;
 
 // ============================================================================
-// CEFR Levels
-// ============================================================================
-
-export const CEFR_LEVELS = [
-  "Pre-A1", "A1", "A2", "B1", "B2", "C1", "C2",
-] as const;
-
-export type CefrLevel = (typeof CEFR_LEVELS)[number];
-
-// ============================================================================
 // Convenience Functions
 // ============================================================================
 
 import {
   getLanguageName as _getLanguageName,
-  toISO639_3,
   SPECIAL_CODES as _SPECIAL_CODES,
 } from "./data/locale";
 
@@ -121,12 +202,15 @@ export function isSpecialCode(code: string): boolean {
 /** @deprecated Use GlostLanguage instead */
 export type LingoLogLanguage = GlostLanguage;
 
-/** @deprecated Use CEFR_LEVELS instead */
-export const LINGOLOG_CEFR_LEVELS = CEFR_LEVELS;
-
-/** @deprecated Use CefrLevel instead */
-export type LingoLogCefrLevels = CefrLevel;
-
 /** @deprecated Use languageCodeSchema instead */
 export const glostLanguageSchema = languageCodeSchema;
 export const lingoLogLanguageSchema = languageCodeSchema;
+
+// Re-export CefrLevel as alias for backwards compatibility
+export { type CEFRLevel as CefrLevel } from "./data/proficiency";
+
+/** @deprecated Use CEFR_LEVELS instead */
+export { CEFR_LEVELS as LINGOLOG_CEFR_LEVELS } from "./data/proficiency";
+
+/** @deprecated Use CEFRLevel instead */
+export { type CEFRLevel as LingoLogCefrLevels } from "./data/proficiency";

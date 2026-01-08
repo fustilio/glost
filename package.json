@@ -11,11 +11,15 @@
     "test:watch": "pnpm -r test -- --watch",
     "lint": "pnpm -r lint",
     "typecheck": "pnpm -r typecheck",
-    "clean": "pnpm -r exec rm -rf dist node_modules"
+    "clean": "pnpm -r exec rm -rf dist node_modules",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "changeset publish"
   },
   "devDependencies": {
-    "typescript": "^5.8.3",
+    "@changesets/cli": "^2.29.8",
     "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
     "vitest": "^3.0.5"
   },
   "keywords": [

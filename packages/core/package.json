@@ -1,5 +1,5 @@
 {
-  "name": "@glost/core",
+  "name": "glost",
   "version": "0.1.0",
   "description": "GLOST - Glossed Syntax Tree for augmenting text with language learning metadata",
   "type": "module",
@@ -33,7 +33,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@glost/common": "workspace:*",
+    "glost-common": "workspace:*",
     "unist-util-filter": "^5.0.1",
     "unist-util-find": "^3.0.0",
     "unist-util-flatmap": "^1.0.0",

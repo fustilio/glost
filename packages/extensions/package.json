@@ -1,5 +1,5 @@
 {
-  "name": "@glost/extensions",
+  "name": "glost-extensions",
   "version": "0.1.0",
   "description": "Core extension system and built-in extensions for GLOST",
   "type": "module",
@@ -30,8 +30,8 @@
     "lint": "echo 'No linting configured'"
   },
   "dependencies": {
-    "@glost/core": "workspace:*",
-    "@glost/common": "workspace:*",
+    "glost": "workspace:*",
+    "glost-common": "workspace:*",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {

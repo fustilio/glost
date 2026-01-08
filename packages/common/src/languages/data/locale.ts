@@ -8,7 +8,7 @@
  */
 
 // ============================================================================
-// ISO-639-1 to ISO-639-3 Mapping
+// ISO-639-1 to ISO-639-3 Mapping (Complete - all 184 languages)
 // ============================================================================
 
 /**
@@ -53,95 +53,272 @@ export const ISO639_3_TO_1: Record<string, string> = Object.fromEntries(
 );
 
 // ============================================================================
-// Language Names Database (ISO-639-3 based)
+// Language Names Database (ISO-639-3 based) - Complete for all ISO-639-1
 // ============================================================================
 
 export type LanguageEntry = {
   name: string;
   nativeName: string;
-  iso1?: string; // ISO-639-1 code if exists
+  iso1?: string;
 };
 
 /**
- * Common languages with names (indexed by ISO-639-3)
- * Extensible - add more as needed
+ * Complete language database indexed by ISO-639-3
+ * Includes all 184 ISO-639-1 languages plus Chinese varieties
  */
 export const LANGUAGE_DATA: Record<string, LanguageEntry> = {
-  // Major world languages
-  eng: { name: "English", nativeName: "English", iso1: "en" },
-  spa: { name: "Spanish", nativeName: "Español", iso1: "es" },
-  fra: { name: "French", nativeName: "Français", iso1: "fr" },
-  deu: { name: "German", nativeName: "Deutsch", iso1: "de" },
-  ita: { name: "Italian", nativeName: "Italiano", iso1: "it" },
-  por: { name: "Portuguese", nativeName: "Português", iso1: "pt" },
-  rus: { name: "Russian", nativeName: "Русский", iso1: "ru" },
+  // A
+  aar: { name: "Afar", nativeName: "Afaraf", iso1: "aa" },
+  abk: { name: "Abkhazian", nativeName: "Аԥсуа бызшәа", iso1: "ab" },
+  afr: { name: "Afrikaans", nativeName: "Afrikaans", iso1: "af" },
+  aka: { name: "Akan", nativeName: "Akan", iso1: "ak" },
+  amh: { name: "Amharic", nativeName: "አማርኛ", iso1: "am" },
   ara: { name: "Arabic", nativeName: "العربية", iso1: "ar" },
-  hin: { name: "Hindi", nativeName: "हिन्दी", iso1: "hi" },
-  ben: { name: "Bengali", nativeName: "বাংলা", iso1: "bn" },
-  jpn: { name: "Japanese", nativeName: "日本語", iso1: "ja" },
-  kor: { name: "Korean", nativeName: "한국어", iso1: "ko" },
-  vie: { name: "Vietnamese", nativeName: "Tiếng Việt", iso1: "vi" },
-  tha: { name: "Thai", nativeName: "ไทย", iso1: "th" },
-  ind: { name: "Indonesian", nativeName: "Bahasa Indonesia", iso1: "id" },
-  msa: { name: "Malay", nativeName: "Bahasa Melayu", iso1: "ms" },
-  nld: { name: "Dutch", nativeName: "Nederlands", iso1: "nl" },
-  pol: { name: "Polish", nativeName: "Polski", iso1: "pl" },
-  tur: { name: "Turkish", nativeName: "Türkçe", iso1: "tr" },
-  ukr: { name: "Ukrainian", nativeName: "Українська", iso1: "uk" },
-  swe: { name: "Swedish", nativeName: "Svenska", iso1: "sv" },
-  ell: { name: "Greek", nativeName: "Ελληνικά", iso1: "el" },
-  ces: { name: "Czech", nativeName: "Čeština", iso1: "cs" },
-  ron: { name: "Romanian", nativeName: "Română", iso1: "ro" },
-  hun: { name: "Hungarian", nativeName: "Magyar", iso1: "hu" },
-  fin: { name: "Finnish", nativeName: "Suomi", iso1: "fi" },
-  dan: { name: "Danish", nativeName: "Dansk", iso1: "da" },
-  nor: { name: "Norwegian", nativeName: "Norsk", iso1: "no" },
-  heb: { name: "Hebrew", nativeName: "עברית", iso1: "he" },
-  kat: { name: "Georgian", nativeName: "ქართული", iso1: "ka" },
+  arg: { name: "Aragonese", nativeName: "Aragonés", iso1: "an" },
+  asm: { name: "Assamese", nativeName: "অসমীয়া", iso1: "as" },
+  ava: { name: "Avaric", nativeName: "Авар мацӀ", iso1: "av" },
+  ave: { name: "Avestan", nativeName: "Avesta", iso1: "ae" },
+  aym: { name: "Aymara", nativeName: "Aymar aru", iso1: "ay" },
+  aze: { name: "Azerbaijani", nativeName: "Azərbaycan dili", iso1: "az" },
 
-  // Chinese varieties (ISO-639-3 distinguishes these)
+  // B
+  bak: { name: "Bashkir", nativeName: "Башҡорт теле", iso1: "ba" },
+  bam: { name: "Bambara", nativeName: "Bamanankan", iso1: "bm" },
+  bel: { name: "Belarusian", nativeName: "Беларуская", iso1: "be" },
+  ben: { name: "Bengali", nativeName: "বাংলা", iso1: "bn" },
+  bih: { name: "Bihari", nativeName: "भोजपुरी", iso1: "bh" },
+  bis: { name: "Bislama", nativeName: "Bislama", iso1: "bi" },
+  bod: { name: "Tibetan", nativeName: "བོད་སྐད", iso1: "bo" },
+  bos: { name: "Bosnian", nativeName: "Bosanski", iso1: "bs" },
+  bre: { name: "Breton", nativeName: "Brezhoneg", iso1: "br" },
+  bul: { name: "Bulgarian", nativeName: "Български", iso1: "bg" },
+
+  // C
+  cat: { name: "Catalan", nativeName: "Català", iso1: "ca" },
+  ces: { name: "Czech", nativeName: "Čeština", iso1: "cs" },
+  cha: { name: "Chamorro", nativeName: "Chamoru", iso1: "ch" },
+  che: { name: "Chechen", nativeName: "Нохчийн мотт", iso1: "ce" },
+  chu: { name: "Church Slavonic", nativeName: "Ѩзыкъ словѣньскъ", iso1: "cu" },
+  chv: { name: "Chuvash", nativeName: "Чӑваш чӗлхи", iso1: "cv" },
+  cor: { name: "Cornish", nativeName: "Kernewek", iso1: "kw" },
+  cos: { name: "Corsican", nativeName: "Corsu", iso1: "co" },
+  cre: { name: "Cree", nativeName: "ᓀᐦᐃᔭᐍᐏᐣ", iso1: "cr" },
+  cym: { name: "Welsh", nativeName: "Cymraeg", iso1: "cy" },
+
+  // D
+  dan: { name: "Danish", nativeName: "Dansk", iso1: "da" },
+  deu: { name: "German", nativeName: "Deutsch", iso1: "de" },
+  div: { name: "Divehi", nativeName: "ދިވެހި", iso1: "dv" },
+  dzo: { name: "Dzongkha", nativeName: "རྫོང་ཁ", iso1: "dz" },
+
+  // E
+  ell: { name: "Greek", nativeName: "Ελληνικά", iso1: "el" },
+  eng: { name: "English", nativeName: "English", iso1: "en" },
+  epo: { name: "Esperanto", nativeName: "Esperanto", iso1: "eo" },
+  est: { name: "Estonian", nativeName: "Eesti", iso1: "et" },
+  eus: { name: "Basque", nativeName: "Euskara", iso1: "eu" },
+  ewe: { name: "Ewe", nativeName: "Eʋegbe", iso1: "ee" },
+
+  // F
+  fao: { name: "Faroese", nativeName: "Føroyskt", iso1: "fo" },
+  fas: { name: "Persian", nativeName: "فارسی", iso1: "fa" },
+  fij: { name: "Fijian", nativeName: "Vosa Vakaviti", iso1: "fj" },
+  fin: { name: "Finnish", nativeName: "Suomi", iso1: "fi" },
+  fra: { name: "French", nativeName: "Français", iso1: "fr" },
+  fry: { name: "Western Frisian", nativeName: "Frysk", iso1: "fy" },
+  ful: { name: "Fulah", nativeName: "Fulfulde", iso1: "ff" },
+
+  // G
+  gla: { name: "Scottish Gaelic", nativeName: "Gàidhlig", iso1: "gd" },
+  gle: { name: "Irish", nativeName: "Gaeilge", iso1: "ga" },
+  glg: { name: "Galician", nativeName: "Galego", iso1: "gl" },
+  glv: { name: "Manx", nativeName: "Gaelg", iso1: "gv" },
+  grn: { name: "Guarani", nativeName: "Avañe'ẽ", iso1: "gn" },
+  guj: { name: "Gujarati", nativeName: "ગુજરાતી", iso1: "gu" },
+
+  // H
+  hat: { name: "Haitian Creole", nativeName: "Kreyòl ayisyen", iso1: "ht" },
+  hau: { name: "Hausa", nativeName: "Hausa", iso1: "ha" },
+  heb: { name: "Hebrew", nativeName: "עברית", iso1: "he" },
+  her: { name: "Herero", nativeName: "Otjiherero", iso1: "hz" },
+  hin: { name: "Hindi", nativeName: "हिन्दी", iso1: "hi" },
+  hmo: { name: "Hiri Motu", nativeName: "Hiri Motu", iso1: "ho" },
+  hrv: { name: "Croatian", nativeName: "Hrvatski", iso1: "hr" },
+  hun: { name: "Hungarian", nativeName: "Magyar", iso1: "hu" },
+  hye: { name: "Armenian", nativeName: "Հայերdelays", iso1: "hy" },
+
+  // I
+  ibo: { name: "Igbo", nativeName: "Igbo", iso1: "ig" },
+  ido: { name: "Ido", nativeName: "Ido", iso1: "io" },
+  iii: { name: "Sichuan Yi", nativeName: "ꆈꌠ꒿", iso1: "ii" },
+  iku: { name: "Inuktitut", nativeName: "ᐃᓄᒃᑎᑐᑦ", iso1: "iu" },
+  ile: { name: "Interlingue", nativeName: "Interlingue", iso1: "ie" },
+  ina: { name: "Interlingua", nativeName: "Interlingua", iso1: "ia" },
+  ind: { name: "Indonesian", nativeName: "Bahasa Indonesia", iso1: "id" },
+  ipk: { name: "Inupiaq", nativeName: "Iñupiaq", iso1: "ik" },
+  isl: { name: "Icelandic", nativeName: "Íslenska", iso1: "is" },
+  ita: { name: "Italian", nativeName: "Italiano", iso1: "it" },
+
+  // J
+  jav: { name: "Javanese", nativeName: "Basa Jawa", iso1: "jv" },
+  jpn: { name: "Japanese", nativeName: "日本語", iso1: "ja" },
+
+  // K
+  kal: { name: "Kalaallisut", nativeName: "Kalaallisut", iso1: "kl" },
+  kan: { name: "Kannada", nativeName: "ಕನ್ನಡ", iso1: "kn" },
+  kas: { name: "Kashmiri", nativeName: "कॉशुर", iso1: "ks" },
+  kat: { name: "Georgian", nativeName: "ქართული", iso1: "ka" },
+  kau: { name: "Kanuri", nativeName: "Kanuri", iso1: "kr" },
+  kaz: { name: "Kazakh", nativeName: "Қазақ тілі", iso1: "kk" },
+  khm: { name: "Khmer", nativeName: "ខ្មែរ", iso1: "km" },
+  kik: { name: "Kikuyu", nativeName: "Gĩkũyũ", iso1: "ki" },
+  kin: { name: "Kinyarwanda", nativeName: "Ikinyarwanda", iso1: "rw" },
+  kir: { name: "Kyrgyz", nativeName: "Кыргызча", iso1: "ky" },
+  kom: { name: "Komi", nativeName: "Коми кыв", iso1: "kv" },
+  kon: { name: "Kongo", nativeName: "Kikongo", iso1: "kg" },
+  kor: { name: "Korean", nativeName: "한국어", iso1: "ko" },
+  kua: { name: "Kuanyama", nativeName: "Kuanyama", iso1: "kj" },
+  kur: { name: "Kurdish", nativeName: "Kurdî", iso1: "ku" },
+
+  // L
+  lao: { name: "Lao", nativeName: "ພາສາລາວ", iso1: "lo" },
+  lat: { name: "Latin", nativeName: "Latina", iso1: "la" },
+  lav: { name: "Latvian", nativeName: "Latviešu", iso1: "lv" },
+  lim: { name: "Limburgish", nativeName: "Limburgs", iso1: "li" },
+  lin: { name: "Lingala", nativeName: "Lingála", iso1: "ln" },
+  lit: { name: "Lithuanian", nativeName: "Lietuvių", iso1: "lt" },
+  ltz: { name: "Luxembourgish", nativeName: "Lëtzebuergesch", iso1: "lb" },
+  lub: { name: "Luba-Katanga", nativeName: "Kiluba", iso1: "lu" },
+  lug: { name: "Ganda", nativeName: "Luganda", iso1: "lg" },
+
+  // M
+  mah: { name: "Marshallese", nativeName: "Kajin M̧ajeļ", iso1: "mh" },
+  mal: { name: "Malayalam", nativeName: "മലയാളം", iso1: "ml" },
+  mar: { name: "Marathi", nativeName: "मराठी", iso1: "mr" },
+  mkd: { name: "Macedonian", nativeName: "Македонски", iso1: "mk" },
+  mlg: { name: "Malagasy", nativeName: "Malagasy", iso1: "mg" },
+  mlt: { name: "Maltese", nativeName: "Malti", iso1: "mt" },
+  mon: { name: "Mongolian", nativeName: "Монгол хэл", iso1: "mn" },
+  mri: { name: "Maori", nativeName: "Te Reo Māori", iso1: "mi" },
+  msa: { name: "Malay", nativeName: "Bahasa Melayu", iso1: "ms" },
+  mya: { name: "Burmese", nativeName: "ဗမာစာ", iso1: "my" },
+
+  // N
+  nau: { name: "Nauru", nativeName: "Dorerin Naoero", iso1: "na" },
+  nav: { name: "Navajo", nativeName: "Diné bizaad", iso1: "nv" },
+  nbl: { name: "South Ndebele", nativeName: "isiNdebele", iso1: "nr" },
+  nde: { name: "North Ndebele", nativeName: "isiNdebele", iso1: "nd" },
+  ndo: { name: "Ndonga", nativeName: "Owambo", iso1: "ng" },
+  nep: { name: "Nepali", nativeName: "नेपाली", iso1: "ne" },
+  nld: { name: "Dutch", nativeName: "Nederlands", iso1: "nl" },
+  nno: { name: "Norwegian Nynorsk", nativeName: "Norsk nynorsk", iso1: "nn" },
+  nob: { name: "Norwegian Bokmål", nativeName: "Norsk bokmål", iso1: "nb" },
+  nor: { name: "Norwegian", nativeName: "Norsk", iso1: "no" },
+  nya: { name: "Chichewa", nativeName: "Chichewa", iso1: "ny" },
+
+  // O
+  oci: { name: "Occitan", nativeName: "Occitan", iso1: "oc" },
+  oji: { name: "Ojibwe", nativeName: "ᐊᓂᔑᓈᐯᒧᐎᓐ", iso1: "oj" },
+  ori: { name: "Odia", nativeName: "ଓଡ଼ିଆ", iso1: "or" },
+  orm: { name: "Oromo", nativeName: "Afaan Oromoo", iso1: "om" },
+  oss: { name: "Ossetian", nativeName: "Ирон æвзаг", iso1: "os" },
+
+  // P
+  pan: { name: "Punjabi", nativeName: "ਪੰਜਾਬੀ", iso1: "pa" },
+  pli: { name: "Pali", nativeName: "पालि", iso1: "pi" },
+  pol: { name: "Polish", nativeName: "Polski", iso1: "pl" },
+  por: { name: "Portuguese", nativeName: "Português", iso1: "pt" },
+  pus: { name: "Pashto", nativeName: "پښتو", iso1: "ps" },
+
+  // Q
+  que: { name: "Quechua", nativeName: "Runa Simi", iso1: "qu" },
+
+  // R
+  roh: { name: "Romansh", nativeName: "Rumantsch", iso1: "rm" },
+  ron: { name: "Romanian", nativeName: "Română", iso1: "ro" },
+  run: { name: "Kirundi", nativeName: "Ikirundi", iso1: "rn" },
+  rus: { name: "Russian", nativeName: "Русский", iso1: "ru" },
+
+  // S
+  sag: { name: "Sango", nativeName: "Yângâ tî sängö", iso1: "sg" },
+  san: { name: "Sanskrit", nativeName: "संस्कृतम्", iso1: "sa" },
+  sin: { name: "Sinhala", nativeName: "සිංහල", iso1: "si" },
+  slk: { name: "Slovak", nativeName: "Slovenčina", iso1: "sk" },
+  slv: { name: "Slovenian", nativeName: "Slovenščina", iso1: "sl" },
+  sme: { name: "Northern Sami", nativeName: "Davvisámegiella", iso1: "se" },
+  smo: { name: "Samoan", nativeName: "Gagana Samoa", iso1: "sm" },
+  sna: { name: "Shona", nativeName: "ChiShona", iso1: "sn" },
+  snd: { name: "Sindhi", nativeName: "سنڌي", iso1: "sd" },
+  som: { name: "Somali", nativeName: "Soomaali", iso1: "so" },
+  sot: { name: "Southern Sotho", nativeName: "Sesotho", iso1: "st" },
+  spa: { name: "Spanish", nativeName: "Español", iso1: "es" },
+  sqi: { name: "Albanian", nativeName: "Shqip", iso1: "sq" },
+  srd: { name: "Sardinian", nativeName: "Sardu", iso1: "sc" },
+  srp: { name: "Serbian", nativeName: "Српски", iso1: "sr" },
+  ssw: { name: "Swati", nativeName: "SiSwati", iso1: "ss" },
+  sun: { name: "Sundanese", nativeName: "Basa Sunda", iso1: "su" },
+  swa: { name: "Swahili", nativeName: "Kiswahili", iso1: "sw" },
+  swe: { name: "Swedish", nativeName: "Svenska", iso1: "sv" },
+
+  // T
+  tah: { name: "Tahitian", nativeName: "Reo Tahiti", iso1: "ty" },
+  tam: { name: "Tamil", nativeName: "தமிழ்", iso1: "ta" },
+  tat: { name: "Tatar", nativeName: "Татар теле", iso1: "tt" },
+  tel: { name: "Telugu", nativeName: "తెలుగు", iso1: "te" },
+  tgk: { name: "Tajik", nativeName: "Тоҷикӣ", iso1: "tg" },
+  tgl: { name: "Tagalog", nativeName: "Tagalog", iso1: "tl" },
+  tha: { name: "Thai", nativeName: "ไทย", iso1: "th" },
+  tir: { name: "Tigrinya", nativeName: "ትግርኛ", iso1: "ti" },
+  ton: { name: "Tongan", nativeName: "Lea faka-Tonga", iso1: "to" },
+  tsn: { name: "Tswana", nativeName: "Setswana", iso1: "tn" },
+  tso: { name: "Tsonga", nativeName: "Xitsonga", iso1: "ts" },
+  tuk: { name: "Turkmen", nativeName: "Türkmençe", iso1: "tk" },
+  tur: { name: "Turkish", nativeName: "Türkçe", iso1: "tr" },
+  twi: { name: "Twi", nativeName: "Twi", iso1: "tw" },
+
+  // U
+  uig: { name: "Uyghur", nativeName: "ئۇيغۇرچە", iso1: "ug" },
+  ukr: { name: "Ukrainian", nativeName: "Українська", iso1: "uk" },
+  urd: { name: "Urdu", nativeName: "اردو", iso1: "ur" },
+  uzb: { name: "Uzbek", nativeName: "Oʻzbek", iso1: "uz" },
+
+  // V
+  ven: { name: "Venda", nativeName: "Tshivenḓa", iso1: "ve" },
+  vie: { name: "Vietnamese", nativeName: "Tiếng Việt", iso1: "vi" },
+  vol: { name: "Volapük", nativeName: "Volapük", iso1: "vo" },
+
+  // W
+  wln: { name: "Walloon", nativeName: "Walon", iso1: "wa" },
+  wol: { name: "Wolof", nativeName: "Wollof", iso1: "wo" },
+
+  // X
+  xho: { name: "Xhosa", nativeName: "isiXhosa", iso1: "xh" },
+
+  // Y
+  yid: { name: "Yiddish", nativeName: "ייִדיש", iso1: "yi" },
+  yor: { name: "Yoruba", nativeName: "Yorùbá", iso1: "yo" },
+
+  // Z
+  zha: { name: "Zhuang", nativeName: "Saɯ cueŋƅ", iso1: "za" },
   zho: { name: "Chinese", nativeName: "中文", iso1: "zh" },
+  zul: { name: "Zulu", nativeName: "isiZulu", iso1: "zu" },
+
+  // ============================================================================
+  // Chinese varieties (ISO-639-3 distinguishes these - no ISO-639-1 equivalent)
+  // ============================================================================
   cmn: { name: "Mandarin Chinese", nativeName: "普通话" },
   yue: { name: "Cantonese", nativeName: "粵語" },
   nan: { name: "Min Nan Chinese", nativeName: "閩南語" },
   wuu: { name: "Wu Chinese", nativeName: "吴语" },
   hak: { name: "Hakka Chinese", nativeName: "客家話" },
-
-  // Southeast Asian languages
-  khm: { name: "Khmer", nativeName: "ខ្មែរ", iso1: "km" },
-  lao: { name: "Lao", nativeName: "ພາສາລາວ", iso1: "lo" },
-  mya: { name: "Burmese", nativeName: "ဗမာစာ", iso1: "my" },
-  tgl: { name: "Tagalog", nativeName: "Tagalog", iso1: "tl" },
-
-  // South Asian languages
-  tam: { name: "Tamil", nativeName: "தமிழ்", iso1: "ta" },
-  tel: { name: "Telugu", nativeName: "తెలుగు", iso1: "te" },
-  mal: { name: "Malayalam", nativeName: "മലയാളം", iso1: "ml" },
-  kan: { name: "Kannada", nativeName: "ಕನ್ನಡ", iso1: "kn" },
-  mar: { name: "Marathi", nativeName: "मराठी", iso1: "mr" },
-  guj: { name: "Gujarati", nativeName: "ગુજરાતી", iso1: "gu" },
-  pan: { name: "Punjabi", nativeName: "ਪੰਜਾਬੀ", iso1: "pa" },
-  urd: { name: "Urdu", nativeName: "اردو", iso1: "ur" },
-  sin: { name: "Sinhala", nativeName: "සිංහල", iso1: "si" },
-  nep: { name: "Nepali", nativeName: "नेपाली", iso1: "ne" },
-
-  // African languages
-  swa: { name: "Swahili", nativeName: "Kiswahili", iso1: "sw" },
-  hau: { name: "Hausa", nativeName: "Hausa", iso1: "ha" },
-  yor: { name: "Yoruba", nativeName: "Yorùbá", iso1: "yo" },
-  ibo: { name: "Igbo", nativeName: "Igbo", iso1: "ig" },
-  amh: { name: "Amharic", nativeName: "አማርኛ", iso1: "am" },
-  zul: { name: "Zulu", nativeName: "isiZulu", iso1: "zu" },
-  xho: { name: "Xhosa", nativeName: "isiXhosa", iso1: "xh" },
-  afr: { name: "Afrikaans", nativeName: "Afrikaans", iso1: "af" },
-
-  // Other notable languages
-  fas: { name: "Persian", nativeName: "فارسی", iso1: "fa" },
-  cat: { name: "Catalan", nativeName: "Català", iso1: "ca" },
-  eus: { name: "Basque", nativeName: "Euskara", iso1: "eu" },
-  glg: { name: "Galician", nativeName: "Galego", iso1: "gl" },
-  lat: { name: "Latin", nativeName: "Latina", iso1: "la" },
-  san: { name: "Sanskrit", nativeName: "संस्कृतम्", iso1: "sa" },
+  hsn: { name: "Xiang Chinese", nativeName: "湘语" },
+  gan: { name: "Gan Chinese", nativeName: "贛語" },
+  cjy: { name: "Jinyu Chinese", nativeName: "晋语" },
+  cpx: { name: "Pu-Xian Chinese", nativeName: "莆仙語" },
+  czh: { name: "Huizhou Chinese", nativeName: "徽州話" },
+  czo: { name: "Min Zhong Chinese", nativeName: "閩中語" },
+  mnp: { name: "Min Bei Chinese", nativeName: "閩北語" },
+  cdo: { name: "Min Dong Chinese", nativeName: "閩東語" },
 };
 
 // ============================================================================
@@ -210,9 +387,9 @@ export function isValidLanguageCode(code: string): boolean {
 // ============================================================================
 
 export type BCP47Components = {
-  language: string;  // ISO-639 code (2 or 3 letter)
-  script?: string;   // ISO-15924 script code (4 letter)
-  region?: string;   // ISO-3166-1 region code (2 letter) or UN M.49 (3 digit)
+  language: string;
+  script?: string;
+  region?: string;
 };
 
 /**
@@ -223,12 +400,10 @@ export function parseBCP47(tag: string): BCP47Components {
   const result: BCP47Components = { language: parts[0].toLowerCase() };
 
   let i = 1;
-  // Script (4 letters, title case)
   if (parts[i] && /^[A-Za-z]{4}$/.test(parts[i])) {
     result.script = parts[i].charAt(0).toUpperCase() + parts[i].slice(1).toLowerCase();
     i++;
   }
-  // Region (2 letters or 3 digits)
   if (parts[i] && (/^[A-Za-z]{2}$/.test(parts[i]) || /^\d{3}$/.test(parts[i]))) {
     result.region = parts[i].toUpperCase();
   }
@@ -263,24 +438,30 @@ export function isValidBCP47(tag: string): boolean {
 }
 
 // ============================================================================
-// Default Regions (for convenience)
+// Default Regions
 // ============================================================================
 
-/**
- * Common default regions for languages
- */
 export const DEFAULT_REGIONS: Record<string, string> = {
+  // ISO-639-3
   eng: "US", spa: "ES", fra: "FR", deu: "DE", ita: "IT", por: "PT",
   rus: "RU", ara: "SA", hin: "IN", jpn: "JP", kor: "KR", vie: "VN",
   tha: "TH", ind: "ID", msa: "MY", cmn: "CN", yue: "HK", zho: "CN",
   khm: "KH", lao: "LA", mya: "MM", kat: "GE", nld: "NL", pol: "PL",
   tur: "TR", ukr: "UA", swe: "SE", tam: "IN", mal: "IN", tel: "IN",
+  ben: "BD", fas: "IR", heb: "IL", ell: "GR", ces: "CZ", ron: "RO",
+  hun: "HU", fin: "FI", dan: "DK", nor: "NO", bul: "BG", hrv: "HR",
+  slk: "SK", slv: "SI", srp: "RS", lit: "LT", lav: "LV",
+  est: "EE", isl: "IS", cat: "ES", eus: "ES", glg: "ES", afr: "ZA",
   // ISO-639-1 shortcuts
   en: "US", es: "ES", fr: "FR", de: "DE", it: "IT", pt: "PT",
   ru: "RU", ar: "SA", hi: "IN", ja: "JP", ko: "KR", vi: "VN",
   th: "TH", id: "ID", ms: "MY", zh: "CN", km: "KH", lo: "LA",
   my: "MM", ka: "GE", nl: "NL", pl: "PL", tr: "TR", uk: "UA",
-  sv: "SE", ta: "IN", ml: "IN", te: "IN",
+  sv: "SE", ta: "IN", ml: "IN", te: "IN", bn: "BD", fa: "IR",
+  he: "IL", el: "GR", cs: "CZ", ro: "RO", hu: "HU", fi: "FI",
+  da: "DK", no: "NO", bg: "BG", hr: "HR", sk: "SK", sl: "SI",
+  sr: "RS", lt: "LT", lv: "LV", et: "EE", is: "IS", ca: "ES",
+  eu: "ES", gl: "ES", af: "ZA",
 };
 
 /**
@@ -298,14 +479,6 @@ export function toBCP47WithRegion(code: string): string {
 
 export const SPECIAL_CODES = ["ipa", "und", "mul", "zxx"] as const;
 export type SpecialCode = (typeof SPECIAL_CODES)[number];
-
-/**
- * Special code meanings:
- * - ipa: International Phonetic Alphabet
- * - und: Undetermined language
- * - mul: Multiple languages
- * - zxx: No linguistic content
- */
 
 // ============================================================================
 // Language Info Helper

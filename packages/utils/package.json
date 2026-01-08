@@ -1,5 +1,5 @@
 {
-  "name": "@glost/utils",
+  "name": "glost-utils",
   "version": "0.1.0",
   "description": "Framework-agnostic utilities for GLOST manipulation, conversion, and merging",
   "type": "module",
@@ -38,8 +38,8 @@
     "lint": "echo 'No linting configured'"
   },
   "dependencies": {
-    "@glost/core": "workspace:*",
-    "@glost/common": "workspace:*"
+    "glost": "workspace:*",
+    "glost-common": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.8.3",
