@@ -11,7 +11,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension, ExtensionContext } from "../types";
+import type { GLOSTExtension } from "../types";
 import type {
   GLOSTRoot,
   GLOSTClause,
@@ -371,7 +371,7 @@ export function createNegationTransformerExtension(
       extras: ["isNegated", "negationWord"],
     },
 
-    transform: (document: GLOSTRoot, context?: ExtensionContext) => {
+    transform: (document: GLOSTRoot) => {
       // Check if clauses exist
       const clauses = getAllClauses(document);
 

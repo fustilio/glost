@@ -1,6 +1,6 @@
 # Getting Started
 
-This guide will help you get up and running with GLOST quickly.
+This guide will help you get started with GLOST.
 
 ## Installation
 
@@ -55,9 +55,10 @@ const simple = createSimpleWord("hello", "həˈloʊ", "ipa");
 ### Creating Thai Words
 
 ```typescript
-import { createThaiWord } from 'glost';
+import { createThaiWord } from 'glost-th';
 
-const thaiWord = createThaiWord(
+const thaiWord = createThaiWord({
+  text:
   "สวัสดี",      // text
   "sa-wat-dii",  // RTGS romanization
   "interjection", // part of speech
@@ -68,9 +69,10 @@ const thaiWord = createThaiWord(
 ### Creating Japanese Words
 
 ```typescript
-import { createJapaneseWord } from 'glost';
+import { createJapaneseWord } from 'glost-ja';
 
-const japaneseWord = createJapaneseWord(
+const japaneseWord = createJapaneseWord({
+  text:
   "今日は",        // text
   "konnichiwa",    // romaji
   "interjection",  // part of speech

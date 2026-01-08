@@ -34,7 +34,7 @@ function textToGLOST(text: string): GLOSTRoot {
     return createDocumentFromParagraphs([], "en-US", "latin");
   }
 
-  const wordNodes = words.map((word) => createSimpleWord(word, "en-US"));
+  const wordNodes = words.map((word) => createSimpleWord({ text: word, transliteration: word }));
 
   return createDocumentFromParagraphs(
     [createParagraphFromSentences([createSentenceFromWords(wordNodes, "en-US", "latin")])],

@@ -188,14 +188,13 @@ function createWordFromSegment(
   const scriptSystem = languageStrategy.getScriptForLanguage(language) as ScriptSystem;
 
   // Create word node
-  const wordNode = createGLOSTWordNode(
-    text,
+  const wordNode = createGLOSTWordNode({
+    value: text,
     transcription,
-    { partOfSpeech: "" }, // Placeholder metadata
-    "word",
-    language as LanguageCode,
-    scriptSystem,
-  );
+    metadata: { partOfSpeech: "" }, // Placeholder metadata
+    lang: language as LanguageCode,
+    script: scriptSystem,
+  });
 
   // Add gender to extras if present
   if (gender) {
@@ -282,20 +281,20 @@ export function convertTextToGLOST(
     ? script.map((s) => (isRubySegment(s) ? s.base : s)).join("")
     : script;
 
-  const sentence: GLOSTSentence = createGLOSTSentenceNode(
+  const sentence: GLOSTSentence = createGLOSTSentenceNode({
     originalText,
-    langCode as LanguageCode,
-    scriptSystem,
-    words,
-  );
+    lang: langCode as LanguageCode,
+    script: scriptSystem,
+    children: words,
+  });
 
   const paragraph: GLOSTParagraph = createGLOSTParagraphNode([sentence]);
 
-  const root: GLOSTRoot = createGLOSTRootNode(
-    langCode as LanguageCode,
-    scriptSystem,
-    [paragraph],
-  );
+  const root: GLOSTRoot = createGLOSTRootNode({
+    lang: langCode as LanguageCode,
+    script: scriptSystem,
+    children: [paragraph],
+  });
 
   return root;
 }

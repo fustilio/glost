@@ -58,7 +58,6 @@ function hasNodeType(document: GLOSTRoot, nodeType: string): boolean {
 function validateNodeRequirements(
   extension: GLOSTExtension,
   document: GLOSTRoot,
-  context: ExtensionContext,
   options: ProcessorOptions,
 ): Error[] {
   const errors: Error[] = [];
@@ -199,7 +198,6 @@ export function processGLOSTWithExtensions(
         const validationErrors = validateNodeRequirements(
           extension,
           processedDocument,
-          context,
           options,
         );
 
@@ -560,7 +558,6 @@ export async function processGLOSTWithExtensionsAsync(
         const validationErrors = validateNodeRequirements(
           extension,
           processedDocument,
-          context,
           options,
         );
 

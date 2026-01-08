@@ -299,11 +299,21 @@ import {
   createGLOSTTextNode,
   createGLOSTPunctuationNode,
   createGLOSTWhiteSpaceNode,
-  createThaiWord,
-  createJapaneseWord,
   createSentenceFromWords,
   createDocumentFromParagraphs
 } from 'glost';
 ```
 
-See the [API Reference](../packages/core.md) for full documentation.
+### Language-Specific Helpers
+
+Language-specific helpers are in separate packages:
+
+```typescript
+import { createThaiWord } from 'glost-th';
+import { createJapaneseWord } from 'glost-ja';
+```
+
+See:
+- [glost-th](../../packages/languages/th/README.md) - Thai language support
+- [glost-ja](../../packages/languages/ja/README.md) - Japanese language support
+- [API Reference](../packages/core.md) - Full core documentation

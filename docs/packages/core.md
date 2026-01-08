@@ -65,31 +65,22 @@ function createSimpleWord(
 ): GLOSTWord;
 ```
 
-### createThaiWord
+### Language-Specific Helpers
 
-Create a Thai word with RTGS romanization.
+Language-specific helper functions have been moved to dedicated packages:
 
-```typescript
-function createThaiWord(
-  text: string,
-  rtgs: string,
-  partOfSpeech: string,
-  syllableCount?: number
-): GLOSTWord;
-```
-
-### createJapaneseWord
-
-Create a Japanese word with romaji.
+- **Thai:** `glost-th` package - See [glost-th README](../../packages/languages/th/README.md)
+- **Japanese:** `glost-ja` package - See [glost-ja README](../../packages/languages/ja/README.md)
 
 ```typescript
-function createJapaneseWord(
-  text: string,
-  romaji: string,
-  partOfSpeech: string,
-  furigana?: string
-): GLOSTWord;
+// Install language packages
+// npm install glost-th glost-ja
+
+import { createThaiWord } from 'glost-th';
+import { createJapaneseWord } from 'glost-ja';
 ```
+
+See [MIGRATION.md](../../MIGRATION.md) for upgrading from v0.1.x.
 
 ### createSentenceFromWords
 

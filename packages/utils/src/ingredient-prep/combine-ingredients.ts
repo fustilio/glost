@@ -123,15 +123,15 @@ function combineAppend(
     allParagraphs.push(...paragraphs);
   }
 
-  return createGLOSTRootNode(
-    language,
+  return createGLOSTRootNode({
+    lang: language,
     script,
-    allParagraphs,
-    {
+    children: allParagraphs,
+    metadata: {
       title: title || "Combined Document",
       description: description || `Combined from ${ingredients.length} sources`,
     },
-  );
+  });
 }
 
 /**
@@ -151,15 +151,15 @@ function combineMergeParagraphs(
     allParagraphs.push(...paragraphs);
   }
 
-  return createGLOSTRootNode(
-    language,
+  return createGLOSTRootNode({
+    lang: language,
     script,
-    allParagraphs,
-    {
+    children: allParagraphs,
+    metadata: {
       title: title || "Merged Paragraphs",
       description: description || `Merged ${allParagraphs.length} paragraphs`,
     },
-  );
+  });
 }
 
 /**
@@ -181,15 +181,15 @@ function combineMergeSentences(
 
   const paragraph = createGLOSTParagraphNode(allSentences);
 
-  return createGLOSTRootNode(
-    language,
+  return createGLOSTRootNode({
+    lang: language,
     script,
-    [paragraph],
-    {
+    children: [paragraph],
+    metadata: {
       title: title || "Merged Sentences",
       description: description || `Merged ${allSentences.length} sentences`,
     },
-  );
+  });
 }
 
 /**
@@ -209,24 +209,24 @@ function combineMergeWords(
     allWords.push(...words);
   }
 
-  const sentence = createGLOSTSentenceNode(
-    allWords.map((w) => w.children.find((c) => c.type === "TextNode")?.value || "").join(" "),
-    language,
+  const sentence = createGLOSTSentenceNode({
+    originalText: allWords.map((w) => w.children.find((c) => c.type === "TextNode")?.value || "").join(" "),
+    lang: language,
     script,
-    allWords,
-  );
+    children: allWords,
+  });
 
   const paragraph = createGLOSTParagraphNode([sentence]);
 
-  return createGLOSTRootNode(
-    language,
+  return createGLOSTRootNode({
+    lang: language,
     script,
-    [paragraph],
-    {
+    children: [paragraph],
+    metadata: {
       title: title || "Merged Words",
       description: description || `Merged ${allWords.length} words`,
     },
-  );
+  });
 }
 
 /**
@@ -251,14 +251,14 @@ function combineInterleave(
     }
   }
 
-  return createGLOSTRootNode(
-    language,
+  return createGLOSTRootNode({
+    lang: language,
     script,
-    allParagraphs,
-    {
+    children: allParagraphs,
+    metadata: {
       title: title || "Interleaved Document",
       description: description || `Interleaved from ${ingredients.length} sources`,
     },
-  );
+  });
 }
 

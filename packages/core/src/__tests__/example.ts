@@ -1,7 +1,5 @@
 // Example usage of the GLOST package
 import {
-  createThaiWord,
-  createJapaneseWord,
   createSentenceFromWords,
   createParagraphFromSentences,
   createDocumentFromParagraphs,
@@ -9,48 +7,50 @@ import {
   getWordTranscription,
   validateGLOSTTree,
   getWordText
-} from './index';
+} from '../index';
+import { createThaiWord } from 'glost-th';
+import { createJapaneseWord } from 'glost-ja';
 
 // ============================================================================
 // Thai Example: "สวัสดีครับ ผมชื่อสมชาย" (Hello, my name is Somchai)
 // ============================================================================
 
 const thaiWords = [
-  createThaiWord(
-    'สวัสดี',
-    'sà-wàt-dii',
-    'interjection',
-    2, // tone
-    ['sa', 'wat', 'dii']
-  ),
-  createThaiWord(
-    'ครับ',
-    'khráp',
-    'particle',
-    2,
-    ['khrap']
-  ),
-  createThaiWord(
-    'ผม',
-    'phǒm',
-    'pronoun',
-    3,
-    ['phom']
-  ),
-  createThaiWord(
-    'ชื่อ',
-    'chûue',
-    'noun',
-    3,
-    ['chue']
-  ),
-  createThaiWord(
-    'สมชาย',
-    'sǒm-chaai',
-    'proper noun',
-    3,
-    ['som', 'chaai']
-  )
+  createThaiWord({
+    text: 'สวัสดี',
+    rtgs: 'sà-wàt-dii',
+    partOfSpeech: 'interjection',
+    tone: 2,
+    syllables: ['sa', 'wat', 'dii']
+  }),
+  createThaiWord({
+    text: 'ครับ',
+    rtgs: 'khráp',
+    partOfSpeech: 'particle',
+    tone: 2,
+    syllables: ['khrap']
+  }),
+  createThaiWord({
+    text: 'ผม',
+    rtgs: 'phǒm',
+    partOfSpeech: 'pronoun',
+    tone: 3,
+    syllables: ['phom']
+  }),
+  createThaiWord({
+    text: 'ชื่อ',
+    rtgs: 'chûue',
+    partOfSpeech: 'noun',
+    tone: 3,
+    syllables: ['chue']
+  }),
+  createThaiWord({
+    text: 'สมชาย',
+    rtgs: 'sǒm-chaai',
+    partOfSpeech: 'proper noun',
+    tone: 3,
+    syllables: ['som', 'chaai']
+  })
 ];
 
 const thaiSentence = createSentenceFromWords(
@@ -65,39 +65,39 @@ const thaiSentence = createSentenceFromWords(
 // ============================================================================
 
 const japaneseWords = [
-  createJapaneseWord(
-    '私',
-    'watashi',
-    'pronoun',
-    'わたし'
-  ),
-  createJapaneseWord(
-    'の',
-    'no',
-    'particle'
-  ),
-  createJapaneseWord(
-    '名前',
-    'namae',
-    'noun',
-    'なまえ'
-  ),
-  createJapaneseWord(
-    'は',
-    'wa',
-    'particle'
-  ),
-  createJapaneseWord(
-    '田中',
-    'tanaka',
-    'proper noun',
-    'たなか'
-  ),
-  createJapaneseWord(
-    'です',
-    'desu',
-    'copula'
-  )
+  createJapaneseWord({
+    text: '私',
+    romaji: 'watashi',
+    partOfSpeech: 'pronoun',
+    furigana: 'わたし'
+  }),
+  createJapaneseWord({
+    text: 'の',
+    romaji: 'no',
+    partOfSpeech: 'particle'
+  }),
+  createJapaneseWord({
+    text: '名前',
+    romaji: 'namae',
+    partOfSpeech: 'noun',
+    furigana: 'なまえ'
+  }),
+  createJapaneseWord({
+    text: 'は',
+    romaji: 'wa',
+    partOfSpeech: 'particle'
+  }),
+  createJapaneseWord({
+    text: '田中',
+    romaji: 'tanaka',
+    partOfSpeech: 'proper noun',
+    furigana: 'たなか'
+  }),
+  createJapaneseWord({
+    text: 'です',
+    romaji: 'desu',
+    partOfSpeech: 'copula'
+  })
 ];
 
 const japaneseSentence = createSentenceFromWords(

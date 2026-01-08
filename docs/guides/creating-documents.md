@@ -48,9 +48,10 @@ const word = createSimpleWord("hello", "heloʊ", "ipa");
 With RTGS romanization:
 
 ```typescript
-import { createThaiWord } from 'glost';
+import { createThaiWord } from 'glost-th';
 
-const word = createThaiWord(
+const word = createThaiWord({
+  text:
   "สวัสดี",        // Thai text
   "sawatdi",       // RTGS romanization
   "interjection",  // part of speech
@@ -63,9 +64,10 @@ const word = createThaiWord(
 With romaji and furigana:
 
 ```typescript
-import { createJapaneseWord } from 'glost';
+import { createJapaneseWord } from 'glost-ja';
 
-const word = createJapaneseWord(
+const word = createJapaneseWord({
+  text:
   "今日",          // kanji
   "kyou",          // romaji
   "noun",          // part of speech
@@ -78,11 +80,12 @@ const word = createJapaneseWord(
 ### From Words
 
 ```typescript
-import { createSentenceFromWords, createThaiWord, createGLOSTWhiteSpaceNode } from 'glost';
+import { createSentenceFromWords, createGLOSTWhiteSpaceNode } from 'glost';
+import { createThaiWord } from 'glost-th';
 
 const words = [
-  createThaiWord("สวัสดี", "sawatdi", "interjection"),
-  createThaiWord("ครับ", "khrap", "particle")
+  createThaiWord({ text: "สวัสดี", rtgs: "sawatdi", partOfSpeech: "interjection" }),
+  createThaiWord({ text: "ครับ", rtgs: "khrap", partOfSpeech: "particle" })
 ];
 
 const sentence = createSentenceFromWords(

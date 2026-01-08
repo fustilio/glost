@@ -1,6 +1,6 @@
 # Contributing to GLOST
 
-Thank you for your interest in contributing to GLOST!
+Thank you for your interest in contributing to GLOST! We appreciate your help.
 
 ## Development Setup
 
@@ -39,6 +39,37 @@ GLOST is a monorepo managed with pnpm workspaces. Each package in `packages/` is
 - Update README files when adding features
 - Add examples for new functionality
 - Keep API documentation up to date
+
+## Contributing to the Ecosystem
+
+Beyond core GLOST contributions, you can also contribute to the ecosystem:
+
+### Create Packages
+
+- **Data Source Packages** - Dictionary data, corpus sources
+- **Transcription Systems** - Romanization systems for languages
+- **Lookup Factories** - Compose data sources with transcription systems
+- **Plugins** - Framework integrations (React, Vue, etc.)
+
+See: [Creating Data Source Packages](docs/guides/creating-data-source-packages.md)
+
+### Share Implementations
+
+Built something with GLOST? We'd be happy to feature it:
+
+1. Document your implementation and patterns
+2. Submit PR to add to [Ecosystem](docs/ecosystem.md)
+3. Share insights that might benefit others
+
+### Improve Standards
+
+Help refine GLOST standards:
+
+- [Metadata Schema](docs/standards/metadata-schema.md)
+- [Transcription Patterns](docs/guides/implementing-transcription-providers.md)
+- [Naming Conventions](docs/conventions/naming.md)
+
+Open an issue to discuss improvements or propose new standards.
 
 ## Questions?
 

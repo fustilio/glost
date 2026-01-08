@@ -13,7 +13,6 @@ import type {
   GLOSTSyllable,
   GLOSTWord,
   TranscriptionSystem,
-  TransliterationData,
 } from "./types";
 
 // ============================================================================

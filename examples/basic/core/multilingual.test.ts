@@ -11,8 +11,6 @@
 import { describe, it, expect } from "vitest";
 
 import {
-  createThaiWord,
-  createJapaneseWord,
   createGLOSTWordNode,
   createSentenceFromWords,
   createDocumentFromParagraphs,
@@ -24,6 +22,9 @@ import {
   type TransliterationData,
   type LinguisticMetadata,
 } from "glost";
+
+import { createThaiWord } from "glost-th";
+import { createJapaneseWord } from "glost-ja";
 
 describe("Multilingual Support", () => {
   describe("Thai Language", () => {

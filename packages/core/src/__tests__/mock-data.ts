@@ -3,19 +3,19 @@ import {
   createGLOSTSentenceNode,
   createGLOSTParagraphNode,
   createGLOSTRootNode
-} from './nodes';
+} from 'glost/nodes';
 
 import type {
-  GLOSTWord} from './types';
+  GLOSTWord} from '../types.js';
 
 // ============================================================================
 // Enhanced Thai Example with Extras
 // ============================================================================
 
 const thaiWordsWithExtras: GLOSTWord[] = [
-  createGLOSTWordNode(
-    'สวัสดี',
-    {
+  createGLOSTWordNode({
+    value: 'สวัสดี',
+    transcription: {
       rtgs: {
         text: 'sà-wàt-dii',
         system: 'rtgs',
@@ -38,15 +38,14 @@ const thaiWordsWithExtras: GLOSTWord[] = [
         syllables: ['sa', 'wat', 'diː']
       }
     },
-    {
+    metadata: {
       meaning: 'hello, hi',
       partOfSpeech: 'interjection',
       usage: 'greeting, formal and informal'
     },
-    'word',
-    'th',
-    'thai',
-    {
+    lang: 'th',
+    script: 'thai',
+    extras: {
       translations: {
         en: 'hello, hi',
         ja: 'こんにちは',
@@ -61,10 +60,10 @@ const thaiWordsWithExtras: GLOSTWord[] = [
         examples: ['สวัสดีครับ', 'สวัสดีค่ะ', 'สวัสดีทุกคน']
       }
     }
-  ),
-  createGLOSTWordNode(
-    'ครับ',
-    {
+  }),
+  createGLOSTWordNode({
+    value: 'ครับ',
+    transcription: {
       rtgs: {
         text: 'khráp',
         system: 'rtgs',
@@ -87,15 +86,14 @@ const thaiWordsWithExtras: GLOSTWord[] = [
         syllables: ['khrap']
       }
     },
-    {
+    metadata: {
       meaning: 'polite particle for male speakers',
       partOfSpeech: 'particle',
       usage: 'sentence ending, formal speech'
     },
-    'word',
-    'th',
-    'thai',
-    {
+    lang: 'th',
+    script: 'thai',
+    extras: {
       translations: {
         en: 'polite particle (male)',
         ja: '丁寧語の助詞（男性）',
@@ -110,10 +108,10 @@ const thaiWordsWithExtras: GLOSTWord[] = [
         examples: ['ขอบคุณครับ', 'ไม่เป็นไรครับ', 'ครับครับ']
       }
     }
-  ),
-  createGLOSTWordNode(
-    'ผม',
-    {
+  }),
+  createGLOSTWordNode({
+    value: 'ผม',
+    transcription: {
       rtgs: {
         text: 'phǒm',
         system: 'rtgs',
@@ -136,15 +134,14 @@ const thaiWordsWithExtras: GLOSTWord[] = [
         syllables: ['phom']
       }
     },
-    {
+    metadata: {
       meaning: 'I, me (male)',
       partOfSpeech: 'pronoun',
       usage: 'first person singular, male speaker'
     },
-    'word',
-    'th',
-    'thai',
-    {
+    lang: 'th',
+    script: 'thai',
+    extras: {
       translations: {
         en: 'I, me (male)',
         ja: '私（男性）',
@@ -159,10 +156,10 @@ const thaiWordsWithExtras: GLOSTWord[] = [
         examples: ['ผมชื่อ...', 'ผมชอบ...', 'ผมจะไป...']
       }
     }
-  ),
-  createGLOSTWordNode(
-    'ชื่อ',
-    {
+  }),
+  createGLOSTWordNode({
+    value: 'ชื่อ',
+    transcription: {
       rtgs: {
         text: 'chûue',
         system: 'rtgs',
@@ -185,15 +182,14 @@ const thaiWordsWithExtras: GLOSTWord[] = [
         syllables: ['chue']
       }
     },
-    {
+    metadata: {
       meaning: 'name',
       partOfSpeech: 'noun',
       usage: 'noun, can be used as verb \'to be named\''
     },
-    'word',
-    'th',
-    'thai',
-    {
+    lang: 'th',
+    script: 'thai',
+    extras: {
       translations: {
         en: 'name',
         ja: '名前',
@@ -208,10 +204,10 @@ const thaiWordsWithExtras: GLOSTWord[] = [
         examples: ['ชื่ออะไรครับ', 'ชื่อของผมคือ...', 'ตั้งชื่อ']
       }
     }
-  ),
-  createGLOSTWordNode(
-    'สมชาย',
-    {
+  }),
+  createGLOSTWordNode({
+    value: 'สมชาย',
+    transcription: {
       rtgs: {
         text: 'sǒm-chaai',
         system: 'rtgs',
@@ -234,15 +230,14 @@ const thaiWordsWithExtras: GLOSTWord[] = [
         syllables: ['som', 'chaai']
       }
     },
-    {
+    metadata: {
       meaning: 'male given name',
       partOfSpeech: 'proper noun',
       usage: 'personal name, common Thai male name'
     },
-    'word',
-    'th',
-    'thai',
-    {
+    lang: 'th',
+    script: 'thai',
+    extras: {
       translations: {
         en: 'Somchai (male name)',
         ja: 'ソムチャイ（男性名）',
@@ -257,7 +252,7 @@ const thaiWordsWithExtras: GLOSTWord[] = [
         examples: ['คุณสมชาย', 'สมชายเป็นคนดี', 'เพื่อนของสมชาย']
       }
     }
-  )
+  })
 ];
 
 // ============================================================================
@@ -265,9 +260,9 @@ const thaiWordsWithExtras: GLOSTWord[] = [
 // ============================================================================
 
 const japaneseWordsWithExtras: GLOSTWord[] = [
-  createGLOSTWordNode(
-    '私',
-    {
+  createGLOSTWordNode({
+    value: '私',
+    transcription: {
       romaji: {
         text: 'watashi',
         system: 'romaji',
@@ -284,15 +279,14 @@ const japaneseWordsWithExtras: GLOSTWord[] = [
         syllables: ['wa', 'ta', 'shi']
       }
     },
-    {
+    metadata: {
       meaning: 'I, me',
       partOfSpeech: 'pronoun',
       usage: 'first person singular, formal and informal'
     },
-    'word',
-    'ja',
-    'mixed',
-    {
+    lang: 'ja',
+    script: 'mixed',
+    extras: {
       translations: {
         en: 'I, me',
         th: 'ผม/ดิฉัน',
@@ -307,10 +301,10 @@ const japaneseWordsWithExtras: GLOSTWord[] = [
         examples: ['私は学生です', '私の名前は...', '私も行きます']
       }
     }
-  ),
-  createGLOSTWordNode(
-    'の',
-    {
+  }),
+  createGLOSTWordNode({
+    value: 'の',
+    transcription: {
       romaji: {
         text: 'no',
         system: 'romaji',
@@ -327,15 +321,14 @@ const japaneseWordsWithExtras: GLOSTWord[] = [
         syllables: ['no']
       }
     },
-    {
+    metadata: {
       meaning: 'possessive particle',
       partOfSpeech: 'particle',
       usage: 'indicates possession or relationship'
     },
-    'word',
-    'ja',
-    'mixed',
-    {
+    lang: 'ja',
+    script: 'mixed',
+    extras: {
       translations: {
         en: 'possessive particle',
         th: 'คำบุพบทแสดงความเป็นเจ้าของ',
@@ -350,10 +343,10 @@ const japaneseWordsWithExtras: GLOSTWord[] = [
         examples: ['私の本', '日本の文化', '友達の家']
       }
     }
-  ),
-  createGLOSTWordNode(
-    '名前',
-    {
+  }),
+  createGLOSTWordNode({
+    value: '名前',
+    transcription: {
       romaji: {
         text: 'namae',
         system: 'romaji',
@@ -370,15 +363,14 @@ const japaneseWordsWithExtras: GLOSTWord[] = [
         syllables: ['na', 'mae']
       }
     },
-    {
+    metadata: {
       meaning: 'name',
       partOfSpeech: 'noun',
       usage: 'noun, refers to a person\'s name'
     },
-    'word',
-    'ja',
-    'mixed',
-    {
+    lang: 'ja',
+    script: 'mixed',
+    extras: {
       translations: {
         en: 'name',
         th: 'ชื่อ',
@@ -393,10 +385,10 @@ const japaneseWordsWithExtras: GLOSTWord[] = [
         examples: ['お名前は？', '名前を教えてください', '美しい名前']
       }
     }
-  ),
-  createGLOSTWordNode(
-    'は',
-    {
+  }),
+  createGLOSTWordNode({
+    value: 'は',
+    transcription: {
       romaji: {
         text: 'wa',
         system: 'romaji',
@@ -413,15 +405,14 @@ const japaneseWordsWithExtras: GLOSTWord[] = [
         syllables: ['wa']
       }
     },
-    {
+    metadata: {
       meaning: 'topic particle',
       partOfSpeech: 'particle',
       usage: 'marks the topic of the sentence'
     },
-    'word',
-    'ja',
-    'mixed',
-    {
+    lang: 'ja',
+    script: 'mixed',
+    extras: {
       translations: {
         en: 'topic particle',
         th: 'คำบุพบทแสดงหัวข้อ',
@@ -436,10 +427,10 @@ const japaneseWordsWithExtras: GLOSTWord[] = [
         examples: ['私は学生です', 'これは本です', '日本は美しい国です']
       }
     }
-  ),
-  createGLOSTWordNode(
-    '田中',
-    {
+  }),
+  createGLOSTWordNode({
+    value: '田中',
+    transcription: {
       romaji: {
         text: 'tanaka',
         system: 'romaji',
@@ -456,15 +447,14 @@ const japaneseWordsWithExtras: GLOSTWord[] = [
         syllables: ['ta', 'na', 'ka']
       }
     },
-    {
+    metadata: {
       meaning: 'surname Tanaka',
       partOfSpeech: 'proper noun',
       usage: 'family name, very common Japanese surname'
     },
-    'word',
-    'ja',
-    'mixed',
-    {
+    lang: 'ja',
+    script: 'mixed',
+    extras: {
       translations: {
         en: 'Tanaka (surname)',
         th: 'ทานากะ (นามสกุล)',
@@ -479,10 +469,10 @@ const japaneseWordsWithExtras: GLOSTWord[] = [
         examples: ['田中さん', '田中先生', '田中家']
       }
     }
-  ),
-  createGLOSTWordNode(
-    'です',
-    {
+  }),
+  createGLOSTWordNode({
+    value: 'です',
+    transcription: {
       romaji: {
         text: 'desu',
         system: 'romaji',
@@ -499,15 +489,14 @@ const japaneseWordsWithExtras: GLOSTWord[] = [
         syllables: ['de', 'su']
       }
     },
-    {
+    metadata: {
       meaning: 'copula (is, am, are)',
       partOfSpeech: 'copula',
       usage: 'polite form of the copula, formal speech'
     },
-    'word',
-    'ja',
-    'mixed',
-    {
+    lang: 'ja',
+    script: 'mixed',
+    extras: {
       translations: {
         en: 'is, am, are (polite)',
         th: 'เป็น, คือ (สุภาพ)',
@@ -522,49 +511,49 @@ const japaneseWordsWithExtras: GLOSTWord[] = [
         examples: ['私は学生です', 'これは本です', '田中さんです']
       }
     }
-  )
+  })
 ];
 
 // ============================================================================
 // Create Enhanced Document Structure
 // ============================================================================
 
-const thaiSentenceWithExtras = createGLOSTSentenceNode(
-  'สวัสดีครับ ผมชื่อสมชาย',
-  'th',
-  'thai',
-  thaiWordsWithExtras
-);
+const thaiSentenceWithExtras = createGLOSTSentenceNode({
+  originalText: 'สวัสดีครับ ผมชื่อสมชาย',
+  lang: 'th',
+  script: 'thai',
+  children: thaiWordsWithExtras
+});
 
-const japaneseSentenceWithExtras = createGLOSTSentenceNode(
-  '私の名前は田中です。',
-  'ja',
-  'mixed',
-  japaneseWordsWithExtras
-);
+const japaneseSentenceWithExtras = createGLOSTSentenceNode({
+  originalText: '私の名前は田中です。',
+  lang: 'ja',
+  script: 'mixed',
+  children: japaneseWordsWithExtras
+});
 
-const thaiParagraphWithExtras = createGLOSTParagraphNode( [thaiSentenceWithExtras]);
-const japaneseParagraphWithExtras = createGLOSTParagraphNode( [japaneseSentenceWithExtras]);
+const thaiParagraphWithExtras = createGLOSTParagraphNode([thaiSentenceWithExtras]);
+const japaneseParagraphWithExtras = createGLOSTParagraphNode([japaneseSentenceWithExtras]);
 
-export const thaiDocumentWithExtras = createGLOSTRootNode(
-  'th',
-  'thai',
-  [thaiParagraphWithExtras],
-  { 
+export const thaiDocumentWithExtras = createGLOSTRootNode({
+  lang: 'th',
+  script: 'thai',
+  children: [thaiParagraphWithExtras],
+  metadata: {
     title: 'Thai Greeting Example with Extras',
     description: 'Enhanced Thai example with i18n translations and metadata'
   }
-);
+});
 
-export const japaneseDocumentWithExtras = createGLOSTRootNode(
-  'ja',
-  'mixed',
-  [japaneseParagraphWithExtras],
-  { 
+export const japaneseDocumentWithExtras = createGLOSTRootNode({
+  lang: 'ja',
+  script: 'mixed',
+  children: [japaneseParagraphWithExtras],
+  metadata: {
     title: 'Japanese Greeting Example with Extras',
     description: 'Enhanced Japanese example with i18n translations and metadata'
   }
-);
+});
 
 // ============================================================================
 // Utility Functions for Working with Extras
@@ -583,7 +572,7 @@ export function getQuickTranslation(word: GLOSTWord, targetLang: string): string
 export function getAllTranslations(word: GLOSTWord): Record<string, string> {
   const translations = word.extras?.translations;
   if (!translations) return {};
-  
+
   const result: Record<string, string> = {};
   Object.entries(translations).forEach(([lang, text]) => {
     if (text !== undefined) {

@@ -1,4 +1,4 @@
-import type { Literal as NlcstLiteral, Node as NlcstNode, Paragraph as NlcstParagraph, Parent as NlcstParent, Punctuation as NlcstPunctuation, Root as NlcstRoot, RootContent as NlcstRootContent, Sentence as NlcstSentence, Source as NlcstSource, Symbol as NlcstSymbol, Text as NlcstText, WhiteSpace as NlcstWhiteSpace, Word as NlcstWord } from "nlcst";
+import type { Literal as NlcstLiteral, Paragraph as NlcstParagraph, Punctuation as NlcstPunctuation, Root as NlcstRoot, Sentence as NlcstSentence, Source as NlcstSource, Symbol as NlcstSymbol, Text as NlcstText, WhiteSpace as NlcstWhiteSpace, Word as NlcstWord } from "nlcst";
 
 
 

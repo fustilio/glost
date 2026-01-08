@@ -8,7 +8,7 @@
  */
 
 import type { GLOSTWord } from "glost";
-import type { GLOSTExtension, ExtensionContext } from "../types";
+import type { GLOSTExtension } from "../types";
 import { ExtensionDependencyError } from "../errors";
 import type { FrequencyLevel } from "./frequency";
 import type { DifficultyLevel } from "./difficulty";
@@ -146,7 +146,6 @@ export function createReadingScoreExtension(
 
     enhanceMetadata: (
       node: GLOSTWord,
-      context?: ExtensionContext,
     ): { readingScore: ReadingScoreMetadata } | void => {
       // Get frequency from the frequency extension's output
       const frequencyData = node.extras?.frequency as

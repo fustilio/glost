@@ -1,6 +1,6 @@
 {
   "name": "glost",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "GLOST - Glossed Syntax Tree for augmenting text with language learning metadata",
   "type": "module",
   "main": "./src/index.ts",
@@ -47,8 +47,8 @@
   },
   "devDependencies": {
     "@types/nlcst": "^2.0.3",
-    "typescript": "^5.8.3",
-    "vitest": "^3.0.5"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "keywords": [
     "glost",
@@ -57,10 +57,6 @@
     "multilingual",
     "language-learning",
     "linguistics",
-    "thai",
-    "japanese",
-    "chinese",
-    "korean",
     "syntax-tree",
     "unist"
   ]

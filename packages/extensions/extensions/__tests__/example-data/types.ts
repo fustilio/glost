@@ -7,8 +7,8 @@
  */
 
 import type { GlostLanguage } from "glost-common";
-import type { FrequencyLevel } from "../extensions/frequency";
-import type { DifficultyLevel } from "../extensions/difficulty";
+import type { FrequencyLevel } from "../../src/extensions/frequency";
+import type { DifficultyLevel } from "../../src/extensions/difficulty";
 
 /**
  * Vocabulary entry structure

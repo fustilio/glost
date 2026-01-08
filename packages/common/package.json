@@ -1,6 +1,6 @@
 {
   "name": "glost-common",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Common utilities and language configs for GLOST",
   "type": "module",
   "main": "./src/index.ts",
@@ -41,8 +41,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "typescript": "^5.8.3",
-    "vitest": "^3.0.5"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "keywords": [
     "glost",

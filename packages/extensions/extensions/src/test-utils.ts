@@ -78,15 +78,14 @@ export function createMockGLOSTWord(
     partOfSpeech: (metadata.partOfSpeech as string | undefined) ?? "",
   };
 
-  const wordNode = createGLOSTWordNode(
-    text,
-    fullTranscription,
-    fullMetadata,
-    "word",
-    lang as any,
-    script as any,
+  const wordNode = createGLOSTWordNode({
+    value: text,
+    transcription: fullTranscription,
+    metadata: fullMetadata,
+    lang: lang as any,
+    script: script as any,
     extras,
-  );
+  });
   
   // Add difficulty to node if provided
   if (difficulty) {
@@ -199,9 +198,9 @@ export function createMockGLOSTDocument(
     return word;
   });
 
-  const sentence = createGLOSTSentenceNode("", lang as any, script as any, wordNodes);
+  const sentence = createGLOSTSentenceNode({ originalText: "", lang: lang as any, script: script as any, children: wordNodes });
   const paragraph = createGLOSTParagraphNode([sentence]);
-  const root = createGLOSTRootNode(lang as any, script as any, [paragraph]);
+  const root = createGLOSTRootNode({ lang: lang as any, script: script as any, children: [paragraph] });
 
   return root;
 }
@@ -241,12 +240,12 @@ function createMockGLOSTDocumentFromSpec(spec: MockDocumentOptions): GLOSTRoot {
     );
 
     // Create sentence with words
-    const sentence = createGLOSTSentenceNode(
-      sentenceSpec.originalText ?? "",
-      sentenceLang as any,
-      sentenceScript as any,
-      wordNodes,
-    );
+    const sentence = createGLOSTSentenceNode({
+      originalText: sentenceSpec.originalText ?? "",
+      lang: sentenceLang as any,
+      script: sentenceScript as any,
+      children: wordNodes,
+    });
 
     // Add punctuation nodes to sentence children
     if (punctuationNodes.length > 0) {
@@ -258,12 +257,12 @@ function createMockGLOSTDocumentFromSpec(spec: MockDocumentOptions): GLOSTRoot {
 
   // If no sentences provided, create an empty document
   if (sentenceNodes.length === 0) {
-    const emptySentence = createGLOSTSentenceNode("", lang as any, script as any, []);
+    const emptySentence = createGLOSTSentenceNode({ originalText: "", lang: lang as any, script: script as any, children: [] });
     sentenceNodes.push(emptySentence);
   }
 
   const paragraph = createGLOSTParagraphNode(sentenceNodes);
-  const root = createGLOSTRootNode(lang as any, script as any, [paragraph]);
+  const root = createGLOSTRootNode({ lang: lang as any, script: script as any, children: [paragraph] });
 
   return root;
 }

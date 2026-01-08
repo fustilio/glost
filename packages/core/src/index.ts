@@ -7,7 +7,6 @@ export * from "./utils";
 export * from "./validators";
 export * from "./guards";
 // export * from './example';
-export * from "./mock-data";
 
 // Re-export utility types
 export type { ParagraphLike } from "./utils";

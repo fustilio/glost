@@ -8,7 +8,7 @@
  */
 
 import type { GLOSTWord } from "glost";
-import type { GLOSTExtension, ExtensionContext } from "../types";
+import type { GLOSTExtension } from "../types";
 import { ExtensionDependencyError } from "../errors";
 import type { DifficultyLevel } from "./difficulty";
 import type { PartOfSpeechMetadata } from "./part-of-speech";
@@ -192,7 +192,6 @@ export function createLearnerHintsExtension(
 
     enhanceMetadata: (
       node: GLOSTWord,
-      context?: ExtensionContext,
     ): { learnerHints: LearnerHintsMetadata } | void => {
       // Get part of speech from the extension's output
       const posData = node.extras?.partOfSpeech as

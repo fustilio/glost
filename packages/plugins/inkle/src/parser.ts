@@ -39,17 +39,16 @@ export function parseInkJSON(
     // Simple tokenization by space
     const words: GLOSTWord[] = text.split(/\s+/).map((w) => {
       // Create a basic word node
-      return createGLOSTWordNode(
-        w,
-        {}, // No transcription
-        { partOfSpeech: "" }, // Empty metadata
-        "word",
-        language,
+      return createGLOSTWordNode({
+        value: w,
+        transcription: {}, // No transcription
+        metadata: { partOfSpeech: "" }, // Empty metadata
+        lang: language,
         script
-      );
+      });
     });
 
-    const sentence = createGLOSTSentenceNode(text, language, script, words);
+    const sentence = createGLOSTSentenceNode({ originalText: text, lang: language, script, children: words });
     
     // Add extra metadata for choices
     const extras = type === 'choice' ? { type: 'choice' } : {};
@@ -105,7 +104,7 @@ export function parseInkJSON(
     }
   }
 
-  return createGLOSTRootNode(language, script, paragraphs);
+  return createGLOSTRootNode({ lang: language, script, children: paragraphs });
 }
 
 function traverseContent(

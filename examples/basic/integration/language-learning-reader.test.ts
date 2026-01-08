@@ -5,7 +5,6 @@
 import { describe, it, expect } from "vitest";
 
 import {
-  createThaiWord,
   createSentenceFromWords,
   createParagraphFromSentences,
   createDocumentFromParagraphs,
@@ -17,6 +16,8 @@ import {
   type GLOSTWord,
   type GLOSTRoot,
 } from "glost";
+
+import { createThaiWord } from "glost-th";
 
 import {
   processGLOSTWithExtensions,

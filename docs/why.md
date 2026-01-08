@@ -1,6 +1,6 @@
 # Why GLOST?
 
-## The Problem
+## The Challenge
 
 Building language learning applications requires representing text with rich annotations:
 
@@ -10,7 +10,7 @@ Building language learning applications requires representing text with rich ann
 - **Grammar information** (part of speech, gender, etc.)
 - **Cultural context** and usage notes
 
-Existing solutions fall short:
+There are several approaches to this problem, each with trade-offs:
 
 ### Plain Text + External Data
 
@@ -24,11 +24,11 @@ Existing solutions fall short:
 }
 ```
 
-**Problems:**
-- Offset-based matching is fragile
-- No standard structure
-- Hard to traverse and manipulate
-- Loses relationship between words and sentences
+**Trade-offs:**
+- Offset-based matching can be fragile
+- Lacks standard structure
+- Can be harder to traverse and manipulate
+- May lose relationship between words and sentences
 
 ### HTML + Data Attributes
 
@@ -36,36 +36,36 @@ Existing solutions fall short:
 <span data-translation="hello" data-ipa="sa.wàt.diː">สวัสดี</span>
 ```
 
-**Problems:**
-- Mixing presentation with data
-- Limited to flat structure
-- Not easily programmatically manipulable
-- No type safety
+**Trade-offs:**
+- Mixes presentation with data
+- Often limited to flat structure
+- Can be less convenient for programmatic manipulation
+- Usually lacks type safety
 
 ### Custom JSON Formats
 
-Every language learning app invents its own format:
-- Duolingo has one format
+Many language learning apps create their own formats:
+- Duolingo has one approach
 - Anki has another
-- Each tool is incompatible
+- Each tool develops its own solution
 
-**Problems:**
-- No interoperability
-- Reinventing the wheel
-- No ecosystem of tools
+**Trade-offs:**
+- Limited interoperability between tools
+- Each project rebuilds similar functionality
+- Smaller ecosystem of shared tools
 
-## The Solution: GLOST
+## GLOST's Approach
 
-GLOST provides a **standardized syntax tree** for multilingual annotated text:
+GLOST attempts to provide a **standardized syntax tree** for multilingual annotated text:
 
 ### 1. Standards-Based
 
-Built on [nlcst](https://github.com/syntax-tree/nlcst) (Natural Language Concrete Syntax Tree), part of the [unified](https://unifiedjs.com/) ecosystem. This means:
+Built on [nlcst](https://github.com/syntax-tree/nlcst) (Natural Language Concrete Syntax Tree), part of the [unified](https://unifiedjs.com/) ecosystem. This gives us:
 
-- Well-tested foundation
-- Existing tools work (unist-util-visit, etc.)
-- Community-driven standard
-- Interoperable with other unified tools
+- A well-tested foundation
+- Compatibility with existing tools (unist-util-visit, etc.)
+- A community-driven standard
+- Potential interoperability with other unified tools
 
 ### 2. Concrete Syntax Tree (CST)
 
@@ -82,9 +82,9 @@ sentence.originalText // "สวัสดีครับ"
 { type: "PunctuationNode", value: "。" }
 ```
 
-This matters for language learning because learners need to see **exactly** what native speakers write.
+This can be valuable for language learning because learners often benefit from seeing exactly what native speakers write.
 
-### 3. Multi-Language Ready
+### 3. Multi-Language Support
 
 ```typescript
 // Thai with RTGS romanization
@@ -97,7 +97,7 @@ createJapaneseWord("今日", "kyou", "noun", "きょう");
 createGLOSTWordNode("你好", { pinyin: { text: "nǐ hǎo", system: "pinyin" }});
 ```
 
-Supports any language with ISO-639 codes, multiple transcription systems, and flexible script handling.
+Designed to work with languages using ISO-639 codes, multiple transcription systems, and flexible script handling.
 
 ### 4. Rich Metadata
 
@@ -160,11 +160,11 @@ if (isGLOSTWord(node)) {
 }
 ```
 
-## Use Cases
+## Potential Use Cases
 
 ### Language Learning Apps
 
-Build apps like Duolingo, Lingvist, or custom learning tools with:
+Could be used for apps with features like:
 - Word-by-word translations
 - Pronunciation guides
 - Difficulty filtering
@@ -205,14 +205,14 @@ Structure dictionary entries with:
 
 | Feature | GLOST | Plain JSON | HTML | Other ASTs |
 |---------|-------|------------|------|------------|
-| Standard format | ✅ | ❌ | ❌ | ✅ |
-| Preserves whitespace | ✅ | ❌ | ⚠️ | ❌ |
-| Multi-language | ✅ | ⚠️ | ⚠️ | ⚠️ |
-| Multiple transcriptions | ✅ | ⚠️ | ❌ | ❌ |
-| Type-safe | ✅ | ⚠️ | ❌ | ✅ |
-| Extensible | ✅ | ❌ | ❌ | ✅ |
-| Ecosystem tools | ✅ | ❌ | ⚠️ | ✅ |
-| Language learning focus | ✅ | ❌ | ❌ | ❌ |
+| Standard format | Yes | Varies | No | Yes |
+| Preserves whitespace | Yes | Varies | Partially | No |
+| Multi-language | Yes | Possible | Possible | Varies |
+| Multiple transcriptions | Yes | Possible | Limited | No |
+| Type-safe | Yes | Possible | No | Yes |
+| Extensible | Yes | Varies | Limited | Yes |
+| Ecosystem tools | Some | No | Many | Yes |
+| Language learning focus | Yes | No | No | No |
 
 ## Design Principles
 

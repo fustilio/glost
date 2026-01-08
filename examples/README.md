@@ -85,13 +85,13 @@ Complete real-world applications.
 
 ```typescript
 import { 
-  createThaiWord, 
   createSentenceFromWords,
   createDocumentFromParagraphs 
 } from "glost";
+import { createThaiWord } from "glost-th";
 
 // Create Thai word with RTGS transcription
-const word = createThaiWord("สวัสดี", "sa-wat-di", "interjection");
+const word = createThaiWord({ text: "สวัสดี", rtgs: "sa-wat-di", partOfSpeech: "interjection" });
 
 // Add translations and metadata
 word.extras = {

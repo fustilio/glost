@@ -172,7 +172,6 @@ function detectGrammaticalMood(
   }
 
   // Check for conditional
-  const markers = getClauseMarkers(sentence.lang || "en-US");
   const hasConditional = words.some((w) => {
     const text = getWordText(w).toLowerCase();
     return text === "if" || text === "ถ้า" || text === "หาก";

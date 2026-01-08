@@ -1,236 +1,128 @@
 # GLOST - Glossed Syntax Tree
 
-> Framework-agnostic syntax tree format for representing multilingual text enriched with learner-focused annotations.
+**GLOST** (Glossed Syntax Tree) is a Concrete Syntax Tree format that extends [nlcst](https://github.com/syntax-tree/nlcst) to support rich language learning metadata.
 
-## What is GLOST?
+## Features
 
-**GLOST** (Glossed Syntax Tree) is a Concrete Syntax Tree (CST) format that extends [nlcst](https://github.com/syntax-tree/nlcst) to support rich language learning metadata. It's designed to augment text with everything a language learner needs:
-
-- **Translations and glosses** in multiple languages
-- **Difficulty levels** and word frequency data  
-- **Pronunciation guides** (IPA, romanization, transcription systems)
-- **Cultural context** and usage notes
-- **Part-of-speech** tagging
-- **Grammar metadata** for language learners
-
-## Why GLOST?
-
-The name "GLOST" comes from "glossed" - the linguistic practice of adding annotations and translations to text. It's a CST (not AST) because it preserves all syntactic details including whitespace and punctuation, which is essential for language learning applications.
-
-## Packages
-
-### Core Packages
-
-- **[glost](packages/core)** - Core types and node creation
-- **[glost-common](packages/common)** - Shared utilities and language configs
-- **[glost-extensions](packages/extensions)** - Extension system and built-in extensions
-- **[glost-utils](packages/utils)** - Text parsing and manipulation utilities
-
-### Extension Packages
-
-- **[glost-transcription](packages/extensions/transcription)** - Pronunciation and transcription
-- **[glost-translation](packages/extensions/translation)** - Multilingual glosses
-
-### Plugin Packages
-
-- **[glost-inkle](packages/plugins/inkle)** - Inkle/Ink integration
+- 🌍 **Multi-language support** - Aims to handle multiple languages with proper metadata
+- 📝 **Rich annotations** - Support for transcription, translation, part-of-speech, difficulty levels
+- 🔌 **Extensible** - Plugin system for custom processing
+- 🎯 **Type-safe** - Full TypeScript support
+- 📦 **Modular** - Use only what you need
 
 ## Quick Start
 
 ```bash
-# Install packages
-pnpm install
-
-# Build all packages
-pnpm build
-
-# Run tests
-pnpm test
+npm install glost glost-common
+# Install language packages as needed
+npm install glost-th glost-ja
 ```
-
-## Usage Example
 
 ```typescript
-import { createGLOSTWordNode, createGLOSTRootNode } from "glost";
-import { processGLOST, FrequencyExtension, DifficultyExtension } from "glost-extensions";
+import { createSentenceFromWords } from 'glost';
+import { createThaiWord } from 'glost-th';
+import { getLanguageName } from 'glost-common';
 
-// Create a word node with annotations
-const word = createGLOSTWordNode(
-  "สวัสดี", // Thai: hello
-  {
-    rtgs: { text: "sà-wàt-dii", system: "rtgs" },
-    ipa: { text: "sa.wàt.diː", system: "ipa" }
-  },
-  {
-    partOfSpeech: "interjection",
-    usage: "greeting"
-  },
-  "word",
-  "th",      // ISO-639-1 code
-  "thai",
-  {
-    translations: {
-      en: "hello, hi",
-      ja: "こんにちは",
-      zh: "你好"
-    },
-    metadata: {
-      difficulty: "beginner",
-      frequency: "very-common",
-      culturalNotes: "Standard greeting used throughout the day"
-    }
-  }
-);
+const words = [
+  createThaiWord({ 
+    text: "สวัสดี", 
+    rtgs: "sawatdi", 
+    partOfSpeech: "interjection" 
+  }),
+  createThaiWord({ 
+    text: "ครับ", 
+    rtgs: "khrap", 
+    partOfSpeech: "particle" 
+  })
+];
 
-// Process with extensions
-const result = processGLOST(document, [
-  FrequencyExtension,
-  DifficultyExtension
-]);
+const sentence = createSentenceFromWords(words, "th", "thai", "สวัสดีครับ");
+
+console.log(getLanguageName("th")); // "Thai"
 ```
 
-## Language Support
+## Packages
 
-GLOST uses a **flexible language identification system** that accepts multiple formats:
+### Core Packages
+- **[glost](./packages/core)** - Core types and node factories
+- **[glost-common](./packages/common)** - Language utilities and shared code
+- **[glost-extensions](./packages/extensions/extensions)** - Extension system
+- **[glost-utils](./packages/utils)** - Text utilities
 
-- **ISO-639-1**: Two-letter codes (en, th, ja) - 184 languages
-- **ISO-639-3**: Three-letter codes (eng, tha, jpn, cmn) - more precise identification
-- **BCP-47**: Full tags with script/region (en-US, zh-Hans-CN)
+### Language Packages
+- **[glost-th](./packages/languages/th)** - Thai language support
+- **[glost-ja](./packages/languages/ja)** - Japanese language support
 
-Internally, GLOST normalizes to ISO-639-3 for precision, supporting distinctions that ISO-639-1 cannot make (e.g., Mandarin `cmn` vs Cantonese `yue`).
+### Extensions
+- **[glost-extensions-transcription](./packages/extensions/transcription)** - Transcription extension
+- **[glost-extensions-translation](./packages/extensions/translation)** - Translation extension
 
-```typescript
-import {
-  // Core utilities (accept any format)
-  getLanguageName,         // "th" or "tha" → "Thai"
-  getNativeLanguageName,   // "ja" or "jpn" → "日本語"
-  isValidLanguageCode,     // Validate any code format
+### Plugins
+- **[glost-plugin-inkle](./packages/plugins/inkle)** - Inkle/Ink integration
 
-  // ISO-639 conversion
-  toISO639_3,              // "en" → "eng", "en-US" → "eng"
-  toISO639_1,              // "eng" → "en", "cmn" → undefined
+## Documentation
 
-  // BCP-47 utilities
-  parseBCP47,              // "zh-Hans-CN" → { language: "zh", script: "Hans", region: "CN" }
-  buildBCP47,              // { language: "zh", script: "Hans" } → "zh-Hans"
-  toBCP47WithRegion,       // "th" → "th-TH"
+- **[Getting Started](./docs/getting-started.md)** - Installation and first steps
+- **[Why GLOST?](./docs/why.md)** - Motivation and use cases
+- **[Migration Guide](./MIGRATION.md)** - Upgrading from v0.1.x to v0.2.0
+- **[API Reference](./docs/api.md)** - Complete API documentation
+- **[Ecosystem](./docs/ecosystem.md)** - GLOST ecosystem and community
 
-  // Language info
-  getLanguageInfo,         // Full details for any code
+### Guides
+- [Creating Documents](./docs/guides/creating-documents.md)
+- [Using Extensions](./docs/guides/using-extensions.md)
+- [Multi-Language Architecture](./docs/guides/multi-language-architecture.md)
+- [Implementing Transcription Providers](./docs/guides/implementing-transcription-providers.md)
 
-  // Special codes
-  SPECIAL_CODES,           // ["ipa", "und", "mul", "zxx"]
-  isSpecialCode,           // Check for non-language codes
-} from "glost-common";
-```
-
-### Supported Language Codes
-
-| ISO-639-1 | ISO-639-3 | Language | Native Name |
-|-----------|-----------|----------|-------------|
-| `en` | `eng` | English | English |
-| `th` | `tha` | Thai | ไทย |
-| `zh` | `zho` | Chinese | 中文 |
-| `ja` | `jpn` | Japanese | 日本語 |
-| `ko` | `kor` | Korean | 한국어 |
-| - | `cmn` | Mandarin Chinese | 普通话 |
-| - | `yue` | Cantonese | 粵語 |
-
-See the [full list of ISO-639-1 codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) and [ISO-639-3 codes](https://iso639-3.sil.org/code_tables/639/data).
+### Standards
+- [Metadata Schema](./docs/standards/metadata-schema.md)
+- [Naming Conventions](./docs/conventions/naming.md)
 
 ## Architecture
 
-GLOST follows a layered architecture:
+GLOST follows a modular architecture with clear separation of concerns:
 
 ```
-┌─────────────────────────────────────┐
-│   Language-Specific Extensions      │
-│   (Thai, French, Japanese, etc.)    │
-└─────────────────────────────────────┘
-              ↓
-┌─────────────────────────────────────┐
-│      Extension Packages             │
-│   glost-transcription               │
-│   glost-translation                 │
-└─────────────────────────────────────┘
-              ↓
-┌─────────────────────────────────────┐
-│      Core Extension System          │
-│   glost-extensions                  │
-│   (processor, registry, built-ins)  │
-└─────────────────────────────────────┘
-              ↓
-┌─────────────────────────────────────┐
-│      Core & Utilities               │
-│   glost          - Types & nodes    │
-│   glost-common   - Language codes   │
-│   glost-utils    - Helpers          │
-└─────────────────────────────────────┘
-              ↓
-┌─────────────────────────────────────┐
-│      Foundation                     │
-│   nlcst (Natural Language CST)      │
-│   unist (Universal Syntax Tree)     │
-└─────────────────────────────────────┘
+glost (core)              - Core types and node factories
+  ├── glost-common        - Language utilities
+  ├── glost-extensions    - Extension system
+  ├── glost-utils         - Text utilities
+  │
+  ├── glost-th            - Thai language support
+  ├── glost-ja            - Japanese language support
+  └── glost-*             - Other language packages
 ```
 
-## Features
+## Use Cases
 
-- ✅ **Framework-agnostic** - Works in any JavaScript/TypeScript environment
-- ✅ **Type-safe** - Full TypeScript support with comprehensive types
-- ✅ **Extensible** - Plugin system for custom transformations
-- ✅ **Standards-based** - Extends nlcst, compatible with unist ecosystem
-- ✅ **Flexible language codes** - Accepts ISO-639-1, ISO-639-3, and BCP-47 formats
-- ✅ **Language-learning focused** - Designed for educational applications
-- ✅ **CST preservation** - Maintains all syntactic details for accurate representation
+GLOST may be useful for:
+- **Language Learning Apps** - Building interactive reading experiences
+- **Dictionary Systems** - Rich word annotations with multiple transcription schemes
+- **Graded Readers** - Content adapted to learner proficiency
+- **Transcription Tools** - Converting between scripts and romanization
+- **Corpus Linguistics** - Annotated text corpora with metadata
 
-## Development
+## Status
 
-### Project Structure
+GLOST is being used in real-world applications and has been tested with:
+- Multiple languages across different writing systems
+- Various transcription systems (IPA, romanization, phonetic)
+- Hundreds of words with metadata
+- Performance suitable for interactive applications
 
-```
-external/glost/
-├── packages/
-│   ├── core/              # Core types and nodes
-│   ├── common/            # Shared utilities
-│   ├── extensions/        # Extension system
-│   │   ├── transcription/ # Transcription extension
-│   │   └── translation/   # Translation extension
-│   ├── utils/             # Utilities
-│   └── plugins/           # Plugins
-│       └── inkle/         # Inkle integration
-├── package.json           # Workspace root
-├── pnpm-workspace.yaml    # Workspace config
-└── tsconfig.json          # Base TypeScript config
-```
+We're still learning and improving based on feedback and real-world use.
 
-### Building
+## Contributing
 
-```bash
-# Build all packages
-pnpm build
+We'd appreciate contributions! Please see:
+- [Architecture Summary](./docs/ARCHITECTURE_SUMMARY.md)
+- [Multi-Language Architecture Guide](./docs/guides/multi-language-architecture.md)
+- [Implementing Transcription Providers](./docs/guides/implementing-transcription-providers.md)
 
-# Build specific package
-cd packages/core && pnpm build
-```
-
-### Testing
-
-```bash
-# Run all tests
-pnpm test
-
-# Run tests in watch mode
-pnpm test:watch
-```
-
-## Roadmap
-
-- [ ] Publish to npm as public packages
-- [ ] Extract to separate repository
-- [ ] Add more built-in extensions
-- [ ] Improve documentation and examples
-- [ ] Add language-specific extension templates
+If you'd like to add a new language package:
+1. You can follow the [Multi-Language Architecture](./docs/guides/multi-language-architecture.md) guide
+2. Consider using `glost-th` or `glost-ja` as a reference
+3. Feel free to submit a PR with your language package
 
 ## License
 
@@ -240,8 +132,9 @@ MIT
 
 - [nlcst](https://github.com/syntax-tree/nlcst) - Natural Language Concrete Syntax Tree
 - [unist](https://github.com/syntax-tree/unist) - Universal Syntax Tree
-- [remark](https://github.com/remarkjs/remark) - Markdown processor (similar plugin architecture)
 
----
+## Links
 
-**GLOST** - Framework-agnostic syntax tree for language learning applications.
+- [Documentation](./docs/index.md)
+- [Examples](./examples/)
+- [Changelog](./CHANGELOG.md)

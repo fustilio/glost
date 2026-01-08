@@ -1,0 +1,59 @@
+{
+  "name": "glost-ja",
+  "version": "0.2.0",
+  "description": "Japanese language support for GLOST - helper functions and transcription providers",
+  "keywords": [
+    "glost",
+    "japanese",
+    "language",
+    "transcription",
+    "romanization",
+    "romaji",
+    "furigana",
+    "nlp"
+  ],
+  "author": "GLOST Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/glost.git",
+    "directory": "packages/languages/ja"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./helpers": {
+      "types": "./dist/helpers.d.ts",
+      "default": "./dist/helpers.js"
+    },
+    "./transcription": {
+      "types": "./dist/transcription.d.ts",
+      "default": "./dist/transcription.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "glost": "workspace:*",
+    "glost-common": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

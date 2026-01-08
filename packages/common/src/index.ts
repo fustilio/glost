@@ -1,5 +1,7 @@
 export * from "./languages";
 export * from "./types";
+export * from "./metadata";
+export * from "./transcription-provider";
 export * from "./utils/zod";
 export * from "./utils/groupBy";
 export * from "./utils/array";

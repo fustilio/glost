@@ -2,7 +2,7 @@
 
 ## Overview
 
-GLOST now has a **composable, principle-driven architecture** following SRP (Single Responsibility Principle) and SSOT (Single Source of Truth).
+GLOST aims for a **composable, principle-driven architecture** following SRP (Single Responsibility Principle) and SSOT (Single Source of Truth).
 
 ## What Was Built
 
