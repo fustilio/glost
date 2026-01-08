@@ -9,8 +9,8 @@ import {
 } from "./clause-segmenter";
 import { processGLOSTWithExtensions } from "../processor";
 import { createMockGLOSTDocument } from "../test-utils";
-import type { GLOSTSentence, GLOSTClause } from "@glost/core";
-import { getAllSentences, getAllClauses, isGLOSTClause } from "@glost/core";
+import type { GLOSTSentence, GLOSTClause } from "glost";
+import { getAllSentences, getAllClauses, isGLOSTClause } from "glost";
 
 describe("ClauseSegmenterExtension", () => {
   it("should have correct metadata", () => {

@@ -3,23 +3,23 @@
  * 
  * Utilities for extracting information from GLOST documents.
  * 
- * This module re-exports utilities from @glost/core where possible,
+ * This module re-exports utilities from glost where possible,
  * and adds additional utilities that are specific to document manipulation.
  */
 
-import type { GLOSTWord, GLOSTSentence, GLOSTRoot } from "@glost/core";
+import type { GLOSTWord, GLOSTSentence, GLOSTRoot } from "glost";
 import {
   getAllWords,
   getWordsFromDocument,
   getFirstSentence as getFirstSentenceFromGLOST,
   getWordsFromSentence,
   getSentenceTranslation as getSentenceTranslationFromGLOST,
-} from "@glost/core";
+} from "glost";
 
 /**
  * Extract all words from an GLOST document
  * 
- * Re-exports getWordsFromDocument from @glost/core for consistency.
+ * Re-exports getWordsFromDocument from glost for consistency.
  */
 export function getAllWordsFromDocument(doc: GLOSTRoot): GLOSTWord[] {
   return getWordsFromDocument(doc);
@@ -86,7 +86,7 @@ export function getDocumentMetadata(doc: GLOSTRoot) {
 /**
  * Get words from the first sentence (alias for getWordsFromFirstSentence)
  * 
- * Note: This differs from @glost/core's getFirstSentence which returns the sentence node.
+ * Note: This differs from glost's getFirstSentence which returns the sentence node.
  * This function returns the words array for convenience.
  */
 export function getFirstSentence(doc: GLOSTRoot): GLOSTWord[] {
@@ -96,7 +96,7 @@ export function getFirstSentence(doc: GLOSTRoot): GLOSTWord[] {
 /**
  * Get sentence translation from extras
  * 
- * Re-exports getSentenceTranslation from @glost/core.
+ * Re-exports getSentenceTranslation from glost.
  */
 export function getSentenceTranslation(
   sentence: GLOSTSentence,

@@ -12,7 +12,7 @@ import type {
   GLOSTParagraph,
   GLOSTRoot,
   GLOSTExtras,
-} from "@glost/core";
+} from "glost";
 
 /**
  * AST Transformation Extension

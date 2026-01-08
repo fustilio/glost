@@ -7,7 +7,7 @@
  */
 
 import type { GLOSTExtension } from "../types";
-import type { GLOSTWord } from "@glost/core";
+import type { GLOSTWord } from "glost";
 
 /**
  * Difficulty level type

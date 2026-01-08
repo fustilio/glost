@@ -15,9 +15,9 @@ import type {
   GLOSTWord,
   GLOSTPunctuation,
   LanguageCode,
-} from "@glost/core";
+} from "glost";
 import { visit } from "unist-util-visit";
-import { getWordText } from "@glost/core";
+import { getWordText } from "glost";
 
 /**
  * Clause type
@@ -325,7 +325,7 @@ function createClause(
  *
  * @example
  * ```typescript
- * import { createClauseSegmenterExtension } from "@glost/core-extensions/extensions";
+ * import { createClauseSegmenterExtension } from "glost-extensions/extensions";
  *
  * const extension = createClauseSegmenterExtension({
  *   language: "en-US",
@@ -421,8 +421,8 @@ export function createClauseSegmenterExtension(
  *
  * @example
  * ```typescript
- * import { ClauseSegmenterExtension } from "@glost/core-extensions/extensions";
- * import { processGLOSTWithExtensions } from "@glost/core-extensions/processor";
+ * import { ClauseSegmenterExtension } from "glost-extensions/extensions";
+ * import { processGLOSTWithExtensions } from "glost-extensions/processor";
  *
  * const result = processGLOSTWithExtensions(document, [
  *   ClauseSegmenterExtension,

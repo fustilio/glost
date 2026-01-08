@@ -11,9 +11,9 @@
  */
 
 import type { GLOSTExtension } from "../types";
-import type { GLOSTRoot, GLOSTWord, GLOSTSentence } from "@glost/core";
+import type { GLOSTRoot, GLOSTWord, GLOSTSentence } from "glost";
 import { visit } from "unist-util-visit";
-import { getWordText } from "@glost/core";
+import { getWordText } from "glost";
 
 /**
  * Target gender type
@@ -269,7 +269,7 @@ function transformSentence(
  *
  * @example
  * ```typescript
- * import { createGenderTransformerExtension } from "@glost/core-extensions/extensions";
+ * import { createGenderTransformerExtension } from "glost-extensions/extensions";
  *
  * // Replace with male forms
  * const maleExt = createGenderTransformerExtension({
@@ -350,8 +350,8 @@ export function createGenderTransformerExtension(
  *
  * @example
  * ```typescript
- * import { GenderTransformerExtension } from "@glost/core-extensions/extensions";
- * import { processGLOSTWithExtensions } from "@glost/core-extensions/processor";
+ * import { GenderTransformerExtension } from "glost-extensions/extensions";
+ * import { processGLOSTWithExtensions } from "glost-extensions/processor";
  *
  * const result = processGLOSTWithExtensions(document, [
  *   GenderTransformerExtension,

@@ -1,12 +1,12 @@
 /**
- * @glost/core-utils
+ * glost-utils
  * 
  * Framework-agnostic utilities for GLOST manipulation, conversion, and merging.
  * 
  * This package provides:
  * - Text-to-GLOST conversion with pluggable interfaces
  * - GLOST merging and hydration utilities
- * - Document manipulation utilities (re-exports from @glost/core where applicable)
+ * - Document manipulation utilities (re-exports from glost where applicable)
  * - Script conversion utilities
  */
 
@@ -33,7 +33,7 @@ export {
 } from "./glost-merger";
 
 // Export document utilities
-// These re-export from @glost/core where possible, adding convenience wrappers
+// These re-export from glost where possible, adding convenience wrappers
 export {
   getAllWordsFromDocument,
   getFirstSentenceFromDocument,
@@ -60,7 +60,7 @@ export {
 // Export ingredient prep utilities
 export * from "./ingredient-prep";
 
-// Re-export commonly used utilities from @glost/core for convenience
+// Re-export commonly used utilities from glost for convenience
 export {
   // Tree traversal
   getAllWords,
@@ -97,5 +97,5 @@ export {
   getLanguageFallback,
   normalizeLanguageTag,
   isValidLanguageTag,
-} from "@glost/core";
+} from "glost";
 

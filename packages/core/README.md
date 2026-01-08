@@ -1,4 +1,4 @@
-# @glost/core
+# glost
 
 Core types and node creation for GLOST (Glossed Syntax Tree).
 
@@ -16,14 +16,14 @@ GLOST (Glossed Syntax Tree) is a Concrete Syntax Tree format that extends nlcst 
 ## Installation
 
 ```bash
-pnpm add @glost/core
+pnpm add glost
 ```
 
 ## Usage
 
 ```typescript
-import { createGLOSTWordNode, createGLOSTRootNode } from "@glost/core";
-import type { GLOSTWord, GLOSTRoot } from "@glost/core";
+import { createGLOSTWordNode, createGLOSTRootNode } from "glost";
+import type { GLOSTWord, GLOSTRoot } from "glost";
 
 // Create a word node with annotations
 // Language codes: ISO-639-1, ISO-639-3, or BCP-47 all work
@@ -53,9 +53,9 @@ const word = createGLOSTWordNode(
 
 ## Related Packages
 
-- `@glost/extensions` - Extension system for transforming GLOST trees
-- `@glost/utils` - Utilities for working with GLOST documents
-- `@glost/common` - Shared utilities and language configs
+- `glost-extensions` - Extension system for transforming GLOST trees
+- `glost-utils` - Utilities for working with GLOST documents
+- `glost-common` - Shared utilities and language configs
 
 ## Documentation
 

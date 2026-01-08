@@ -16,15 +16,15 @@ import type {
   LanguageCode,
   ScriptSystem,
   TransliterationData,
-} from "@glost/core";
+} from "glost";
 import {
   createGLOSTWordNode,
   createGLOSTSentenceNode,
   createGLOSTParagraphNode,
   createGLOSTRootNode,
-} from "@glost/core/nodes";
+} from "glost/nodes";
 import type { ILanguageStrategy, ITranscriptionProvider } from "./interfaces";
-import type { GlostLanguage } from "@glost/common";
+import type { GlostLanguage } from "glost-common";
 
 /**
  * Options for converting text to GLOST

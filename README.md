@@ -21,19 +21,19 @@ The name "GLOST" comes from "glossed" - the linguistic practice of adding annota
 
 ### Core Packages
 
-- **[@glost/core](packages/core)** - Core types and node creation
-- **[@glost/common](packages/common)** - Shared utilities and language configs
-- **[@glost/extensions](packages/extensions)** - Extension system and built-in extensions
-- **[@glost/utils](packages/utils)** - Text parsing and manipulation utilities
+- **[glost](packages/core)** - Core types and node creation
+- **[glost-common](packages/common)** - Shared utilities and language configs
+- **[glost-extensions](packages/extensions)** - Extension system and built-in extensions
+- **[glost-utils](packages/utils)** - Text parsing and manipulation utilities
 
 ### Extension Packages
 
-- **[@glost/extensions-transcription](packages/extensions/transcription)** - Pronunciation and transcription
-- **[@glost/extensions-translation](packages/extensions/translation)** - Multilingual glosses
+- **[glost-transcription](packages/extensions/transcription)** - Pronunciation and transcription
+- **[glost-translation](packages/extensions/translation)** - Multilingual glosses
 
 ### Plugin Packages
 
-- **[@glost/inkle](packages/plugins/inkle)** - Inkle/Ink integration
+- **[glost-inkle](packages/plugins/inkle)** - Inkle/Ink integration
 
 ## Quick Start
 
@@ -51,8 +51,8 @@ pnpm test
 ## Usage Example
 
 ```typescript
-import { createGLOSTWordNode, createGLOSTRootNode } from "@glost/core";
-import { processGLOST, FrequencyExtension, DifficultyExtension } from "@glost/extensions";
+import { createGLOSTWordNode, createGLOSTRootNode } from "glost";
+import { processGLOST, FrequencyExtension, DifficultyExtension } from "glost-extensions";
 
 // Create a word node with annotations
 const word = createGLOSTWordNode(
@@ -121,7 +121,7 @@ import {
   // Special codes
   SPECIAL_CODES,           // ["ipa", "und", "mul", "zxx"]
   isSpecialCode,           // Check for non-language codes
-} from "@glost/common";
+} from "glost-common";
 ```
 
 ### Supported Language Codes
@@ -150,21 +150,21 @@ GLOST follows a layered architecture:
               ↓
 ┌─────────────────────────────────────┐
 │      Extension Packages             │
-│   @glost/extensions-transcription   │
-│   @glost/extensions-translation     │
+│   glost-transcription               │
+│   glost-translation                 │
 └─────────────────────────────────────┘
               ↓
 ┌─────────────────────────────────────┐
 │      Core Extension System          │
-│   @glost/extensions                 │
+│   glost-extensions                  │
 │   (processor, registry, built-ins)  │
 └─────────────────────────────────────┘
               ↓
 ┌─────────────────────────────────────┐
 │      Core & Utilities               │
-│   @glost/core    - Types & nodes    │
-│   @glost/common  - Language codes   │
-│   @glost/utils   - Helpers          │
+│   glost          - Types & nodes    │
+│   glost-common   - Language codes   │
+│   glost-utils    - Helpers          │
 └─────────────────────────────────────┘
               ↓
 ┌─────────────────────────────────────┐

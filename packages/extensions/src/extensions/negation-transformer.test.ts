@@ -11,8 +11,8 @@ import {
 import { ClauseSegmenterExtension } from "./clause-segmenter";
 import { processGLOSTWithExtensions } from "../processor";
 import { createMockGLOSTDocument } from "../test-utils";
-import type { GLOSTSentence, GLOSTClause, GLOSTWord } from "@glost/core";
-import { getAllSentences, getAllClauses, getAllWords, getWordText } from "@glost/core";
+import type { GLOSTSentence, GLOSTClause, GLOSTWord } from "glost";
+import { getAllSentences, getAllClauses, getAllWords, getWordText } from "glost";
 
 describe("NegationTransformerExtension", () => {
   it("should have correct metadata", () => {

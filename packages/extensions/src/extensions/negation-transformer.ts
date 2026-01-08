@@ -18,9 +18,9 @@ import type {
   GLOSTSentence,
   GLOSTWord,
   LanguageCode,
-} from "@glost/core";
+} from "glost";
 import { visit } from "unist-util-visit";
-import { getWordText, getAllClauses } from "@glost/core";
+import { getWordText, getAllClauses } from "glost";
 
 /**
  * Negation type
@@ -318,7 +318,7 @@ function negateClause(
  * import {
  *   ClauseSegmenterExtension,
  *   createNegationTransformerExtension,
- * } from "@glost/core-extensions/extensions";
+ * } from "glost-extensions/extensions";
  *
  * // Negate all main clauses
  * const negationExt = createNegationTransformerExtension({
@@ -466,8 +466,8 @@ export function createNegationTransformerExtension(
  * import {
  *   ClauseSegmenterExtension,
  *   NegationTransformerExtension,
- * } from "@glost/core-extensions/extensions";
- * import { processGLOSTWithExtensions } from "@glost/core-extensions/processor";
+ * } from "glost-extensions/extensions";
+ * import { processGLOSTWithExtensions } from "glost-extensions/processor";
  *
  * const result = processGLOSTWithExtensions(document, [
  *   ClauseSegmenterExtension,

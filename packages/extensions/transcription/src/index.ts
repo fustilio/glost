@@ -7,10 +7,10 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "@glost/extensions";
-import type { GLOSTWord } from "@glost/core";
-import { getWordText } from "@glost/core";
-import type { GlostLanguage } from "@glost/common";
+import type { GLOSTExtension } from "glost-extensions";
+import type { GLOSTWord } from "glost";
+import { getWordText } from "glost";
+import type { GlostLanguage } from "glost-common";
 
 /**
  * Transcription extension options
@@ -52,9 +52,9 @@ export interface TranscriptionExtensionOptions {
  *
  * @example
  * ```typescript
- * import { createTranscriptionExtension } from "@glost/extensions-transcription";
- * import { processGLOSTWithExtensionsAsync } from "@glost/extensions/processor";
- * import type { GlostLanguage } from "@glost/common";
+ * import { createTranscriptionExtension } from "glost-extensions-transcription";
+ * import { processGLOSTWithExtensionsAsync } from "glost-extensions/processor";
+ * import type { GlostLanguage } from "glost-common";
  *
  * // Provide your own lookup function (e.g., from a dictionary service)
  * async function lookupTranscription(word: string, lang: GlostLanguage): Promise<Record<string, string>> {

@@ -9,8 +9,8 @@ import type {
   GLOSTWord,
   LanguageCode,
   ScriptSystem,
-} from "@glost/core";
-import { getAllWords } from "@glost/core";
+} from "glost";
+import { getAllWords } from "glost";
 
 /**
  * Transformation function type

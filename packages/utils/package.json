@@ -1,6 +1,6 @@
 {
   "name": "glost-utils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Framework-agnostic utilities for GLOST manipulation, conversion, and merging",
   "type": "module",
   "main": "./src/index.ts",
@@ -34,7 +34,7 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "test": "vitest",
+    "test": "vitest --passWithNoTests",
     "lint": "echo 'No linting configured'"
   },
   "dependencies": {

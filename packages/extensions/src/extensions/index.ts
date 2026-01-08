@@ -43,8 +43,8 @@ export {
 } from "./gender";
 
 // Note: Transcription and Translation extensions have been moved to separate packages:
-// - @glost/extensions-transcription
-// - @glost/extensions-translation
+// - glost-extensions-transcription
+// - glost-extensions-translation
 
 export {
   GenderTransformerExtension,

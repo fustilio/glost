@@ -1,5 +1,5 @@
 /**
- * @glost/core-extensions
+ * glost-extensions
  * 
  * Framework-agnostic AST extensions for GLOST manipulation and enhancement.
  * 
@@ -10,8 +10,8 @@
  * 
  * @example
  * ```typescript
- * import { processGLOSTWithExtensions } from "@glost/core-extensions";
- * import { FrequencyExtension, DifficultyExtension } from "@glost/core-extensions/extensions";
+ * import { processGLOSTWithExtensions } from "glost-extensions";
+ * import { FrequencyExtension, DifficultyExtension } from "glost-extensions/extensions";
  * 
  * const result = processGLOSTWithExtensions(document, [
  *   FrequencyExtension,

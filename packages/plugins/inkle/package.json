@@ -1,6 +1,6 @@
 {
   "name": "glost-inkle",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Inkle integration for GLOST",
   "type": "module",
   "main": "./src/index.ts",
@@ -14,7 +14,7 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "test": "vitest",
+    "test": "vitest --passWithNoTests",
     "lint": "echo 'No linting configured'"
   },
   "dependencies": {

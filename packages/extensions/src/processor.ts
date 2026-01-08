@@ -11,7 +11,7 @@ import type {
   GLOSTSentence,
   GLOSTParagraph,
   GLOSTRoot,
-} from "@glost/core";
+} from "glost";
 import { visit } from "unist-util-visit";
 import type {
   GLOSTExtension,
@@ -40,8 +40,8 @@ import { extensionRegistry } from "./registry";
  * 
  * @example
  * ```typescript
- * import { processGLOSTWithExtensions } from "@glost/core-extensions/processor";
- * import { FrequencyExtension, DifficultyExtension } from "@glost/core-extensions/extensions";
+ * import { processGLOSTWithExtensions } from "glost-extensions/processor";
+ * import { FrequencyExtension, DifficultyExtension } from "glost-extensions/extensions";
  * 
  * const result = processGLOSTWithExtensions(document, [
  *   FrequencyExtension,
@@ -213,7 +213,7 @@ function applyVisitors(
  */
 function enhanceMetadata(
   document: GLOSTRoot,
-  enhancer: (node: GLOSTWord) => Partial<import("@glost/core").GLOSTExtras> | void,
+  enhancer: (node: GLOSTWord) => Partial<import("glost").GLOSTExtras> | void,
 ): GLOSTRoot {
   visit(document, "WordNode", (node) => {
     if (node.type === "WordNode") {
@@ -245,8 +245,8 @@ function enhanceMetadata(
  * 
  * @example
  * ```typescript
- * import { processGLOSTWithExtensionIds, registerExtension } from "@glost/core-extensions/processor";
- * import { FrequencyExtension } from "@glost/core-extensions/extensions";
+ * import { processGLOSTWithExtensionIds, registerExtension } from "glost-extensions/processor";
+ * import { FrequencyExtension } from "glost-extensions/extensions";
  * 
  * // Register extension first
  * registerExtension(FrequencyExtension);
@@ -292,8 +292,8 @@ export function processGLOSTWithExtensionIds(
  * 
  * @example
  * ```typescript
- * import { processGLOSTWithExtensionsAsync } from "@glost/core-extensions/processor";
- * import { TranscriptionExtension, TranslationExtension } from "@glost/core-extensions/extensions";
+ * import { processGLOSTWithExtensionsAsync } from "glost-extensions/processor";
+ * import { TranscriptionExtension, TranslationExtension } from "glost-extensions/extensions";
  * 
  * const result = await processGLOSTWithExtensionsAsync(document, [
  *   TranscriptionExtension,
@@ -479,7 +479,7 @@ async function applyVisitorsAsync(
  */
 async function enhanceMetadataAsync(
   document: GLOSTRoot,
-  enhancer: (node: GLOSTWord) => Partial<import("@glost/core").GLOSTExtras> | void | Promise<Partial<import("@glost/core").GLOSTExtras> | void>,
+  enhancer: (node: GLOSTWord) => Partial<import("glost").GLOSTExtras> | void | Promise<Partial<import("glost").GLOSTExtras> | void>,
 ): Promise<GLOSTRoot> {
   const wordNodes: GLOSTWord[] = [];
   visit(document, "WordNode", (node) => {

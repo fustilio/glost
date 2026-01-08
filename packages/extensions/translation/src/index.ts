@@ -7,10 +7,10 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "@glost/extensions";
-import type { GLOSTWord } from "@glost/core";
-import { getWordText } from "@glost/core";
-import type { GlostLanguage } from "@glost/common";
+import type { GLOSTExtension } from "glost-extensions";
+import type { GLOSTWord } from "glost";
+import { getWordText } from "glost";
+import type { GlostLanguage } from "glost-common";
 
 /**
  * Translation extension options
@@ -59,9 +59,9 @@ export interface TranslationExtensionOptions {
  *
  * @example
  * ```typescript
- * import { createTranslationExtension } from "@glost/extensions-translation";
- * import { processGLOSTWithExtensionsAsync } from "@glost/extensions/processor";
- * import type { GlostLanguage } from "@glost/common";
+ * import { createTranslationExtension } from "glost-extensions-translation";
+ * import { processGLOSTWithExtensionsAsync } from "glost-extensions/processor";
+ * import type { GlostLanguage } from "glost-common";
  *
  * // Provide your own lookup function (e.g., from a dictionary service)
  * async function lookupTranslation(word: string, lang: GlostLanguage): Promise<string | undefined> {

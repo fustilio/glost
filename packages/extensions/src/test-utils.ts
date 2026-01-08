@@ -16,7 +16,7 @@ import type {
   TransliterationData,
   TranscriptionSystem,
   LinguisticMetadata,
-} from "@glost/core";
+} from "glost";
 import {
   createGLOSTWordNode,
   createGLOSTTextNode,
@@ -24,7 +24,7 @@ import {
   createGLOSTParagraphNode,
   createGLOSTRootNode,
   createGLOSTPunctuationNode,
-} from "@glost/core";
+} from "glost";
 
 /**
  * Create a mock GLOST word node for testing

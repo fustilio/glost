@@ -1,6 +1,6 @@
 {
   "name": "glost-extensions",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Core extension system and built-in extensions for GLOST",
   "type": "module",
   "main": "./src/index.ts",

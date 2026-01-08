@@ -7,7 +7,7 @@
  */
 
 import type { GLOSTExtension } from "../types";
-import type { GLOSTWord } from "@glost/core";
+import type { GLOSTWord } from "glost";
 
 /**
  * Frequency level type
@@ -171,7 +171,7 @@ export interface FrequencyExtensionOptions {
  * 
  * @example
  * ```typescript
- * import { createFrequencyExtension } from "@glost/core-extensions/extensions";
+ * import { createFrequencyExtension } from "glost-extensions/extensions";
  * 
  * const customExtension = createFrequencyExtension({
  *   normalize: true,
@@ -268,7 +268,7 @@ export function createFrequencyExtension(
  * 
  * @example
  * ```typescript
- * import { FrequencyExtension } from "@glost/core-extensions/extensions";
+ * import { FrequencyExtension } from "glost-extensions/extensions";
  * 
  * const result = processGLOSTWithExtensions(document, [FrequencyExtension]);
  * ```

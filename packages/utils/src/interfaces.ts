@@ -5,7 +5,7 @@
  * implementations rather than depending on concrete classes.
  */
 
-// GlostLanguage type is available from @glost/common if needed for type constraints
+// GlostLanguage type is available from glost-common if needed for type constraints
 
 /**
  * Interface for language-specific strategies

@@ -249,7 +249,7 @@ class ExtensionRegistry {
  * 
  * @example
  * ```typescript
- * import { extensionRegistry } from "@glost/core-extensions/registry";
+ * import { extensionRegistry } from "glost-extensions/registry";
  * 
  * extensionRegistry.register(MyExtension);
  * const ext = extensionRegistry.get("my-extension");
@@ -268,7 +268,7 @@ export const extensionRegistry = new ExtensionRegistry();
  * 
  * @example
  * ```typescript
- * import { registerExtension } from "@glost/core-extensions/registry";
+ * import { registerExtension } from "glost-extensions/registry";
  * 
  * registerExtension({
  *   id: "my-extension",
@@ -294,7 +294,7 @@ export function registerExtension(extension: GLOSTExtension): void {
  * 
  * @example
  * ```typescript
- * import { registerExtensions } from "@glost/core-extensions/registry";
+ * import { registerExtensions } from "glost-extensions/registry";
  * 
  * registerExtensions([
  *   FrequencyExtension,
@@ -321,7 +321,7 @@ export function registerExtensions(extensions: GLOSTExtension[]): void {
  * 
  * @example
  * ```typescript
- * import { getExtension } from "@glost/core-extensions/registry";
+ * import { getExtension } from "glost-extensions/registry";
  * 
  * const ext = getExtension("frequency");
  * if (ext) {
@@ -346,7 +346,7 @@ export function getExtension(id: string): GLOSTExtension | undefined {
  * 
  * @example
  * ```typescript
- * import { getAllExtensions } from "@glost/core-extensions/registry";
+ * import { getAllExtensions } from "glost-extensions/registry";
  * 
  * const all = getAllExtensions();
  * console.log(`Registered ${all.length} extensions`);

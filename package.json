@@ -13,11 +13,12 @@
     "typecheck": "pnpm -r typecheck",
     "clean": "pnpm -r exec rm -rf dist node_modules",
     "changeset": "changeset",
-    "version": "changeset version",
-    "release": "changeset publish"
+    "changeset:version": "changeset version",
+    "changeset:release": "changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",
+    "@types/node": "^20.0.0",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3",
     "vitest": "^3.0.5"

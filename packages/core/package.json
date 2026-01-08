@@ -1,6 +1,6 @@
 {
   "name": "glost",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "GLOST - Glossed Syntax Tree for augmenting text with language learning metadata",
   "type": "module",
   "main": "./src/index.ts",
@@ -30,7 +30,7 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "test": "vitest"
+    "test": "vitest --passWithNoTests"
   },
   "dependencies": {
     "glost-common": "workspace:*",
