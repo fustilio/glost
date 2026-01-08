@@ -1,8 +1,8 @@
 /**
  * Extension Processor
- * 
+ *
  * Processes GLOST documents with registered extensions.
- * 
+ *
  * @packageDocumentation
  */
 
@@ -11,58 +11,151 @@ import type {
   GLOSTSentence,
   GLOSTParagraph,
   GLOSTRoot,
+  GLOSTExtras,
 } from "glost";
 import { visit } from "unist-util-visit";
 import type {
   GLOSTExtension,
   ExtensionContext,
   ExtensionResult,
+  ProcessorOptions,
 } from "./types";
 import { extensionRegistry } from "./registry";
+import { deepMerge } from "./utils/deep-merge";
+import { MissingNodeTypeError } from "./errors";
+
+/**
+ * Check if a document contains a specific node type
+ *
+ * @param document - The document to check
+ * @param nodeType - The node type to look for
+ * @returns true if the node type exists in the document
+ *
+ * @internal
+ */
+function hasNodeType(document: GLOSTRoot, nodeType: string): boolean {
+  let found = false;
+  visit(document, (node) => {
+    if (node.type === nodeType) {
+      found = true;
+      return false; // Stop visiting
+    }
+  });
+  return found;
+}
+
+/**
+ * Validate that required node types exist in the document
+ *
+ * @param extension - The extension with requirements
+ * @param document - The document to validate
+ * @param context - Processing context
+ * @param options - Processor options
+ * @returns Array of errors (empty if validation passed)
+ *
+ * @internal
+ */
+function validateNodeRequirements(
+  extension: GLOSTExtension,
+  document: GLOSTRoot,
+  context: ExtensionContext,
+  options: ProcessorOptions,
+): Error[] {
+  const errors: Error[] = [];
+
+  if (!extension.requires?.nodes) {
+    return errors;
+  }
+
+  for (const nodeType of extension.requires.nodes) {
+    if (!hasNodeType(document, nodeType)) {
+      // Try to find which extension provides this node type
+      const provider = findProviderForNode(nodeType);
+
+      const error = new MissingNodeTypeError(
+        extension.id,
+        nodeType,
+        provider?.id,
+      );
+
+      if (options.lenient) {
+        console.warn(`[glost-extensions] ${error.message}`);
+      } else {
+        errors.push(error);
+      }
+    }
+  }
+
+  return errors;
+}
+
+/**
+ * Find an extension that provides a specific node type
+ *
+ * @param nodeType - The node type to find a provider for
+ * @returns The extension that provides this node type, or undefined
+ *
+ * @internal
+ */
+function findProviderForNode(nodeType: string): GLOSTExtension | undefined {
+  const allExtensions = extensionRegistry.getAll();
+  return allExtensions.find((ext) => ext.provides?.nodes?.includes(nodeType));
+}
 
 /**
  * Process an GLOST document with extensions
- * 
+ *
  * Applies all specified extensions in dependency order, transforming
  * the document tree and enhancing node metadata. Extensions are processed
  * in three phases:
  * 1. Transform phase: Global tree transformations
  * 2. Visit phase: Node-specific modifications
  * 3. Enhance phase: Metadata enhancement
- * 
+ *
  * Extensions that fail are skipped, but processing continues with remaining
  * extensions. Errors are captured in the result metadata.
- * 
+ *
  * @param document - The GLOST document to process
  * @param extensions - Array of extensions to apply
  * @param options - Optional processing options
  * @returns Result containing processed document and metadata
- * 
+ *
  * @example
  * ```typescript
  * import { processGLOSTWithExtensions } from "glost-extensions/processor";
  * import { FrequencyExtension, DifficultyExtension } from "glost-extensions/extensions";
- * 
+ *
  * const result = processGLOSTWithExtensions(document, [
  *   FrequencyExtension,
  *   DifficultyExtension,
  * ]);
- * 
+ *
  * console.log(result.document); // Processed document
  * console.log(result.metadata.appliedExtensions); // ["frequency", "difficulty"]
  * ```
- * 
+ *
+ * @example
+ * ```typescript
+ * // With lenient mode - warn instead of throwing on errors
+ * const result = processGLOSTWithExtensions(document, extensions, {
+ *   lenient: true,
+ *   conflictStrategy: "warn",
+ * });
+ * ```
+ *
  * @throws {Error} If circular dependencies are detected in extensions
- * 
+ * @throws {MissingNodeTypeError} If required node types are missing (unless lenient)
+ * @throws {ExtensionConflictError} If metadata conflicts occur (unless conflictStrategy !== "error")
+ *
  * @see {@link processGLOSTWithExtensionIds} - Process with extension IDs
  * @see {@link ExtensionResult} - Result type
- * 
+ *
  * @since 0.0.1
  */
 export function processGLOSTWithExtensions(
   document: GLOSTRoot,
   extensions: GLOSTExtension[],
-  options?: Record<string, unknown>,
+  options: ProcessorOptions = {},
 ): ExtensionResult {
   // Register extensions temporarily if not already registered
   const tempExtensions: string[] = [];
@@ -83,9 +176,11 @@ export function processGLOSTWithExtensions(
       .map((id) => extensionRegistry.get(id))
       .filter((ext): ext is GLOSTExtension => ext !== undefined);
 
+    // Create mutable context that tracks applied extensions
     const context: ExtensionContext = {
       originalDocument: document,
       extensionIds: orderedIds,
+      appliedExtensions: [],
       options,
     };
 
@@ -94,36 +189,74 @@ export function processGLOSTWithExtensions(
     const skippedExtensions: string[] = [];
     const errors: Array<{ extensionId: string; error: Error }> = [];
 
+    // Track which extension wrote which fields for conflict detection
+    const fieldOwnership: Map<string, string> = new Map();
+
     // Apply extensions in order
     for (const extension of orderedExtensions) {
       try {
+        // Validate node requirements before running extension
+        const validationErrors = validateNodeRequirements(
+          extension,
+          processedDocument,
+          context,
+          options,
+        );
+
+        if (validationErrors.length > 0) {
+          for (const error of validationErrors) {
+            errors.push({ extensionId: extension.id, error });
+          }
+          skippedExtensions.push(extension.id);
+
+          // In strict mode, throw the first validation error
+          if (!options.lenient && validationErrors[0]) {
+            throw validationErrors[0];
+          }
+          continue;
+        }
+
         // Apply transform if present (sync transforms only - use processGLOSTWithExtensionsAsync for async)
         if (extension.transform) {
-          const result = extension.transform(processedDocument);
+          const result = extension.transform(processedDocument, context);
           // Type assertion: sync function expects sync transforms
           processedDocument = result as GLOSTRoot;
         }
 
         // Apply visitors
         if (extension.visit) {
-          processedDocument = applyVisitors(processedDocument, extension.visit);
+          processedDocument = applyVisitors(
+            processedDocument,
+            extension.visit,
+            context,
+          );
         }
 
-        // Apply metadata enhancement
+        // Apply metadata enhancement with deep merge
         if (extension.enhanceMetadata) {
           processedDocument = enhanceMetadata(
             processedDocument,
             extension.enhanceMetadata,
+            extension.id,
+            fieldOwnership,
+            options,
+            context,
           );
         }
 
         appliedExtensions.push(extension.id);
+        context.appliedExtensions.push(extension.id);
       } catch (error) {
         errors.push({
           extensionId: extension.id,
           error: error instanceof Error ? error : new Error(String(error)),
         });
         skippedExtensions.push(extension.id);
+
+        // In strict mode, re-throw the error to stop processing
+        if (!options.lenient) {
+          throw error;
+        }
       }
     }
 
@@ -145,18 +278,20 @@ export function processGLOSTWithExtensions(
 
 /**
  * Apply visitor functions to the document tree
- * 
+ *
  * Visits nodes of specified types and applies visitor functions.
- * 
+ *
  * @param document - The document to process
  * @param visitors - Visitor functions for different node types
+ * @param context - Extension context
  * @returns The processed document
- * 
+ *
  * @internal
  */
 function applyVisitors(
   document: GLOSTRoot,
   visitors: NonNullable<GLOSTExtension["visit"]>,
+  context: ExtensionContext,
 ): GLOSTRoot {
   let processed = document;
 
@@ -164,7 +299,7 @@ function applyVisitors(
   if (visitors.word) {
     visit(processed, "WordNode", (node) => {
       if (node.type === "WordNode") {
-        const result = visitors.word!(node);
+        const result = visitors.word!(node, context);
         if (result) {
           // Replace node with result
           Object.assign(node, result);
@@ -177,7 +312,7 @@ function applyVisitors(
   if (visitors.sentence) {
     visit(processed, "SentenceNode", (node) => {
       if (node.type === "SentenceNode") {
-        const result = visitors.sentence!(node);
+        const result = visitors.sentence!(node, context);
         if (result) {
           Object.assign(node, result);
         }
@@ -189,7 +324,7 @@ function applyVisitors(
   if (visitors.paragraph) {
     visit(processed, "ParagraphNode", (node) => {
       if (node.type === "ParagraphNode") {
-        const result = visitors.paragraph!(node);
+        const result = visitors.paragraph!(node, context);
         if (result) {
           Object.assign(node, result);
         }
@@ -202,27 +337,49 @@ function applyVisitors(
 
 /**
  * Enhance metadata for all word nodes
- * 
+ *
  * Applies metadata enhancement function to all word nodes in the document.
- * 
+ * Uses deep merge with conflict detection.
+ *
  * @param document - The document to process
  * @param enhancer - Function that enhances metadata for word nodes
+ * @param extensionId - ID of the current extension (for conflict tracking)
+ * @param fieldOwnership - Map tracking which extension owns which fields
+ * @param options - Processor options
+ * @param context - Extension context
  * @returns The processed document
- * 
+ *
  * @internal
  */
 function enhanceMetadata(
   document: GLOSTRoot,
-  enhancer: (node: GLOSTWord) => Partial<import("glost").GLOSTExtras> | void,
+  enhancer: (
+    node: GLOSTWord,
+    context?: ExtensionContext,
+  ) => Partial<GLOSTExtras> | void,
+  extensionId: string,
+  fieldOwnership: Map<string, string>,
+  options: ProcessorOptions,
+  context: ExtensionContext,
 ): GLOSTRoot {
   visit(document, "WordNode", (node) => {
     if (node.type === "WordNode") {
-      const enhancement = enhancer(node);
+      const enhancement = enhancer(node, context);
       if (enhancement) {
-        node.extras = {
-          ...node.extras,
-          ...enhancement,
-        };
+        // Use deep merge with conflict detection
+        node.extras = deepMerge(node.extras ?? {}, enhancement, {
+          arrayStrategy: "concat",
+          conflictStrategy: options.conflictStrategy ?? "error",
+          existingExtensionId: getOwnerForFields(
+            node.extras ?? {},
+            enhancement,
+            fieldOwnership,
+          ),
+          incomingExtensionId: extensionId,
+        }) as GLOSTExtras;
+
+        // Track ownership of new fields
+        trackFieldOwnership(enhancement, extensionId, fieldOwnership);
       }
     }
   });
@@ -231,39 +388,93 @@ function enhanceMetadata(
 }
 
 /**
+ * Get the owner extension for conflicting fields
+ *
+ * Returns undefined if the field comes from the original document (not an extension).
+ * This allows extensions to transform/enrich original data without triggering conflicts.
+ * Only returns an extension ID if another extension wrote to this field.
+ *
+ * @internal
+ */
+function getOwnerForFields(
+  existing: Record<string, unknown>,
+  incoming: Record<string, unknown>,
+  fieldOwnership: Map<string, string>,
+): string | undefined {
+  for (const key of Object.keys(incoming)) {
+    if (key in existing && fieldOwnership.has(key)) {
+      return fieldOwnership.get(key)!;
+    }
+  }
+  // Field comes from original document, not another extension
+  return undefined;
+}
+
+/**
+ * Track which extension owns which fields
+ *
+ * @internal
+ */
+function trackFieldOwnership(
+  enhancement: Record<string, unknown>,
+  extensionId: string,
+  fieldOwnership: Map<string, string>,
+  prefix = "",
+): void {
+  for (const [key, value] of Object.entries(enhancement)) {
+    const fullKey = prefix ? `${prefix}.${key}` : key;
+    fieldOwnership.set(fullKey, extensionId);
+
+    // Track nested objects too
+    if (
+      typeof value === "object" &&
+      value !== null &&
+      !Array.isArray(value)
+    ) {
+      trackFieldOwnership(
+        value as Record<string, unknown>,
+        extensionId,
+        fieldOwnership,
+        fullKey,
+      );
+    }
+  }
+}
+
+/**
  * Process document with registered extensions by ID
- * 
+ *
  * Processes a document using extensions that have been previously registered
  * with the extension registry. Extensions are looked up by ID.
- * 
+ *
  * @param document - The GLOST document to process
  * @param extensionIds - Array of extension IDs to apply
  * @param options - Optional processing options
  * @returns Result containing processed document and metadata
- * 
+ *
  * @throws {Error} If any extension ID is not found in the registry
- * 
+ *
  * @example
  * ```typescript
  * import { processGLOSTWithExtensionIds, registerExtension } from "glost-extensions/processor";
  * import { FrequencyExtension } from "glost-extensions/extensions";
- * 
+ *
  * // Register extension first
  * registerExtension(FrequencyExtension);
- * 
+ *
  * // Process by ID
  * const result = processGLOSTWithExtensionIds(document, ["frequency"]);
  * ```
- * 
+ *
  * @see {@link processGLOSTWithExtensions} - Process with extension objects
  * @see {@link registerExtension} - Register extensions
- * 
+ *
  * @since 0.0.1
  */
 export function processGLOSTWithExtensionIds(
   document: GLOSTRoot,
   extensionIds: string[],
-  options?: Record<string, unknown>,
+  options: ProcessorOptions = {},
 ): ExtensionResult {
   const extensions = extensionIds
     .map((id) => extensionRegistry.get(id))
@@ -281,32 +492,32 @@ export function processGLOSTWithExtensionIds(
 
 /**
  * Process an GLOST document with extensions (async version)
- * 
+ *
  * Async version of `processGLOSTWithExtensions` that supports async extensions.
  * Extensions can have async transform, visit, and enhanceMetadata functions.
- * 
+ *
  * @param document - The GLOST document to process
  * @param extensions - Array of extensions to apply
  * @param options - Optional processing options
  * @returns Promise resolving to result containing processed document and metadata
- * 
+ *
  * @example
  * ```typescript
  * import { processGLOSTWithExtensionsAsync } from "glost-extensions/processor";
  * import { TranscriptionExtension, TranslationExtension } from "glost-extensions/extensions";
- * 
+ *
  * const result = await processGLOSTWithExtensionsAsync(document, [
  *   TranscriptionExtension,
  *   TranslationExtension,
  * ]);
  * ```
- * 
+ *
  * @since 0.0.1
  */
 export async function processGLOSTWithExtensionsAsync(
   document: GLOSTRoot,
   extensions: GLOSTExtension[],
-  options?: Record<string, unknown>,
+  options: ProcessorOptions = {},
 ): Promise<ExtensionResult> {
   // Register extensions temporarily if not already registered
   const tempExtensions: string[] = [];
@@ -330,6 +541,7 @@ export async function processGLOSTWithExtensionsAsync(
     const context: ExtensionContext = {
       originalDocument: document,
       extensionIds: orderedIds,
+      appliedExtensions: [],
       options,
     };
 
@@ -338,17 +550,48 @@ export async function processGLOSTWithExtensionsAsync(
     const skippedExtensions: string[] = [];
     const errors: Array<{ extensionId: string; error: Error }> = [];
 
+    // Track which extension wrote which fields for conflict detection
+    const fieldOwnership: Map<string, string> = new Map();
+
     // Apply extensions in order
     for (const extension of orderedExtensions) {
       try {
+        // Validate node requirements before running extension
+        const validationErrors = validateNodeRequirements(
+          extension,
+          processedDocument,
+          context,
+          options,
+        );
+
+        if (validationErrors.length > 0) {
+          for (const error of validationErrors) {
+            errors.push({ extensionId: extension.id, error });
+          }
+          skippedExtensions.push(extension.id);
+
+          // In strict mode, throw the first validation error
+          if (!options.lenient && validationErrors[0]) {
+            throw validationErrors[0];
+          }
+          continue;
+        }
+
         // Apply transform if present (supports async)
         if (extension.transform) {
-          processedDocument = await extension.transform(processedDocument);
+          processedDocument = await extension.transform(
+            processedDocument,
+            context,
+          );
         }
 
         // Apply visitors (supports async)
         if (extension.visit) {
-          processedDocument = await applyVisitorsAsync(processedDocument, extension.visit);
+          processedDocument = await applyVisitorsAsync(
+            processedDocument,
+            extension.visit,
+            context,
+          );
         }
 
         // Apply metadata enhancement (supports async)
@@ -356,16 +599,26 @@ export async function processGLOSTWithExtensionsAsync(
           processedDocument = await enhanceMetadataAsync(
             processedDocument,
             extension.enhanceMetadata,
+            extension.id,
+            fieldOwnership,
+            options,
+            context,
           );
         }
 
         appliedExtensions.push(extension.id);
+        context.appliedExtensions.push(extension.id);
       } catch (error) {
         errors.push({
           extensionId: extension.id,
           error: error instanceof Error ? error : new Error(String(error)),
         });
         skippedExtensions.push(extension.id);
+
+        // In strict mode, re-throw the error to stop processing
+        if (!options.lenient) {
+          throw error;
+        }
       }
     }
 
@@ -387,19 +640,21 @@ export async function processGLOSTWithExtensionsAsync(
 
 /**
  * Apply visitor functions to the document tree (async version)
- * 
+ *
  * Visits nodes of specified types and applies visitor functions.
  * Supports async visitor functions.
- * 
+ *
  * @param document - The document to process
  * @param visitors - Visitor functions for different node types
+ * @param context - Extension context
  * @returns Promise resolving to the processed document
- * 
+ *
  * @internal
  */
 async function applyVisitorsAsync(
   document: GLOSTRoot,
   visitors: NonNullable<GLOSTExtension["visit"]>,
+  context: ExtensionContext,
 ): Promise<GLOSTRoot> {
   let processed = document;
 
@@ -415,7 +670,7 @@ async function applyVisitorsAsync(
     // Process all word nodes in parallel
     await Promise.all(
       wordNodes.map(async (node) => {
-        const result = await visitors.word!(node);
+        const result = await visitors.word!(node, context);
         if (result) {
           // Replace node with result
           Object.assign(node, result);
@@ -435,7 +690,7 @@ async function applyVisitorsAsync(
 
     await Promise.all(
       sentenceNodes.map(async (node) => {
-        const result = await visitors.sentence!(node);
+        const result = await visitors.sentence!(node, context);
         if (result) {
           Object.assign(node, result);
         }
@@ -454,7 +709,7 @@ async function applyVisitorsAsync(
 
     await Promise.all(
       paragraphNodes.map(async (node) => {
-        const result = await visitors.paragraph!(node);
+        const result = await visitors.paragraph!(node, context);
         if (result) {
           Object.assign(node, result);
         }
@@ -467,19 +722,33 @@ async function applyVisitorsAsync(
 
 /**
  * Enhance metadata for all word nodes (async version)
- * 
+ *
  * Applies metadata enhancement function to all word nodes in the document.
- * Supports async enhancement functions.
- * 
+ * Supports async enhancement functions. Uses deep merge with conflict detection.
+ *
  * @param document - The document to process
  * @param enhancer - Function that enhances metadata for word nodes
+ * @param extensionId - ID of the current extension (for conflict tracking)
+ * @param fieldOwnership - Map tracking which extension owns which fields
+ * @param options - Processor options
+ * @param context - Extension context
  * @returns Promise resolving to the processed document
- * 
+ *
  * @internal
  */
 async function enhanceMetadataAsync(
   document: GLOSTRoot,
-  enhancer: (node: GLOSTWord) => Partial<import("glost").GLOSTExtras> | void | Promise<Partial<import("glost").GLOSTExtras> | void>,
+  enhancer: (
+    node: GLOSTWord,
+    context?: ExtensionContext,
+  ) =>
+    | Partial<GLOSTExtras>
+    | void
+    | Promise<Partial<GLOSTExtras> | void>,
+  extensionId: string,
+  fieldOwnership: Map<string, string>,
+  options: ProcessorOptions,
+  context: ExtensionContext,
 ): Promise<GLOSTRoot> {
   const wordNodes: GLOSTWord[] = [];
   visit(document, "WordNode", (node) => {
@@ -491,16 +760,25 @@ async function enhanceMetadataAsync(
   // Process all word nodes in parallel
   await Promise.all(
     wordNodes.map(async (node) => {
-      const enhancement = await enhancer(node);
+      const enhancement = await enhancer(node, context);
       if (enhancement) {
-        node.extras = {
-          ...node.extras,
-          ...enhancement,
-        };
+        // Use deep merge with conflict detection
+        node.extras = deepMerge(node.extras ?? {}, enhancement, {
+          arrayStrategy: "concat",
+          conflictStrategy: options.conflictStrategy ?? "error",
+          existingExtensionId: getOwnerForFields(
+            node.extras ?? {},
+            enhancement,
+            fieldOwnership,
+          ),
+          incomingExtensionId: extensionId,
+        }) as GLOSTExtras;
+
+        // Track ownership of new fields
+        trackFieldOwnership(enhancement, extensionId, fieldOwnership);
       }
     }),
   );
 
   return document;
 }
-

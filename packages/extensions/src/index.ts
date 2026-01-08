@@ -29,7 +29,18 @@ export type {
   GLOSTExtension,
   ExtensionContext,
   ExtensionResult,
+  ProcessorOptions,
 } from "./types";
+
+// Export errors
+export {
+  ExtensionDependencyError,
+  ExtensionConflictError,
+  MissingNodeTypeError,
+} from "./errors";
+
+// Export utilities
+export { deepMerge, findConflicts, type DeepMergeOptions } from "./utils";
 
 // Export registry
 export {
@@ -49,4 +60,3 @@ export {
 
 // Export built-in extensions
 export * from "./extensions";
-

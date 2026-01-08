@@ -1,0 +1,197 @@
+# glost-[LANG]-transcription-[SYSTEM]
+
+[SYSTEM] transcription system for [LANGUAGE] language.
+
+## Overview
+
+This package provides the **SINGLE SOURCE OF TRUTH** for [SYSTEM] transcription rules. It applies [SYSTEM] romanization/transcription to [LANGUAGE] text following the Single Responsibility Principle (SRP).
+
+### Single Responsibility
+
+✅ **Does:**
+- Apply [SYSTEM] transcription rules
+- Convert [LANGUAGE] text to [SYSTEM] format
+- Handle tone markers (if applicable)
+- Split into syllables
+
+❌ **Does NOT:**
+- Fetch data from databases (use data source packages)
+- Query dictionaries (use data source packages)
+- Handle other transcription systems (each system is separate)
+
+## Installation
+
+```bash
+npm install glost-[LANG]-transcription-[SYSTEM]
+# or
+pnpm add glost-[LANG]-transcription-[SYSTEM]
+```
+
+## Usage
+
+### Basic Transcription
+
+```typescript
+import { transcribeTo[System] } from 'glost-[LANG]-transcription-[SYSTEM]';
+
+const result = transcribeTo[System]("example");
+console.log(result.text);      // "[SYSTEM] transcription"
+console.log(result.syllables);  // ["syl", "la", "bles"]
+```
+
+### With Options
+
+```typescript
+const result = transcribeTo[System]("example", {
+  includeTones: true,
+  syllableSeparator: "-",
+  capitalize: true
+});
+```
+
+### Validate Transcription
+
+```typescript
+import { isValid[System]Transcription } from 'glost-[LANG]-transcription-[SYSTEM]';
+
+const isValid = isValid[System]Transcription("example");
+```
+
+## Composing with Data Sources
+
+This transcription system is designed to work with ANY data source:
+
+### Example: Compose with Data Source
+
+```typescript
+import { query[Source] } from 'glost-[LANG]-datasource-[SOURCE]';
+import { transcribeTo[System] } from 'glost-[LANG]-transcription-[SYSTEM]';
+
+async function lookupAndTranscribe(word: string) {
+  // Get data (SRP - data access)
+  const entry = await query[Source](word);
+  if (!entry) return null;
+
+  // Apply transcription (SRP - processing)
+  const transcription = transcribeTo[System](entry.reading);
+
+  return {
+    word: entry.word,
+    [SYSTEM]: transcription.text,
+    syllables: transcription.syllables
+  };
+}
+```
+
+### Example: Use with Multiple Data Sources
+
+```typescript
+import { querySourceA } from 'glost-[LANG]-datasource-source-a';
+import { querySourceB } from 'glost-[LANG]-datasource-source-b';
+import { transcribeTo[System] } from 'glost-[LANG]-transcription-[SYSTEM]';
+
+// Same transcription system works with ANY data source
+async function lookupFromMultipleSources(word: string) {
+  let entry = await querySourceA(word);
+  if (!entry) {
+    entry = await querySourceB(word);
+  }
+  
+  if (entry) {
+    // Single source of truth for transcription rules
+    return transcribeTo[System](entry.reading);
+  }
+}
+```
+
+## API Reference
+
+### `transcribeTo[System](text, options?)`
+
+Transcribe [LANGUAGE] text to [SYSTEM] format.
+
+- **Parameters:**
+  - `text`: [LANGUAGE] text to transcribe
+  - `options`: Transcription options
+- **Returns:** `TranscriptionResult`
+
+### `isValid[System]Transcription(text)`
+
+Validate if text follows [SYSTEM] rules.
+
+- **Parameters:**
+  - `text`: Text to validate
+- **Returns:** `boolean`
+
+### `get[System]Info()`
+
+Get system information.
+
+- **Returns:** `SystemInfo`
+
+## Transcription Options
+
+```typescript
+interface TranscriptionOptions {
+  includeTones?: boolean;        // Include tone markers
+  syllableSeparator?: string;    // Syllable separator ("-", "·", etc.)
+  capitalize?: boolean;          // Capitalize first letter
+}
+```
+
+## Transcription Result
+
+```typescript
+interface TranscriptionResult {
+  text: string;           // Transcribed text
+  syllables?: string[];   // Syllables
+  tones?: string[];       // Tone information
+  system: string;         // System identifier
+}
+```
+
+## [SYSTEM] System Information
+
+- **Target Language:** [LANGUAGE] ([LANG])
+- **System Type:** [Romanization/Phonetic/etc.]
+- **Standard:** [Official/Academic/Popular]
+- **Features:** [List key features]
+
+## Examples
+
+### Basic Usage
+
+```typescript
+const result = transcribeTo[System]("example");
+// { text: "...", syllables: [...], system: "[SYSTEM]" }
+```
+
+### With All Options
+
+```typescript
+const result = transcribeTo[System]("example", {
+  includeTones: true,
+  syllableSeparator: "-",
+  capitalize: true
+});
+```
+
+## Contributing
+
+Contributions welcome! Please ensure:
+
+1. Maintain SRP - ONLY transcription logic in this package
+2. No data fetching or database queries
+3. All [SYSTEM] rules in single source of truth
+4. Add tests for transcription rules
+5. Update documentation
+
+## License
+
+MIT License - see LICENSE file for details.
+
+## References
+
+- [SYSTEM] specification: [LINK]
+- [LANGUAGE] phonology: [LINK]
+- Related standards: [LINKS]

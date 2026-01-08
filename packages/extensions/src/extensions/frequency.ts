@@ -197,6 +197,11 @@ export function createFrequencyExtension(
     name: "Word Frequency",
     description: "Processes and enhances word frequency metadata",
 
+    // Declare what this extension provides
+    provides: {
+      extras: ["frequency"],
+    },
+
     enhanceMetadata: (node: GLOSTWord) => {
       // Get frequency from various possible locations
       const frequency =

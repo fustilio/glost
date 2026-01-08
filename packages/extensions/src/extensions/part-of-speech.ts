@@ -111,6 +111,11 @@ export function createPartOfSpeechExtension(
     name: "Part of Speech",
     description: "Processes and enhances part-of-speech metadata",
 
+    // Declare what this extension provides
+    provides: {
+      extras: ["partOfSpeech"],
+    },
+
     enhanceMetadata: (node: GLOSTWord) => {
       // Get POS from various possible locations
       const pos =

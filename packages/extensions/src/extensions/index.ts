@@ -71,3 +71,24 @@ export {
   type NegationTransformerOptions,
 } from "./negation-transformer";
 
+// Stacking example extensions - demonstrate dependency validation
+export {
+  ReadingScoreExtension,
+  createReadingScoreExtension,
+  type ReadingScoreMetadata,
+  type ReadingScoreOptions,
+} from "./reading-score";
+
+export {
+  LearnerHintsExtension,
+  createLearnerHintsExtension,
+  type LearnerHintsMetadata,
+  type LearnerHintsOptions,
+} from "./learner-hints";
+
+export {
+  ClauseAnalysisExtension,
+  createClauseAnalysisExtension,
+  type ClauseAnalysisMetadata,
+  type ClauseAnalysisOptions,
+} from "./clause-analysis";

@@ -121,7 +121,10 @@ describe("Extension Integration", () => {
     });
 
     const document = createMockGLOSTDocument(["hello"]);
-    const result = processGLOSTWithExtensions(document, [ext1, ext2, ext3]);
+    // Use lenient mode to continue after errors
+    const result = processGLOSTWithExtensions(document, [ext1, ext2, ext3], {
+      lenient: true,
+    });
 
     expect(result.metadata.appliedExtensions).toContain("ext1");
     expect(result.metadata.appliedExtensions).toContain("ext3");

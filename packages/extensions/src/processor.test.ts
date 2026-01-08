@@ -122,7 +122,10 @@ describe("Extension Processor", () => {
         },
       });
 
-      const result = processGLOSTWithExtensions(document, [extension]);
+      // Use lenient mode for graceful error handling
+      const result = processGLOSTWithExtensions(document, [extension], {
+        lenient: true,
+      });
 
       expect(result.metadata.appliedExtensions).not.toContain("test-1");
       expect(result.metadata.skippedExtensions).toContain("test-1");
@@ -141,7 +144,10 @@ describe("Extension Processor", () => {
         enhanceMetadata: () => ({ success: true }),
       });
 
-      const result = processGLOSTWithExtensions(document, [ext1, ext2]);
+      // Use lenient mode to continue after errors
+      const result = processGLOSTWithExtensions(document, [ext1, ext2], {
+        lenient: true,
+      });
 
       expect(result.metadata.skippedExtensions).toContain("test-1");
       expect(result.metadata.appliedExtensions).toContain("test-2");

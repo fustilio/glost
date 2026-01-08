@@ -1,0 +1,254 @@
+{
+  "language": "es",
+  "languageName": "Spanish",
+  "nativeName": "Español",
+  "vocabulary": [
+    {
+      "word": "hola",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "interjection",
+      "culturalNotes": "Informal greeting used any time of day. Very common in Spanish-speaking countries.",
+      "transcription": {
+        "ipa": "ˈo.la"
+      },
+      "translations": {
+        "en": "hello, hi",
+        "th": "สวัสดี",
+        "ja": "こんにちは",
+        "fr": "bonjour, salut"
+      },
+      "examples": [
+        "¡Hola! ¿Cómo estás?",
+        "Hola, buenos días."
+      ]
+    },
+    {
+      "word": "gracias",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "interjection",
+      "culturalNotes": "Thank you. Essential polite expression in Spanish culture.",
+      "transcription": {
+        "ipa": "ˈɡɾa.sjas"
+      },
+      "translations": {
+        "en": "thank you, thanks",
+        "th": "ขอบคุณ",
+        "ja": "ありがとう",
+        "fr": "merci"
+      },
+      "examples": [
+        "¡Muchas gracias!",
+        "Gracias por tu ayuda."
+      ]
+    },
+    {
+      "word": "idioma",
+      "frequency": "common",
+      "difficulty": "beginner",
+      "partOfSpeech": "noun",
+      "gender": "masculine",
+      "culturalNotes": "Language. More commonly used than 'lengua' in modern Spanish.",
+      "transcription": {
+        "ipa": "i.ˈðjo.ma"
+      },
+      "translations": {
+        "en": "language",
+        "th": "ภาษา",
+        "ja": "言語",
+        "fr": "langue"
+      },
+      "examples": [
+        "El idioma español.",
+        "Aprender un nuevo idioma."
+      ]
+    },
+    {
+      "word": "aprender",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "verb",
+      "culturalNotes": "To learn. Regular -er verb, essential for discussing education.",
+      "transcription": {
+        "ipa": "a.pɾenˈdeɾ"
+      },
+      "translations": {
+        "en": "to learn",
+        "th": "เรียนรู้",
+        "ja": "学ぶ",
+        "fr": "apprendre"
+      },
+      "examples": [
+        "Quiero aprender español.",
+        "Aprender de memoria."
+      ]
+    },
+    {
+      "word": "entender",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "verb",
+      "culturalNotes": "To understand. Slightly more informal than 'comprender'.",
+      "transcription": {
+        "ipa": "en.tenˈdeɾ"
+      },
+      "translations": {
+        "en": "to understand",
+        "th": "เข้าใจ",
+        "ja": "理解する",
+        "fr": "comprendre"
+      },
+      "examples": [
+        "¿Entiendes?",
+        "No entiendo."
+      ]
+    },
+    {
+      "word": "hablar",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "verb",
+      "culturalNotes": "To speak or talk. One of the most common verbs.",
+      "transcription": {
+        "ipa": "a.ˈβlaɾ"
+      },
+      "translations": {
+        "en": "to speak, to talk",
+        "th": "พูด",
+        "ja": "話す",
+        "fr": "parler"
+      },
+      "examples": [
+        "Hablo español.",
+        "Hablar despacio."
+      ]
+    },
+    {
+      "word": "palabra",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "noun",
+      "gender": "feminine",
+      "culturalNotes": "Word. Fundamental unit of language.",
+      "transcription": {
+        "ipa": "pa.ˈla.βɾa"
+      },
+      "translations": {
+        "en": "word",
+        "th": "คำ",
+        "ja": "言葉",
+        "fr": "mot"
+      },
+      "examples": [
+        "Una palabra nueva.",
+        "La palabra correcta."
+      ]
+    },
+    {
+      "word": "gramática",
+      "frequency": "common",
+      "difficulty": "intermediate",
+      "partOfSpeech": "noun",
+      "gender": "feminine",
+      "culturalNotes": "Grammar. Spanish grammar varies across regions.",
+      "transcription": {
+        "ipa": "ɡɾa.ˈma.ti.ka"
+      },
+      "translations": {
+        "en": "grammar",
+        "th": "ไวยากรณ์",
+        "ja": "文法",
+        "fr": "grammaire"
+      },
+      "examples": [
+        "La gramática española.",
+        "Estudiar gramática."
+      ]
+    },
+    {
+      "word": "vocabulario",
+      "frequency": "common",
+      "difficulty": "intermediate",
+      "partOfSpeech": "noun",
+      "gender": "masculine",
+      "culturalNotes": "Vocabulary. Collection of words.",
+      "transcription": {
+        "ipa": "bo.ka.βu.ˈla.ɾjo"
+      },
+      "translations": {
+        "en": "vocabulary",
+        "th": "คำศัพท์",
+        "ja": "語彙",
+        "fr": "vocabulaire"
+      },
+      "examples": [
+        "Ampliar el vocabulario.",
+        "Vocabulario técnico."
+      ]
+    },
+    {
+      "word": "pronunciación",
+      "frequency": "common",
+      "difficulty": "intermediate",
+      "partOfSpeech": "noun",
+      "gender": "feminine",
+      "culturalNotes": "Pronunciation. Spanish pronunciation is relatively consistent.",
+      "transcription": {
+        "ipa": "pɾo.nun.sja.ˈsjon"
+      },
+      "translations": {
+        "en": "pronunciation",
+        "th": "การออกเสียง",
+        "ja": "発音",
+        "fr": "prononciation"
+      },
+      "examples": [
+        "Buena pronunciación.",
+        "Practicar la pronunciación."
+      ]
+    },
+    {
+      "word": "lingüística",
+      "frequency": "uncommon",
+      "difficulty": "advanced",
+      "partOfSpeech": "noun",
+      "gender": "feminine",
+      "culturalNotes": "Linguistics. Academic study of language.",
+      "transcription": {
+        "ipa": "liŋ.ˈɡwis.ti.ka"
+      },
+      "translations": {
+        "en": "linguistics",
+        "th": "ภาษาศาสตร์",
+        "ja": "言語学",
+        "fr": "linguistique"
+      },
+      "examples": [
+        "Estudiar lingüística.",
+        "Lingüística aplicada."
+      ]
+    },
+    {
+      "word": "español",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "noun",
+      "gender": "masculine",
+      "culturalNotes": "Spanish language or Spanish person. One of the most spoken languages worldwide.",
+      "transcription": {
+        "ipa": "es.pa.ˈɲol"
+      },
+      "translations": {
+        "en": "Spanish (language or person)",
+        "th": "ภาษาสเปน",
+        "ja": "スペイン語",
+        "fr": "espagnol"
+      },
+      "examples": [
+        "Hablo español.",
+        "El español es mi lengua materna."
+      ]
+    }
+  ]
+}

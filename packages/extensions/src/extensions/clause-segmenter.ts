@@ -368,6 +368,12 @@ export function createClauseSegmenterExtension(
     name: "Clause Segmenter",
     description: "Segments sentences into grammatical clauses",
 
+    // Declare what this extension provides for dependent extensions
+    provides: {
+      nodes: ["ClauseNode"],
+      extras: ["mood"],
+    },
+
     transform: (document: GLOSTRoot) => {
       visit(document, "SentenceNode", (node: any) => {
         const sentence = node as GLOSTSentence;

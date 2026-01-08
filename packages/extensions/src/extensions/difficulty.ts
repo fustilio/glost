@@ -116,6 +116,11 @@ export function createDifficultyExtension(
     name: "Word Difficulty",
     description: "Processes and enhances word difficulty level metadata",
 
+    // Declare what this extension provides
+    provides: {
+      extras: ["difficulty"],
+    },
+
     enhanceMetadata: (node: GLOSTWord) => {
       // Get difficulty from various possible locations
       const difficulty =

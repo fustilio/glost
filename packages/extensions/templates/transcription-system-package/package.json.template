@@ -1,0 +1,41 @@
+{
+  "name": "glost-[LANG]-transcription-[SYSTEM]",
+  "version": "0.0.1",
+  "description": "[DESCRIPTION - e.g., Thai romanization using Paiboon+ system]",
+  "keywords": [
+    "glost",
+    "[LANG]",
+    "transcription",
+    "[SYSTEM]",
+    "romanization",
+    "language-learning"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest",
+    "test:watch": "vitest --watch"
+  },
+  "dependencies": {
+    "glost": "workspace:*",
+    "glost-common": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/glost",
+    "directory": "packages/transcription-systems/[LANG]-transcription-[SYSTEM]"
+  }
+}

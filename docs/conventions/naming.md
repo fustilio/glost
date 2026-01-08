@@ -1,0 +1,303 @@
+# GLOST Naming Conventions
+
+Comprehensive naming conventions for the GLOST ecosystem following SRP (Single Responsibility Principle) and SSOT (Single Source of Truth).
+
+## Core Principles
+
+1. **Single Responsibility Principle (SRP)**: Each package does ONE thing
+2. **Single Source of Truth (SSOT)**: Logic lives in ONE place, never duplicated
+3. **Composition Over Duplication**: Import and compose, never copy
+4. **Clear Intent**: Package name describes exactly what it does
+
+## Package Categories
+
+### 1. Core Packages (Foundation)
+
+**Pattern:** `glost-[name]`
+
+| Package | Responsibility | Example |
+|---------|----------------|---------|
+| `glost` | Core types and node creation | Node factories, type definitions |
+| `glost-common` | Shared utilities and language codes | Language info, validators |
+| `glost-utils` | Text parsing and manipulation | Text utilities, parsers |
+| `glost-extensions` | Extension system | Extension interface, processor |
+
+**Naming Rules:**
+- Simple, descriptive names
+- No hyphens for single-word names
+- Indicates foundational nature
+
+### 2. Extension Packages
+
+**Pattern:** `glost-extensions-[type]`
+
+| Type | Responsibility | Example |
+|------|----------------|---------|
+| Translation | Translation generation API | `glost-extensions-translation` |
+| Transcription | Transcription generation API | `glost-extensions-transcription` |
+
+**Naming Rules:**
+- Always prefixed with `glost-extensions-`
+- Describes the extension category
+- Contains extension interface, not implementation
+
+### 3. Data Source Packages (Composable Layer 1)
+
+**Pattern:** `glost-[lang]-datasource-[source]`
+
+| Component | Description | Example |
+|-----------|-------------|---------|
+| `[lang]` | ISO 639-1 language code | `th`, `ja`, `fr` |
+| `datasource` | Indicates data provider | Always `datasource` |
+| `[source]` | Data source name | `lexitron`, `jmdict`, `googletrans` |
+
+**Examples:**
+- `glost-th-datasource-lexitron` - Thai Lexitron dictionary
+- `glost-ja-datasource-jmdict` - Japanese JMDict
+- `glost-multi-datasource-googletrans` - Multi-language Google Translate
+
+**Responsibility:** Query data ONLY
+- ✅ Fetch from database/API
+- ✅ Return raw data structures
+- ❌ Process or transform data
+- ❌ Apply transcription rules
+
+### 4. Transcription System Packages (Composable Layer 2)
+
+**Pattern:** `glost-[lang]-transcription-[system]`
+
+| Component | Description | Example |
+|-----------|-------------|---------|
+| `[lang]` | ISO 639-1 language code | `th`, `ja`, `zh` |
+| `transcription` | Indicates transcription system | Always `transcription` |
+| `[system]` | System name | `paiboon`, `rtgs`, `hepburn`, `ipa` |
+
+**Examples:**
+- `glost-th-transcription-paiboon` - Thai Paiboon+ romanization
+- `glost-th-transcription-rtgs` - Thai RTGS romanization
+- `glost-ja-transcription-hepburn` - Japanese Hepburn romaji
+- `glost-ja-transcription-kunrei` - Japanese Kunrei romaji
+
+**Responsibility:** Apply transcription rules ONLY
+- ✅ Transform text using specific rules
+- ✅ Work with ANY text input (source-agnostic)
+- ❌ Fetch data from databases
+- ❌ Handle multiple systems
+
+**Special Case - Language-Agnostic:**
+
+**Pattern:** `glost-transcription-strategy-[name]`
+
+For transcription strategies that work across languages:
+
+- `glost-transcription-strategy-ipa` - IPA transcription (works with any language)
+
+### 5. Lookup Factory Packages (Composition Layer)
+
+**Pattern:** `glost-[lang]-lookup-[type]-[system]-[source]`
+
+| Component | Description | Example |
+|-----------|-------------|---------|
+| `[lang]` | Language code | `th`, `ja` |
+| `lookup` | Indicates composition | Always `lookup` |
+| `[type]` | Data type | `transcription`, `translation` |
+| `[system]` | System name | `paiboon`, `hepburn` |
+| `[source]` | Data source | `lexitron`, `jmdict` |
+
+**Examples:**
+- `glost-th-lookup-transcription-paiboon-lexitron` - Paiboon+ using Lexitron
+- `glost-ja-lookup-transcription-hepburn-jmdict` - Hepburn using JMDict
+- `glost-th-lookup-translation-googletrans` - Translation using Google
+
+**Responsibility:** Compose components ONLY
+- ✅ Import data source package
+- ✅ Import transcription system package
+- ✅ Wire them together
+- ❌ Duplicate any logic
+- ❌ Implement transcription rules
+- ❌ Implement data queries
+
+### 6. Plugin Packages (Framework Integration)
+
+**Pattern:** `glost-plugin-[framework]`
+
+| Component | Description | Example |
+|-----------|-------------|---------|
+| `plugin` | Indicates framework integration | Always `plugin` |
+| `[framework]` | Framework name | `inkle`, `react`, `vue` |
+
+**Examples:**
+- `glost-plugin-inkle` - Inkle/Ink integration
+- `glost-plugin-react` - React components
+- `glost-plugin-vue` - Vue components
+
+## Extension Naming (Within glost-extensions)
+
+Extensions are categorized by their purpose:
+
+### 1. Enhancer Extensions
+
+**Pattern:** `[Feature]EnhancerExtension` (future - currently just `[Feature]Extension`)
+
+**Purpose:** Add display metadata to existing data
+
+**Examples:**
+- `FrequencyExtension` → `FrequencyEnhancerExtension`
+- `DifficultyExtension` → `DifficultyEnhancerExtension`
+- `PartOfSpeechExtension` → `PartOfSpeechEnhancerExtension`
+- `CulturalNotesExtension` → `CulturalNotesEnhancerExtension`
+
+**Responsibility:**
+- ✅ Transform raw metadata into display-friendly format
+- ✅ Add colors, labels, priorities
+- ❌ Generate new data
+
+### 2. Transformer Extensions
+
+**Pattern:** `[Feature]TransformerExtension`
+
+**Purpose:** Modify tree structure
+
+**Examples:**
+- `ClauseSegmenterExtension`
+- `GenderTransformerExtension`
+- `NegationTransformerExtension`
+
+**Responsibility:**
+- ✅ Modify document tree structure
+- ✅ Add/remove/reorganize nodes
+- ❌ Just add metadata
+
+### 3. Generator Extensions
+
+**Pattern:** `[Feature]GeneratorExtension`
+
+**Purpose:** Create new data from external sources
+
+**Examples:**
+- `TranslationGeneratorExtension` (in `glost-extensions-translation`)
+- `TranscriptionGeneratorExtension` (in `glost-extensions-transcription`)
+
+**Responsibility:**
+- ✅ Fetch data from external sources
+- ✅ Generate new metadata
+- ❌ Just transform existing data
+
+### 4. Analyzer Extensions
+
+**Pattern:** `[Feature]AnalyzerExtension`
+
+**Purpose:** Complex multi-dependency analysis
+
+**Examples:**
+- `ReadingScoreAnalyzerExtension`
+- `LearnerHintsAnalyzerExtension`
+- `ClauseAnalysisAnalyzerExtension`
+
+**Responsibility:**
+- ✅ Analyze data from multiple sources
+- ✅ Compute derived metrics
+- ✅ Depend on multiple other extensions
+
+## Factory Function Naming
+
+**Pattern:** `create[ExtensionName]` ✅ (Already consistent)
+
+**Examples:**
+- `createFrequencyExtension()`
+- `createTranscriptionLookup()`
+- `createFallbackLookup()`
+
+## File and Directory Structure
+
+### Extension Categories
+
+```
+packages/extensions/src/extensions/
+├── enhancers/          # Display metadata enhancers (future)
+│   ├── frequency.ts
+│   ├── difficulty.ts
+│   ├── part-of-speech.ts
+│   └── cultural-notes.ts
+├── transformers/       # Tree structure modifiers (future)
+│   ├── clause-segmenter.ts
+│   └── gender-transformer.ts
+├── generators/         # Moved to separate packages
+│   └── (empty)
+├── analyzers/         # Complex analyzers (future)
+│   ├── reading-score.ts
+│   └── learner-hints.ts
+└── index.ts
+```
+
+### Data Sources
+
+```
+packages/data-sources/
+├── th-datasource-lexitron/
+├── ja-datasource-jmdict/
+└── multi-datasource-googletrans/
+```
+
+### Transcription Systems
+
+```
+packages/transcription-systems/
+├── th-transcription-paiboon/
+├── th-transcription-rtgs/
+├── ja-transcription-hepburn/
+└── transcription-strategy-ipa/
+```
+
+### Lookup Factories
+
+```
+packages/lookup-factories/
+├── th-lookup-transcription-paiboon-lexitron/
+└── ja-lookup-transcription-hepburn-jmdict/
+```
+
+## Language Codes
+
+Use ISO 639-1 codes (two letters) for all language identifiers:
+
+| Code | Language |
+|------|----------|
+| `en` | English |
+| `th` | Thai |
+| `ja` | Japanese |
+| `fr` | French |
+| `es` | Spanish |
+| `zh` | Chinese |
+| `ko` | Korean |
+
+For multi-language packages, use `multi`:
+- `glost-multi-datasource-googletrans`
+
+## Naming Rules Summary
+
+1. **Use lowercase with hyphens** for package names
+2. **Use PascalCase** for extension names in code
+3. **Use ISO 639-1** language codes
+4. **Be descriptive** - name should explain purpose
+5. **Follow patterns** - consistency is key
+6. **Single responsibility** - name reflects ONE job
+7. **No abbreviations** unless standard (IPA, RTGS)
+
+## Quick Reference
+
+| What | Pattern | Example |
+|------|---------|---------|
+| Core package | `glost-[name]` | `glost-common` |
+| Extension package | `glost-extensions-[type]` | `glost-extensions-transcription` |
+| Data source | `glost-[lang]-datasource-[source]` | `glost-th-datasource-lexitron` |
+| Transcription | `glost-[lang]-transcription-[system]` | `glost-th-transcription-paiboon` |
+| Lookup factory | `glost-[lang]-lookup-[type]-[system]-[source]` | `glost-th-lookup-transcription-paiboon-lexitron` |
+| Plugin | `glost-plugin-[framework]` | `glost-plugin-react` |
+
+## See Also
+
+- [SRP/SSOT Architecture](../../.cursor/plans/naming_conventions_srp_architecture.md)
+- [Creating Data Source Packages](../guides/creating-data-source-packages.md)
+- [Package Templates](../../packages/extensions/templates/USAGE.md)
+- [Example Data](../../packages/extensions/src/example-data/README.md)

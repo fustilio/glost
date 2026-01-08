@@ -1,0 +1,207 @@
+/**
+ * glost-[LANG]-transcription-[SYSTEM]
+ *
+ * [SYSTEM] transcription system for [LANGUAGE] language.
+ * Applies [SYSTEM] romanization/transcription rules to [LANGUAGE] text.
+ *
+ * This is the SINGLE SOURCE OF TRUTH for [SYSTEM] transcription rules.
+ *
+ * Single Responsibility: Apply [SYSTEM] transcription rules ONLY.
+ * Does NOT fetch data - works with ANY text input (source-agnostic).
+ *
+ * @packageDocumentation
+ */
+
+/**
+ * Transcription options for [SYSTEM]
+ */
+export interface TranscriptionOptions {
+  /** Include tone markers (if applicable) */
+  includeTones?: boolean;
+
+  /** Syllable separator character */
+  syllableSeparator?: string;
+
+  /** Capitalize first letter */
+  capitalize?: boolean;
+
+  // Add more options specific to your transcription system
+}
+
+/**
+ * Transcription result
+ */
+export interface TranscriptionResult {
+  /** Transcribed text */
+  text: string;
+
+  /** Syllables (if applicable) */
+  syllables?: string[];
+
+  /** Tone information (if applicable) */
+  tones?: string[];
+
+  /** System identifier */
+  system: string;
+}
+
+/**
+ * Transcribe [LANGUAGE] text to [SYSTEM]
+ *
+ * Single Responsibility: Apply [SYSTEM] transcription rules ONLY.
+ * This is the SINGLE SOURCE OF TRUTH for [SYSTEM] transcription logic.
+ *
+ * Does NOT:
+ * - Fetch data from databases (use data source packages)
+ * - Handle multiple systems (each system is separate package)
+ * - Perform translation (use translation packages)
+ *
+ * @param text - [LANGUAGE] text to transcribe
+ * @param options - Transcription options
+ * @returns Transcription result
+ *
+ * @example
+ * ```typescript
+ * import { transcribeTo[System] } from 'glost-[LANG]-transcription-[SYSTEM]';
+ *
+ * const result = transcribeTo[System]("example");
+ * console.log(result.text);
+ * console.log(result.syllables);
+ * ```
+ *
+ * @example
+ * ```typescript
+ * // With options
+ * const result = transcribeTo[System]("example", {
+ *   includeTones: true,
+ *   syllableSeparator: "-",
+ *   capitalize: true
+ * });
+ * ```
+ */
+export function transcribeTo[System](
+  text: string,
+  options: TranscriptionOptions = {},
+): TranscriptionResult {
+  // Default options
+  const {
+    includeTones = true,
+    syllableSeparator = "-",
+    capitalize = false,
+  } = options;
+
+  // TODO: Implement actual transcription logic
+  // This is a placeholder - replace with real [SYSTEM] rules
+
+  // Example structure:
+  // 1. Parse input text
+  // 2. Apply transcription rules (character mappings, tone rules, etc.)
+  // 3. Format output according to options
+  // 4. Return result
+
+  const transcribed = applyTranscriptionRules(text, options);
+  const syllables = splitIntoSyllables(transcribed);
+
+  let result = syllables.join(syllableSeparator);
+  
+  if (capitalize) {
+    result = result.charAt(0).toUpperCase() + result.slice(1);
+  }
+
+  return {
+    text: result,
+    syllables,
+    system: "[SYSTEM]",
+  };
+}
+
+/**
+ * Apply [SYSTEM] transcription rules
+ *
+ * Internal function containing the core transcription logic.
+ * This is where the actual character-to-character mapping happens.
+ *
+ * @internal
+ */
+function applyTranscriptionRules(
+  text: string,
+  options: TranscriptionOptions,
+): string {
+  // TODO: Implement [SYSTEM] specific rules
+  // Examples:
+  // - Character mapping tables
+  // - Tone conversion rules
+  // - Special case handling
+  // - Combining character rules
+
+  return text; // Placeholder
+}
+
+/**
+ * Split transcribed text into syllables
+ *
+ * @internal
+ */
+function splitIntoSyllables(text: string): string[] {
+  // TODO: Implement syllable splitting logic
+  // This depends on the language and system
+
+  return [text]; // Placeholder
+}
+
+/**
+ * Validate [SYSTEM] transcription
+ *
+ * Single Responsibility: Validate if text follows [SYSTEM] rules
+ *
+ * @param text - Text to validate
+ * @returns True if valid [SYSTEM] transcription
+ *
+ * @example
+ * ```typescript
+ * const isValid = isValid[System]Transcription("example");
+ * ```
+ */
+export function isValid[System]Transcription(text: string): boolean {
+  // TODO: Implement validation logic
+  // Check if text follows [SYSTEM] rules and conventions
+
+  return true; // Placeholder
+}
+
+/**
+ * Get [SYSTEM] system information
+ *
+ * Single Responsibility: Provide system metadata
+ *
+ * @returns System information
+ */
+export function get[System]Info(): SystemInfo {
+  return {
+    system: "[SYSTEM]",
+    name: "[SYSTEM_FULL_NAME]",
+    language: "[LANG]",
+    description: "[DESCRIPTION]",
+    version: "1.0",
+  };
+}
+
+/**
+ * System information structure
+ */
+export interface SystemInfo {
+  /** System identifier */
+  system: string;
+
+  /** Full system name */
+  name: string;
+
+  /** Target language */
+  language: string;
+
+  /** System description */
+  description: string;
+
+  /** System version */
+  version: string;
+}

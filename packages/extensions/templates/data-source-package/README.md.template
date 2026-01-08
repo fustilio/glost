@@ -1,0 +1,148 @@
+# glost-[LANG]-datasource-[SOURCE_NAME]
+
+[LANGUAGE] language data source using [SOURCE_NAME] [database/API/dictionary].
+
+## Overview
+
+This package provides **raw data access** to [SOURCE_NAME] following the Single Responsibility Principle (SRP). It ONLY queries the data source and returns raw data - it does NOT process or transform data.
+
+### Single Responsibility
+
+✅ **Does:**
+- Query [SOURCE_NAME] database/API
+- Return raw dictionary entries
+- Handle connection and errors
+
+❌ **Does NOT:**
+- Apply transcription rules (use transcription system packages)
+- Transform or process data (use strategy packages)
+- Implement business logic (use adapter/lookup packages)
+
+## Installation
+
+```bash
+npm install glost-[LANG]-datasource-[SOURCE_NAME]
+# or
+pnpm add glost-[LANG]-datasource-[SOURCE_NAME]
+```
+
+## Usage
+
+### Basic Query
+
+```typescript
+import { query[SourceName] } from 'glost-[LANG]-datasource-[SOURCE_NAME]';
+
+const entry = await query[SourceName]("example");
+if (entry) {
+  console.log(entry.word);
+  console.log(entry.definitions);
+}
+```
+
+### With Options
+
+```typescript
+const entry = await query[SourceName]("example", {
+  includeExamples: true,
+  maxDefinitions: 3
+});
+```
+
+### Check Availability
+
+```typescript
+import { is[SourceName]Available } from 'glost-[LANG]-datasource-[SOURCE_NAME]';
+
+const available = await is[SourceName]Available();
+if (!available) {
+  console.error("[SOURCE_NAME] is not available");
+}
+```
+
+## Composing with Other Packages
+
+This data source is designed to be composed with transcription systems and adapters:
+
+### Example: Compose with Transcription System
+
+```typescript
+import { query[SourceName] } from 'glost-[LANG]-datasource-[SOURCE_NAME]';
+import { transcribeTo[System] } from 'glost-[LANG]-transcription-[SYSTEM]';
+
+async function lookupWithTranscription(word: string) {
+  // Get data from source (SRP - data access only)
+  const entry = await query[SourceName](word);
+  if (!entry) return null;
+
+  // Apply transcription (SRP - processing only)
+  const transcription = transcribeTo[System](entry.reading);
+
+  return {
+    word: entry.word,
+    transcription,
+    definitions: entry.definitions
+  };
+}
+```
+
+## Data Structure
+
+```typescript
+interface [SourceName]Entry {
+  word: string;              // Native script
+  reading?: string;          // Raw pronunciation from source
+  definitions: string[];     // List of definitions
+  partOfSpeech?: string;    // Raw POS tag
+  metadata?: Record<string, unknown>; // Additional data
+}
+```
+
+## API Reference
+
+### `query[SourceName](word, options?)`
+
+Query [SOURCE_NAME] for a word.
+
+- **Parameters:**
+  - `word`: The word to look up
+  - `options`: Optional query parameters
+- **Returns:** `Promise<[SourceName]Entry | null>`
+
+### `is[SourceName]Available()`
+
+Check if [SOURCE_NAME] is accessible.
+
+- **Returns:** `Promise<boolean>`
+
+### `getSupportedLanguages()`
+
+Get list of supported languages.
+
+- **Returns:** `GlostLanguage[]`
+
+## Data Source Information
+
+- **Source:** [SOURCE_NAME]
+- **Language:** [LANGUAGE] ([LANG])
+- **Type:** [Database/API/Dictionary]
+- **License:** [DATA_LICENSE]
+- **Attribution:** [REQUIRED_ATTRIBUTION]
+
+## Contributing
+
+Contributions welcome! Please ensure:
+
+1. Maintain SRP - this package should ONLY access data
+2. No transcription or processing logic
+3. Add tests for new functionality
+4. Update documentation
+
+## License
+
+MIT License - see LICENSE file for details.
+
+## Credits
+
+- Data source: [SOURCE_NAME] - [LINK]
+- [Any required attribution]

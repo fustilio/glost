@@ -127,6 +127,11 @@ export function createGenderExtension(
     name: "Gender",
     description: "Processes and enhances gender metadata",
 
+    // Declare what this extension provides
+    provides: {
+      extras: ["gender"],
+    },
+
     enhanceMetadata: (node: GLOSTWord) => {
       // Get gender from various possible locations
       const gender =

@@ -1,5 +1,7 @@
 packages:
-  - 'packages/*'
-  - 'packages/extensions/*'
-  - 'packages/plugins/*'
-  - 'examples'
+  - packages/*
+  - packages/plugins/*
+  - packages/extensions/*
+  - examples/basic
+  - examples/transcription
+  - examples/kitchensink

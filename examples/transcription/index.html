@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GLOST Transcription Demo</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background: #f5f5f5;
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+      .subtitle {
+        color: #666;
+        margin-bottom: 2rem;
+      }
+      .input-section {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+      textarea {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+        resize: vertical;
+        min-height: 100px;
+        font-family: inherit;
+      }
+      textarea:focus {
+        outline: none;
+        border-color: #4a90d9;
+      }
+      .output-section {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .output-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .output-header h2 {
+        margin: 0;
+        color: #333;
+      }
+      .toggle-btn {
+        padding: 0.5rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: white;
+        cursor: pointer;
+        font-size: 0.9rem;
+        margin-left: 0.5rem;
+      }
+      .toggle-btn:hover {
+        background: #f5f5f5;
+      }
+      .toggle-btn.active {
+        background: #4a90d9;
+        color: white;
+        border-color: #4a90d9;
+      }
+      .word {
+        display: inline-block;
+        margin: 0.25rem;
+        padding: 0.5rem 0.75rem;
+        background: #f0f7ff;
+        border-radius: 4px;
+      }
+      .word-text {
+        font-size: 1.1rem;
+        color: #333;
+      }
+      .word-ipa {
+        display: block;
+        font-size: 0.85rem;
+        color: #666;
+        margin-top: 0.25rem;
+      }
+      .word-respelling {
+        display: block;
+        font-size: 0.85rem;
+        color: #4a90d9;
+        margin-top: 0.25rem;
+        font-style: italic;
+      }
+      #output {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        min-height: 60px;
+        padding: 1rem;
+        background: #fafafa;
+        border-radius: 6px;
+        border: 1px solid #eee;
+      }
+      .empty-state {
+        color: #999;
+        font-style: italic;
+      }
+      .legend {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+        display: flex;
+        gap: 2rem;
+        font-size: 0.85rem;
+        color: #666;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .legend-color {
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+      }
+      .legend-ipa { background: #666; }
+      .legend-respelling { background: #4a90d9; }
+    </style>
+  </head>
+  <body>
+    <h1>GLOST Transcription Demo</h1>
+    <p class="subtitle">Type text to see IPA transcription and phonemic respelling (extension stacking demo)</p>
+
+    <div class="input-section">
+      <label for="input">Enter text:</label>
+      <textarea id="input" placeholder="Try: ecclesiastical, phenomenon, worcestershire...">ecclesiastical phenomenon</textarea>
+    </div>
+
+    <div class="output-section">
+      <div class="output-header">
+        <h2>Transcription Output</h2>
+        <div>
+          <button id="toggle-ipa" class="toggle-btn active">IPA</button>
+          <button id="toggle-respelling" class="toggle-btn active">Respelling</button>
+        </div>
+      </div>
+      <div id="output">
+        <span class="empty-state">Output will appear here...</span>
+      </div>
+      <div class="legend">
+        <div class="legend-item">
+          <span class="legend-color legend-ipa"></span>
+          <span>IPA pronunciation</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color legend-respelling"></span>
+          <span>Phonemic respelling</span>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

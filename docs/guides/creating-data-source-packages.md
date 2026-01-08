@@ -1,0 +1,398 @@
+# Creating Data Source Packages
+
+Complete guide to creating data source and transcription system packages for GLOST.
+
+## Overview
+
+GLOST uses a composable architecture where data sources and processing systems are separate packages that can be mixed and matched. This guide shows you how to create both types of packages.
+
+## Architecture Principles
+
+### Single Responsibility Principle (SRP)
+
+Each package has ONE job:
+- **Data sources**: Query data ONLY
+- **Transcription systems**: Apply rules ONLY
+- **Lookup factories**: Compose ONLY
+
+### Single Source of Truth (SSOT)
+
+- Transcription rules live in ONE package
+- Data queries live in ONE package
+- Update once, changes reflect everywhere
+
+## Creating a Data Source Package
+
+### Step 1: Choose Your Package Name
+
+Follow the naming pattern: `glost-[lang]-datasource-[source]`
+
+Examples:
+- `glost-th-datasource-lexitron`
+- `glost-ja-datasource-jmdict`
+- `glost-multi-datasource-googletrans`
+
+### Step 2: Use the Template
+
+```bash
+# Copy template
+cp -r packages/extensions/templates/data-source-package packages/data-sources/th-datasource-lexitron
+
+# Navigate to new package
+cd packages/data-sources/th-datasource-lexitron
+```
+
+### Step 3: Replace Placeholders
+
+Edit all files and replace:
+
+| Placeholder | Replace With | Example |
+|-------------|--------------|---------|
+| `[LANG]` | Language code | `th` |
+| `[SOURCE_NAME]` | Source name (lowercase) | `lexitron` |
+| `[SourceName]` | Source name (PascalCase) | `Lexitron` |
+| `[LANGUAGE]` | Language name | `Thai` |
+| `[DESCRIPTION]` | Package description | `Thai dictionary data from Lexitron` |
+
+### Step 4: Implement Data Access
+
+In `src/index.ts`:
+
+```typescript
+export interface LexitronEntry {
+  word: string;
+  reading: string;
+  definitions: string[];
+  partOfSpeech?: string;
+  metadata?: Record<string, unknown>;
+}
+
+export async function queryLexitron(
+  word: string,
+  options?: QueryOptions
+): Promise<LexitronEntry | null> {
+  try {
+    // Your data access logic here
+    const response = await fetch(`https://api.lexitron.nectec.or.th/lookup/${word}`);
+    const data = await response.json();
+    
+    return {
+      word: data.word,
+      reading: data.pronunciation,
+      definitions: data.meanings,
+      partOfSpeech: data.pos
+    };
+  } catch (error) {
+    console.error(`Error querying Lexitron:`, error);
+    return null;
+  }
+}
+```
+
+**Remember:**
+- ✅ Query data from your source
+- ✅ Return standardized structure
+- ❌ Apply transcription rules (that's for transcription packages)
+- ❌ Transform or process data
+
+### Step 5: Add Tests
+
+Create `src/index.test.ts`:
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import { queryLexitron } from './index';
+
+describe('Lexitron Data Source', () => {
+  it('queries word successfully', async () => {
+    const entry = await queryLexitron("สวัสดี");
+    
+    expect(entry).toBeDefined();
+    expect(entry?.word).toBe("สวัสดี");
+    expect(entry?.definitions).toBeInstanceOf(Array);
+  });
+
+  it('handles non-existent words', async () => {
+    const entry = await queryLexitron("nonexistent");
+    expect(entry).toBeNull();
+  });
+});
+```
+
+### Step 6: Update Documentation
+
+Update `README.md` with:
+- Data source information
+- Attribution requirements
+- Usage examples
+- API documentation
+
+## Creating a Transcription System Package
+
+### Step 1: Choose Your Package Name
+
+Follow the naming pattern: `glost-[lang]-transcription-[system]`
+
+Examples:
+- `glost-th-transcription-paiboon`
+- `glost-ja-transcription-hepburn`
+- `glost-transcription-strategy-ipa` (language-agnostic)
+
+### Step 2: Use the Template
+
+```bash
+# Copy template
+cp -r packages/extensions/templates/transcription-system-package packages/transcription-systems/th-transcription-paiboon
+
+# Navigate to new package
+cd packages/transcription-systems/th-transcription-paiboon
+```
+
+### Step 3: Replace Placeholders
+
+| Placeholder | Replace With | Example |
+|-------------|--------------|---------|
+| `[LANG]` | Language code | `th` |
+| `[SYSTEM]` | System name (lowercase) | `paiboon` |
+| `[System]` | System name (PascalCase) | `Paiboon` |
+| `[LANGUAGE]` | Language name | `Thai` |
+| `[SYSTEM_FULL_NAME]` | Full system name | `Paiboon Plus` |
+
+### Step 4: Implement Transcription Rules
+
+In `src/index.ts`:
+
+```typescript
+export function transcribeToPaiboon(
+  text: string,
+  options: TranscriptionOptions = {}
+): TranscriptionResult {
+  const { includeTones = true, syllableSeparator = "-" } = options;
+  
+  // Apply Paiboon+ rules (SINGLE SOURCE OF TRUTH)
+  const transcribed = applyPaiboonRules(text, includeTones);
+  const syllables = splitIntoSyllables(transcribed);
+  
+  return {
+    text: syllables.join(syllableSeparator),
+    syllables,
+    system: "paiboon"
+  };
+}
+
+function applyPaiboonRules(text: string, includeTones: boolean): string {
+  // This is the SINGLE SOURCE OF TRUTH for Paiboon+ rules
+  let result = text;
+  
+  // Character mappings
+  const mappings: Record<string, string> = {
+    'ก': 'g', 'ข': 'k', 'ค': 'k',
+    'ง': 'ng', 'จ': 'j', 'ฉ': 'ch',
+    // ... more mappings ...
+  };
+  
+  for (const [thai, roman] of Object.entries(mappings)) {
+    result = result.replace(new RegExp(thai, 'g'), roman);
+  }
+  
+  if (includeTones) {
+    result = applyToneMarkers(result);
+  }
+  
+  return result;
+}
+
+function applyToneMarkers(text: string): string {
+  // Tone marker logic
+  // This is specific to Paiboon+ system
+  return text; // Implement your logic
+}
+
+function splitIntoSyllables(text: string): string[] {
+  // Syllable splitting logic
+  return text.split('-');
+}
+```
+
+**Remember:**
+- ✅ Apply transcription rules for ONE system
+- ✅ Work with ANY text input (source-agnostic)
+- ✅ This is the SINGLE SOURCE OF TRUTH for these rules
+- ❌ Fetch data from databases
+- ❌ Handle other transcription systems
+
+### Step 5: Add Tests
+
+Create `src/index.test.ts`:
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import { transcribeToPaiboon, isValidPaiboonTranscription } from './index';
+
+describe('Paiboon Transcription System', () => {
+  it('transcribes correctly', () => {
+    const result = transcribeToPaiboon("สวัสดี");
+    
+    expect(result.text).toBe("sà-wàt-dii");
+    expect(result.syllables).toEqual(["sà", "wàt", "dii"]);
+    expect(result.system).toBe("paiboon");
+  });
+
+  it('respects tone options', () => {
+    const withTones = transcribeToPaiboon("สวัสดี", { includeTones: true });
+    const withoutTones = transcribeToPaiboon("สวัสดี", { includeTones: false });
+    
+    expect(withTones.text).toContain("à");
+    expect(withoutTones.text).not.toContain("à");
+  });
+
+  it('validates transcription', () => {
+    expect(isValidPaiboonTranscription("sà-wàt-dii")).toBe(true);
+    expect(isValidPaiboonTranscription("invalid123")).toBe(false);
+  });
+});
+```
+
+## Composing Packages
+
+Once you have data source and transcription system packages, create a lookup factory:
+
+### Creating a Lookup Factory Package
+
+**Pattern:** `glost-[lang]-lookup-[type]-[system]-[source]`
+
+Example: `glost-th-lookup-transcription-paiboon-lexitron`
+
+```typescript
+// glost-th-lookup-transcription-paiboon-lexitron/src/index.ts
+import { queryLexitron } from 'glost-th-datasource-lexitron';
+import { transcribeToPaiboon } from 'glost-th-transcription-paiboon';
+import { createTranscriptionGeneratorExtension } from 'glost-extensions-transcription';
+
+/**
+ * Create lookup function (pure composition)
+ */
+export function createLookupFunction(transcriptionOptions?) {
+  return async (word: string, language: GlostLanguage) => {
+    // Step 1: Get data (delegates to data source - SSOT)
+    const entry = await queryLexitron(word);
+    if (!entry) return {};
+    
+    // Step 2: Apply transcription (delegates to system - SSOT)
+    const result = transcribeToPaiboon(entry.reading, transcriptionOptions);
+    
+    // Step 3: Return in standard format
+    return { paiboon: result.text };
+  };
+}
+
+/**
+ * Pre-configured extension
+ */
+export const ThaiPaiboonLexitronExtension = 
+  createTranscriptionGeneratorExtension({
+    targetLanguage: "th",
+    lookupTranscription: createLookupFunction()
+  });
+
+// Re-export components for custom usage
+export { queryLexitron } from 'glost-th-datasource-lexitron';
+export { transcribeToPaiboon } from 'glost-th-transcription-paiboon';
+```
+
+## Best Practices
+
+### 1. Single Responsibility
+
+```typescript
+// ✅ GOOD - Single responsibility
+export async function queryLexitron(word: string) {
+  // ONLY queries database
+  return await database.query(word);
+}
+
+// ❌ BAD - Multiple responsibilities
+export async function queryAndTranscribe(word: string) {
+  const data = await database.query(word);
+  const transcribed = applyPaiboonRules(data); // Don't do this!
+  return transcribed;
+}
+```
+
+### 2. Single Source of Truth
+
+```typescript
+// ✅ GOOD - Import from single source
+import { transcribeToPaiboon } from 'glost-th-transcription-paiboon';
+const result = transcribeToPaiboon(text);
+
+// ❌ BAD - Duplicating transcription logic
+function myTranscribe(text: string) {
+  // Don't re-implement Paiboon+ rules here!
+  return text.replace(/ก/g, 'g'); // Violates SSOT
+}
+```
+
+### 3. Source-Agnostic Systems
+
+```typescript
+// ✅ GOOD - Works with any data source
+export function transcribeToPaiboon(text: string) {
+  // Accepts any text, regardless of source
+  return applyRules(text);
+}
+
+// ❌ BAD - Hard-coded to specific source
+export async function transcribeFromLexitron(word: string) {
+  const data = await queryLexitron(word); // Too coupled!
+  return applyRules(data.reading);
+}
+```
+
+### 4. Composition
+
+```typescript
+// ✅ GOOD - Pure composition
+import { querySource } from 'data-source-package';
+import { transcribe } from 'transcription-package';
+
+export function lookup(word: string) {
+  const data = await querySource(word);
+  return transcribe(data.reading);
+}
+
+// ❌ BAD - Reimplementing
+export function lookup(word: string) {
+  const data = await fetch(...); // Don't reimplement query!
+  const transcribed = text.replace(...); // Don't reimplement rules!
+  return transcribed;
+}
+```
+
+## Publishing Checklist
+
+Before publishing your package:
+
+- [ ] Follows naming convention
+- [ ] Single responsibility maintained
+- [ ] No duplicated logic
+- [ ] Comprehensive tests
+- [ ] Documentation complete
+- [ ] Attribution included (for data sources)
+- [ ] Works with example data
+- [ ] Types exported correctly
+- [ ] README has examples
+- [ ] License file included
+
+## Examples
+
+See these for complete examples:
+- [Example Data](../../packages/extensions/src/example-data/README.md)
+- [Composition Pattern Tests](../../examples/extensions/composition-pattern.test.ts)
+- [Package Templates](../../packages/extensions/templates/USAGE.md)
+
+## Need Help?
+
+- Check [Naming Conventions](../conventions/naming.md)
+- Review [SRP/SSOT Architecture](../../.cursor/plans/naming_conventions_srp_architecture.md)
+- See [Template Usage Guide](../../packages/extensions/templates/USAGE.md)

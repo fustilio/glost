@@ -1,0 +1,41 @@
+{
+  "name": "glost-[LANG]-datasource-[SOURCE_NAME]",
+  "version": "0.0.1",
+  "description": "[DESCRIPTION - e.g., Thai dictionary data from Lexitron database]",
+  "keywords": [
+    "glost",
+    "[LANG]",
+    "datasource",
+    "[SOURCE_NAME]",
+    "language-learning",
+    "linguistics"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest",
+    "test:watch": "vitest --watch"
+  },
+  "dependencies": {
+    "glost": "workspace:*",
+    "glost-common": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/glost",
+    "directory": "packages/data-sources/[LANG]-datasource-[SOURCE_NAME]"
+  }
+}

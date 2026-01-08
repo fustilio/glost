@@ -1,0 +1,129 @@
+/**
+ * glost-[LANG]-datasource-[SOURCE_NAME]
+ *
+ * Data source package for [LANGUAGE] language using [SOURCE_NAME].
+ * Provides raw data access following SRP (Single Responsibility Principle).
+ *
+ * Single Responsibility: Query [SOURCE_NAME] database/API and return raw data ONLY.
+ * Does NOT process or transform data - that's the job of strategy/system packages.
+ *
+ * @packageDocumentation
+ */
+
+import type { GlostLanguage } from "glost-common";
+
+/**
+ * Raw dictionary entry from [SOURCE_NAME]
+ *
+ * This is the SINGLE SOURCE OF TRUTH for [SOURCE_NAME] data structure.
+ */
+export interface [SourceName]Entry {
+  /** The word in native script */
+  word: string;
+
+  /** Reading or pronunciation (raw from source) */
+  reading?: string;
+
+  /** Definitions (raw from source) */
+  definitions: string[];
+
+  /** Part of speech (raw from source) */
+  partOfSpeech?: string;
+
+  /** Any additional metadata from source */
+  metadata?: Record<string, unknown>;
+}
+
+/**
+ * Query [SOURCE_NAME] database
+ *
+ * Single Responsibility: ONLY queries [SOURCE_NAME] and returns raw data.
+ * Does NOT:
+ * - Apply transcription rules
+ * - Transform or process data
+ * - Apply business logic
+ *
+ * @param word - The word to look up
+ * @param options - Optional query parameters
+ * @returns Raw dictionary entry or null if not found
+ *
+ * @example
+ * ```typescript
+ * import { query[SourceName] } from 'glost-[LANG]-datasource-[SOURCE_NAME]';
+ *
+ * const entry = await query[SourceName]("example");
+ * if (entry) {
+ *   console.log(entry.word);
+ *   console.log(entry.definitions);
+ * }
+ * ```
+ */
+export async function query[SourceName](
+  word: string,
+  options?: QueryOptions,
+): Promise<[SourceName]Entry | null> {
+  // TODO: Implement actual database/API query
+  // This is a placeholder - replace with real implementation
+
+  try {
+    // Example: Query your database or API
+    // const response = await fetch(`https://api.[source].com/lookup/${word}`);
+    // const data = await response.json();
+
+    // For now, return null (word not found)
+    return null;
+  } catch (error) {
+    // Handle errors appropriately
+    console.error(`Error querying [SOURCE_NAME] for "${word}":`, error);
+    return null;
+  }
+}
+
+/**
+ * Query options for [SOURCE_NAME]
+ */
+export interface QueryOptions {
+  /** Include example sentences */
+  includeExamples?: boolean;
+
+  /** Include etymology information */
+  includeEtymology?: boolean;
+
+  /** Limit number of definitions */
+  maxDefinitions?: number;
+
+  // Add more options specific to your data source
+}
+
+/**
+ * Check if [SOURCE_NAME] is available
+ *
+ * Single Responsibility: Verify data source connectivity
+ *
+ * @returns True if data source is accessible
+ *
+ * @example
+ * ```typescript
+ * const available = await is[SourceName]Available();
+ * if (!available) {
+ *   console.error("[SOURCE_NAME] is not available");
+ * }
+ * ```
+ */
+export async function is[SourceName]Available(): Promise<boolean> {
+  // TODO: Implement availability check
+  // e.g., ping the API, check database connection, etc.
+  return true;
+}
+
+/**
+ * Get supported languages from [SOURCE_NAME]
+ *
+ * Single Responsibility: Return list of supported languages
+ *
+ * @returns Array of ISO 639-1 language codes
+ */
+export function getSupportedLanguages(): GlostLanguage[] {
+  // TODO: Update with actual supported languages
+  return ["[LANG]"];
+}

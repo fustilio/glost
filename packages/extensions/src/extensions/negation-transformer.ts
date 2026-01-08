@@ -11,7 +11,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "../types";
+import type { GLOSTExtension, ExtensionContext } from "../types";
 import type {
   GLOSTRoot,
   GLOSTClause,
@@ -359,9 +359,19 @@ export function createNegationTransformerExtension(
     id: "negation-transformer",
     name: "Negation Transformer",
     description: "Negates clauses or sentences",
-    dependencies: ["clause-segmenter"], // Requires clauses to exist
+    dependencies: ["clause-segmenter"],
 
-    transform: (document: GLOSTRoot) => {
+    // Note: We don't use `requires: { nodes: ["ClauseNode"] }` because
+    // this extension has fallback behavior to negate at sentence level
+    // when clauses don't exist. The dependency on clause-segmenter ensures
+    // correct ordering when clauses are available.
+
+    // Declare what we provide
+    provides: {
+      extras: ["isNegated", "negationWord"],
+    },
+
+    transform: (document: GLOSTRoot, context?: ExtensionContext) => {
       // Check if clauses exist
       const clauses = getAllClauses(document);
 
