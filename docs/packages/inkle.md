@@ -1,0 +1,146 @@
+# glost-inkle
+
+Ink/Inkle interactive fiction integration for GLOST.
+
+## Installation
+
+```bash
+pnpm add glost-inkle
+```
+
+## Overview
+
+This package provides integration with [Ink](https://www.inklestudios.com/ink/), the narrative scripting language by Inkle Studios. It allows you to parse Ink story JSON and convert it to GLOST documents for language learning applications.
+
+## Usage
+
+### parseInkJSON
+
+Parse Ink JSON output to a GLOST document.
+
+```typescript
+import { parseInkJSON } from 'glost-inkle';
+
+const inkStory = {
+  root: [/* ink JSON structure */],
+  // ...
+};
+
+const document = parseInkJSON(inkStory, {
+  language: "en",
+  script: "latin"
+});
+```
+
+### Options
+
+```typescript
+interface ParseInkOptions {
+  language: GlostLanguage;
+  script?: string;
+  sections?: string[];  // Specific sections to parse
+}
+```
+
+## Use Cases
+
+### Multilingual Interactive Fiction
+
+Create language learning games using Ink stories:
+
+```ink
+=== greeting ===
+สวัสดีครับ #thai #translation:Hello
+คุณสบายดีไหม #thai #translation:How are you?
+* [สบายดี] -> good_response
+* [ไม่สบาย] -> bad_response
+```
+
+### Annotated Stories
+
+Parse Ink stories and enrich them with GLOST extensions:
+
+```typescript
+import { parseInkJSON } from 'glost-inkle';
+import { processGLOSTWithExtensions, FrequencyExtension } from 'glost-extensions';
+
+// Parse Ink story
+const document = parseInkJSON(inkStory, { language: "th" });
+
+// Enrich with language learning metadata
+const result = processGLOSTWithExtensions(document, [
+  FrequencyExtension,
+  DifficultyExtension
+]);
+```
+
+### Story-Based Learning
+
+Build applications that:
+- Show word-by-word translations
+- Highlight vocabulary by difficulty
+- Track learned words through story progression
+- Provide pronunciation guides
+
+## Integration with Ink
+
+### Getting Ink JSON
+
+Compile your Ink story to JSON:
+
+```bash
+# Using inklecate
+inklecate -j story.ink > story.json
+```
+
+### Loading in JavaScript
+
+```typescript
+import storyJson from './story.json';
+import { parseInkJSON } from 'glost-inkle';
+
+const document = parseInkJSON(storyJson, {
+  language: "th",
+  script: "thai"
+});
+```
+
+## Example
+
+### Input (Ink JSON)
+
+```json
+{
+  "root": [
+    ["^Hello, world!", "\n", "done", null]
+  ],
+  "listDefs": {}
+}
+```
+
+### Output (GLOST Document)
+
+```typescript
+{
+  type: "root",
+  lang: "en",
+  script: "latin",
+  children: [
+    {
+      type: "ParagraphNode",
+      children: [
+        {
+          type: "SentenceNode",
+          children: [
+            { type: "WordNode", children: [{ type: "TextNode", value: "Hello" }] },
+            { type: "PunctuationNode", value: "," },
+            { type: "WhiteSpaceNode", value: " " },
+            { type: "WordNode", children: [{ type: "TextNode", value: "world" }] },
+            { type: "PunctuationNode", value: "!" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```

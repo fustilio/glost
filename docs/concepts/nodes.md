@@ -1,0 +1,309 @@
+# Node Types
+
+GLOST extends nlcst with language learning metadata. This document covers all node types.
+
+## Node Hierarchy
+
+```
+GLOSTRoot (document)
+├── GLOSTParagraph
+│   └── GLOSTSentence
+│       ├── GLOSTWord
+│       │   └── GLOSTText
+│       ├── GLOSTWhiteSpace
+│       ├── GLOSTPunctuation
+│       └── GLOSTSymbol
+```
+
+### Transformer Nodes
+
+Extensions can create additional structural nodes:
+
+```
+GLOSTSentence
+├── GLOSTClause (main, subordinate, relative, adverbial)
+│   └── GLOSTPhrase (noun, verb, prepositional, etc.)
+│       └── GLOSTWord
+│           └── GLOSTSyllable
+│               └── GLOSTCharacter
+```
+
+## Core Nodes
+
+### GLOSTRoot
+
+The document root node.
+
+```typescript
+interface GLOSTRoot {
+  type: "root";
+  lang: GlostLanguage;      // Document language
+  script?: string;          // Writing system
+  children: GLOSTParagraph[];
+  metadata?: Record<string, unknown>;
+  extras?: GLOSTExtras;
+}
+```
+
+### GLOSTParagraph
+
+A paragraph containing sentences.
+
+```typescript
+interface GLOSTParagraph {
+  type: "ParagraphNode";
+  children: GLOSTSentence[];
+  extras?: GLOSTExtras;
+}
+```
+
+### GLOSTSentence
+
+A sentence containing words, whitespace, and punctuation.
+
+```typescript
+interface GLOSTSentence {
+  type: "SentenceNode";
+  originalText?: string;    // Original text before parsing
+  lang: GlostLanguage;
+  script?: string;
+  children: GLOSTContent[];
+  transcription?: TransliterationData;
+  extras?: GLOSTExtras;
+}
+```
+
+### GLOSTWord
+
+The primary annotation unit - a word with rich metadata.
+
+```typescript
+interface GLOSTWord {
+  type: "WordNode";
+  children: GLOSTText[];
+  transcription?: TransliterationData;
+  metadata?: LinguisticMetadata;
+  level: LinguisticLevel;
+  lang?: GlostLanguage;
+  script?: string;
+  extras?: GLOSTExtras;
+}
+```
+
+### GLOSTText
+
+Plain text content within a word.
+
+```typescript
+interface GLOSTText {
+  type: "TextNode";
+  value: string;
+}
+```
+
+### GLOSTWhiteSpace
+
+Whitespace (spaces, tabs, newlines).
+
+```typescript
+interface GLOSTWhiteSpace {
+  type: "WhiteSpaceNode";
+  value: string;
+}
+```
+
+### GLOSTPunctuation
+
+Punctuation marks.
+
+```typescript
+interface GLOSTPunctuation {
+  type: "PunctuationNode";
+  value: string;
+}
+```
+
+### GLOSTSymbol
+
+Symbols (emoji, special characters).
+
+```typescript
+interface GLOSTSymbol {
+  type: "SymbolNode";
+  value: string;
+}
+```
+
+## Transformer Nodes
+
+Created by extensions to add structural analysis.
+
+### GLOSTClause
+
+A grammatical clause within a sentence.
+
+```typescript
+interface GLOSTClause {
+  type: "ClauseNode";
+  clauseType: "main" | "subordinate" | "relative" | "adverbial";
+  children: (GLOSTWord | GLOSTPhrase | GLOSTWhiteSpace | GLOSTPunctuation)[];
+  extras?: GLOSTExtras;
+}
+```
+
+### GLOSTPhrase
+
+A grammatical phrase (noun phrase, verb phrase, etc.).
+
+```typescript
+interface GLOSTPhrase {
+  type: "PhraseNode";
+  phraseType: "noun" | "verb" | "prepositional" | "adjectival" | "adverbial";
+  children: GLOSTWord[];
+  extras?: GLOSTExtras;
+}
+```
+
+### GLOSTSyllable
+
+A phonological syllable.
+
+```typescript
+interface GLOSTSyllable {
+  type: "SyllableNode";
+  onset?: string;     // Initial consonant(s)
+  nucleus: string;    // Vowel
+  coda?: string;      // Final consonant(s)
+  tone?: number;      // Tone number (for tonal languages)
+  stress?: "primary" | "secondary" | "unstressed";
+  children: GLOSTCharacter[];
+  extras?: GLOSTExtras;
+}
+```
+
+### GLOSTCharacter
+
+An individual character with linguistic role.
+
+```typescript
+interface GLOSTCharacter {
+  type: "CharacterNode";
+  value: string;
+  role: "vowel" | "consonant" | "tone-mark" | "diacritic" | "punctuation" | "other";
+  unicode?: {
+    codePoint: number;
+    name: string;
+    category: string;
+  };
+  extras?: GLOSTExtras;
+}
+```
+
+## Key Data Types
+
+### TransliterationData
+
+Map of transcription system to transcription info.
+
+```typescript
+type TransliterationData = {
+  [system: string]: TranscriptionInfo;
+};
+
+interface TranscriptionInfo {
+  text: string;
+  system: TranscriptionSystem;
+  variants?: PronunciationVariant[];
+  tone?: number;
+  syllables?: string[];
+  phonetic?: string;
+}
+```
+
+Supported transcription systems:
+- `ipa` - International Phonetic Alphabet
+- `rtgs` - Royal Thai General System
+- `aua` - AUA Thai romanization
+- `paiboon` - Paiboon+ Thai romanization
+- `romaji` - Japanese romanization
+- `furigana` - Japanese reading aid
+- `pinyin` - Chinese romanization
+- `hangul` - Korean script
+
+### LinguisticMetadata
+
+Linguistic information about a word.
+
+```typescript
+interface LinguisticMetadata {
+  partOfSpeech: string;       // Required
+  meaning?: string;           // Definition
+  usage?: string;             // Usage notes
+  etymology?: string;         // Word origin
+  examples?: string[];        // Example sentences
+  frequency?: "high" | "medium" | "low";
+  formality?: "formal" | "neutral" | "informal";
+  register?: string;          // Language register
+}
+```
+
+### GLOSTExtras
+
+Extensible metadata field.
+
+```typescript
+interface GLOSTExtras {
+  translations?: QuickTranslations;
+  metadata?: ExtendedMetadata;
+  [key: string]: unknown;     // Custom fields
+}
+
+interface QuickTranslations {
+  [languageCode: string]: string;
+}
+
+interface ExtendedMetadata {
+  difficulty?: "beginner" | "intermediate" | "advanced";
+  frequency?: "rare" | "uncommon" | "common" | "very-common";
+  culturalNotes?: string;
+  related?: string[];
+  examples?: string[];
+  [key: string]: unknown;
+}
+```
+
+## Linguistic Levels
+
+Words can exist at different granularities:
+
+```typescript
+type LinguisticLevel = 
+  | "character"   // Individual characters
+  | "syllable"    // Phonological syllables
+  | "word"        // Primary unit (default)
+  | "phrase"      // Word groups
+  | "sentence"    // Complete sentences
+  | "paragraph";  // Paragraph-level
+```
+
+## Creating Nodes
+
+Use the factory functions from `glost`:
+
+```typescript
+import {
+  createGLOSTWordNode,
+  createGLOSTSentenceNode,
+  createGLOSTParagraphNode,
+  createGLOSTRootNode,
+  createGLOSTTextNode,
+  createGLOSTPunctuationNode,
+  createGLOSTWhiteSpaceNode,
+  createThaiWord,
+  createJapaneseWord,
+  createSentenceFromWords,
+  createDocumentFromParagraphs
+} from 'glost';
+```
+
+See the [API Reference](../packages/core.md) for full documentation.
