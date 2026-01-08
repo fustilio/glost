@@ -1,0 +1,30 @@
+{
+  "name": "@glost/workspace",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GLOST - Glossed Syntax Tree for language learning",
+  "license": "MIT",
+  "packageManager": "pnpm@9.5.0",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "test:watch": "pnpm -r test -- --watch",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "clean": "pnpm -r exec rm -rf dist node_modules"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "prettier": "^3.5.3",
+    "vitest": "^3.0.5"
+  },
+  "keywords": [
+    "glost",
+    "glossed-syntax-tree",
+    "nlcst",
+    "language-learning",
+    "multilingual",
+    "annotations",
+    "syntax-tree"
+  ]
+}

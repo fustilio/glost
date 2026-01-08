@@ -1,0 +1,52 @@
+/**
+ * @glost/core-extensions
+ * 
+ * Framework-agnostic AST extensions for GLOST manipulation and enhancement.
+ * 
+ * This package provides a plugin architecture similar to remark, enabling
+ * framework-agnostic AST transformations for GLOST documents.
+ * 
+ * @packageDocumentation
+ * 
+ * @example
+ * ```typescript
+ * import { processGLOSTWithExtensions } from "@glost/core-extensions";
+ * import { FrequencyExtension, DifficultyExtension } from "@glost/core-extensions/extensions";
+ * 
+ * const result = processGLOSTWithExtensions(document, [
+ *   FrequencyExtension,
+ *   DifficultyExtension,
+ * ]);
+ * ```
+ * 
+ * @see {@link https://github.com/your-org/lalia-prism/tree/main/docs/polyglot-tools/services/mtst-extensions | Documentation}
+ * 
+ * @since 0.0.1
+ */
+
+// Export types
+export type {
+  GLOSTExtension,
+  ExtensionContext,
+  ExtensionResult,
+} from "./types";
+
+// Export registry
+export {
+  extensionRegistry,
+  registerExtension,
+  registerExtensions,
+  getExtension,
+  getAllExtensions,
+} from "./registry";
+
+// Export processor
+export {
+  processGLOSTWithExtensions,
+  processGLOSTWithExtensionsAsync,
+  processGLOSTWithExtensionIds,
+} from "./processor";
+
+// Export built-in extensions
+export * from "./extensions";
+

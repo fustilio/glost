@@ -1,0 +1,54 @@
+{
+  "name": "@glost/common",
+  "version": "0.1.0",
+  "description": "Common utilities and language configs for GLOST",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./languages": {
+      "types": "./src/languages/index.ts",
+      "default": "./src/languages/index.ts"
+    },
+    "./utils/array": {
+      "types": "./src/utils/array.ts",
+      "default": "./src/utils/array.ts"
+    },
+    "./utils/groupBy": {
+      "types": "./src/utils/groupBy.ts",
+      "default": "./src/utils/groupBy.ts"
+    },
+    "./utils/string": {
+      "types": "./src/utils/string-utils.ts",
+      "default": "./src/utils/string-utils.ts"
+    },
+    "./utils/zod": {
+      "types": "./src/utils/zod.ts",
+      "default": "./src/utils/zod.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "lint": "echo 'No linting configured'"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vitest": "^3.0.5"
+  },
+  "keywords": [
+    "glost",
+    "languages",
+    "utilities",
+    "i18n",
+    "multilingual"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@glost/extensions-translation",
+  "version": "0.1.0",
+  "description": "Translation extension for GLOST - adds multilingual glosses",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@glost/core": "workspace:*",
+    "@glost/common": "workspace:*",
+    "@glost/extensions": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vitest": "^3.0.5"
+  },
+  "keywords": [
+    "glost",
+    "translation",
+    "glosses",
+    "dictionary",
+    "bilingual"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "name": "@glost/utils",
+  "version": "0.1.0",
+  "description": "Framework-agnostic utilities for GLOST manipulation, conversion, and merging",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./text-to-glost": {
+      "types": "./src/text-to-glost.ts",
+      "default": "./src/text-to-glost.ts"
+    },
+    "./merger": {
+      "types": "./src/glost-merger.ts",
+      "default": "./src/glost-merger.ts"
+    },
+    "./document": {
+      "types": "./src/document-utils.ts",
+      "default": "./src/document-utils.ts"
+    },
+    "./script": {
+      "types": "./src/script-conversion.ts",
+      "default": "./src/script-conversion.ts"
+    },
+    "./interfaces": {
+      "types": "./src/interfaces.ts",
+      "default": "./src/interfaces.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "lint": "echo 'No linting configured'"
+  },
+  "dependencies": {
+    "@glost/core": "workspace:*",
+    "@glost/common": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vitest": "^3.0.5"
+  },
+  "keywords": [
+    "glost",
+    "multilingual",
+    "utilities",
+    "text-conversion",
+    "document-manipulation"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@glost/extensions-transcription",
+  "version": "0.1.0",
+  "description": "Transcription extension for GLOST - adds pronunciation data",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@glost/core": "workspace:*",
+    "@glost/common": "workspace:*",
+    "@glost/extensions": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vitest": "^3.0.5"
+  },
+  "keywords": [
+    "glost",
+    "transcription",
+    "pronunciation",
+    "ipa",
+    "romanization"
+  ]
+}
