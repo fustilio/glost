@@ -1,0 +1,42 @@
+{
+  "name": "glost-frequency",
+  "version": "0.2.0",
+  "description": "Word frequency extension for GLOST - generates and formats frequency data",
+  "author": "GLOST Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fustilio/glost.git",
+    "directory": "packages/extensions/frequency"
+  },
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest --passWithNoTests"
+  },
+  "dependencies": {
+    "glost": "workspace:*",
+    "glost-common": "workspace:*",
+    "glost-extensions": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "keywords": [
+    "glost",
+    "frequency",
+    "word-frequency",
+    "corpus",
+    "linguistics"
+  ]
+}

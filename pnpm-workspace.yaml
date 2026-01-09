@@ -6,6 +6,8 @@ packages:
   - examples/basic
   - examples/transcription
   - examples/kitchensink
+  - examples/composition-demo
+  - examples/extensions/languages/en/*
 
 catalog:
   typescript: ^5.8.3

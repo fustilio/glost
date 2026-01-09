@@ -118,7 +118,7 @@ Gets the display name for a Thai transcription scheme.
 
 ## Architecture
 
-This package follows the [GLOST Multi-Language Architecture](https://github.com/your-org/glost/blob/main/docs/guides/multi-language-architecture.md) pattern:
+This package follows the [GLOST Multi-Language Architecture](https://github.com/fustilio/glost/blob/main/docs/guides/multi-language-architecture.md) pattern:
 
 - **Focused**: Contains only Thai-specific code
 - **Composable**: Works seamlessly with core GLOST packages

@@ -1,5 +1,9 @@
 # GLOST - Glossed Syntax Tree
 
+[![npm version](https://img.shields.io/npm/v/glost.svg)](https://www.npmjs.com/package/glost)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![npm downloads](https://img.shields.io/npm/dm/glost.svg)](https://www.npmjs.com/package/glost)
+
 **GLOST** (Glossed Syntax Tree) is a Concrete Syntax Tree format that extends [nlcst](https://github.com/syntax-tree/nlcst) to support rich language learning metadata.
 
 ## Features
@@ -50,8 +54,8 @@ console.log(getLanguageName("th")); // "Thai"
 - **[glost-utils](./packages/utils)** - Text utilities
 
 ### Language Packages
-- **[glost-th](./packages/languages/th)** - Thai language support
-- **[glost-ja](./packages/languages/ja)** - Japanese language support
+- **[glost-th](./packages/languages/th)** - Thai language support [![npm](https://img.shields.io/npm/v/glost-th.svg)](https://www.npmjs.com/package/glost-th)
+- **[glost-ja](./packages/languages/ja)** - Japanese language support [![npm](https://img.shields.io/npm/v/glost-ja.svg)](https://www.npmjs.com/package/glost-ja)
 
 ### Extensions
 - **[glost-extensions-transcription](./packages/extensions/transcription)** - Transcription extension

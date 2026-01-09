@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLOST Extension Composition Demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 2rem;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .main-content {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+
+    .extension-pipeline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      flex-wrap: wrap;
+    }
+
+    .extension-box {
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      min-width: 200px;
+      transition: transform 0.2s;
+    }
+
+    .extension-box:hover {
+      transform: translateY(-2px);
+    }
+
+    .extension-box.generator {
+      background: #667eea;
+      color: white;
+    }
+
+    .extension-box.enhancer {
+      background: #764ba2;
+      color: white;
+    }
+
+    .extension-box.inactive {
+      background: #e0e0e0;
+      color: #999;
+    }
+
+    .extension-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .extension-type {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .arrow {
+      font-size: 1.5rem;
+      color: #667eea;
+      font-weight: bold;
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .toggle-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .toggle-btn {
+      padding: 0.5rem 1rem;
+      border: 2px solid #667eea;
+      background: white;
+      color: #667eea;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .toggle-btn.active {
+      background: #667eea;
+      color: white;
+    }
+
+    .toggle-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .input-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .input-section label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .input-section textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 1rem;
+      resize: vertical;
+      transition: border-color 0.2s;
+    }
+
+    .input-section textarea:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .output-section {
+      min-height: 200px;
+    }
+
+    .output-section h2 {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .output-words {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      min-height: 150px;
+    }
+
+    .word-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      min-width: 150px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .word-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .word-text {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .word-ipa {
+      font-size: 0.95rem;
+      color: #667eea;
+      font-family: "Courier New", monospace;
+    }
+
+    .word-respelling {
+      font-size: 1rem;
+      color: #764ba2;
+      font-weight: 500;
+    }
+
+    .word-info {
+      font-size: 0.85rem;
+      color: #999;
+      padding-top: 0.5rem;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: #999;
+      padding: 3rem;
+      font-size: 1.1rem;
+    }
+
+    .examples {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #fff3cd;
+      border-radius: 6px;
+      border-left: 4px solid #ffc107;
+    }
+
+    .examples strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #856404;
+    }
+
+    .examples code {
+      background: #fff;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-family: "Courier New", monospace;
+      color: #667eea;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🔗 Extension Composition Demo</h1>
+      <p>See how GLOST extensions compose together to create powerful features</p>
+    </div>
+
+    <div class="main-content">
+      <!-- Extension Pipeline Visualization -->
+      <div class="extension-pipeline">
+        <div class="extension-box generator" id="ext-ipa">
+          <div class="extension-title">en-transcription-ipa</div>
+          <div class="extension-type">GENERATOR</div>
+        </div>
+        <div class="arrow" id="arrow-1">→</div>
+        <div class="extension-box enhancer" id="ext-phonemic">
+          <div class="extension-title">en-ipa-to-phonemic</div>
+          <div class="extension-type">ENHANCER</div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="toggle-ipa">Show IPA</button>
+          <button class="toggle-btn active" id="toggle-respelling">Show Phonemic</button>
+        </div>
+      </div>
+
+      <!-- Input -->
+      <div class="input-section">
+        <label for="input">Enter English text:</label>
+        <textarea 
+          id="input" 
+          rows="3" 
+          placeholder="Type English words here... Try: ecclesiastical, worcestershire, colonel, queue"
+        >hello world ecclesiastical worcestershire</textarea>
+      </div>
+
+      <!-- Examples -->
+      <div class="examples">
+        <strong>💡 Try these interesting words:</strong>
+        <code>ecclesiastical</code> <code>worcestershire</code> <code>colonel</code> <code>queue</code> <code>knight</code> <code>subtle</code> <code>psychology</code> <code>pneumonia</code>
+      </div>
+
+      <!-- Output -->
+      <div class="output-section">
+        <h2>Output</h2>
+        <div class="output-words" id="output">
+          <span class="empty-state">Results will appear here...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

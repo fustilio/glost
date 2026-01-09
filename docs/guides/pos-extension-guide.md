@@ -1,0 +1,435 @@
+# Part-of-Speech Extension Guide
+
+## Real-World Use Case: Grammar Learning App
+
+**Scenario**: You're building a grammar practice app. Students need to identify nouns, verbs, adjectives, etc. in sentences to understand sentence structure.
+
+## Before (Without POS Data)
+
+```
+Text: "The quick brown fox jumps over the lazy dog."
+
+Students must manually identify:
+- Which words are nouns?
+- Which words are verbs?
+- Which words are adjectives?
+
+No automated checking or color-coding available.
+```
+
+## After (With POS Extension)
+
+### Input Sentence
+
+```typescript
+const sentence = "The quick brown fox jumps over the lazy dog.";
+```
+
+### With POS Tagging
+
+```typescript
+import { createPOSExtension } from "glost-pos";
+import { createEnglishPOSProvider } from "./my-nlp-provider";
+
+// Real POS tagger (e.g., from dictionary or NLP model)
+const posData = new Map([
+  ["the", "article"],
+  ["quick", "adjective"],
+  ["brown", "adjective"],
+  ["fox", "noun"],
+  ["jumps", "verb"],
+  ["over", "preposition"],
+  ["lazy", "adjective"],
+  ["dog", "noun"],
+]);
+
+const provider = createEnglishPOSProvider({ dictionary: posData });
+const [generator, enhancer] = createPOSExtension({
+  targetLanguage: "en",
+  provider
+});
+
+const result = await processGLOSTWithExtensionsAsync(glostDoc, [generator, enhancer]);
+```
+
+### Output (Visualized)
+
+```
+The      [Art]  Article      🔵
+quick    [Adj]  Adjective    🟢
+brown    [Adj]  Adjective    🟢
+fox      [N]    Noun         🔴
+jumps    [V]    Verb         🟡
+over     [Prep] Preposition  🟣
+the      [Art]  Article      🔵
+lazy     [Adj]  Adjective    🟢
+dog      [N]    Noun         🔴
+```
+
+### UI Implementation
+
+```typescript
+function WordWithPOS({ word }) {
+  const pos = word.extras?.partOfSpeech;
+  
+  if (!pos) {
+    return <span className="no-pos">{word.text}</span>;
+  }
+  
+  const colors = {
+    "noun": "#FF6B6B",
+    "verb": "#FFD93D",
+    "adjective": "#6BCB77",
+    "article": "#4D96FF",
+    "preposition": "#9D84B7"
+  };
+  
+  return (
+    <span 
+      className={`word pos-${pos.tag}`}
+      style={{ 
+        borderBottom: `3px solid ${colors[pos.tag] || '#999'}`,
+        cursor: 'help'
+      }}
+      title={`${pos.display} (${pos.abbreviation})`}
+    >
+      {word.text}
+    </span>
+  );
+}
+```
+
+## Value Demonstrated
+
+### 1. Pattern Recognition
+
+**Exercise**: Find all adjectives describing nouns
+
+```typescript
+function findAdjectiveNounPairs(sentence) {
+  const words = sentence.children;
+  const pairs = [];
+  
+  for (let i = 0; i < words.length - 1; i++) {
+    const current = words[i];
+    const next = words[i + 1];
+    
+    if (current.extras?.partOfSpeech?.tag === "adjective" && 
+        next.extras?.partOfSpeech?.tag === "noun") {
+      pairs.push({
+        adjective: current.text,
+        noun: next.text
+      });
+    }
+  }
+  
+  return pairs;
+}
+
+// Output:
+// [
+//   { adjective: "quick", noun: "fox" },
+//   { adjective: "brown", noun: "fox" },
+//   { adjective: "lazy", noun: "dog" }
+// ]
+```
+
+**Student sees**: "quick fox", "brown fox", "lazy dog" - pattern learned!
+
+### 2. Sentence Structure Visualization
+
+```typescript
+function visualizeSentenceStructure(sentence) {
+  const structure = sentence.children.map(word => ({
+    text: word.text,
+    pos: word.extras?.partOfSpeech?.abbreviation || "?"
+  }));
+  
+  return structure;
+}
+
+// Output:
+// [Art] [Adj] [Adj] [N] [V] [Prep] [Art] [Adj] [N]
+//  The  quick brown fox jumps over  the  lazy  dog
+//
+// Pattern visible: [Articles] introduce [Noun Phrases]
+// Structure: [NP] [V] [PP-NP]
+```
+
+### 3. Grammar Exercise Generator
+
+```typescript
+function generateExercise(sentence) {
+  const verbs = sentence.children.filter(
+    w => w.extras?.partOfSpeech?.tag === "verb"
+  );
+  
+  const nouns = sentence.children.filter(
+    w => w.extras?.partOfSpeech?.tag === "noun"
+  );
+  
+  return {
+    question: "Replace the verb with its past tense form",
+    verb: verbs[0]?.text,          // "jumps"
+    answer: "jumped",
+    explanation: "Regular verb: add -ed"
+  };
+}
+
+// Exercise generated automatically from POS data!
+```
+
+## Real Data Example: Thai Language
+
+### Thai POS from Lexitron Dictionary
+
+```typescript
+const thaiPOSData = new Map([
+  // Nouns
+  ["แมว", "noun"],      // "cat"
+  ["บ้าน", "noun"],     // "house"
+  
+  // Verbs
+  ["วิ่ง", "verb"],     // "run"
+  ["กิน", "verb"],      // "eat"
+  
+  // Adjectives
+  ["สวย", "adjective"], // "beautiful"
+  ["เร็ว", "adjective"], // "fast"
+  
+  // Classifiers (Thai-specific)
+  ["ตัว", "classifier"], // classifier for animals
+  ["หลัง", "classifier"], // classifier for houses
+]);
+
+const thaiProvider = createThaiPOSProvider({ 
+  dictionary: thaiPOSData,
+  tagger: thaiNLPTagger  // For words not in dictionary
+});
+```
+
+### Thai Sentence Example
+
+**Input**: "แมวตัวนี้วิ่งเร็ว"  
+(This cat runs fast)
+
+**Output with POS**:
+```
+แมว   [N]    Noun         (cat)
+ตัว    [Clf]  Classifier   (counter for animals)
+นี้    [Det]  Determiner   (this)
+วิ่ง   [V]    Verb         (run)
+เร็ว   [Adj]  Adjective    (fast)
+```
+
+**Pattern Shown**: [Noun] [Classifier] [Determiner] [Verb] [Adjective]  
+Thai word order: Subject-Verb-Adjective (unlike English SVO)
+
+## Practical Applications
+
+### 1. Verb Conjugation Practice
+
+```typescript
+function generateVerbExercise(document) {
+  const verbs = extractWords(document)
+    .filter(w => w.extras?.partOfSpeech?.tag === "verb");
+  
+  return verbs.map(verb => ({
+    infinitive: verb.text,
+    exercise: `What is the past tense of "${verb.text}"?`,
+    type: "verb-conjugation"
+  }));
+}
+
+// Auto-generates exercises for all verbs in text
+// "jumps" → "What is the past tense of 'jumps'?"
+```
+
+### 2. Word Class Sorting Game
+
+```typescript
+function createSortingGame(sentence) {
+  const words = shuffle(sentence.children);
+  const categories = {
+    nouns: [],
+    verbs: [],
+    adjectives: [],
+    other: []
+  };
+  
+  return {
+    instruction: "Drag each word to its correct category",
+    words: words.map(w => w.text),
+    correctAnswers: categories,  // Pre-computed from POS data
+    checkAnswer: (userAnswer) => comparePOS(userAnswer, categories)
+  };
+}
+
+// Game: Student drags "fox" to Nouns, "jumps" to Verbs, etc.
+// Instant feedback based on POS data
+```
+
+### 3. Sentence Pattern Templates
+
+```typescript
+function identifyPattern(sentence) {
+  const pattern = sentence.children
+    .map(w => w.extras?.partOfSpeech?.abbreviation)
+    .join("-");
+  
+  const templates = {
+    "Art-Adj-N-V": "Simple descriptive sentence",
+    "N-V-Prep-N": "Action with prepositional phrase",
+    "Art-Adj-Adj-N-V-Prep-Art-Adj-N": "Complex descriptive narrative"
+  };
+  
+  return {
+    pattern,
+    description: templates[pattern] || "Custom pattern",
+    example: sentence.text
+  };
+}
+
+// "The quick brown fox jumps over the lazy dog"
+// → Pattern: Art-Adj-Adj-N-V-Prep-Art-Adj-N
+// → "Complex descriptive narrative"
+```
+
+## Japanese Example: Particle Usage
+
+### Challenge: Understanding Japanese Particles
+
+```typescript
+const japaneseText = "猫は魚を食べる";
+// "The cat eats fish"
+
+const japanesePOS = [
+  { word: "猫", pos: "noun", reading: "neko" },
+  { word: "は", pos: "particle", subtype: "topic-marker" },  // ← Key!
+  { word: "魚", pos: "noun", reading: "sakana" },
+  { word: "を", pos: "particle", subtype: "object-marker" }, // ← Key!
+  { word: "食べる", pos: "verb", reading: "taberu" }
+];
+```
+
+**Visualization**:
+```
+猫   [N]      Noun      (cat)
+は   [Part]   Particle  ← Topic marker (this is what we're talking about)
+魚   [N]      Noun      (fish)
+を   [Part]   Particle  ← Object marker (this is what's being acted upon)
+食べる [V]     Verb      (eat)
+```
+
+**Pattern Learned**: [Topic]は [Object]を [Verb]  
+Students can now identify sentence structure!
+
+## Data Quality Comparison
+
+### Bad Data Example (Why Heuristics Fail)
+
+```typescript
+// ❌ WRONG: Heuristic based on word endings
+function badPOSTagger(word) {
+  if (word.endsWith("ing")) return "verb";     // "king", "ring" ❌
+  if (word.endsWith("ly")) return "adverb";    // "fly", "July" ❌
+  if (word.endsWith("tion")) return "noun";    // Works often ✓ (but not complete)
+  return "unknown";
+}
+
+// Misclassifications:
+// "king" → verb ❌ (actually noun)
+// "ring" → verb ❌ (could be noun or verb, context needed)
+// "fly" → adverb ❌ (noun or verb)
+// "running" → verb ✓ (but what about "a running joke" = adjective?)
+```
+
+### Good Data Example (Dictionary/NLP Based)
+
+```typescript
+// ✅ CORRECT: From validated dictionary or NLP model
+const nlpTagger = await loadStanfordNLP();
+
+async function goodPOSTagger(word, context) {
+  const result = await nlpTagger.tag([context]);
+  return result.find(w => w.word === word)?.pos;
+}
+
+// Correct classifications with context:
+// "running" in "He is running" → verb
+// "running" in "running water" → adjective  
+// "running" in "the running" → noun
+// Context matters!
+```
+
+## Integration Example: Grammar Dashboard
+
+```typescript
+import { createPOSExtension } from "glost-pos";
+import { processGLOSTWithExtensionsAsync } from "glost-extensions";
+
+// 1. Setup POS provider
+const posProvider = createEnglishPOSProvider({
+  tagger: await loadNLPModel()
+});
+
+const [posGen, posEnh] = createPOSExtension({
+  targetLanguage: "en",
+  provider: posProvider
+});
+
+// 2. Process text
+const glostDoc = convertTextToGLOST(text, "en");
+const result = await processGLOSTWithExtensionsAsync(glostDoc, [posGen, posEnh]);
+
+// 3. Render grammar view
+function GrammarDashboard({ document }) {
+  const stats = analyzePOS(document);
+  
+  return (
+    <div>
+      <h2>Grammar Analysis</h2>
+      
+      <div className="pos-stats">
+        <POSChart data={stats} />
+      </div>
+      
+      <div className="sentence-view">
+        {document.children.map(sentence => (
+          <SentenceWithPOS sentence={sentence} />
+        ))}
+      </div>
+      
+      <div className="exercises">
+        <h3>Practice Exercises</h3>
+        {generatePOSExercises(document).map(ex => (
+          <Exercise key={ex.id} {...ex} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// 4. Show statistics
+function POSChart({ data }) {
+  return (
+    <div className="chart">
+      <div>Nouns: {data.nouns} (40%)</div>
+      <div>Verbs: {data.verbs} (20%)</div>
+      <div>Adjectives: {data.adjectives} (15%)</div>
+      <div>Other: {data.other} (25%)</div>
+    </div>
+  );
+}
+```
+
+## Conclusion
+
+POS tagging transforms text from words into **grammatical structure**:
+
+- ✅ Students see patterns (adjective + noun, subject-verb-object)
+- ✅ Exercises generated automatically (find all verbs, identify noun phrases)
+- ✅ Grammar rules become visible (English: SVO, Japanese: SOV)
+- ✅ Language structure is teachable (particles, classifiers, articles)
+
+**The key**: Accurate POS tags from NLP or validated dictionaries, not regex patterns.

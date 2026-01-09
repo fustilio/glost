@@ -2,7 +2,7 @@
  * Negation Transformer Extension
  *
  * Transforms clauses or sentences by adding negation.
- * Requires ClauseSegmenterExtension to run first for clause-level negation.
+ * Requires clause segmenter (from glost-clause-segmenter) to run first for clause-level negation.
  *
  * Supports language-specific negation patterns:
  * - English: Adds "don't", "doesn't", "didn't" based on tense
@@ -307,18 +307,22 @@ function negateClause(
  * Create Negation Transformer extension
  *
  * Creates a transformer extension that negates clauses or sentences.
- * This extension REQUIRES ClauseSegmenterExtension to run first
- * for clause-level negation.
+ * This extension REQUIRES clause segmenter (from glost-clause-segmenter)
+ * to run first for clause-level negation.
  *
  * @param options - Extension configuration options
  * @returns Configured negation transformer extension
  *
  * @example
  * ```typescript
- * import {
- *   ClauseSegmenterExtension,
- *   createNegationTransformerExtension,
- * } from "glost-extensions/extensions";
+ * import { createNegationTransformerExtension } from "glost-extensions/extensions";
+ * import { createClauseSegmenterExtension } from "glost-clause-segmenter";
+ * import { englishSegmenterProvider } from "glost-en/segmenter";
+ *
+ * const segmenter = createClauseSegmenterExtension({
+ *   targetLanguage: "en",
+ *   provider: englishSegmenterProvider,
+ * });
  *
  * // Negate all main clauses
  * const negationExt = createNegationTransformerExtension({
@@ -327,7 +331,7 @@ function negateClause(
  * });
  *
  * const result = processGLOSTWithExtensions(document, [
- *   ClauseSegmenterExtension, // Must run first!
+ *   segmenter, // Must run first!
  *   negationExt,
  * ]);
  *
@@ -468,19 +472,23 @@ export function createNegationTransformerExtension(
  * negation, or create a custom extension with
  * `createNegationTransformerExtension()` for specific options.
  *
- * **Important:** This extension requires ClauseSegmenterExtension
+ * **Important:** This extension requires clause segmenter (from glost-clause-segmenter)
  * to run first for clause-level negation.
  *
  * @example
  * ```typescript
- * import {
- *   ClauseSegmenterExtension,
- *   NegationTransformerExtension,
- * } from "glost-extensions/extensions";
+ * import { NegationTransformerExtension } from "glost-extensions/extensions";
  * import { processGLOSTWithExtensions } from "glost-extensions/processor";
+ * import { createClauseSegmenterExtension } from "glost-clause-segmenter";
+ * import { englishSegmenterProvider } from "glost-en/segmenter";
+ *
+ * const segmenter = createClauseSegmenterExtension({
+ *   targetLanguage: "en",
+ *   provider: englishSegmenterProvider,
+ * });
  *
  * const result = processGLOSTWithExtensions(document, [
- *   ClauseSegmenterExtension,
+ *   segmenter,
  *   NegationTransformerExtension,
  * ]);
  *

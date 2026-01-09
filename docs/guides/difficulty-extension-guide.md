@@ -1,0 +1,430 @@
+# Difficulty Extension Guide
+
+## Real-World Use Case: Adaptive Learning Platform
+
+**Scenario**: You're building a language learning app that adapts content to student level (beginner, intermediate, advanced). You need to automatically assess text difficulty and recommend appropriate materials.
+
+## Before (Without Difficulty Data)
+
+```
+Text A: "I go to school every day."
+Text B: "The implementation of the aforementioned protocol requires meticulous attention."
+
+Both texts look similar in the system.
+Teacher must manually grade each text.
+Students get inappropriate materials.
+```
+
+## After (With Difficulty Extension)
+
+### Sample Texts
+
+```typescript
+const texts = [
+  {
+    id: 1,
+    title: "Daily Routine",
+    text: "I go to school every day. I study English and math."
+  },
+  {
+    id: 2,
+    title: "Science Paper",
+    text: "The implementation of the aforementioned protocol requires meticulous attention."
+  },
+  {
+    id: 3,
+    title: "News Article",
+    text: "The government announced new regulations for environmental protection."
+  }
+];
+```
+
+### With Difficulty Assessment (Based on CEFR Word Lists)
+
+```typescript
+import { createDifficultyExtension } from "glost-difficulty";
+import { createCEFRDifficultyProvider } from "./my-wordlist-provider";
+
+// Real CEFR word lists
+const cefrLists = {
+  A1: new Set(["I", "go", "to", "school", "every", "day", "and"]),
+  A2: new Set(["study", "English", "math", "new"]),
+  B1: new Set(["government", "announced", "regulations"]),
+  B2: new Set(["environmental", "protection", "implementation"]),
+  C1: new Set(["protocol", "requires", "meticulous"]),
+  C2: new Set(["aforementioned", "scrutiny"])
+};
+
+const provider = createCEFRDifficultyProvider({ cefrLists });
+const [generator, enhancer] = createDifficultyExtension({
+  targetLanguage: "en",
+  provider
+});
+
+const result = await processGLOSTWithExtensionsAsync(glostDoc, [generator, enhancer]);
+```
+
+### Output (Visualized)
+
+**Text 1: "Daily Routine"**
+```
+I           [Beginner]     Green    ●●●○
+go          [Beginner]     Green    ●●●○
+to          [Beginner]     Green    ●●●○
+school      [Beginner]     Green    ●●●○
+every       [Beginner]     Green    ●●●○
+day         [Beginner]     Green    ●●●○
+study       [Beginner]     Green    ●●●○
+English     [Beginner]     Green    ●●●○
+and         [Beginner]     Green    ●●●○
+math        [Beginner]     Green    ●●●○
+
+Overall: 100% beginner words → BEGINNER LEVEL ✓
+```
+
+**Text 2: "Science Paper"**
+```
+The              [Beginner]      Green     ●●●○
+implementation   [Intermediate]  Yellow    ●●○○
+of               [Beginner]      Green     ●●●○
+the              [Beginner]      Green     ●●●○
+aforementioned   [Advanced]      Red       ●○○○  ← Challenge!
+protocol         [Advanced]      Red       ●○○○  ← Challenge!
+requires         [Advanced]      Red       ●○○○  ← Challenge!
+meticulous       [Advanced]      Red       ●○○○  ← Challenge!
+attention        [Intermediate]  Yellow    ●●○○
+
+Overall: 44% advanced words → ADVANCED LEVEL ⚠️
+```
+
+**Text 3: "News Article"**
+```
+The             [Beginner]      Green     ●●●○
+government      [Intermediate]  Yellow    ●●○○
+announced       [Intermediate]  Yellow    ●●○○
+new             [Beginner]      Green     ●●●○
+regulations     [Intermediate]  Yellow    ●●○○
+for             [Beginner]      Green     ●●●○
+environmental   [Intermediate]  Yellow    ●●○○
+protection      [Intermediate]  Yellow    ●●○○
+
+Overall: 63% intermediate words → INTERMEDIATE LEVEL ✓
+```
+
+### UI Implementation
+
+```typescript
+function TextDifficultyBadge({ document }) {
+  const analysis = analyzeDifficulty(document);
+  
+  const badges = {
+    beginner: { color: "#4CAF50", label: "Beginner Friendly", icon: "🟢" },
+    intermediate: { color: "#FF9800", label: "Intermediate", icon: "🟡" },
+    advanced: { color: "#F44336", label: "Advanced", icon: "🔴" }
+  };
+  
+  const badge = badges[analysis.level];
+  
+  return (
+    <div className="difficulty-badge" style={{ backgroundColor: badge.color }}>
+      <span className="icon">{badge.icon}</span>
+      <span className="label">{badge.label}</span>
+      <div className="breakdown">
+        <small>
+          {analysis.beginner}% beginner | 
+          {analysis.intermediate}% intermediate | 
+          {analysis.advanced}% advanced
+        </small>
+      </div>
+    </div>
+  );
+}
+```
+
+## Value Demonstrated
+
+### 1. Automatic Text Leveling
+
+```typescript
+function levelText(text, wordLists) {
+  const words = tokenize(text);
+  const difficulties = words.map(w => getDifficulty(w, wordLists));
+  
+  const counts = {
+    beginner: difficulties.filter(d => d === "beginner").length,
+    intermediate: difficulties.filter(d => d === "intermediate").length,
+    advanced: difficulties.filter(d => d === "advanced").length
+  };
+  
+  const total = words.length;
+  const advancedPercent = (counts.advanced / total) * 100;
+  
+  if (advancedPercent > 30) return "advanced";
+  if (advancedPercent > 10 || counts.intermediate > counts.beginner) return "intermediate";
+  return "beginner";
+}
+
+// Text 1: 0% advanced → "beginner"
+// Text 2: 44% advanced → "advanced"
+// Text 3: 0% advanced, 63% intermediate → "intermediate"
+```
+
+### 2. Personalized Reading Recommendations
+
+```typescript
+function recommendTexts(studentLevel, availableTexts) {
+  return availableTexts
+    .map(text => ({
+      ...text,
+      difficulty: assessDifficulty(text),
+      match: calculateMatch(studentLevel, text.difficulty)
+    }))
+    .sort((a, b) => b.match - a.match);
+}
+
+// Student at "intermediate" level:
+// 1. Text 3 (Intermediate) - 100% match ✓
+// 2. Text 1 (Beginner) - 70% match (too easy, but readable)
+// 3. Text 2 (Advanced) - 30% match (too hard, frustrating)
+```
+
+### 3. Challenge Word Identification
+
+```typescript
+function findChallengeWords(document, studentLevel) {
+  const words = extractWords(document);
+  const challenges = words.filter(word => {
+    const difficulty = word.extras?.difficulty?.level;
+    
+    // Beginner student: intermediate+ is challenging
+    if (studentLevel === "beginner") {
+      return difficulty === "intermediate" || difficulty === "advanced";
+    }
+    
+    // Intermediate student: only advanced is challenging
+    if (studentLevel === "intermediate") {
+      return difficulty === "advanced";
+    }
+    
+    return false;
+  });
+  
+  return challenges;
+}
+
+// Intermediate student reading Text 2:
+// Challenges: ["aforementioned", "protocol", "requires", "meticulous"]
+// → Pre-teach these 4 words before reading!
+```
+
+## Real Data Example: Japanese (JLPT Levels)
+
+### JLPT Word Lists
+
+```typescript
+const jlptLists = {
+  N5: new Set(["私", "行く", "学校", "毎日"]),    // Beginner
+  N4: new Set(["勉強", "英語", "数学", "新しい"]), // Elementary
+  N3: new Set(["政府", "発表", "規則"]),          // Intermediate
+  N2: new Set(["環境", "保護", "実施"]),          // Upper-intermediate
+  N1: new Set(["前述", "方式", "細心", "注意"])   // Advanced
+};
+
+function mapJLPTToDifficulty(jlptLevel) {
+  if (jlptLevel === "N5" || jlptLevel === "N4") return "beginner";
+  if (jlptLevel === "N3" || jlptLevel === "N2") return "intermediate";
+  return "advanced"; // N1
+}
+
+const japaneseProvider = createJapaneseDifficultyProvider({ 
+  jlptLists,
+  mapper: mapJLPTToDifficulty
+});
+```
+
+### Japanese Text Example
+
+**Text**: "私は毎日学校に行きます"  
+(I go to school every day)
+
+**Word-by-Word Analysis**:
+```
+私    (I)        N5  → Beginner     [●●●○]
+は    (topic)    N5  → Beginner     [●●●○]
+毎日  (every day) N5  → Beginner     [●●●○]
+学校  (school)   N5  → Beginner     [●●●○]
+に    (to)       N5  → Beginner     [●●●○]
+行く  (go)       N5  → Beginner     [●●●○]
+ます  (polite)   N5  → Beginner     [●●●○]
+
+Overall: 100% N5 words → BEGINNER (JLPT N5 level)
+```
+
+## Practical Applications
+
+### 1. Graded Reader Library
+
+```typescript
+function buildGradedLibrary(texts) {
+  const graded = texts.map(text => ({
+    ...text,
+    level: assessDifficulty(text),
+    words: text.wordCount,
+    challenges: countChallengeWords(text)
+  }));
+  
+  return {
+    beginner: graded.filter(t => t.level === "beginner"),
+    intermediate: graded.filter(t => t.level === "intermediate"),
+    advanced: graded.filter(t => t.level === "advanced")
+  };
+}
+
+// Beginner shelf: 150 texts (0-10 intermediate words each)
+// Intermediate shelf: 200 texts (10-30% advanced words)
+// Advanced shelf: 100 texts (30%+ advanced vocabulary)
+```
+
+### 2. Progress Tracking
+
+```typescript
+function trackProgress(student) {
+  const readingHistory = student.completedTexts;
+  const levels = readingHistory.map(t => t.difficulty);
+  
+  const timeline = [
+    { month: "Jan", level: "beginner", texts: 10 },
+    { month: "Feb", level: "beginner", texts: 15 },
+    { month: "Mar", level: "intermediate", texts: 5 },  // ← Progress!
+    { month: "Apr", level: "intermediate", texts: 12 }
+  ];
+  
+  return {
+    currentLevel: "intermediate",
+    trend: "improving",
+    recommendation: "Continue with intermediate texts, try 1-2 advanced texts per week"
+  };
+}
+```
+
+### 3. Adaptive Difficulty Progression
+
+```typescript
+function selectNextText(student, completedText) {
+  const currentDifficulty = completedText.difficulty;
+  const comprehension = student.lastScore; // e.g., 85%
+  
+  if (comprehension > 90 && currentDifficulty === "beginner") {
+    return findText({ difficulty: "intermediate", first: true });
+  }
+  
+  if (comprehension < 70) {
+    return findText({ difficulty: currentDifficulty, easier: true });
+  }
+  
+  return findText({ difficulty: currentDifficulty, similar: true });
+}
+
+// Student scored 92% on beginner text → recommend first intermediate text
+// Student scored 65% on intermediate text → recommend easier intermediate text
+```
+
+## Thai Example: CEFR + Thai-Specific Lists
+
+### Combining Standard and Local Word Lists
+
+```typescript
+const thaiDifficultyProvider = createThaiDifficultyProvider({
+  cefrLists: standardCEFRLists,         // International words
+  thaiSpecific: thaiEducationLists,     // Thai curriculum
+  combineStrategy: "union"              // Use both lists
+});
+
+// "ประชาธิปไตย" (democracy) 
+// - Not in CEFR (Thai word)
+// - In Thai Grade 6 curriculum → Intermediate
+```
+
+### Thai Text Example
+
+**Text**: "ประชาธิปไตยเป็นระบบการปกครองที่ดี"  
+(Democracy is a good governance system)
+
+**Analysis**:
+```
+ประชาธิปไตย (democracy)     → Intermediate (Grade 6+)  [●●○○]
+เป็น      (is)            → Beginner    (Grade 1)   [●●●○]
+ระบบ      (system)        → Intermediate (Grade 5)   [●●○○]
+การปกครอง (governance)    → Intermediate (Grade 7)   [●●○○]
+ที่        (that)          → Beginner    (Grade 1)   [●●●○]
+ดี        (good)          → Beginner    (Grade 1)   [●●●○]
+
+Overall: 50% intermediate vocabulary → INTERMEDIATE LEVEL
+```
+
+## Integration Example: Complete Adaptive System
+
+```typescript
+import { createDifficultyExtension } from "glost-difficulty";
+import { processGLOSTWithExtensionsAsync } from "glost-extensions";
+
+// 1. Load difficulty data (CEFR, JLPT, or custom)
+const wordLists = await loadCEFRWordLists();
+const provider = createDifficultyProvider({ wordLists });
+
+// 2. Create extensions
+const [diffGen, diffEnh] = createDifficultyExtension({
+  targetLanguage: "en",
+  provider
+});
+
+// 3. Process library
+async function processTextLibrary(texts) {
+  const processed = [];
+  
+  for (const text of texts) {
+    const glostDoc = convertTextToGLOST(text.content, "en");
+    const result = await processGLOSTWithExtensionsAsync(glostDoc, [diffGen, diffEnh]);
+    
+    processed.push({
+      ...text,
+      difficulty: assessOverallDifficulty(result.document),
+      challengeWords: extractChallengeWords(result.document),
+      suitable For: determineSuitability(result.document)
+    });
+  }
+  
+  return processed;
+}
+
+// 4. Render adaptive UI
+function AdaptiveLibrary({ texts, studentLevel }) {
+  const suitable = texts.filter(t => 
+    t.suitableFor.includes(studentLevel)
+  );
+  
+  return (
+    <div className="library">
+      <h2>Recommended for {studentLevel} level</h2>
+      {suitable.map(text => (
+        <TextCard 
+          key={text.id}
+          {...text}
+          highlighted={text.difficulty === studentLevel}
+        />
+      ))}
+    </div>
+  );
+}
+```
+
+## Conclusion
+
+Difficulty assessment transforms your content library from **ungraded materials** into a **structured learning path**:
+
+- ✅ Students read at their level (90% comprehension → optimal learning)
+- ✅ Progress is measurable (beginner → intermediate → advanced)
+- ✅ Frustration reduced (no texts too hard or too boring)
+- ✅ Challenge words pre-taught (targeted vocabulary instruction)
+
+**The key**: Validated word lists (CEFR, JLPT, HSK, curriculum standards), not length-based guesses.

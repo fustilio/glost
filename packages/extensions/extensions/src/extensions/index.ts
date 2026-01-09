@@ -1,31 +1,17 @@
 /**
  * Built-in GLOST Extensions
  * 
- * Exports all built-in extensions for easy importing.
+ * Exports core extensions that don't require external data sources.
+ * 
+ * Moved to separate packages (install separately):
+ * - Frequency → glost-frequency
+ * - Difficulty → glost-difficulty
+ * - POS → glost-pos
+ * - Gender → glost-gender
+ * - Clause Segmenter → glost-clause-segmenter
+ * - Transcription → glost-transcription
+ * - Translation → glost-translation
  */
-
-export {
-  FrequencyExtension,
-  createFrequencyExtension,
-  type FrequencyLevel,
-  type FrequencyMetadata,
-  type FrequencyExtensionOptions,
-} from "./frequency";
-
-export {
-  DifficultyExtension,
-  createDifficultyExtension,
-  type DifficultyLevel,
-  type DifficultyMetadata,
-  type DifficultyExtensionOptions,
-} from "./difficulty";
-
-export {
-  PartOfSpeechExtension,
-  createPartOfSpeechExtension,
-  type PartOfSpeechMetadata,
-  type PartOfSpeechExtensionOptions,
-} from "./part-of-speech";
 
 export {
   CulturalNotesExtension,
@@ -33,18 +19,6 @@ export {
   type CulturalNotesMetadata,
   type CulturalNotesExtensionOptions,
 } from "./cultural-notes";
-
-export {
-  GenderExtension,
-  createGenderExtension,
-  type GenderType,
-  type GenderMetadata,
-  type GenderExtensionOptions,
-} from "./gender";
-
-// Note: Transcription and Translation extensions have been moved to separate packages:
-// - glost-extensions-transcription
-// - glost-extensions-translation
 
 export {
   GenderTransformerExtension,
@@ -56,14 +30,6 @@ export {
 } from "./gender-transformer";
 
 export {
-  ClauseSegmenterExtension,
-  createClauseSegmenterExtension,
-  type ClauseType,
-  type GrammaticalMood,
-  type ClauseSegmenterOptions,
-} from "./clause-segmenter";
-
-export {
   NegationTransformerExtension,
   createNegationTransformerExtension,
   type NegationType,
@@ -71,7 +37,7 @@ export {
   type NegationTransformerOptions,
 } from "./negation-transformer";
 
-// Stacking example extensions - demonstrate dependency validation
+// Analyzer extensions - compute derived metrics from existing data
 export {
   ReadingScoreExtension,
   createReadingScoreExtension,

@@ -16,8 +16,8 @@ import type { GLOSTExtension } from "./types";
  * @example
  * ```typescript
  * const registry = new ExtensionRegistry();
- * registry.register(FrequencyExtension);
- * const ext = registry.get("frequency");
+ * registry.register(ReadingScoreExtension);
+ * const ext = registry.get("reading-score");
  * ```
  * 
  * @since 0.0.1
@@ -62,9 +62,9 @@ class ExtensionRegistry {
    * @example
    * ```typescript
    * registry.registerAll([
-   *   FrequencyExtension,
-   *   DifficultyExtension,
-   *   GenderExtension
+   *   ReadingScoreExtension,
+   *   LearnerHintsExtension,
+   *   ClauseAnalysisExtension
    * ]);
    * ```
    */
@@ -297,9 +297,9 @@ export function registerExtension(extension: GLOSTExtension): void {
  * import { registerExtensions } from "glost-extensions/registry";
  * 
  * registerExtensions([
- *   FrequencyExtension,
- *   DifficultyExtension,
- *   GenderExtension
+ *   ReadingScoreExtension,
+ *   LearnerHintsExtension,
+ *   ClauseAnalysisExtension
  * ]);
  * ```
  * 

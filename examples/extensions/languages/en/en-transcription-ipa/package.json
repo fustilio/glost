@@ -1,0 +1,26 @@
+{
+  "name": "@examples/en-transcription-ipa",
+  "version": "1.0.1",
+  "description": "English IPA transcription extension - provides IPA for English words",
+  "type": "module",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "glost": "workspace:*",
+    "glost-extensions": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}

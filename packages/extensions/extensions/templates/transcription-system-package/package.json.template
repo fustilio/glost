@@ -35,7 +35,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/glost",
+    "url": "https://github.com/fustilio/glost",
     "directory": "packages/transcription-systems/[LANG]-transcription-[SYSTEM]"
   }
 }

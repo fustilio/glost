@@ -1,0 +1,53 @@
+{
+  "name": "glost-en",
+  "version": "0.2.0",
+  "description": "English language support for GLOST - segmentation providers and helpers",
+  "keywords": [
+    "glost",
+    "english",
+    "language",
+    "segmentation",
+    "clause",
+    "nlp"
+  ],
+  "author": "fustilio",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fustilio/glost.git",
+    "directory": "packages/languages/en"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./segmenter": {
+      "types": "./dist/segmenter/index.d.ts",
+      "default": "./dist/segmenter/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "test": "vitest --passWithNoTests"
+  },
+  "dependencies": {
+    "glost": "workspace:*",
+    "glost-clause-segmenter": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

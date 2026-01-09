@@ -1,0 +1,22 @@
+{
+  "name": "@examples/composition-demo",
+  "version": "1.0.1",
+  "description": "Demo showcasing GLOST extension composition",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@examples/en-transcription-ipa": "workspace:*",
+    "@examples/en-ipa-to-phonemic": "workspace:*",
+    "glost": "workspace:*",
+    "glost-extensions": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "vite": "^5.0.0"
+  }
+}

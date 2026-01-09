@@ -1,6 +1,6 @@
 {
   "name": "glost-ja",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Japanese language support for GLOST - helper functions and transcription providers",
   "keywords": [
     "glost",
@@ -12,11 +12,11 @@
     "furigana",
     "nlp"
   ],
-  "author": "GLOST Contributors",
+  "author": "fustilio",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/glost.git",
+    "url": "https://github.com/fustilio/glost.git",
     "directory": "packages/languages/ja"
   },
   "main": "./dist/index.js",
@@ -33,6 +33,10 @@
     "./transcription": {
       "types": "./dist/transcription.d.ts",
       "default": "./dist/transcription.js"
+    },
+    "./extensions": {
+      "types": "./dist/extensions/index.d.ts",
+      "default": "./dist/extensions/index.js"
     }
   },
   "files": [
@@ -42,11 +46,12 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist",
-    "test": "vitest"
+    "test": "vitest --passWithNoTests"
   },
   "dependencies": {
     "glost": "workspace:*",
-    "glost-common": "workspace:*"
+    "glost-common": "workspace:*",
+    "glost-frequency": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

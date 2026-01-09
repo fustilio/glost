@@ -10,8 +10,9 @@
 import type { GLOSTWord } from "glost";
 import type { GLOSTExtension } from "../types";
 import { ExtensionDependencyError } from "../errors";
-import type { FrequencyLevel } from "./frequency";
-import type { DifficultyLevel } from "./difficulty";
+// Types moved to separate packages
+type FrequencyLevel = "rare" | "uncommon" | "common" | "very-common";
+type DifficultyLevel = "beginner" | "intermediate" | "advanced";
 
 /**
  * Reading score metadata structure
@@ -102,12 +103,17 @@ function getReadingColor(score: number): string {
  * @example
  * ```typescript
  * import { processGLOSTWithExtensions } from "glost-extensions/processor";
- * import { FrequencyExtension, DifficultyExtension } from "glost-extensions/extensions";
  * import { createReadingScoreExtension } from "glost-extensions/extensions/reading-score";
+ * import { createFrequencyExtension } from "glost-frequency";
+ * import { createDifficultyExtension } from "glost-difficulty";
+ *
+ * // These extensions are now in separate packages
+ * const [freqGen, freqEnh] = createFrequencyExtension({ targetLanguage: "en", provider });
+ * const [diffGen, diffEnh] = createDifficultyExtension({ targetLanguage: "en", provider });
  *
  * const result = processGLOSTWithExtensions(document, [
- *   FrequencyExtension,
- *   DifficultyExtension,
+ *   freqGen, freqEnh,
+ *   diffGen, diffEnh,
  *   createReadingScoreExtension({ frequencyWeight: 0.3, difficultyWeight: 0.7 }),
  * ]);
  *
@@ -166,7 +172,7 @@ export function createReadingScoreExtension(
           "frequency",
           "extras.frequency.level",
           "Frequency extension did not provide 'frequency.level' field. " +
-            "Ensure FrequencyExtension runs before ReadingScoreExtension and " +
+            "Ensure frequency generator (from glost-frequency) runs before ReadingScoreExtension and " +
             "that the word has frequency metadata.",
         );
       }
@@ -178,7 +184,7 @@ export function createReadingScoreExtension(
           "difficulty",
           "extras.difficulty.level",
           "Difficulty extension did not provide 'difficulty.level' field. " +
-            "Ensure DifficultyExtension runs before ReadingScoreExtension and " +
+            "Ensure difficulty generator (from glost-difficulty) runs before ReadingScoreExtension and " +
             "that the word has difficulty metadata.",
         );
       }
@@ -210,15 +216,17 @@ export function createReadingScoreExtension(
  * @example
  * ```typescript
  * import { processGLOSTWithExtensions } from "glost-extensions/processor";
- * import {
- *   FrequencyExtension,
- *   DifficultyExtension,
- *   ReadingScoreExtension
- * } from "glost-extensions/extensions";
+ * import { ReadingScoreExtension } from "glost-extensions/extensions";
+ * import { createFrequencyExtension } from "glost-frequency";
+ * import { createDifficultyExtension } from "glost-difficulty";
+ *
+ * // These extensions are now in separate packages
+ * const [freqGen, freqEnh] = createFrequencyExtension({ targetLanguage: "en", provider });
+ * const [diffGen, diffEnh] = createDifficultyExtension({ targetLanguage: "en", provider });
  *
  * const result = processGLOSTWithExtensions(document, [
- *   FrequencyExtension,
- *   DifficultyExtension,
+ *   freqGen, freqEnh,
+ *   diffGen, diffEnh,
  *   ReadingScoreExtension,
  * ]);
  * ```

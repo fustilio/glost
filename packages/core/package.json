@@ -1,7 +1,14 @@
 {
   "name": "glost",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "GLOST - Glossed Syntax Tree for augmenting text with language learning metadata",
+  "author": "fustilio",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fustilio/glost.git",
+    "directory": "packages/core"
+  },
   "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",

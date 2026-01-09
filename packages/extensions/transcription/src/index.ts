@@ -1,8 +1,16 @@
 /**
- * Transcription Extension
+ * glost-transcription
  *
- * Augments word nodes with transcription data using dictionary lookup.
- * This extension can be composed with other extensions like translation.
+ * Language-agnostic transcription extension for GLOST.
+ *
+ * This package provides the core transcription logic. Language-specific
+ * implementations should be provided via the TranscriptionProvider interface.
+ *
+ * Language-specific providers should be in:
+ * - glost-th/extensions (Thai RTGS, IPA)
+ * - glost-ja/extensions (Japanese romaji, kana)
+ * - glost-zh/extensions (Chinese pinyin)
+ * etc.
  *
  * @packageDocumentation
  */
@@ -10,6 +18,38 @@
 import type { GLOSTExtension } from "glost-extensions";
 import type { GLOSTWord } from "glost";
 import { getWordText } from "glost";
+
+/**
+ * Provider interface for transcription data
+ *
+ * Language-specific implementations should be provided by language packages
+ * (e.g., glost-th/extensions, glost-ja/extensions)
+ */
+export interface TranscriptionProvider {
+  /**
+   * Get transcriptions for a word
+   *
+   * @param word - The word to transcribe
+   * @param language - Language code
+   * @returns Record of scheme name -> transcription string, or undefined if not available
+   *
+   * @example
+   * ```typescript
+   * // Thai example
+   * getTranscriptions("สวัสดี", "th")
+   * // Returns: { rtgs: "sawatdi", ipa: "sàwàtdii" }
+   *
+   * // Japanese example
+   * getTranscriptions("こんにちは", "ja")
+   * // Returns: { romaji: "konnichiwa", hiragana: "こんにちは" }
+   * ```
+   */
+  getTranscriptions(
+    word: string,
+    language: string
+  ): Promise<Record<string, string> | undefined>;
+}
+
 import type { GlostLanguage } from "glost-common";
 
 /**
@@ -18,78 +58,75 @@ import type { GlostLanguage } from "glost-common";
 export interface TranscriptionExtensionOptions {
   /**
    * Target language for transcriptions
-   *
-   * The ISO-639-1 language code for which to look up transcriptions (e.g., "th", "fr", "ja").
    */
   targetLanguage: GlostLanguage;
 
   /**
-   * Lookup function for transcriptions
+   * Provider for language-specific transcription data
    *
-   * Function that looks up transcriptions for a given word and language.
-   * Returns a record mapping transcription scheme names to transcription strings.
-   * If not provided, the extension will skip processing.
-   *
-   * @param word - The word to look up
-   * @param language - The ISO-639-1 language code
-   * @returns Record of transcription scheme -> transcription string, or empty object if not found
+   * Should be implemented by language packages:
+   * - import { thaiTranscriptionProvider } from "glost-th/extensions"
+   * - import { japaneseTranscriptionProvider } from "glost-ja/extensions"
    */
-  lookupTranscription?: (
-    word: string,
-    language: GlostLanguage,
-  ) => Promise<Record<string, string>>;
+  provider: TranscriptionProvider;
 }
+
 
 /**
  * Create transcription extension
  *
- * This extension augments word nodes with transcription data by looking up
- * transcriptions from the dictionary. It only populates transcriptions if
- * they don't already exist.
+ * This extension augments word nodes with transcription data using a provider.
+ * It only populates transcriptions if they don't already exist.
  *
- * @param options - Extension options
+ * @param options - Extension options including provider
  * @returns GLOST extension for transcriptions
  *
  * @example
  * ```typescript
- * import { createTranscriptionExtension } from "glost-extensions-transcription";
- * import { processGLOSTWithExtensionsAsync } from "glost-extensions/processor";
- * import type { GlostLanguage } from "glost-common";
- *
- * // Provide your own lookup function (e.g., from a dictionary service)
- * async function lookupTranscription(word: string, lang: GlostLanguage): Promise<Record<string, string>> {
- *   // Your transcription lookup implementation
- *   return { "ipa": "transcription", "rtgs": "romanization" };
- * }
+ * import { createTranscriptionExtension } from "glost-transcription";
+ * import { thaiTranscriptionProvider } from "glost-th/extensions";
+ * import { processGLOSTWithExtensionsAsync } from "glost-extensions";
  *
  * const extension = createTranscriptionExtension({
  *   targetLanguage: "th",
- *   lookupTranscription
+ *   provider: thaiTranscriptionProvider
  * });
  *
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);
+ * ```
+ *
+ * @example
+ * ```typescript
+ * // Japanese example
+ * import { createTranscriptionExtension } from "glost-transcription";
+ * import { japaneseTranscriptionProvider } from "glost-ja/extensions";
+ *
+ * const extension = createTranscriptionExtension({
+ *   targetLanguage: "ja",
+ *   provider: japaneseTranscriptionProvider
+ * });
  * ```
  */
 export function createTranscriptionExtension(
   options: TranscriptionExtensionOptions,
 ): GLOSTExtension {
-  const { lookupTranscription } = options;
+  const { targetLanguage, provider } = options;
+
+  if (!provider) {
+    throw new Error(
+      "[Transcription] Provider is required. " +
+      "Import from language package: " +
+      "import { thaiTranscriptionProvider } from 'glost-th/extensions'"
+    );
+  }
 
   return {
     id: "transcription",
     name: "Transcription",
     description:
-      "Augments word nodes with transcription data using dictionary lookup",
+      "Augments word nodes with transcription data via provider",
     visit: {
       word: async (node: GLOSTWord) => {
-        // Skip if no lookup function provided
-        if (!lookupTranscription) {
-          console.warn(
-            "[Transcription Extension] No lookupTranscription function provided, skipping processing",
-          );
-          return;
-        }
-
         // Skip if transcription already exists
         if (node.transcription && Object.keys(node.transcription).length > 0) {
           return;
@@ -104,9 +141,9 @@ export function createTranscriptionExtension(
         const cleanWordText = wordText.trim().replace(/[!?.,:;]$/, "");
 
         try {
-          const transcriptions = await lookupTranscription(
+          const transcriptions = await provider.getTranscriptions(
             cleanWordText,
-            options.targetLanguage,
+            targetLanguage
           );
 
           if (transcriptions && Object.keys(transcriptions).length > 0) {
@@ -126,7 +163,7 @@ export function createTranscriptionExtension(
         } catch (error) {
           // Silently fail - transcription lookup is optional
           console.debug(
-            `[Transcription Extension] Transcription lookup failed for "${cleanWordText}":`,
+            `[Transcription] Lookup failed for "${cleanWordText}":`,
             error,
           );
         }
@@ -135,16 +172,3 @@ export function createTranscriptionExtension(
     options: options as unknown as Record<string, unknown>,
   };
 }
-
-/**
- * Default transcription extension (requires options to be passed via processor options)
- *
- * This is a convenience export, but you should use `createTranscriptionExtension`
- * with explicit options for better type safety.
- */
-export const TranscriptionExtension: GLOSTExtension = {
-  id: "transcription",
-  name: "Transcription",
-  description:
-    "Augments word nodes with transcription data using dictionary lookup",
-};

@@ -1,0 +1,26 @@
+{
+  "name": "glost-examples",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Working examples demonstrating GLOST extension packages",
+  "scripts": {
+    "example:frequency": "tsx frequency-demo.ts",
+    "example:pos": "tsx pos-demo.ts",
+    "example:difficulty": "tsx difficulty-demo.ts",
+    "example:gender": "tsx gender-demo.ts",
+    "example:clause-segmenter": "tsx clause-segmenter-demo.ts",
+    "examples": "npm run example:frequency && npm run example:pos && npm run example:difficulty && npm run example:gender && npm run example:clause-segmenter"
+  },
+  "dependencies": {
+    "glost-frequency": "workspace:*",
+    "glost-pos": "workspace:*",
+    "glost-difficulty": "workspace:*",
+    "glost-gender": "workspace:*",
+    "glost-clause-segmenter": "workspace:*",
+    "glost-extensions": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}

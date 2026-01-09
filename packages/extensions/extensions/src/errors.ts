@@ -19,7 +19,7 @@
  *   "frequency",
  *   "extras.frequency",
  *   "Frequency extension did not provide 'frequency' field. " +
- *   "Ensure FrequencyExtension runs before ReadingScoreExtension."
+ *   "Ensure frequency generator runs before ReadingScoreExtension."
  * );
  * ```
  *

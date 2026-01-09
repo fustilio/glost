@@ -4,8 +4,8 @@
  * Transforms text containing {male|female} gender variant syntax,
  * replacing or annotating words based on the target gender.
  *
- * This is a TRANSFORMER (modifies AST structure) vs the existing
- * GenderExtension which is an ENRICHER (adds metadata only).
+ * This is a TRANSFORMER (modifies AST structure) vs the gender generator
+ * extension (from glost-gender) which is an ENRICHER (adds metadata only).
  *
  * @packageDocumentation
  */
@@ -261,8 +261,8 @@ function transformSentence(
  * Create Gender Transformer extension
  *
  * Creates a transformer extension that processes {male|female} gender
- * variant syntax in Thai text. Unlike the GenderExtension (enricher),
- * this transformer modifies the actual text content.
+ * variant syntax in Thai text. Unlike the gender generator extension
+ * from glost-gender (enricher), this transformer modifies the actual text content.
  *
  * @param options - Extension configuration options
  * @returns Configured gender transformer extension

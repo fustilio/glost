@@ -1,9 +1,11 @@
 /**
  * GLOST Transcription Demo
  *
- * Demonstrates extension stacking with:
- * - Transcription extension (adds IPA)
- * - IPA Phonemic Respelling extension (converts IPA to user-friendly format)
+ * Demonstrates extension composition using packages:
+ * - @examples/en-transcription-ipa (adds IPA)
+ * - @examples/en-ipa-to-phonemic (converts IPA to user-friendly format)
+ * 
+ * NOTE: For a more comprehensive demo, see examples/composition-demo
  */
 
 import { processGLOSTWithExtensions } from "glost-extensions";
@@ -14,8 +16,10 @@ import {
   createDocumentFromParagraphs,
 } from "glost";
 import type { GLOSTRoot, GLOSTWord } from "glost";
-import { TranscriptionExtension } from "./extensions/transcription";
-import { IPARespellingExtension } from "./extensions/ipa-respelling";
+
+// Import from packages instead of inline extensions
+import { EnglishIPAExtension } from "@examples/en-transcription-ipa";
+import { EnglishIPAToPhonemicExtension } from "@examples/en-ipa-to-phonemic";
 
 // DOM elements
 const inputElement = document.getElementById("input") as HTMLTextAreaElement;
@@ -89,12 +93,12 @@ function processAndRender() {
   try {
     const document = textToGLOST(text);
 
-    // Process with stacked extensions
-    // TranscriptionExtension provides IPA
-    // IPARespellingExtension requires IPA and converts to respelling
+    // Process with composed extensions
+    // EnglishIPAExtension provides IPA
+    // EnglishIPAToPhonemicExtension requires IPA and converts to respelling
     const result = processGLOSTWithExtensions(
       document,
-      [TranscriptionExtension, IPARespellingExtension],
+      [EnglishIPAExtension, EnglishIPAToPhonemicExtension],
       { lenient: true } // Skip words without dictionary entries
     );
 

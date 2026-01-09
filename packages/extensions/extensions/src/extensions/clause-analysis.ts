@@ -151,11 +151,17 @@ function calculateComplexity(
  * @example
  * ```typescript
  * import { processGLOSTWithExtensions } from "glost-extensions/processor";
- * import { ClauseSegmenterExtension } from "glost-extensions/extensions";
  * import { createClauseAnalysisExtension } from "glost-extensions/extensions/clause-analysis";
+ * import { createClauseSegmenterExtension } from "glost-clause-segmenter";
+ * import { englishSegmenterProvider } from "glost-en/segmenter";
+ *
+ * const segmenter = createClauseSegmenterExtension({
+ *   targetLanguage: "en",
+ *   provider: englishSegmenterProvider,
+ * });
  *
  * const result = processGLOSTWithExtensions(document, [
- *   ClauseSegmenterExtension,
+ *   segmenter,
  *   createClauseAnalysisExtension({ includeDescriptions: true }),
  * ]);
  *
@@ -211,8 +217,8 @@ export function createClauseAnalysisExtension(
             "clause-analysis",
             "clause-segmenter",
             "ClauseNode nodes",
-            "ClauseSegmenterExtension must run before ClauseAnalysisExtension. " +
-              "Add ClauseSegmenterExtension to your extension list before ClauseAnalysisExtension.",
+            "Clause segmenter (from glost-clause-segmenter) must run before ClauseAnalysisExtension. " +
+              "Add clause segmenter extension to your extension list before ClauseAnalysisExtension.",
           );
         }
 
@@ -264,13 +270,17 @@ export function createClauseAnalysisExtension(
  * @example
  * ```typescript
  * import { processGLOSTWithExtensions } from "glost-extensions/processor";
- * import {
- *   ClauseSegmenterExtension,
- *   ClauseAnalysisExtension
- * } from "glost-extensions/extensions";
+ * import { ClauseAnalysisExtension } from "glost-extensions/extensions";
+ * import { createClauseSegmenterExtension } from "glost-clause-segmenter";
+ * import { englishSegmenterProvider } from "glost-en/segmenter";
+ *
+ * const segmenter = createClauseSegmenterExtension({
+ *   targetLanguage: "en",
+ *   provider: englishSegmenterProvider,
+ * });
  *
  * const result = processGLOSTWithExtensions(document, [
- *   ClauseSegmenterExtension,
+ *   segmenter,
  *   ClauseAnalysisExtension,
  * ]);
  * ```

@@ -10,8 +10,9 @@
 import type { GLOSTWord } from "glost";
 import type { GLOSTExtension } from "../types";
 import { ExtensionDependencyError } from "../errors";
-import type { DifficultyLevel } from "./difficulty";
-import type { PartOfSpeechMetadata } from "./part-of-speech";
+// Types moved to separate packages
+type DifficultyLevel = "beginner" | "intermediate" | "advanced";
+type PartOfSpeechMetadata = { tag: string; description?: string };
 
 /**
  * Learner hints metadata structure
@@ -142,17 +143,20 @@ function getPriority(difficulty: DifficultyLevel): "low" | "medium" | "high" {
  * @example
  * ```typescript
  * import { processGLOSTWithExtensions } from "glost-extensions/processor";
- * import {
- *   PartOfSpeechExtension,
- *   DifficultyExtension,
- *   GenderExtension
- * } from "glost-extensions/extensions";
  * import { createLearnerHintsExtension } from "glost-extensions/extensions/learner-hints";
+ * import { createPOSExtension } from "glost-pos";
+ * import { createDifficultyExtension } from "glost-difficulty";
+ * import { createGenderExtension } from "glost-gender";
+ *
+ * // These extensions are now in separate packages
+ * const [posGen, posEnh] = createPOSExtension({ targetLanguage: "en", provider });
+ * const [diffGen, diffEnh] = createDifficultyExtension({ targetLanguage: "en", provider });
+ * const [genderGen, genderEnh] = createGenderExtension({ targetLanguage: "en", provider });
  *
  * const result = processGLOSTWithExtensions(document, [
- *   PartOfSpeechExtension,
- *   DifficultyExtension,
- *   GenderExtension,  // Optional - enhances hints
+ *   posGen, posEnh,
+ *   diffGen, diffEnh,
+ *   genderGen, genderEnh,  // Optional - enhances hints
  *   createLearnerHintsExtension({ includeGrammarTips: true }),
  * ]);
  *
@@ -217,8 +221,8 @@ export function createLearnerHintsExtension(
           "learner-hints",
           "part-of-speech",
           "extras.partOfSpeech.tag",
-          "PartOfSpeechExtension must run before LearnerHintsExtension. " +
-            "Add PartOfSpeechExtension to your extension list.",
+          "POS generator (from glost-pos) must run before LearnerHintsExtension. " +
+            "Add POS generator to your extension list.",
         );
       }
 
@@ -227,8 +231,8 @@ export function createLearnerHintsExtension(
           "learner-hints",
           "difficulty",
           "extras.difficulty.level",
-          "DifficultyExtension must run before LearnerHintsExtension. " +
-            "Add DifficultyExtension to your extension list.",
+          "Difficulty generator (from glost-difficulty) must run before LearnerHintsExtension. " +
+            "Add difficulty generator to your extension list.",
         );
       }
 
@@ -274,15 +278,17 @@ export function createLearnerHintsExtension(
  * @example
  * ```typescript
  * import { processGLOSTWithExtensions } from "glost-extensions/processor";
- * import {
- *   PartOfSpeechExtension,
- *   DifficultyExtension,
- *   LearnerHintsExtension
- * } from "glost-extensions/extensions";
+ * import { LearnerHintsExtension } from "glost-extensions/extensions";
+ * import { createPOSExtension } from "glost-pos";
+ * import { createDifficultyExtension } from "glost-difficulty";
+ *
+ * // These extensions are now in separate packages
+ * const [posGen, posEnh] = createPOSExtension({ targetLanguage: "en", provider });
+ * const [diffGen, diffEnh] = createDifficultyExtension({ targetLanguage: "en", provider });
  *
  * const result = processGLOSTWithExtensions(document, [
- *   PartOfSpeechExtension,
- *   DifficultyExtension,
+ *   posGen, posEnh,
+ *   diffGen, diffEnh,
  *   LearnerHintsExtension,
  * ]);
  * ```

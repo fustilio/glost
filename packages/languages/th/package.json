@@ -1,6 +1,6 @@
 {
   "name": "glost-th",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Thai language support for GLOST - helper functions and transcription providers",
   "keywords": [
     "glost",
@@ -11,11 +11,11 @@
     "rtgs",
     "nlp"
   ],
-  "author": "GLOST Contributors",
+  "author": "fustilio",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/glost.git",
+    "url": "https://github.com/fustilio/glost.git",
     "directory": "packages/languages/th"
   },
   "main": "./dist/index.js",
@@ -32,6 +32,14 @@
     "./transcription": {
       "types": "./dist/transcription.d.ts",
       "default": "./dist/transcription.js"
+    },
+    "./extensions": {
+      "types": "./dist/extensions/index.d.ts",
+      "default": "./dist/extensions/index.js"
+    },
+    "./segmenter": {
+      "types": "./dist/segmenter/index.d.ts",
+      "default": "./dist/segmenter/index.js"
     }
   },
   "files": [
@@ -41,11 +49,15 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist",
-    "test": "vitest"
+    "test": "vitest --passWithNoTests"
   },
   "dependencies": {
     "glost": "workspace:*",
-    "glost-common": "workspace:*"
+    "glost-common": "workspace:*",
+    "glost-clause-segmenter": "workspace:*",
+    "glost-transcription": "workspace:*",
+    "glost-translation": "workspace:*",
+    "glost-frequency": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

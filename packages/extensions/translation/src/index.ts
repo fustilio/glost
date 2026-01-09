@@ -1,8 +1,16 @@
 /**
- * Translation Extension
+ * glost-translation
  *
- * Augments word nodes with translation data using dictionary lookup.
- * This extension can be composed with other extensions like transcription.
+ * Language-agnostic translation extension for GLOST.
+ *
+ * This package provides the core translation logic. Language-specific
+ * implementations should be provided via the TranslationProvider interface.
+ *
+ * Language-specific providers should be in:
+ * - glost-th/extensions (Thai-English translations)
+ * - glost-ja/extensions (Japanese-English translations)
+ * - glost-zh/extensions (Chinese-English translations)
+ * etc.
  *
  * @packageDocumentation
  */
@@ -13,97 +21,125 @@ import { getWordText } from "glost";
 import type { GlostLanguage } from "glost-common";
 
 /**
+ * Provider interface for translation data
+ *
+ * Language-specific implementations should be provided by language packages
+ * (e.g., glost-th/extensions, glost-ja/extensions)
+ */
+export interface TranslationProvider {
+  /**
+   * Get translation for a word
+   *
+   * @param word - The word to translate
+   * @param sourceLanguage - Source language code
+   * @param targetLanguage - Target language code (usually "en")
+   * @returns Translation string if available, undefined otherwise
+   *
+   * @example
+   * ```typescript
+   * // Thai-English example
+   * getTranslation("สวัสดี", "th", "en")
+   * // Returns: "hello"
+   *
+   * // Japanese-English example
+   * getTranslation("こんにちは", "ja", "en")
+   * // Returns: "hello"
+   * ```
+   */
+  getTranslation(
+    word: string,
+    sourceLanguage: GlostLanguage,
+    targetLanguage: GlostLanguage
+  ): Promise<string | undefined>;
+}
+
+/**
  * Translation extension options
  */
 export interface TranslationExtensionOptions {
   /**
-   * Target language for translations
-   *
-   * The ISO-639-1 language code for which to look up translations (e.g., "th", "fr", "ja").
+   * Source language (document language)
+   */
+  sourceLanguage: GlostLanguage;
+
+  /**
+   * Target language for translations (usually "en")
    */
   targetLanguage: GlostLanguage;
 
   /**
-   * Native language (default: "en")
+   * Provider for language-specific translation data
    *
-   * The ISO-639-1 language code for native/fallback translations.
+   * Should be implemented by language packages:
+   * - import { thaiTranslationProvider } from "glost-th/extensions"
+   * - import { japaneseTranslationProvider } from "glost-ja/extensions"
    */
-  nativeLanguage?: GlostLanguage;
-
-  /**
-   * Lookup function for translations
-   *
-   * Function that looks up translations/definitions for a given word and language.
-   * Returns the translation string if found, undefined otherwise.
-   * If not provided, the extension will skip processing.
-   *
-   * @param word - The word to look up
-   * @param language - The ISO-639-1 language code
-   * @returns Translation string if found, undefined otherwise
-   */
-  lookupTranslation?: (
-    word: string,
-    language: GlostLanguage,
-  ) => Promise<string | undefined>;
+  provider: TranslationProvider;
 }
+
 
 /**
  * Create translation extension
  *
- * This extension augments word nodes with translation data by looking up
- * translations from the dictionary. It only populates translations if
- * they don't already exist.
+ * This extension augments word nodes with translation data using a provider.
+ * It only populates translations if they don't already exist.
  *
- * @param options - Extension options
+ * @param options - Extension options including provider
  * @returns GLOST extension for translations
  *
  * @example
  * ```typescript
- * import { createTranslationExtension } from "glost-extensions-translation";
- * import { processGLOSTWithExtensionsAsync } from "glost-extensions/processor";
- * import type { GlostLanguage } from "glost-common";
- *
- * // Provide your own lookup function (e.g., from a dictionary service)
- * async function lookupTranslation(word: string, lang: GlostLanguage): Promise<string | undefined> {
- *   // Your translation lookup implementation
- *   return "translation";
- * }
+ * import { createTranslationExtension } from "glost-translation";
+ * import { thaiTranslationProvider } from "glost-th/extensions";
+ * import { processGLOSTWithExtensionsAsync } from "glost-extensions";
  *
  * const extension = createTranslationExtension({
- *   targetLanguage: "th",
- *   nativeLanguage: "en",
- *   lookupTranslation
+ *   sourceLanguage: "th",
+ *   targetLanguage: "en",
+ *   provider: thaiTranslationProvider
  * });
  *
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);
+ * ```
+ *
+ * @example
+ * ```typescript
+ * // Japanese-English translation
+ * import { createTranslationExtension } from "glost-translation";
+ * import { japaneseTranslationProvider } from "glost-ja/extensions";
+ *
+ * const extension = createTranslationExtension({
+ *   sourceLanguage: "ja",
+ *   targetLanguage: "en",
+ *   provider: japaneseTranslationProvider
+ * });
  * ```
  */
 export function createTranslationExtension(
   options: TranslationExtensionOptions,
 ): GLOSTExtension {
-  const nativeLanguage = options.nativeLanguage || "en";
-  const { lookupTranslation } = options;
+  const { sourceLanguage, targetLanguage, provider } = options;
+
+  if (!provider) {
+    throw new Error(
+      "[Translation] Provider is required. " +
+      "Import from language package: " +
+      "import { thaiTranslationProvider } from 'glost-th/extensions'"
+    );
+  }
 
   return {
     id: "translation",
     name: "Translation",
     description:
-      "Augments word nodes with translation data using dictionary lookup",
+      "Augments word nodes with translation data via provider",
     visit: {
       word: async (node: GLOSTWord) => {
-        // Skip if no lookup function provided
-        if (!lookupTranslation) {
-          console.warn(
-            "[Translation Extension] No lookupTranslation function provided, skipping processing",
-          );
-          return;
-        }
-
         // Check if translation already exists
         const existingTranslation =
           node.shortDefinition ||
           node.metadata?.meaning ||
-          (node.extras as any)?.translations?.[nativeLanguage] ||
+          (node.extras as any)?.translations?.[targetLanguage] ||
           "";
 
         if (
@@ -123,9 +159,10 @@ export function createTranslationExtension(
         const cleanWordText = wordText.trim().replace(/[!?.,:;]$/, "");
 
         try {
-          const translation = await lookupTranslation(
+          const translation = await provider.getTranslation(
             cleanWordText,
-            options.targetLanguage,
+            sourceLanguage,
+            targetLanguage
           );
 
           if (translation) {
@@ -136,7 +173,7 @@ export function createTranslationExtension(
             if (!(node.extras as any).translations) {
               (node.extras as any).translations = {};
             }
-            (node.extras as any).translations[nativeLanguage] = translation;
+            (node.extras as any).translations[targetLanguage] = translation;
 
             // Ensure metadata exists with partOfSpeech for future use
             if (!node.metadata) {
@@ -146,7 +183,7 @@ export function createTranslationExtension(
         } catch (error) {
           // Silently fail - translation lookup is optional
           console.debug(
-            `[Translation Extension] Translation lookup failed for "${cleanWordText}":`,
+            `[Translation] Lookup failed for "${cleanWordText}":`,
             error,
           );
         }
@@ -155,16 +192,3 @@ export function createTranslationExtension(
     options: options as unknown as Record<string, unknown>,
   };
 }
-
-/**
- * Default translation extension (requires options to be passed via processor options)
- *
- * This is a convenience export, but you should use `createTranslationExtension`
- * with explicit options for better type safety.
- */
-export const TranslationExtension: GLOSTExtension = {
-  id: "translation",
-  name: "Translation",
-  description:
-    "Augments word nodes with translation data using dictionary lookup",
-};

@@ -11,11 +11,11 @@
  * @example
  * ```typescript
  * import { processGLOSTWithExtensions } from "glost-extensions";
- * import { FrequencyExtension, DifficultyExtension } from "glost-extensions/extensions";
+ * import { ReadingScoreExtension, LearnerHintsExtension } from "glost-extensions/extensions";
  * 
  * const result = processGLOSTWithExtensions(document, [
- *   FrequencyExtension,
- *   DifficultyExtension,
+ *   ReadingScoreExtension,
+ *   LearnerHintsExtension,
  * ]);
  * ```
  * 

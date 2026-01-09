@@ -122,11 +122,11 @@ function findProviderForNode(nodeType: string): GLOSTExtension | undefined {
  * @example
  * ```typescript
  * import { processGLOSTWithExtensions } from "glost-extensions/processor";
- * import { FrequencyExtension, DifficultyExtension } from "glost-extensions/extensions";
+ * import { ReadingScoreExtension, LearnerHintsExtension } from "glost-extensions/extensions";
  *
  * const result = processGLOSTWithExtensions(document, [
- *   FrequencyExtension,
- *   DifficultyExtension,
+ *   ReadingScoreExtension,
+ *   LearnerHintsExtension,
  * ]);
  *
  * console.log(result.document); // Processed document
@@ -455,13 +455,13 @@ function trackFieldOwnership(
  * @example
  * ```typescript
  * import { processGLOSTWithExtensionIds, registerExtension } from "glost-extensions/processor";
- * import { FrequencyExtension } from "glost-extensions/extensions";
+ * import { ReadingScoreExtension } from "glost-extensions/extensions";
  *
  * // Register extension first
- * registerExtension(FrequencyExtension);
+ * registerExtension(ReadingScoreExtension);
  *
  * // Process by ID
- * const result = processGLOSTWithExtensionIds(document, ["frequency"]);
+ * const result = processGLOSTWithExtensionIds(document, ["reading-score"]);
  * ```
  *
  * @see {@link processGLOSTWithExtensions} - Process with extension objects
