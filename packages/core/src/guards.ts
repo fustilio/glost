@@ -13,7 +13,7 @@ import type {
   GLOSTWhiteSpace,
   GLOSTWord,
   GLOSTNode,
-} from "./types";
+} from "./types.js";
 
 // ============================================================================
 // Core Node Type Guards

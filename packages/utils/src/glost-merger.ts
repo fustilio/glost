@@ -7,7 +7,7 @@
 
 import type { GLOSTWord, GLOSTRoot, GLOSTNode, GLOSTParagraph, GLOSTSentence, TransliterationData } from "glost";
 import { getAllWords, isGLOSTWord, isGLOSTParagraph, isGLOSTSentence } from "glost";
-import type { ITranscriptionProvider } from "./interfaces";
+import type { ITranscriptionProvider } from "./interfaces.js";
 
 /**
  * Map over an GLOST tree, applying a transformation function to each word node
@@ -81,7 +81,6 @@ export function mergeTranscriptionData(
       ...word.transcription,
       [transcriptionScheme]: {
         text: transcription,
-        system: transcriptionScheme,
       },
     };
 

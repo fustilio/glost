@@ -18,7 +18,7 @@ export {
   createCulturalNotesExtension,
   type CulturalNotesMetadata,
   type CulturalNotesExtensionOptions,
-} from "./cultural-notes";
+} from "./cultural-notes.js";
 
 export {
   GenderTransformerExtension,
@@ -27,7 +27,7 @@ export {
   type GenderDisplayFormat,
   type GenderVariantData,
   type GenderTransformerOptions,
-} from "./gender-transformer";
+} from "./gender-transformer.js";
 
 export {
   NegationTransformerExtension,
@@ -35,7 +35,7 @@ export {
   type NegationType,
   type NegationData,
   type NegationTransformerOptions,
-} from "./negation-transformer";
+} from "./negation-transformer.js";
 
 // Analyzer extensions - compute derived metrics from existing data
 export {
@@ -43,18 +43,18 @@ export {
   createReadingScoreExtension,
   type ReadingScoreMetadata,
   type ReadingScoreOptions,
-} from "./reading-score";
+} from "./reading-score.js";
 
 export {
   LearnerHintsExtension,
   createLearnerHintsExtension,
   type LearnerHintsMetadata,
   type LearnerHintsOptions,
-} from "./learner-hints";
+} from "./learner-hints.js";
 
 export {
   ClauseAnalysisExtension,
   createClauseAnalysisExtension,
   type ClauseAnalysisMetadata,
   type ClauseAnalysisOptions,
-} from "./clause-analysis";
+} from "./clause-analysis.js";

@@ -43,7 +43,6 @@ export function createThaiWord(options: CreateThaiWordOptions): GLOSTWord {
   const transcription: TransliterationData = {
     rtgs: {
       text: rtgs,
-      system: "rtgs",
       tone,
       syllables: syllables || [text],
     },

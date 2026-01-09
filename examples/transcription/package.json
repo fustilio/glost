@@ -1,7 +1,7 @@
 {
   "name": "@glost/example-transcription",
   "private": true,
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "description": "Simple transcription demo using extension packages",
   "scripts": {

@@ -13,7 +13,7 @@ import type {
   GLOSTSyllable,
   GLOSTWord,
   TranscriptionSystem,
-} from "./types";
+} from "./types.js";
 
 // ============================================================================
 // BCP-47 Language Tag Utilities
@@ -517,7 +517,7 @@ export function getWordPartOfSpeech(word: GLOSTWord): string {
 /**
  * Get word difficulty
  */
-export function getWordDifficulty(word: GLOSTWord): string {
+export function getWordDifficulty(word: GLOSTWord): string | number {
   return word.difficulty ?? word.extras?.metadata?.difficulty ?? "";
 }
 

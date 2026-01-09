@@ -8,7 +8,7 @@
 
 import type { GLOSTExtension } from "glost-extensions";
 import type { GLOSTWord } from "glost";
-import type { DifficultyLevel, DifficultyMetadata } from "./types";
+import type { DifficultyLevel, DifficultyMetadata } from "./types.js";
 
 /**
  * Get difficulty display text
@@ -16,12 +16,12 @@ import type { DifficultyLevel, DifficultyMetadata } from "./types";
  * @internal
  */
 function getDifficultyDisplay(level: DifficultyLevel): string {
-  const displays: Record<DifficultyLevel, string> = {
+  const displays: Partial<Record<DifficultyLevel, string>> = {
     beginner: "Beginner",
     intermediate: "Intermediate",
     advanced: "Advanced",
   };
-  return displays[level] || level;
+  return displays[level] || String(level);
 }
 
 /**
@@ -30,7 +30,7 @@ function getDifficultyDisplay(level: DifficultyLevel): string {
  * @internal
  */
 function getDifficultyColor(level: DifficultyLevel): string {
-  const colors: Record<DifficultyLevel, string> = {
+  const colors: Partial<Record<DifficultyLevel, string>> = {
     beginner: "green",
     intermediate: "yellow",
     advanced: "red",
@@ -44,7 +44,7 @@ function getDifficultyColor(level: DifficultyLevel): string {
  * @internal
  */
 function getDifficultyPriority(level: DifficultyLevel): number {
-  const priorities: Record<DifficultyLevel, number> = {
+  const priorities: Partial<Record<DifficultyLevel, number>> = {
     beginner: 1,
     intermediate: 2,
     advanced: 3,

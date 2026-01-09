@@ -6,5 +6,5 @@
  * @packageDocumentation
  */
 
-export * from './helpers';
-export * from './transcription';
+export * from './helpers.js';
+export * from './transcription.js';

@@ -148,14 +148,14 @@ export function createTranscriptionExtension(
 
           if (transcriptions && Object.keys(transcriptions).length > 0) {
             // Convert to GLOST transcription format
+            // Note: system is the key, not stored in the value (v0.4.0+)
             const glostTranscription: Record<
               string,
-              { text: string; system: string }
+              { text: string }
             > = {};
             for (const [system, text] of Object.entries(transcriptions)) {
               glostTranscription[system] = {
                 text,
-                system,
               };
             }
             node.transcription = glostTranscription;

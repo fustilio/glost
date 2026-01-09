@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies
+  - glost-extensions@0.3.0
+  - glost@0.4.0
+  - @examples/en-ipa-to-phonemic@1.0.2
+  - @examples/en-transcription-ipa@1.0.2
+
 ## 0.0.3
 
 ### Patch Changes

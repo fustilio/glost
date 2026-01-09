@@ -68,9 +68,13 @@ console.log(getLanguageName("th")); // "Thai"
 
 - **[Getting Started](./docs/getting-started.md)** - Installation and first steps
 - **[Why GLOST?](./docs/why.md)** - Motivation and use cases
-- **[Migration Guide](./MIGRATION.md)** - Upgrading from v0.1.x to v0.2.0
+- **[Migration Guide](./MIGRATION_v0.3_to_v0.4.md)** - Upgrading from v0.3.x to v0.4.0
 - **[API Reference](./docs/api.md)** - Complete API documentation
 - **[Ecosystem](./docs/ecosystem.md)** - GLOST ecosystem and community
+
+### Migration Guides
+- [v0.3.x → v0.4.0](./MIGRATION_v0.3_to_v0.4.md) - Latest migration (BCP-47, schema cleanup)
+- [v0.1.x → v0.2.0](./MIGRATION.md) - Language package externalization
 
 ### Guides
 - [Creating Documents](./docs/guides/creating-documents.md)

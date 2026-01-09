@@ -8,7 +8,7 @@
  */
 
 import type { z } from "zod";
-import { constructZodLiteralUnionType } from "../utils/zod";
+import { constructZodLiteralUnionType } from "../utils/zod.js";
 
 // Re-export locale utilities
 export {
@@ -40,7 +40,7 @@ export {
 
   // Info helper
   getLanguageInfo,
-} from "./data/locale";
+} from "./data/locale.js";
 
 // Re-export proficiency utilities
 export {
@@ -132,7 +132,7 @@ export {
   meetsLevel,
   levelProgress,
   levelsBetween,
-} from "./data/proficiency";
+} from "./data/proficiency.js";
 
 // ============================================================================
 // Type Definitions
@@ -170,7 +170,7 @@ export type GlostLanguage = z.infer<typeof languageCodeSchema>;
 import {
   getLanguageName as _getLanguageName,
   SPECIAL_CODES as _SPECIAL_CODES,
-} from "./data/locale";
+} from "./data/locale.js";
 
 /**
  * Get display name for any language code
@@ -207,10 +207,10 @@ export const glostLanguageSchema = languageCodeSchema;
 export const lingoLogLanguageSchema = languageCodeSchema;
 
 // Re-export CefrLevel as alias for backwards compatibility
-export { type CEFRLevel as CefrLevel } from "./data/proficiency";
+export { type CEFRLevel as CefrLevel } from "./data/proficiency.js";
 
 /** @deprecated Use CEFR_LEVELS instead */
-export { CEFR_LEVELS as LINGOLOG_CEFR_LEVELS } from "./data/proficiency";
+export { CEFR_LEVELS as LINGOLOG_CEFR_LEVELS } from "./data/proficiency.js";
 
 /** @deprecated Use CEFRLevel instead */
-export { type CEFRLevel as LingoLogCefrLevels } from "./data/proficiency";
+export { type CEFRLevel as LingoLogCefrLevels } from "./data/proficiency.js";

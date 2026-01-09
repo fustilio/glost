@@ -27,10 +27,10 @@ export type {
   ClauseBoundary,
   SegmentationResult,
   ClauseSegmenterProvider,
-} from "./types";
+} from "./types.js";
 
 // Import local types
-import type { ClauseSegmenterProvider } from "./types";
+import type { ClauseSegmenterProvider } from "./types.js";
 
 /**
  * Clause segmenter extension options

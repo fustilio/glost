@@ -4,4 +4,4 @@
  * @packageDocumentation
  */
 
-export { deepMerge, findConflicts, type DeepMergeOptions } from "./deep-merge";
+export { deepMerge, findConflicts, type DeepMergeOptions } from "./deep-merge.js";

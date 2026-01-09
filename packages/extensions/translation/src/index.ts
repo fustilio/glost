@@ -31,8 +31,8 @@ export interface TranslationProvider {
    * Get translation for a word
    *
    * @param word - The word to translate
-   * @param sourceLanguage - Source language code
-   * @param targetLanguage - Target language code (usually "en")
+   * @param from - Source language code (language to translate from)
+   * @param to - Target language code (language to translate to, usually "en")
    * @returns Translation string if available, undefined otherwise
    *
    * @example
@@ -48,8 +48,8 @@ export interface TranslationProvider {
    */
   getTranslation(
     word: string,
-    sourceLanguage: GlostLanguage,
-    targetLanguage: GlostLanguage
+    from: GlostLanguage,
+    to: GlostLanguage
   ): Promise<string | undefined>;
 }
 
@@ -58,14 +58,14 @@ export interface TranslationProvider {
  */
 export interface TranslationExtensionOptions {
   /**
-   * Source language (document language)
+   * Source language (the language of the content to translate from)
    */
-  sourceLanguage: GlostLanguage;
+  from: GlostLanguage;
 
   /**
-   * Target language for translations (usually "en")
+   * Target language (the language to translate to, usually "en")
    */
-  targetLanguage: GlostLanguage;
+  to: GlostLanguage;
 
   /**
    * Provider for language-specific translation data
@@ -94,8 +94,8 @@ export interface TranslationExtensionOptions {
  * import { processGLOSTWithExtensionsAsync } from "glost-extensions";
  *
  * const extension = createTranslationExtension({
- *   sourceLanguage: "th",
- *   targetLanguage: "en",
+ *   from: "th",
+ *   to: "en",
  *   provider: thaiTranslationProvider
  * });
  *
@@ -109,8 +109,8 @@ export interface TranslationExtensionOptions {
  * import { japaneseTranslationProvider } from "glost-ja/extensions";
  *
  * const extension = createTranslationExtension({
- *   sourceLanguage: "ja",
- *   targetLanguage: "en",
+ *   from: "ja",
+ *   to: "en",
  *   provider: japaneseTranslationProvider
  * });
  * ```
@@ -118,7 +118,7 @@ export interface TranslationExtensionOptions {
 export function createTranslationExtension(
   options: TranslationExtensionOptions,
 ): GLOSTExtension {
-  const { sourceLanguage, targetLanguage, provider } = options;
+  const { from, to, provider } = options;
 
   if (!provider) {
     throw new Error(
@@ -139,7 +139,7 @@ export function createTranslationExtension(
         const existingTranslation =
           node.shortDefinition ||
           node.metadata?.meaning ||
-          (node.extras as any)?.translations?.[targetLanguage] ||
+          (node.extras as any)?.translations?.[to] ||
           "";
 
         if (
@@ -161,8 +161,8 @@ export function createTranslationExtension(
         try {
           const translation = await provider.getTranslation(
             cleanWordText,
-            sourceLanguage,
-            targetLanguage
+            from,
+            to
           );
 
           if (translation) {
@@ -173,7 +173,7 @@ export function createTranslationExtension(
             if (!(node.extras as any).translations) {
               (node.extras as any).translations = {};
             }
-            (node.extras as any).translations[targetLanguage] = translation;
+            (node.extras as any).translations[to] = translation;
 
             // Ensure metadata exists with partOfSpeech for future use
             if (!node.metadata) {

@@ -19,10 +19,10 @@ import type {
   ExtensionContext,
   ExtensionResult,
   ProcessorOptions,
-} from "./types";
-import { extensionRegistry } from "./registry";
-import { deepMerge } from "./utils/deep-merge";
-import { MissingNodeTypeError } from "./errors";
+} from "./types.js";
+import { extensionRegistry } from "./registry.js";
+import { deepMerge } from "./utils/deep-merge.js";
+import { MissingNodeTypeError } from "./errors.js";
 
 /**
  * Check if a document contains a specific node type
@@ -234,7 +234,7 @@ export function processGLOSTWithExtensions(
         if (extension.enhanceMetadata) {
           processedDocument = enhanceMetadata(
             processedDocument,
-            extension.enhanceMetadata,
+            extension.enhanceMetadata as (node: GLOSTWord, context?: ExtensionContext) => Partial<GLOSTExtras> | void,
             extension.id,
             fieldOwnership,
             options,

@@ -10,10 +10,10 @@
 export {
   createThaiFrequencyProvider,
   type ThaiFrequencyProviderOptions,
-} from "./frequency";
+} from "./frequency.js";
 
-export { thaiTranscriptionProvider } from "./transcription";
-export { thaiTranslationProvider } from "./translation";
+export { thaiTranscriptionProvider } from "./transcription.js";
+export { thaiTranslationProvider } from "./translation.js";
 
 // TODO: Add other Thai providers as needed:
 // - createThaiPOSProvider

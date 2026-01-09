@@ -1,6 +1,6 @@
 {
   "name": "@examples/en-transcription-ipa",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "English IPA transcription extension - provides IPA for English words",
   "type": "module",
   "private": true,

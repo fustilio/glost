@@ -43,24 +43,24 @@ export type {
   PartOfSpeechMetadata,
   POSTagInfo,
   POSProvider,
-} from "./types";
+} from "./types.js";
 
 // Export generator
 export {
   createPOSGeneratorExtension,
   type POSGeneratorOptions,
-} from "./generator";
+} from "./generator.js";
 
 // Export enhancer
 export {
   createPOSEnhancerExtension,
   POSEnhancerExtension,
   type POSEnhancerOptions,
-} from "./enhancer";
+} from "./enhancer.js";
 
 // Import for local use
-import { createPOSGeneratorExtension } from "./generator";
-import { createPOSEnhancerExtension } from "./enhancer";
+import { createPOSGeneratorExtension } from "./generator.js";
+import { createPOSEnhancerExtension } from "./enhancer.js";
 import type { GlostLanguage } from "glost-common";
 
 /**

@@ -68,7 +68,6 @@ export function createMockGLOSTWord(
   for (const [system, info] of Object.entries(transcription)) {
     fullTranscription[system] = {
       text: info.text,
-      system: system as TranscriptionSystem,
     };
   }
 
@@ -297,7 +296,7 @@ export function createMockExtension(
     };
     dependencies?: string[];
   } = {},
-): import("./types").GLOSTExtension {
+): import("./types.js").GLOSTExtension {
   const {
     name = `Test Extension ${id}`,
     description,

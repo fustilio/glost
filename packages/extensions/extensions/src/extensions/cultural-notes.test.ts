@@ -3,8 +3,8 @@ import {
   CulturalNotesExtension,
   createCulturalNotesExtension,
 } from "./cultural-notes";
-import { processGLOSTWithExtensions } from "../processor";
-import { createMockGLOSTDocument, createMockGLOSTWord } from "../test-utils";
+import { processGLOSTWithExtensions } from "../processor.js";
+import { createMockGLOSTDocument, createMockGLOSTWord } from "../test-utils.js";
 
 describe("CulturalNotesExtension", () => {
   describe("enhanceMetadata", () => {

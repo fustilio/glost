@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { processGLOSTWithExtensions, processGLOSTWithExtensionIds } from "./processor";
 import { extensionRegistry, registerExtension } from "./registry";
-import { createMockGLOSTDocument, createMockExtension } from "./test-utils";
+import { createMockGLOSTDocument, createMockExtension } from "./test-utils.js";
 
 describe("Extension Processor", () => {
   beforeEach(() => {

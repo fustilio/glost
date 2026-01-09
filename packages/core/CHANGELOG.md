@@ -1,5 +1,150 @@
 # glost
 
+## 0.4.0
+
+### Minor Changes
+
+- Fixed critical production issues (ESM imports, BCP-47 language standardization, removed redundant transcription schema fields, renamed translation API sourceLanguage/targetLanguage → from/to) and added major DX improvements (typed extras via declaration merging, comprehensive error classes with suggestions, standard GLOSTDataProvider interface, built-in migration CLI tool npx glost migrate).
+
+### Patch Changes
+
+- Updated dependencies
+  - glost-common@0.2.0
+  - glost-utils@0.2.0
+
+## 0.4.0
+
+### Major Changes
+
+GLOST v0.4.0 brings critical production fixes and developer experience improvements based on 6+ months of real-world usage feedback from the lalia-prism team processing 50+ language learning stories across Thai and French.
+
+#### Breaking Changes
+
+**1. ESM Imports Fixed** 🔧
+
+- Added `.js` extensions to all barrel exports for proper Node.js ESM support
+- Updated TypeScript config to `moduleResolution: "node16"`
+- **Impact**: Fixes `Cannot find module` errors in Node.js ESM
+- **Migration**: Automatic when upgrading packages
+
+**2. BCP-47 Language Code Standard** 🌍
+
+- All language codes now standardized on BCP-47 format (e.g., `en-US`, `th-TH`)
+- Added comprehensive language utilities: `normalizeLanguageCode()`, `matchLanguage()`, `parseLanguageCode()`, `findBestMatch()`, `getLanguageFallbacks()`
+- **Impact**: Language codes like `"th"` become `"th-TH"`
+- **Migration**: Use `npx glost-migrate v0.3-to-v0.4 ./src` or `migrateAllLanguageCodes()` utility
+
+**3. Transcription Schema Cleanup** ✨
+
+- Removed redundant `system` field from `TranscriptionInfo` type
+- System name is already the key in the transcription object
+- **Before**: `{ ipa: { text: "hello", system: "ipa" } }`
+- **After**: `{ ipa: { text: "hello" } }`
+- **Migration**: Use `migrateTranscriptionSchema()` utility
+
+**4. Translation API Clarity** 📝
+
+- Renamed confusing `sourceLanguage`/`targetLanguage` to clear `from`/`to`
+- **Before**: `createTranslationExtension({ sourceLanguage: "th", targetLanguage: "en", ... })`
+- **After**: `createTranslationExtension({ from: "th", to: "en", ... })`
+- **Migration**: Manual update of extension calls
+
+#### New Features
+
+**Typed Extras via Declaration Merging** 🎯
+
+- Extensions can now augment `GLOSTExtras` interface for full type safety
+- Automatic TypeScript autocomplete for extension fields
+- No runtime overhead, pure type-level enhancement
+
+```typescript
+// In extension package
+declare module "glost" {
+  interface GLOSTExtras {
+    frequency?: {
+      rank: number;
+      category: "very-common" | "common" | "uncommon" | "rare";
+    };
+  }
+}
+
+// In user code - full autocomplete!
+word.extras.frequency?.rank; // number | undefined
+```
+
+**Standard Provider Interface** 🔌
+
+- New `GLOSTDataProvider<TInput, TOutput>` interface for consistency
+- Built-in support for batch processing, caching, and cleanup
+- Helper utilities: `createSimpleProvider()`, `createCachedProvider()`, `createFallbackProvider()`
+
+**Better Error Messages** 💬
+
+- New error classes with context, suggestions, and documentation links
+- Helpful error formatting with file paths and node locations
+- Error types: `GLOSTValidationError`, `GLOSTExtensionError`, `GLOSTProviderError`, etc.
+
+```typescript
+GLOSTValidationError: Missing required field 'text' on WordNode
+
+  Location: document.children[0]
+  Node type: WordNode
+  File: stories/test.glost.json:42
+
+  Suggestion: Add a 'text' field containing the word's text content.
+  Documentation: https://glost.dev/docs/node-types#wordnode
+```
+
+**Language Code Utilities** 🛠️
+
+- `normalizeLanguageCode()` - Convert to BCP-47
+- `matchLanguage()` - Flexible matching with options
+- `parseLanguageCode()` - Parse into components
+- `findBestMatch()` - Find closest match from available codes
+- `getLanguageFallbacks()` - Get fallback chain
+- `isValidBCP47()` - Validation
+- `asBCP47()` - Type-safe casting
+
+**Migration CLI** 🚀
+
+- Built-in migration CLI: `npx glost migrate`
+- Automated migration from v0.3.x to v0.4.0
+- Commands: `v0.3-to-v0.4`, `analyze`, `help`
+- Dry-run support for safe testing
+- Programmatic migration utilities in `glost-utils`
+
+### Improvements
+
+- **Bundle Size**: Foundation laid for future optimizations
+- **Type Safety**: Changed `GLOSTExtras` from type to interface for declaration merging
+- **Documentation**: Comprehensive migration guide and updated language docs
+- **Developer Experience**: Better error messages save significant debugging time
+
+### Fixes
+
+- Fixed ESM imports in all language packages
+- Fixed TypeScript moduleResolution for proper ESM output
+- Removed redundant schema fields reducing JSON size
+
+### Migration Guide
+
+See [MIGRATION_v0.3_to_v0.4.md](../../MIGRATION_v0.3_to_v0.4.md) for complete upgrade instructions.
+
+Quick migration:
+
+```bash
+npx glost migrate v0.3-to-v0.4 ./src
+```
+
+### Acknowledgments
+
+Special thanks to the lalia-prism team for their comprehensive RFC and 6+ months of production feedback that made this release possible. Their real-world experience with Thai and French language learning content identified critical issues and guided these improvements.
+
+### Dependencies
+
+- glost-common@0.4.0
+- glost-utils@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes

@@ -9,8 +9,8 @@
 
 import type { GLOSTRoot, GLOSTClause } from "glost";
 import { visit } from "unist-util-visit";
-import type { GLOSTExtension, ExtensionContext } from "../types";
-import { ExtensionDependencyError } from "../errors";
+import type { GLOSTExtension, ExtensionContext } from "../types.js";
+import { ExtensionDependencyError } from "../errors.js";
 
 /**
  * Clause type - matches the clauseType field of GLOSTClause

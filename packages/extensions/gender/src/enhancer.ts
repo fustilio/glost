@@ -8,7 +8,7 @@
 
 import type { GLOSTExtension } from "glost-extensions";
 import type { GLOSTWord } from "glost";
-import type { GenderType, GenderMetadata } from "./types";
+import type { GenderType, GenderMetadata } from "./types.js";
 
 /**
  * Normalize gender value

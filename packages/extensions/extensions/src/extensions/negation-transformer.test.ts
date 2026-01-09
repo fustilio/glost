@@ -11,8 +11,8 @@ import {
 // NOTE: ClauseSegmenterExtension has been moved to glost-clause-segmenter
 // Tests that use it are skipped
 // import { ClauseSegmenterExtension } from "./clause-segmenter";
-import { processGLOSTWithExtensions } from "../processor";
-import { createMockGLOSTDocument } from "../test-utils";
+import { processGLOSTWithExtensions } from "../processor.js";
+import { createMockGLOSTDocument } from "../test-utils.js";
 import type { GLOSTSentence, GLOSTClause, GLOSTWord } from "glost";
 import { getAllSentences, getAllClauses, getAllWords, getWordText } from "glost";
 

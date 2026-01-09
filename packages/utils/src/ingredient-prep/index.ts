@@ -4,7 +4,7 @@
  * Utilities for preparing and transforming content before GLOST conversion
  */
 
-export * from "./normalize-content";
-export * from "./combine-ingredients";
-export * from "./transform-content";
+export * from "./normalize-content.js";
+export * from "./combine-ingredients.js";
+export * from "./transform-content.js";
 

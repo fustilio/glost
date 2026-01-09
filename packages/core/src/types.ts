@@ -188,7 +188,7 @@ export type ExtendedMetadata = {
   /** Quick translations in multiple languages */
   translations?: QuickTranslations;
   /** Difficulty level for learners */
-  difficulty?: "beginner" | "intermediate" | "advanced";
+  difficulty?: "beginner" | "intermediate" | "advanced" | 1 | 2 | 3 | 4 | 5 | string;
   /** Frequency in common usage */
   frequency?: "rare" | "uncommon" | "common" | "very-common";
   /** Cultural notes */
@@ -203,15 +203,30 @@ export type ExtendedMetadata = {
 
 /**
  * Extras field for extending GLOST nodes
+ * 
+ * This interface can be augmented by extension packages via declaration merging.
+ * 
+ * @example
+ * ```typescript
+ * // In an extension package
+ * declare module "glost" {
+ *   interface GLOSTExtras {
+ *     frequency?: {
+ *       rank: number;
+ *       category: "very-common" | "common" | "uncommon" | "rare";
+ *     };
+ *   }
+ * }
+ * ```
  */
-export type GLOSTExtras = {
+export interface GLOSTExtras {
   /** Quick translations */
   translations?: QuickTranslations;
   /** Extended metadata */
   metadata?: ExtendedMetadata;
-  /** Custom extensions */
-  [key: string]: any;
-};
+  /** Custom extensions - allows any string key with unknown value */
+  [key: string]: unknown;
+}
 
 // ============================================================================
 // Transcription and Pronunciation Types
@@ -231,12 +246,13 @@ export type PronunciationVariant = {
 
 /**
  * Transcription information for a text segment
+ * 
+ * Note: The transcription system is not stored in this object.
+ * It is the key in the TransliterationData record.
  */
 export type TranscriptionInfo = {
   /** The transcription text */
   text: string;
-  /** The transcription system used */
-  system: TranscriptionSystem;
   /** Pronunciation variants */
   variants?: PronunciationVariant[];
   /** Tone information (for tonal languages) */
@@ -284,7 +300,7 @@ export type LinguisticMetadata = {
   /** @deprecated Use extras.translations instead */
   fullDefinition?: string;
   /** @deprecated Use metadata enrichment extensions instead */
-  difficulty?: "beginner" | "intermediate" | "advanced";
+  difficulty?: "beginner" | "intermediate" | "advanced" | 1 | 2 | 3 | 4 | 5 | string;
 };
 
 // ============================================================================
@@ -367,7 +383,7 @@ export type GLOSTWord = Omit<NlcstWord, "children"> & {
   /** @deprecated Use extras.translations instead */
   fullDefinition?: string;
   /** @deprecated Use metadata enrichment extensions instead */
-  difficulty?: "beginner" | "intermediate" | "advanced";
+  difficulty?: "beginner" | "intermediate" | "advanced" | 1 | 2 | 3 | 4 | 5 | string;
   /** Language code for this node */
   lang?: LanguageCode;
   /** Script system used */

@@ -6,8 +6,8 @@
  * This ensures consistent GLOST creation across the codebase while remaining framework-agnostic.
  */
 
-import type { RubySegment } from "./script-conversion";
-import { isRubySegment } from "./script-conversion";
+import type { RubySegment } from "./script-conversion.js";
+import { isRubySegment } from "./script-conversion.js";
 import type {
   GLOSTWord,
   GLOSTRoot,
@@ -23,7 +23,7 @@ import {
   createGLOSTParagraphNode,
   createGLOSTRootNode,
 } from "glost/nodes";
-import type { ILanguageStrategy, ITranscriptionProvider } from "./interfaces";
+import type { ILanguageStrategy, ITranscriptionProvider } from "./interfaces.js";
 import type { GlostLanguage } from "glost-common";
 
 /**
@@ -164,7 +164,6 @@ function createWordFromSegment(
     transcription = {
       [transcriptionScheme]: {
         text: ruby,
-        system: transcriptionScheme,
       },
     };
   } else if (fetchTranscription && transcriptionScheme && transcriptionProvider) {
@@ -178,7 +177,6 @@ function createWordFromSegment(
       transcription = {
         [transcriptionScheme]: {
           text: providerTranscription,
-          system: transcriptionScheme,
         },
       };
     }

@@ -1,58 +1,72 @@
 /**
- * Types for difficulty extension
+ * Difficulty Extension Types
  * 
  * @packageDocumentation
  */
 
-import type { GlostLanguage } from "glost-common";
+/**
+ * Numeric difficulty level (1-5)
+ */
+export type DifficultyLevelNumeric = 1 | 2 | 3 | 4 | 5;
 
 /**
- * Difficulty level type
- * 
- * Represents the learning difficulty level of a word.
+ * Descriptive difficulty level
  */
-export type DifficultyLevel = "beginner" | "intermediate" | "advanced";
+export type DifficultyLevelDescriptive = "beginner" | "intermediate" | "advanced";
+
+/**
+ * Combined difficulty level type (supports both numeric and descriptive)
+ */
+export type DifficultyLevel = DifficultyLevelNumeric | DifficultyLevelDescriptive;
 
 /**
  * Difficulty metadata structure
- * 
- * Enhanced metadata structure for word difficulty, including display
- * information and UI properties.
  */
 export interface DifficultyMetadata {
-  level: DifficultyLevel;
-  display: string;
-  color: string;
-  priority: number;
+  /** Difficulty level */
+  level: DifficultyLevel | string;
+  /** Human-readable display label */
+  display?: string;
+  /** Color code for UI display */
+  color?: string;
+  /** Priority for sorting (lower = easier) */
+  priority?: number;
+  /** Numerical difficulty score */
+  score?: number;
+  /** Factors contributing to difficulty */
+  factors?: string[];
+  /** CEFR level (for European languages) */
+  cefr?: "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
+  /** JLPT level (for Japanese) */
+  jlpt?: "N5" | "N4" | "N3" | "N2" | "N1";
+  /** HSK level (for Chinese) */
+  hsk?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 /**
- * Difficulty provider interface
- * 
- * Providers are responsible for determining the difficulty level of a word
- * for language learners. Implementations can use CEFR levels, JLPT levels,
- * word frequency, or other metrics.
- * 
- * @example
- * ```typescript
- * const provider: DifficultyProvider = {
- *   async getDifficulty(word, language) {
- *     const entry = await wordList.lookup(word, language);
- *     return entry?.difficulty || "intermediate";
- *   }
- * };
- * ```
+ * Difficulty data structure (alias for backward compatibility)
+ */
+export type DifficultyData = DifficultyMetadata;
+
+/**
+ * Provider interface for difficulty data
  */
 export interface DifficultyProvider {
   /**
-   * Get the difficulty level for a word
+   * Get difficulty level for a word
    * 
-   * @param word - The word to check
-   * @param language - The ISO-639-1 language code
-   * @returns The difficulty level, or undefined if not found
+   * @param word - The word to analyze
+   * @param language - Language code
+   * @returns Difficulty level or undefined if not available
    */
-  getDifficulty(
-    word: string,
-    language: GlostLanguage,
-  ): Promise<DifficultyLevel | undefined>;
+  getDifficulty(word: string, language: string): Promise<DifficultyLevel | string | undefined>;
+}
+
+/**
+ * Augment GLOSTExtras with difficulty field
+ */
+declare module "glost" {
+  interface GLOSTExtras {
+    difficulty?: DifficultyData;
+  }
 }

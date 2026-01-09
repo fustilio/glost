@@ -8,7 +8,7 @@
 
 import type { GLOSTExtension } from "glost-extensions";
 import type { GLOSTWord } from "glost";
-import type { FrequencyLevel, FrequencyMetadata } from "./types";
+import type { FrequencyLevel, FrequencyMetadata } from "./types.js";
 
 /**
  * Get frequency display text

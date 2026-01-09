@@ -1,6 +1,6 @@
 {
   "name": "glost-extensions",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "description": "Core extension system and built-in extensions for GLOST",
   "author": "fustilio",
   "license": "MIT",

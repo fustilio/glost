@@ -1,77 +1,66 @@
 /**
- * Types for frequency extension
+ * Frequency Extension Types
  * 
  * @packageDocumentation
  */
 
-import type { GlostLanguage } from "glost-common";
-
 /**
- * Frequency level type
- * 
- * Represents the frequency of word usage in common language.
- * 
- * @example
- * ```typescript
- * const level: FrequencyLevel = "common";
- * ```
+ * Frequency category
  */
-export type FrequencyLevel = "rare" | "uncommon" | "common" | "very-common";
+export type FrequencyCategory = "very-common" | "common" | "uncommon" | "rare";
 
 /**
- * Frequency metadata structure
- * 
- * Enhanced metadata structure for word frequency, including display
- * information and UI properties.
- * 
- * @example
- * ```typescript
- * const metadata: FrequencyMetadata = {
- *   level: "common",
- *   display: "Common",
- *   color: "blue",
- *   priority: 3
- * };
- * ```
+ * Frequency level (same as FrequencyCategory)
+ */
+export type FrequencyLevel = FrequencyCategory;
+
+/**
+ * Frequency data structure
+ */
+export interface FrequencyData {
+  /** Frequency rank (1 = most common) */
+  rank: number;
+  /** Frequency category */
+  category: FrequencyCategory;
+  /** Percentile (0-1, where 1 = most common) */
+  percentile?: number;
+  /** Frequency per million words */
+  perMillion?: number;
+}
+
+/**
+ * Frequency metadata with display properties
  */
 export interface FrequencyMetadata {
   /** Frequency level */
   level: FrequencyLevel;
-  /** Human-readable display text */
-  display: string;
-  /** Color identifier for UI styling */
-  color: string;
-  /** Priority number for sorting (1-4) */
-  priority: number;
+  /** Human-readable display label */
+  display?: string;
+  /** Color code for UI display */
+  color?: string;
+  /** Priority for sorting (higher = more common) */
+  priority?: number;
 }
 
 /**
- * Frequency provider interface
- * 
- * Providers are responsible for determining the frequency level of a word
- * in a given language. Implementations can use corpus data, word lists,
- * or other language-specific resources.
- * 
- * @example
- * ```typescript
- * const provider: FrequencyProvider = {
- *   async getFrequency(word, language) {
- *     const entry = await dictionary.lookup(word, language);
- *     return entry?.frequency || "uncommon";
- *   }
- * };
- * ```
+ * Provider interface for frequency data
  */
 export interface FrequencyProvider {
   /**
-   * Get the frequency level for a word in a given language
+   * Get frequency data for a word
    * 
-   * @param word - The word to check
-   * @param language - The ISO-639-1 language code
-   * @returns The frequency level, or undefined if not found
+   * @param word - The word to look up
+   * @param language - Language code
+   * @returns Frequency level or undefined if not available
    */
-  getFrequency(
-    word: string,
-    language: GlostLanguage,
-  ): Promise<FrequencyLevel | undefined>;
+  getFrequency(word: string, language: string): Promise<FrequencyLevel | undefined>;
+}
+
+/**
+ * Augment GLOSTExtras with frequency field
+ */
+declare module "glost" {
+  interface GLOSTExtras {
+    frequency?: FrequencyMetadata;
+  }
 }

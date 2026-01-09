@@ -9,7 +9,7 @@
 import type { GLOSTExtension } from "glost-extensions";
 import type { GLOSTWord } from "glost";
 import { getWordText } from "glost";
-import type { FrequencyProvider, FrequencyLevel } from "./types";
+import type { FrequencyProvider, FrequencyLevel } from "./types.js";
 
 import type { GlostLanguage } from "glost-common";
 

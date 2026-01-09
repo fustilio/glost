@@ -6,7 +6,7 @@ import {
   getExtension,
   getAllExtensions,
 } from "./registry";
-import { createMockExtension } from "./test-utils";
+import { createMockExtension } from "./test-utils.js";
 
 describe("ExtensionRegistry", () => {
   beforeEach(() => {

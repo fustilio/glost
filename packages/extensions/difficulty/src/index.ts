@@ -7,15 +7,15 @@
  */
 
 // Export types
-export type { DifficultyProvider, DifficultyLevel } from "./types";
+export type { DifficultyProvider, DifficultyLevel } from "./types.js";
 
 // Export generator and enhancer functions
-export { createDifficultyGeneratorExtension } from "./generator";
-export { createDifficultyEnhancerExtension } from "./enhancer";
+export { createDifficultyGeneratorExtension } from "./generator.js";
+export { createDifficultyEnhancerExtension } from "./enhancer.js";
 
 // Import for local use
-import { createDifficultyGeneratorExtension } from "./generator";
-import { createDifficultyEnhancerExtension } from "./enhancer";
+import { createDifficultyGeneratorExtension } from "./generator.js";
+import { createDifficultyEnhancerExtension } from "./enhancer.js";
 import type { GlostLanguage } from "glost-common";
 
 /**
@@ -30,7 +30,7 @@ export interface DifficultyExtensionOptions {
   /**
    * Provider for language-specific difficulty data
    */
-  provider: import("./types").DifficultyProvider;
+  provider: import("./types.js").DifficultyProvider;
 
   /**
    * Skip words that already have difficulty data

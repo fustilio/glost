@@ -12,7 +12,7 @@ import type {
   GLOSTWord,
   ScriptSystem,
   TransliterationData,
-} from "./types";
+} from "./types.js";
 
 // ============================================================================
 // Options Interfaces
@@ -220,7 +220,6 @@ export function createSimpleWord(options: CreateSimpleWordOptions): GLOSTWord {
   const transcription: TransliterationData = {
     [system]: {
       text: transliteration,
-      system: system as any,
       syllables: [text],
     },
   };

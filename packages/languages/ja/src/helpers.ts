@@ -42,7 +42,6 @@ export function createJapaneseWord(
   const transcription: TransliterationData = {
     romaji: {
       text: romaji,
-      system: "romaji",
       syllables: [text],
     },
   };
@@ -50,7 +49,6 @@ export function createJapaneseWord(
   if (furigana) {
     transcription.furigana = {
       text: furigana,
-      system: "furigana",
       syllables: [text],
     };
   }

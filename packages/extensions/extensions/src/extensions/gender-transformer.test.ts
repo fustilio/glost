@@ -8,8 +8,8 @@ import {
   GenderTransformerExtension,
   type GenderVariantData,
 } from "./gender-transformer";
-import { processGLOSTWithExtensions } from "../processor";
-import { createMockGLOSTDocument } from "../test-utils";
+import { processGLOSTWithExtensions } from "../processor.js";
+import { createMockGLOSTDocument } from "../test-utils.js";
 import type { GLOSTWord, GLOSTSentence } from "glost";
 import { getAllWords, getAllSentences, getWordText } from "glost";
 

@@ -11,7 +11,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "../types";
+import type { GLOSTExtension } from "../types.js";
 import type {
   GLOSTRoot,
   GLOSTClause,

@@ -30,17 +30,17 @@ export type {
   ExtensionContext,
   ExtensionResult,
   ProcessorOptions,
-} from "./types";
+} from "./types.js";
 
 // Export errors
 export {
   ExtensionDependencyError,
   ExtensionConflictError,
   MissingNodeTypeError,
-} from "./errors";
+} from "./errors.js";
 
 // Export utilities
-export { deepMerge, findConflicts, type DeepMergeOptions } from "./utils";
+export { deepMerge, findConflicts, type DeepMergeOptions } from "./utils/index.js";
 
 // Export registry
 export {
@@ -49,14 +49,14 @@ export {
   registerExtensions,
   getExtension,
   getAllExtensions,
-} from "./registry";
+} from "./registry.js";
 
 // Export processor
 export {
   processGLOSTWithExtensions,
   processGLOSTWithExtensionsAsync,
   processGLOSTWithExtensionIds,
-} from "./processor";
+} from "./processor.js";
 
 // Export built-in extensions
-export * from "./extensions";
+export * from "./extensions/index.js";

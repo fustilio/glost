@@ -10,7 +10,7 @@
 export {
   createJapaneseFrequencyProvider,
   type JapaneseFrequencyProviderOptions,
-} from "./frequency";
+} from "./frequency.js";
 
 // TODO: Add other Japanese providers as needed:
 // - createJapanesePOSProvider (using MeCab/ChaSen tags)

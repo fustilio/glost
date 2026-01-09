@@ -5,11 +5,11 @@
  * multiple languages and provides consistent structure for word metadata.
  */
 
-import type { CEFRLevel } from "./languages/data/proficiency";
-import { CEFR_LEVELS } from "./languages/data/proficiency";
+import type { CEFRLevel } from "./languages/data/proficiency.js";
+import { CEFR_LEVELS } from "./languages/data/proficiency.js";
 
 // Re-export for convenience
-export type { CEFRLevel } from "./languages/data/proficiency";
+export type { CEFRLevel } from "./languages/data/proficiency.js";
 
 /**
  * Word frequency classification based on corpus analysis or word lists

@@ -1,15 +1,16 @@
 // GLOST - Glossed Syntax Tree
 // Extends nlcst for language learning with annotations
 
-export * from "./types";
-export * from "./nodes";
-export * from "./utils";
-export * from "./validators";
-export * from "./guards";
-// export * from './example';
+export * from "./types.js";
+export * from "./nodes.js";
+export * from "./utils.js";
+export * from "./validators.js";
+export * from "./guards.js";
+export * from "./errors.js";
+// export * from './example.js';
 
 // Re-export utility types
-export type { ParagraphLike } from "./utils";
+export type { ParagraphLike } from "./utils.js";
 
 // Re-export key utilities for transcription components
 export {
@@ -65,4 +66,4 @@ export {
   getLanguageFallback,
   normalizeLanguageTag,
   isValidLanguageTag,
-} from "./utils";
+} from "./utils.js";

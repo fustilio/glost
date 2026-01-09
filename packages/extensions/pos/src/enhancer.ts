@@ -8,7 +8,7 @@
 
 import type { GLOSTExtension } from "glost-extensions";
 import type { GLOSTWord } from "glost";
-import type { PartOfSpeechMetadata, POSTagInfo } from "./types";
+import type { PartOfSpeechMetadata, POSTagInfo } from "./types.js";
 
 /**
  * Universal POS categories (based on Universal Dependencies)

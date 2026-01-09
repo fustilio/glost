@@ -7,24 +7,24 @@
  */
 
 // Export types
-export type { GenderType, GenderMetadata, GenderProvider } from "./types";
+export type { GenderType, GenderMetadata, GenderProvider } from "./types.js";
 
 // Export generator
 export {
   createGenderGeneratorExtension,
   type GenderGeneratorOptions,
-} from "./generator";
+} from "./generator.js";
 
 // Export enhancer
 export {
   createGenderEnhancerExtension,
   GenderEnhancerExtension,
   type GenderEnhancerOptions,
-} from "./enhancer";
+} from "./enhancer.js";
 
 // Import for local use
-import { createGenderGeneratorExtension } from "./generator";
-import { createGenderEnhancerExtension } from "./enhancer";
+import { createGenderGeneratorExtension } from "./generator.js";
+import { createGenderEnhancerExtension } from "./enhancer.js";
 import type { GlostLanguage } from "glost-common";
 
 /**

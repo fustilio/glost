@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 
-import { ExtensionConflictError } from "../errors";
+import { ExtensionConflictError } from "../errors.js";
 
 /**
  * Options for deep merge behavior

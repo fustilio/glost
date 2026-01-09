@@ -93,6 +93,170 @@ buildBCP47({ language: "sr", script: "Latn", region: "RS" });
 | `ipa` | International Phonetic Alphabet |
 | `und` | Undetermined language |
 | `mul` | Multiple languages |
+
+## BCP-47 Language Code Utilities (v0.4.0+)
+
+GLOST v0.4.0 introduces comprehensive utilities for working with BCP-47 language codes, providing normalization, matching, and migration support.
+
+### Normalization
+
+Convert language codes to standard BCP-47 format:
+
+```typescript
+import { normalizeLanguageCode } from "glost-common";
+
+// Add default regions
+normalizeLanguageCode("en");      // "en-US"
+normalizeLanguageCode("th");      // "th-TH"
+normalizeLanguageCode("ja");      // "ja-JP"
+
+// Convert ISO 639-3 to ISO 639-1
+normalizeLanguageCode("tha");     // "th-TH"
+normalizeLanguageCode("fra");     // "fr-FR"
+normalizeLanguageCode("eng");     // "en-US"
+
+// Already normalized codes remain unchanged
+normalizeLanguageCode("en-GB");   // "en-GB"
+normalizeLanguageCode("zh-CN");   // "zh-CN"
+```
+
+### Parsing
+
+Parse BCP-47 codes into components:
+
+```typescript
+import { parseLanguageCode } from "glost-common";
+
+parseLanguageCode("en-US");
+// { language: "en", region: "US" }
+
+parseLanguageCode("zh-Hans-CN");
+// { language: "zh", script: "Hans", region: "CN" }
+
+parseLanguageCode("sr-Latn-RS");
+// { language: "sr", script: "Latn", region: "RS" }
+```
+
+### Matching
+
+Compare language codes with flexible matching:
+
+```typescript
+import { matchLanguage } from "glost-common";
+
+// Exact match
+matchLanguage("en-US", "en-US");  // true
+
+// Parent language match
+matchLanguage("en-US", "en");     // true
+
+// Different regions
+matchLanguage("en-GB", "en-US");  // false
+
+// Ignore region differences
+matchLanguage("en-GB", "en-US", { ignoreRegion: true });  // true
+```
+
+### Finding Best Matches
+
+Find the best matching language code from available options:
+
+```typescript
+import { findBestMatch } from "glost-common";
+
+const available = ["en-US", "en-GB", "fr-FR", "th-TH"];
+
+findBestMatch("en-GB", available);  // "en-GB" (exact)
+findBestMatch("en-AU", available);  // "en-US" (fallback)
+findBestMatch("en", available);     // "en-US" (fallback)
+```
+
+### Language Fallbacks
+
+Get fallback language codes in order of preference:
+
+```typescript
+import { getLanguageFallbacks } from "glost-common";
+
+getLanguageFallbacks("en-GB");
+// ["en-GB", "en-US", "en"]
+
+getLanguageFallbacks("zh-Hans-CN");
+// ["zh-Hans-CN", "zh-CN", "zh"]
+```
+
+### Validation
+
+Validate BCP-47 format:
+
+```typescript
+import { isValidBCP47, asBCP47 } from "glost-common";
+
+isValidBCP47("en-US");      // true
+isValidBCP47("tha-TH");     // true
+isValidBCP47("invalid");    // false
+
+// Cast with validation
+const code = asBCP47("en-US");  // Returns BCP47LanguageCode type
+```
+
+### Migration
+
+Migrate existing documents to BCP-47 standard:
+
+```typescript
+import { migrateAllLanguageCodes } from "glost-utils";
+
+const result = migrateAllLanguageCodes(document, {
+  addDefaultRegions: true,
+  convertISO639_3: true
+});
+
+console.log(`Updated ${result.nodesUpdated} nodes`);
+result.changes.forEach(change => {
+  console.log(`${change.path}: ${change.oldCode} → ${change.newCode}`);
+});
+```
+
+### Type Safety
+
+Use branded types for compile-time safety:
+
+```typescript
+import type { BCP47LanguageCode } from "glost-common";
+
+function processLanguage(code: BCP47LanguageCode) {
+  // Type-safe language code handling
+}
+
+// Must use asBCP47 to cast
+const code = asBCP47("en-US");
+processLanguage(code);  // ✓ Type-safe
+```
+
+## Migration from v0.3.x
+
+If you're upgrading from v0.3.x, use the migration utility to update your documents:
+
+```typescript
+import { migrateAllLanguageCodes } from "glost-utils";
+import fs from "fs";
+
+// Read existing document
+const doc = JSON.parse(fs.readFileSync("document.glost.json", "utf-8"));
+
+// Migrate language codes
+const result = migrateAllLanguageCodes(doc, {
+  addDefaultRegions: true,
+  convertISO639_3: true
+});
+
+// Save if changes were made
+if (result.hasChanges) {
+  fs.writeFileSync("document.glost.json", JSON.stringify(doc, null, 2));
+  console.log(`Migrated ${result.nodesUpdated} nodes`);
+}
+```
 | `zxx` | No linguistic content |
 
 ```typescript

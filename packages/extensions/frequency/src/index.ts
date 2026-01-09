@@ -38,25 +38,31 @@
  * ```
  */
 
-// Export types
-export type { FrequencyLevel, FrequencyMetadata, FrequencyProvider } from "./types";
+// Export types (including type augmentation for GLOSTExtras)
+export type {
+  FrequencyLevel,
+  FrequencyMetadata,
+  FrequencyProvider,
+  FrequencyData,
+  FrequencyCategory,
+} from "./types.js";
 
 // Export generator
 export {
   createFrequencyGeneratorExtension,
   type FrequencyGeneratorOptions,
-} from "./generator";
+} from "./generator.js";
 
 // Export enhancer
 export {
   createFrequencyEnhancerExtension,
   FrequencyEnhancerExtension,
   type FrequencyEnhancerOptions,
-} from "./enhancer";
+} from "./enhancer.js";
 
 // Import for local use
-import { createFrequencyGeneratorExtension } from "./generator";
-import { createFrequencyEnhancerExtension } from "./enhancer";
+import { createFrequencyGeneratorExtension } from "./generator.js";
+import { createFrequencyEnhancerExtension } from "./enhancer.js";
 
 import type { GlostLanguage } from "glost-common";
 

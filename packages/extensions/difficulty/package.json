@@ -1,6 +1,6 @@
 {
   "name": "glost-difficulty",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "description": "Word difficulty extension for GLOST - generates and formats difficulty data",
   "author": "GLOST Contributors",
   "license": "MIT",

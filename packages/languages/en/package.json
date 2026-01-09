@@ -1,6 +1,7 @@
 {
   "name": "glost-en",
-  "version": "0.2.0",
+  "version": "0.4.0",
+  "type": "module",
   "description": "English language support for GLOST - segmentation providers and helpers",
   "keywords": [
     "glost",

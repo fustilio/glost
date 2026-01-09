@@ -14,13 +14,13 @@
 export type {
   ILanguageStrategy,
   ITranscriptionProvider,
-} from "./interfaces";
+} from "./interfaces.js";
 
 // Export text-to-glost utilities
 export {
   convertTextToGLOST,
   type ConvertTextToGLOSTOptions,
-} from "./text-to-glost";
+} from "./text-to-glost.js";
 
 // Export merger utilities
 export {
@@ -30,7 +30,7 @@ export {
   extendGLOSTDocumentWithMetadata,
   hydrateGLOSTDocument,
   filterGLOSTByGender,
-} from "./glost-merger";
+} from "./glost-merger.js";
 
 // Export document utilities
 // These re-export from glost where possible, adding convenience wrappers
@@ -43,7 +43,7 @@ export {
   getDocumentMetadata,
   getFirstSentence,
   getSentenceTranslation,
-} from "./document-utils";
+} from "./document-utils.js";
 
 // Export script conversion utilities
 export {
@@ -55,10 +55,27 @@ export {
   ensureArrayFormat,
   ensureStringFormat,
   getPlainText,
-} from "./script-conversion";
+} from "./script-conversion.js";
 
 // Export ingredient prep utilities
-export * from "./ingredient-prep";
+export * from "./ingredient-prep/index.js";
+
+// Export migration utilities
+export {
+  migrateLanguageCodes,
+  migrateTranslationLanguageCodes,
+  migrateAllLanguageCodes,
+  type MigrateLanguageCodesOptions,
+  type MigrationResult,
+} from "./migrate-language-codes.js";
+
+export {
+  migrateTranscriptionSchema,
+  needsTranscriptionMigration,
+  analyzeTranscriptionMigration,
+  type MigrateTranscriptionSchemaOptions,
+  type TranscriptionMigrationResult,
+} from "./migrate-transcription-schema.js";
 
 // Re-export commonly used utilities from glost for convenience
 export {

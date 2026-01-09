@@ -1,5 +1,14 @@
 # glost-gender
 
+## 0.2.1
+
+### Patch Changes
+
+- Updated dependencies
+  - glost-extensions@0.3.0
+  - glost-common@0.2.0
+  - glost@0.4.0
+
 ## 0.2.0
 
 ### Minor Changes

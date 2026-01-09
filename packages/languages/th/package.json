@@ -1,6 +1,7 @@
 {
   "name": "glost-th",
-  "version": "0.3.0",
+  "version": "0.4.0",
+  "type": "module",
   "description": "Thai language support for GLOST - helper functions and transcription providers",
   "keywords": [
     "glost",

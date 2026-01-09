@@ -8,8 +8,8 @@
  */
 
 import type { GLOSTWord } from "glost";
-import type { GLOSTExtension } from "../types";
-import { ExtensionDependencyError } from "../errors";
+import type { GLOSTExtension } from "../types.js";
+import { ExtensionDependencyError } from "../errors.js";
 // Types moved to separate packages
 type FrequencyLevel = "rare" | "uncommon" | "common" | "very-common";
 type DifficultyLevel = "beginner" | "intermediate" | "advanced";
