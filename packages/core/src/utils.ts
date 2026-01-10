@@ -1,5 +1,5 @@
 import { is as isNode } from "unist-util-is";
-import { visit } from "unist-util-visit";
+import { visit, SKIP } from "unist-util-visit";
 
 import type {
   LanguageCode,
@@ -198,6 +198,84 @@ export function getAllWords(node: GLOSTNode): GLOSTWord[] {
   });
 
   return words;
+}
+
+/**
+ * Get the first word from a document
+ * 
+ * Convenience helper for accessing the first word in document order.
+ * Returns undefined if no words are found.
+ * 
+ * @param document - GLOST document root
+ * @returns First word node or undefined
+ * 
+ * @example
+ * ```typescript
+ * const doc = createSimpleDocument([word1, word2], "en");
+ * const firstWord = getFirstWord(doc);
+ * if (firstWord) {
+ *   console.log(getWordText(firstWord));
+ * }
+ * ```
+ */
+export function getFirstWord(document: GLOSTRoot): GLOSTWord | undefined {
+  let firstWord: GLOSTWord | undefined;
+
+  visit(document, "WordNode", (wordNode) => {
+    if (isGLOSTWord(wordNode) && !firstWord) {
+      firstWord = wordNode;
+      return SKIP; // Stop traversal after finding first word
+    }
+  });
+
+  return firstWord;
+}
+
+/**
+ * Get word at specific path in document
+ * 
+ * Navigate document hierarchy using paragraph, sentence, and word indices.
+ * Returns undefined if path is invalid or doesn't exist.
+ * 
+ * @param document - GLOST document root
+ * @param path - Path specifying paragraph, sentence, and word indices (0-based)
+ * @returns Word node at path or undefined
+ * 
+ * @example
+ * ```typescript
+ * // Get the first word of the second sentence in the first paragraph
+ * const word = getWordAtPath(doc, {
+ *   paragraph: 0,
+ *   sentence: 1,
+ *   word: 0
+ * });
+ * ```
+ */
+export function getWordAtPath(
+  document: GLOSTRoot,
+  path: { paragraph: number; sentence: number; word: number }
+): GLOSTWord | undefined {
+  const { paragraph: pIdx, sentence: sIdx, word: wIdx } = path;
+
+  // Navigate to paragraph
+  const para = document.children[pIdx];
+  if (!para || para.type !== "ParagraphNode") {
+    return undefined;
+  }
+
+  // Navigate to sentence
+  const sent = (para as GLOSTParagraph).children[sIdx];
+  if (!sent || sent.type !== "SentenceNode") {
+    return undefined;
+  }
+
+  // Navigate to word
+  const word = (sent as GLOSTSentence).children[wIdx];
+  if (!word || word.type !== "WordNode") {
+    return undefined;
+  }
+
+  return word as GLOSTWord;
 }
 
 /**

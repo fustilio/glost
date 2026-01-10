@@ -636,6 +636,76 @@ export async function processGLOSTWithExtensionsAsync(
 }
 
 /**
+ * Process GLOST document with extensions (simplified API)
+ * 
+ * Processes a document with the given extensions and returns the processed document directly.
+ * This is a convenience wrapper around processGLOSTWithExtensionsAsync that extracts
+ * the document from the result.
+ * 
+ * Use this function when you only need the processed document and don't need
+ * detailed metadata about the processing. For metadata access, use processGLOSTWithMeta()
+ * or processGLOSTWithExtensionsAsync() instead.
+ * 
+ * @param document - The GLOST document to process
+ * @param extensions - Array of extensions to apply
+ * @param options - Optional processing options
+ * @returns Promise resolving to the processed document
+ * 
+ * @example
+ * ```typescript
+ * import { processGLOST } from "glost-extensions";
+ * import { createTranscriptionExtension } from "glost-transcription";
+ * 
+ * const extension = createTranscriptionExtension({ provider, targetLanguage: "th" });
+ * const processedDoc = await processGLOST(document, [extension]);
+ * 
+ * // Access words directly without .document
+ * const words = getAllWords(processedDoc);
+ * ```
+ */
+export async function processGLOST(
+  document: GLOSTRoot,
+  extensions: GLOSTExtension[],
+  options?: ProcessorOptions,
+): Promise<GLOSTRoot> {
+  const result = await processGLOSTWithExtensionsAsync(document, extensions, options);
+  return result.document;
+}
+
+/**
+ * Process GLOST document with extensions and return detailed metadata
+ * 
+ * Alias for processGLOSTWithExtensionsAsync with a clearer name.
+ * Use this when you need access to processing metadata (applied extensions,
+ * errors, skipped extensions, etc.).
+ * 
+ * @param document - The GLOST document to process
+ * @param extensions - Array of extensions to apply
+ * @param options - Optional processing options
+ * @returns Promise resolving to ExtensionResult with document and metadata
+ * 
+ * @example
+ * ```typescript
+ * import { processGLOSTWithMeta } from "glost-extensions";
+ * 
+ * const result = await processGLOSTWithMeta(document, extensions);
+ * 
+ * console.log("Applied:", result.metadata.appliedExtensions);
+ * console.log("Errors:", result.metadata.errors);
+ * 
+ * // Access the processed document
+ * const processedDoc = result.document;
+ * ```
+ */
+export async function processGLOSTWithMeta(
+  document: GLOSTRoot,
+  extensions: GLOSTExtension[],
+  options?: ProcessorOptions,
+): Promise<ExtensionResult> {
+  return processGLOSTWithExtensionsAsync(document, extensions, options);
+}
+
+/**
  * Apply visitor functions to the document tree (async version)
  *
  * Visits nodes of specified types and applies visitor functions.

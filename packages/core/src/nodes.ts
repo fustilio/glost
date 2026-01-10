@@ -281,6 +281,89 @@ export function createDocumentFromParagraphs(
   return createGLOSTRootNode({ lang, script, children: paragraphs, metadata });
 }
 
+/**
+ * Create a document from an array of sentences (simplified helper)
+ * 
+ * Automatically wraps sentences in a paragraph for convenience.
+ * Useful when you don't need explicit paragraph structure.
+ * 
+ * @param sentences - Array of sentences
+ * @param lang - Language code
+ * @param script - Script system (optional, will be inferred from lang if not provided)
+ * @param metadata - Optional document metadata
+ * @returns GLOST root document
+ * 
+ * @example
+ * ```typescript
+ * const sentences = [
+ *   createSentenceFromWords([word1, word2], "th", "thai", "สวัสดี"),
+ *   createSentenceFromWords([word3, word4], "th", "thai", "ขอบคุณ")
+ * ];
+ * const doc = createDocumentFromSentences(sentences, "th", "thai");
+ * ```
+ */
+export function createDocumentFromSentences(
+  sentences: GLOSTSentence[],
+  lang: LanguageCode,
+  script: ScriptSystem,
+  metadata?: {
+    title?: string;
+    author?: string;
+    date?: string;
+    description?: string;
+  },
+): GLOSTRoot {
+  const paragraph = createParagraphFromSentences(sentences);
+  return createDocumentFromParagraphs([paragraph], lang, script, metadata);
+}
+
+/**
+ * Create a simple document from an array of words (simplified helper)
+ * 
+ * Automatically creates sentence and paragraph wrappers for maximum convenience.
+ * Perfect for testing, quick prototypes, and simple use cases.
+ * 
+ * @param words - Array of word nodes
+ * @param lang - Language code
+ * @param script - Script system (optional, will be inferred from lang if not provided)
+ * @param options - Optional configuration
+ * @param options.sentenceText - Original text of the sentence (will be auto-generated if not provided)
+ * @param options.metadata - Optional document metadata
+ * @returns GLOST root document
+ * 
+ * @example
+ * ```typescript
+ * import { createSimpleDocument } from "glost";
+ * import { createThaiWord } from "glost-th";
+ * 
+ * const words = [
+ *   createThaiWord({ text: "สวัสดี" }),
+ *   createThaiWord({ text: "ครับ" })
+ * ];
+ * const doc = createSimpleDocument(words, "th", "thai", {
+ *   sentenceText: "สวัสดีครับ"
+ * });
+ * ```
+ */
+export function createSimpleDocument(
+  words: GLOSTWord[],
+  lang: LanguageCode,
+  script: ScriptSystem,
+  options?: {
+    sentenceText?: string;
+    metadata?: {
+      title?: string;
+      author?: string;
+      date?: string;
+      description?: string;
+    };
+  },
+): GLOSTRoot {
+  const sentence = createSentenceFromWords(words, lang, script, options?.sentenceText);
+  const paragraph = createParagraphFromSentences([sentence]);
+  return createDocumentFromParagraphs([paragraph], lang, script, options?.metadata);
+}
+
 // ============================================================================
 // NLCST Node Factory Functions
 // ============================================================================

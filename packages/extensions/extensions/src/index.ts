@@ -56,6 +56,8 @@ export {
   processGLOSTWithExtensions,
   processGLOSTWithExtensionsAsync,
   processGLOSTWithExtensionIds,
+  processGLOST,
+  processGLOSTWithMeta,
 } from "./processor.js";
 
 // Export built-in extensions
