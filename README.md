@@ -4,15 +4,15 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm downloads](https://img.shields.io/npm/dm/glost.svg)](https://www.npmjs.com/package/glost)
 
-**GLOST** (Glossed Syntax Tree) is a Concrete Syntax Tree format that extends [nlcst](https://github.com/syntax-tree/nlcst) to support rich language learning metadata.
+**GLOST** (Glossed Syntax Tree) is a Concrete Syntax Tree format that extends [nlcst](https://github.com/syntax-tree/nlcst) for representing multilingual text with language learning annotations.
 
 ## Features
 
-- 🌍 **Multi-language support** - Aims to handle multiple languages with proper metadata
-- 📝 **Rich annotations** - Support for transcription, translation, part-of-speech, difficulty levels
-- 🔌 **Extensible** - Plugin system for custom processing
-- 🎯 **Type-safe** - Full TypeScript support
-- 📦 **Modular** - Use only what you need
+- Multi-language support with language-specific packages (Thai, Japanese, Korean, English)
+- Rich annotations: transcription, translation, part-of-speech, difficulty levels
+- Extensible plugin system for custom processing
+- Full TypeScript support with type safety
+- Modular architecture
 
 ## Quick Start
 
@@ -72,11 +72,8 @@ console.log(getLanguageName("th")); // "Thai"
 - **[API Reference](./docs/api.md)** - Complete API documentation
 - **[Ecosystem](./docs/ecosystem.md)** - GLOST ecosystem and community
 
-### Migration Guides
-- [v0.3.x → v0.4.0](./MIGRATION_v0.3_to_v0.4.md) - Latest migration (BCP-47, schema cleanup)
-- [v0.1.x → v0.2.0](./MIGRATION.md) - Language package externalization
-
 ### Guides
+- [v0.3.x → v0.4.0 Migration](./MIGRATION_v0.3_to_v0.4.md) - Upgrading to latest version
 - [Creating Documents](./docs/guides/creating-documents.md)
 - [Using Extensions](./docs/guides/using-extensions.md)
 - [Multi-Language Architecture](./docs/guides/multi-language-architecture.md)
@@ -103,34 +100,20 @@ glost (core)              - Core types and node factories
 
 ## Use Cases
 
-GLOST may be useful for:
-- **Language Learning Apps** - Building interactive reading experiences
-- **Dictionary Systems** - Rich word annotations with multiple transcription schemes
-- **Graded Readers** - Content adapted to learner proficiency
-- **Transcription Tools** - Converting between scripts and romanization
-- **Corpus Linguistics** - Annotated text corpora with metadata
+GLOST is used for:
+- Language learning applications with interactive reading experiences
+- Dictionary systems with multiple transcription schemes
+- Graded readers adapted to learner proficiency
+- Transcription and romanization tools
+- Annotated text corpora
 
 ## Status
 
-GLOST is being used in real-world applications and has been tested with:
-- Multiple languages across different writing systems
-- Various transcription systems (IPA, romanization, phonetic)
-- Hundreds of words with metadata
-- Performance suitable for interactive applications
-
-We're still learning and improving based on feedback and real-world use.
+GLOST is used in some production applications. It has been tested with Thai, Japanese, Korean, and English across various transcription systems including IPA and romanization schemes. The library continues to evolve based on real-world use and feedback.
 
 ## Contributing
 
-We'd appreciate contributions! Please see:
-- [Architecture Summary](./docs/ARCHITECTURE_SUMMARY.md)
-- [Multi-Language Architecture Guide](./docs/guides/multi-language-architecture.md)
-- [Implementing Transcription Providers](./docs/guides/implementing-transcription-providers.md)
-
-If you'd like to add a new language package:
-1. You can follow the [Multi-Language Architecture](./docs/guides/multi-language-architecture.md) guide
-2. Consider using `glost-th` or `glost-ja` as a reference
-3. Feel free to submit a PR with your language package
+Contributions are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines. For adding language packages, refer to the [Multi-Language Architecture](./docs/guides/multi-language-architecture.md) guide or use `glost-th` or `glost-ja` as examples.
 
 ## License
 

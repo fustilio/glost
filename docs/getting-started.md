@@ -1,34 +1,10 @@
 # Getting Started
 
-This guide will help you get started with GLOST.
+This guide covers the basics of using GLOST.
 
 ## Installation
 
-Install the core packages using your preferred package manager:
-
-```bash
-# pnpm (recommended)
-pnpm add glost glost-common
-
-# npm
-npm install glost glost-common
-
-# yarn
-yarn add glost glost-common
-```
-
-For additional functionality, install extension packages:
-
-```bash
-# Extension system
-pnpm add glost-extensions
-
-# Utilities
-pnpm add glost-utils
-
-# Specific extensions
-pnpm add glost-transcription glost-translation
-```
+See the [main README](../README.md#quick-start) for installation instructions.
 
 ## Basic Usage
 
@@ -153,38 +129,14 @@ const enrichedDoc = result.document;
 GLOST accepts multiple language code formats:
 
 ```typescript
-import { getLanguageName, toISO639_3, parseBCP47 } from 'glost-common';
+import { getLanguageName, toISO639_3 } from 'glost-common';
 
-// All formats work
 getLanguageName("th");      // "Thai"
 getLanguageName("tha");     // "Thai"
-getLanguageName("th-TH");   // "Thai"
-
-// Convert between formats
 toISO639_3("en");           // "eng"
-toISO639_3("ja");           // "jpn"
-
-// Parse BCP-47 tags
-const parsed = parseBCP47("zh-Hans-CN");
-// { language: "zh", script: "Hans", region: "CN" }
 ```
 
-## Proficiency Levels
-
-Work with standardized proficiency levels:
-
-```typescript
-import { cefrToNumeric, numericToCEFR, meetsLevel } from 'glost-common';
-
-// Convert CEFR to numeric
-cefrToNumeric("B1");        // 3
-
-// Convert numeric to CEFR
-numericToCEFR(4);           // "B2"
-
-// Check if user meets required level
-meetsLevel("B2", "B1", "CEFR");  // true
-```
+See [API Reference](./api.md) for complete language code and proficiency level functions.
 
 ## Type Safety
 
@@ -203,10 +155,3 @@ if (hasChildren(node)) {
   node.children.forEach(child => processChild(child));
 }
 ```
-
-## Next Steps
-
-- [Core Concepts](./concepts/index.md) - Understand node types and architecture
-- [Extension System](./concepts/extensions.md) - Learn about extensions
-- [Creating Custom Extensions](./guides/custom-extensions.md) - Build your own extensions
-- [Package Reference](./packages/index.md) - Full API documentation

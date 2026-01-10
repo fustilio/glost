@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@examples/en-transcription-ipa": "workspace:*",
-    "@examples/en-ipa-to-phonemic": "workspace:*",
+    "glost-en-transcription-ipa-example": "workspace:*",
+    "glost-en-ipa-to-phonemic-example": "workspace:*",
     "glost": "workspace:*",
     "glost-extensions": "workspace:*"
   },

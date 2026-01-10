@@ -1,16 +1,13 @@
 {
-  "name": "glost-ja",
-  "version": "0.4.0",
+  "name": "glost-ko",
+  "version": "0.1.0",
   "type": "module",
-  "description": "Japanese language support for GLOST - helper functions and transcription providers",
+  "description": "Korean language support for GLOST - helper functions",
   "keywords": [
     "glost",
-    "japanese",
+    "korean",
     "language",
-    "transcription",
     "romanization",
-    "romaji",
-    "furigana",
     "nlp"
   ],
   "author": "fustilio",
@@ -18,7 +15,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/fustilio/glost.git",
-    "directory": "packages/languages/ja"
+    "directory": "packages/languages/ko"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -34,14 +31,6 @@
     "./helpers": {
       "types": "./dist/helpers.d.ts",
       "default": "./dist/helpers.js"
-    },
-    "./transcription": {
-      "types": "./dist/transcription.d.ts",
-      "default": "./dist/transcription.js"
-    },
-    "./extensions": {
-      "types": "./dist/extensions/index.d.ts",
-      "default": "./dist/extensions/index.js"
     }
   },
   "files": [
@@ -55,8 +44,7 @@
   },
   "dependencies": {
     "glost": "workspace:*",
-    "glost-common": "workspace:*",
-    "glost-frequency": "workspace:*"
+    "glost-common": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

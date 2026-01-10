@@ -6,19 +6,7 @@
  */
 
 import type { TranscriptionProvider } from 'glost-common';
-
-/**
- * Japanese transcription schemes
- */
-export type JapaneseTranscriptionScheme = 
-  | 'romaji' 
-  | 'hepburn' 
-  | 'kunrei' 
-  | 'nihon'
-  | 'furigana' 
-  | 'hiragana' 
-  | 'katakana'
-  | 'ipa';
+import type { JapaneseTranscriptionScheme } from './constants.js';
 
 /**
  * Japanese transcription provider interface

@@ -6,15 +6,14 @@ Example extension packages demonstrating real-world extension development patter
 
 ```
 extensions/
-  languages/
-    en/                          # English-specific extensions
-      en-transcription-ipa/      # IPA generator
-      en-ipa-to-phonemic/        # Phonemic enhancer
+  transcription/
+    en-transcription-ipa/      # IPA generator
+    en-ipa-to-phonemic/        # Phonemic enhancer
 ```
 
 ## Extension Packages
 
-### 🎵 [en-transcription-ipa](./languages/en/en-transcription-ipa/)
+### 🎵 [en-transcription-ipa](./transcription/en-transcription-ipa/)
 
 **Type**: GENERATOR  
 **Provides**: IPA transcription  
@@ -23,7 +22,7 @@ extensions/
 Adds IPA (International Phonetic Alphabet) transcription to English words.
 
 ```typescript
-import { EnglishIPAExtension } from "@examples/en-transcription-ipa";
+import { EnglishIPAExtension } from "glost-en-transcription-ipa-example";
 
 // Standalone usage
 processGLOSTWithExtensions(doc, [EnglishIPAExtension]);
@@ -38,7 +37,7 @@ processGLOSTWithExtensions(doc, [EnglishIPAExtension]);
 
 ---
 
-### 📖 [en-ipa-to-phonemic](./languages/en/en-ipa-to-phonemic/)
+### 📖 [en-ipa-to-phonemic](./transcription/en-ipa-to-phonemic/)
 
 **Type**: ENHANCER  
 **Provides**: Phonemic respelling  
@@ -47,8 +46,8 @@ processGLOSTWithExtensions(doc, [EnglishIPAExtension]);
 Converts IPA to user-friendly phonemic respelling with stress markers.
 
 ```typescript
-import { EnglishIPAExtension } from "@examples/en-transcription-ipa";
-import { EnglishIPAToPhonemic Extension } from "@examples/en-ipa-to-phonemic";
+import { EnglishIPAExtension } from "glost-en-transcription-ipa-example";
+import { EnglishIPAToPhonemic Extension } from "glost-en-ipa-to-phonemic-example";
 
 // Composed usage
 processGLOSTWithExtensions(doc, [
@@ -257,7 +256,7 @@ export const MyEnhancerExtension: GLOSTExtension = {
 ### Test in Isolation
 
 ```typescript
-import { EnglishIPAExtension } from "@examples/en-transcription-ipa";
+import { EnglishIPAExtension } from "glost-en-transcription-ipa-example";
 
 const word = createSimpleWord({ text: "hello" });
 const metadata = EnglishIPAExtension.enhanceMetadata!(word);
@@ -274,8 +273,8 @@ expect(metadata).toEqual({
 ### Test Composition
 
 ```typescript
-import { EnglishIPAExtension } from "@examples/en-transcription-ipa";
-import { EnglishIPAToPhonemic Extension } from "@examples/en-ipa-to-phonemic";
+import { EnglishIPAExtension } from "glost-en-transcription-ipa-example";
+import { EnglishIPAToPhonemic Extension } from "glost-en-ipa-to-phonemic-example";
 
 const doc = textToGLOST("hello");
 const result = processGLOSTWithExtensions(doc, [

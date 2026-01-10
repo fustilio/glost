@@ -38,15 +38,15 @@ importers:
 
   examples/composition-demo:
     dependencies:
-      '@examples/en-ipa-to-phonemic':
-        specifier: workspace:*
-        version: link:../extensions/languages/en/en-ipa-to-phonemic
-      '@examples/en-transcription-ipa':
-        specifier: workspace:*
-        version: link:../extensions/languages/en/en-transcription-ipa
       glost:
         specifier: workspace:*
         version: link:../../packages/core
+      glost-en-ipa-to-phonemic-example:
+        specifier: workspace:*
+        version: link:../extensions/transcription/en-ipa-to-phonemic
+      glost-en-transcription-ipa-example:
+        specifier: workspace:*
+        version: link:../extensions/transcription/en-transcription-ipa
       glost-extensions:
         specifier: workspace:*
         version: link:../../packages/extensions/extensions
@@ -58,43 +58,127 @@ importers:
         specifier: ^5.0.0
         version: 5.4.21(@types/node@20.19.27)
 
-  examples/extensions/languages/en/en-ipa-to-phonemic:
+  examples/extensions/transcription/en-ipa-to-phonemic:
     dependencies:
       glost:
         specifier: workspace:*
-        version: link:../../../../../packages/core
+        version: link:../../../../packages/core
       glost-extensions:
         specifier: workspace:*
-        version: link:../../../../../packages/extensions/extensions
+        version: link:../../../../packages/extensions/extensions
     devDependencies:
       typescript:
         specifier: ^5.3.3
         version: 5.9.3
 
-  examples/extensions/languages/en/en-transcription-ipa:
+  examples/extensions/transcription/en-transcription-ipa:
     dependencies:
       glost:
         specifier: workspace:*
-        version: link:../../../../../packages/core
+        version: link:../../../../packages/core
       glost-extensions:
         specifier: workspace:*
-        version: link:../../../../../packages/extensions/extensions
+        version: link:../../../../packages/extensions/extensions
     devDependencies:
       typescript:
         specifier: ^5.3.3
         version: 5.9.3
+
+  examples/extensions/transcription/ja-transcription-example:
+    dependencies:
+      glost:
+        specifier: workspace:*
+        version: link:../../../../packages/core
+      glost-common:
+        specifier: workspace:*
+        version: link:../../../../packages/common
+      glost-extensions:
+        specifier: workspace:*
+        version: link:../../../../packages/extensions/extensions
+      glost-ja:
+        specifier: workspace:*
+        version: link:../../../../packages/languages/ja
+      glost-transcription:
+        specifier: workspace:*
+        version: link:../../../../packages/extensions/transcription
+    devDependencies:
+      '@types/node':
+        specifier: 'catalog:'
+        version: 20.19.27
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      vitest:
+        specifier: 'catalog:'
+        version: 3.2.4(@types/node@20.19.27)(@vitest/ui@3.2.4)
+
+  examples/extensions/transcription/ko-transcription-example:
+    dependencies:
+      glost:
+        specifier: workspace:*
+        version: link:../../../../packages/core
+      glost-common:
+        specifier: workspace:*
+        version: link:../../../../packages/common
+      glost-extensions:
+        specifier: workspace:*
+        version: link:../../../../packages/extensions/extensions
+      glost-ko:
+        specifier: workspace:*
+        version: link:../../../../packages/languages/ko
+      glost-transcription:
+        specifier: workspace:*
+        version: link:../../../../packages/extensions/transcription
+    devDependencies:
+      '@types/node':
+        specifier: 'catalog:'
+        version: 20.19.27
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      vitest:
+        specifier: 'catalog:'
+        version: 3.2.4(@types/node@20.19.27)(@vitest/ui@3.2.4)
+
+  examples/extensions/transcription/th-transcription-example:
+    dependencies:
+      glost:
+        specifier: workspace:*
+        version: link:../../../../packages/core
+      glost-common:
+        specifier: workspace:*
+        version: link:../../../../packages/common
+      glost-extensions:
+        specifier: workspace:*
+        version: link:../../../../packages/extensions/extensions
+      glost-th:
+        specifier: workspace:*
+        version: link:../../../../packages/languages/th
+      glost-transcription:
+        specifier: workspace:*
+        version: link:../../../../packages/extensions/transcription
+    devDependencies:
+      '@types/node':
+        specifier: 'catalog:'
+        version: 20.19.27
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      vitest:
+        specifier: 'catalog:'
+        version: 3.2.4(@types/node@20.19.27)(@vitest/ui@3.2.4)
 
   examples/transcription:
     dependencies:
-      '@examples/en-ipa-to-phonemic':
-        specifier: workspace:*
-        version: link:../extensions/languages/en/en-ipa-to-phonemic
-      '@examples/en-transcription-ipa':
-        specifier: workspace:*
-        version: link:../extensions/languages/en/en-transcription-ipa
       glost:
         specifier: workspace:*
         version: link:../../packages/core
+      glost-en-ipa-to-phonemic-example:
+        specifier: workspace:*
+        version: link:../extensions/transcription/en-ipa-to-phonemic
+      glost-en-transcription-ipa-example:
+        specifier: workspace:*
+        version: link:../extensions/transcription/en-transcription-ipa
       glost-extensions:
         specifier: workspace:*
         version: link:../../packages/extensions/extensions
@@ -350,6 +434,25 @@ importers:
       glost-frequency:
         specifier: workspace:*
         version: link:../../extensions/frequency
+    devDependencies:
+      '@types/node':
+        specifier: 'catalog:'
+        version: 20.19.27
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      vitest:
+        specifier: 'catalog:'
+        version: 3.2.4(@types/node@20.19.27)(@vitest/ui@3.2.4)
+
+  packages/languages/ko:
+    dependencies:
+      glost:
+        specifier: workspace:*
+        version: link:../../core
+      glost-common:
+        specifier: workspace:*
+        version: link:../../common
     devDependencies:
       '@types/node':
         specifier: 'catalog:'

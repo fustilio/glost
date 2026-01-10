@@ -1,5 +1,5 @@
 /**
- * @examples/en-transcription-ipa
+ * glost-en-transcription-ipa-example
  * 
  * English IPA Transcription Extension
  * 
@@ -73,7 +73,7 @@ function getWordText(word: GLOSTWord): string {
  * 
  * @example
  * ```typescript
- * import { EnglishIPAExtension } from "@examples/en-transcription-ipa";
+ * import { EnglishIPAExtension } from "glost-en-transcription-ipa-example";
  * import { processGLOSTWithExtensions } from "glost-extensions";
  * 
  * const result = processGLOSTWithExtensions(document, [EnglishIPAExtension]);

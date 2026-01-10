@@ -1,0 +1,31 @@
+{
+  "name": "glost-ko-transcription-example",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Example: Korean transcription extension combining glost-ko + glost-transcription",
+  "keywords": [
+    "glost",
+    "korean",
+    "transcription",
+    "example"
+  ],
+  "author": "fustilio",
+  "license": "MIT",
+  "scripts": {
+    "test": "vitest --run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "glost": "workspace:*",
+    "glost-common": "workspace:*",
+    "glost-extensions": "workspace:*",
+    "glost-ko": "workspace:*",
+    "glost-transcription": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

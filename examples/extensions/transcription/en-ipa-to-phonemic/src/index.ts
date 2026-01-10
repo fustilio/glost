@@ -1,5 +1,5 @@
 /**
- * @examples/en-ipa-to-phonemic
+ * glost-en-ipa-to-phonemic-example
  * 
  * English IPA to Phonemic Respelling Extension
  * 
@@ -167,8 +167,8 @@ export function ipaToPhonemic(ipa: string): string {
  * 
  * @example
  * ```typescript
- * import { EnglishIPAExtension } from "@examples/en-transcription-ipa";
- * import { EnglishIPAToPhonemic Extension } from "@examples/en-ipa-to-phonemic";
+ * import { EnglishIPAExtension } from "glost-en-transcription-ipa-example";
+ * import { EnglishIPAToPhonemic Extension } from "glost-en-ipa-to-phonemic-example";
  * import { processGLOSTWithExtensions } from "glost-extensions";
  * 
  * // Compose both extensions

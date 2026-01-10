@@ -5,8 +5,8 @@ Simple transcription demo using extension packages.
 ## What This Demonstrates
 
 Basic usage of composed extensions:
-- `@examples/en-transcription-ipa` - Provides IPA
-- `@examples/en-ipa-to-phonemic` - Converts IPA to phonemic respelling
+- `glost-en-transcription-ipa-example` - Provides IPA
+- `glost-en-ipa-to-phonemic-example` - Converts IPA to phonemic respelling
 
 ## Running
 
@@ -42,11 +42,11 @@ Open `http://localhost:5173`
 
 This example was updated to use the new extension packages instead of inline extensions. The old inline extensions are now proper packages:
 
-- `src/extensions/transcription.ts` → `@examples/en-transcription-ipa`
-- `src/extensions/ipa-respelling.ts` → `@examples/en-ipa-to-phonemic`
+- `src/extensions/transcription.ts` → `glost-en-transcription-ipa-example`
+- `src/extensions/ipa-respelling.ts` → `glost-en-ipa-to-phonemic-example`
 
 ## Recommended Path
 
 1. **Start here** - Simple usage example
 2. **Then try** [`composition-demo`](../composition-demo/) - Interactive showcase
-3. **Read packages** - Extension source code in `examples/extensions/languages/en/`
+3. **Read packages** - Extension source code in `examples/extensions/transcription/`

@@ -29,8 +29,8 @@ import {
 import type { GLOSTRoot, GLOSTWord } from "glost";
 
 // Import our composable extensions
-import { EnglishIPAExtension } from "@examples/en-transcription-ipa";
-import { EnglishIPAToPhonemicExtension } from "@examples/en-ipa-to-phonemic";
+import { EnglishIPAExtension } from "glost-en-transcription-ipa-example";
+import { EnglishIPAToPhonemicExtension } from "glost-en-ipa-to-phonemic-example";
 
 // =============================================================================
 // DOM Elements

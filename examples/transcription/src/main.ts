@@ -2,8 +2,8 @@
  * GLOST Transcription Demo
  *
  * Demonstrates extension composition using packages:
- * - @examples/en-transcription-ipa (adds IPA)
- * - @examples/en-ipa-to-phonemic (converts IPA to user-friendly format)
+ * - glost-en-transcription-ipa-example (adds IPA)
+ * - glost-en-ipa-to-phonemic-example (converts IPA to user-friendly format)
  * 
  * NOTE: For a more comprehensive demo, see examples/composition-demo
  */
@@ -18,8 +18,8 @@ import {
 import type { GLOSTRoot, GLOSTWord } from "glost";
 
 // Import from packages instead of inline extensions
-import { EnglishIPAExtension } from "@examples/en-transcription-ipa";
-import { EnglishIPAToPhonemicExtension } from "@examples/en-ipa-to-phonemic";
+import { EnglishIPAExtension } from "glost-en-transcription-ipa-example";
+import { EnglishIPAToPhonemicExtension } from "glost-en-ipa-to-phonemic-example";
 
 // DOM elements
 const inputElement = document.getElementById("input") as HTMLTextAreaElement;

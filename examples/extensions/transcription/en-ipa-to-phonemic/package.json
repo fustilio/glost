@@ -1,5 +1,5 @@
 {
-  "name": "@examples/en-ipa-to-phonemic",
+  "name": "glost-en-ipa-to-phonemic-example",
   "version": "1.0.2",
   "description": "English IPA to phonemic respelling - converts IPA to readable format",
   "type": "module",

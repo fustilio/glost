@@ -135,8 +135,8 @@ Just the raw word, no extensions.
 
 ## Extension Packages Used
 
-- [`@examples/en-transcription-ipa`](../extensions/languages/en/en-transcription-ipa/) - IPA generator
-- [`@examples/en-ipa-to-phonemic`](../extensions/languages/en/en-ipa-to-phonemic/) - Phonemic enhancer
+- [`glost-en-transcription-ipa-example`](../extensions/transcription/en-transcription-ipa/) - IPA generator
+- [`glost-en-ipa-to-phonemic-example`](../extensions/transcription/en-ipa-to-phonemic/) - Phonemic enhancer
 
 ## Architecture Insights
 

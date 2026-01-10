@@ -1,0 +1,31 @@
+{
+  "name": "glost-th-transcription-example",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Example: Thai transcription extension combining glost-th + glost-transcription",
+  "keywords": [
+    "glost",
+    "thai",
+    "transcription",
+    "example"
+  ],
+  "author": "fustilio",
+  "license": "MIT",
+  "scripts": {
+    "test": "vitest --run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "glost": "workspace:*",
+    "glost-common": "workspace:*",
+    "glost-extensions": "workspace:*",
+    "glost-th": "workspace:*",
+    "glost-transcription": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

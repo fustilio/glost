@@ -1,4 +1,4 @@
-# @examples/en-ipa-to-phonemic
+# glost-en-ipa-to-phonemic-example
 
 English IPA to phonemic respelling converter extension.
 
@@ -54,8 +54,8 @@ This demonstrates **extension composition**:
 ### Composed (Recommended)
 
 ```typescript
-import { EnglishIPAExtension } from "@examples/en-transcription-ipa";
-import { EnglishIPAToPhonemic Extension } from "@examples/en-ipa-to-phonemic";
+import { EnglishIPAExtension } from "glost-en-transcription-ipa-example";
+import { EnglishIPAToPhonemic Extension } from "glost-en-ipa-to-phonemic-example";
 
 // Both extensions work together
 const result = processGLOSTWithExtensions(document, [
@@ -67,7 +67,7 @@ const result = processGLOSTWithExtensions(document, [
 ### Standalone Function
 
 ```typescript
-import { ipaToPhonemic } from "@examples/en-ipa-to-phonemic";
+import { ipaToPhonemic } from "glost-en-ipa-to-phonemic-example";
 
 // Use the conversion function directly
 const respelling = ipaToPhonemic("/həˈloʊ/");
