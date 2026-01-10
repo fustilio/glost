@@ -6,11 +6,15 @@
  */
 
 import type { TranscriptionProvider } from 'glost-common';
+import { 
+  THAI_TRANSCRIPTION_SCHEMES, 
+  THAI_TRANSCRIPTION_SCHEME_NAMES,
+  type ThaiTranscriptionScheme 
+} from './constants.js';
 
-/**
- * Thai transcription schemes
- */
-export type ThaiTranscriptionScheme = 'rtgs' | 'paiboon' | 'paiboon+' | 'aua' | 'ipa';
+// Re-export for convenience
+export { THAI_TRANSCRIPTION_SCHEMES, THAI_TRANSCRIPTION_SCHEME_NAMES };
+export type { ThaiTranscriptionScheme };
 
 /**
  * Thai transcription provider interface
@@ -40,14 +44,7 @@ export type ThaiTranscriptionScheme = 'rtgs' | 'paiboon' | 'paiboon+' | 'aua' | 
  *     return ['rtgs', 'paiboon', 'paiboon+', 'aua', 'ipa'];
  *   },
  *   getSchemeDisplayName(scheme: string): string {
- *     const names: Record<string, string> = {
- *       'rtgs': 'RTGS',
- *       'paiboon': 'Paiboon',
- *       'paiboon+': 'Paiboon+',
- *       'aua': 'AUA',
- *       'ipa': 'IPA'
- *     };
- *     return names[scheme] ?? scheme;
+ *     return THAI_TRANSCRIPTION_SCHEME_NAMES[scheme] ?? scheme;
  *   }
  * };
  * ```
@@ -56,21 +53,18 @@ export type ThaiTranscriptionProvider = TranscriptionProvider;
 
 /**
  * Helper function to validate Thai transcription scheme
+ * 
+ * @deprecated Use isValidThaiTranscriptionScheme from constants module instead
  */
 export function isValidThaiScheme(scheme: string): scheme is ThaiTranscriptionScheme {
-  return ['rtgs', 'paiboon', 'paiboon+', 'aua', 'ipa'].includes(scheme);
+  return Object.values(THAI_TRANSCRIPTION_SCHEMES).includes(scheme as ThaiTranscriptionScheme);
 }
 
 /**
  * Get display name for Thai transcription scheme
+ * 
+ * @deprecated Use getThaiTranscriptionSchemeName from constants module instead
  */
 export function getThaiSchemeDisplayName(scheme: string): string {
-  const names: Record<string, string> = {
-    'rtgs': 'RTGS',
-    'paiboon': 'Paiboon',
-    'paiboon+': 'Paiboon+',
-    'aua': 'AUA',
-    'ipa': 'IPA'
-  };
-  return names[scheme] ?? scheme;
+  return THAI_TRANSCRIPTION_SCHEME_NAMES[scheme] ?? scheme;
 }

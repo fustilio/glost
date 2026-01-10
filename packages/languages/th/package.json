@@ -1,6 +1,6 @@
 {
   "name": "glost-th",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "type": "module",
   "description": "Thai language support for GLOST - helper functions and transcription providers",
   "keywords": [
@@ -34,13 +34,17 @@
       "types": "./dist/transcription.d.ts",
       "default": "./dist/transcription.js"
     },
+    "./constants": {
+      "types": "./dist/constants.d.ts",
+      "default": "./dist/constants.js"
+    },
     "./extensions": {
       "types": "./dist/extensions/index.d.ts",
       "default": "./dist/extensions/index.js"
     },
     "./segmenter": {
       "types": "./dist/segmenter/index.d.ts",
-      "default": "./dist/segmenter/index.js"
+      "default": "./dist/segmenter/js"
     }
   },
   "files": [

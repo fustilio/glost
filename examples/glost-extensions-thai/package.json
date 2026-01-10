@@ -1,0 +1,61 @@
+{
+  "name": "glost-extensions-thai",
+  "version": "0.0.1",
+  "description": "Example Thai language-specific GLOST extensions demonstrating how to build extensions with glost-th (uses limited demo data)",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./word-joiner": {
+      "types": "./src/word-joiner.ts",
+      "default": "./src/word-joiner.ts"
+    },
+    "./transcription": {
+      "types": "./src/transcription.ts",
+      "default": "./src/transcription.ts"
+    },
+    "./translation": {
+      "types": "./src/translation.ts",
+      "default": "./src/translation.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc --noCheck -p ./tsconfig.json",
+    "typecheck": "tsc --noEmit --skipLibCheck",
+    "test": "vitest --run",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "glost": "catalog:",
+    "glost-extensions": "catalog:",
+    "glost-th": "catalog:",
+    "glost-transcription": "catalog:",
+    "glost-translation": "catalog:",
+    "glost-common": "catalog:",
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@lalia/eslint-config": "workspace:*",
+    "@lalia/prettier-config": "workspace:*",
+    "@lalia/tsconfig": "workspace:*",
+    "typescript": "catalog:",
+    "vite-tsconfig-paths": "catalog:",
+    "vitest": "catalog:"
+  },
+  "keywords": [
+    "glost",
+    "glossed",
+    "extensions",
+    "plugins",
+    "thai",
+    "transcription",
+    "translation",
+    "example",
+    "demo"
+  ]
+}
