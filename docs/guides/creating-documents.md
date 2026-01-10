@@ -2,6 +2,72 @@
 
 This guide covers building GLOST documents from scratch.
 
+## Quick Start: Simplified Helpers
+
+For most use cases, use these simplified helper functions:
+
+### createSimpleDocument() - One-Step Document Creation
+
+The easiest way to create a GLOST document from words:
+
+```typescript
+import { createSimpleDocument } from 'glost';
+import { createThaiWord } from 'glost-th';
+
+const words = [
+  createThaiWord({ text: "สวัสดี" }),
+  createThaiWord({ text: "ครับ" })
+];
+
+// Creates complete document with one function call
+const document = createSimpleDocument(words, "th", "thai", {
+  sentenceText: "สวัสดีครับ",
+  metadata: { title: "Greeting" }
+});
+```
+
+**When to use:** Tests, prototypes, simple documents, or when you don't need explicit paragraph/sentence structure.
+
+### createDocumentFromSentences() - Skip Paragraph Wrapper
+
+When you have sentences but don't need paragraph structure:
+
+```typescript
+import { createDocumentFromSentences, createSentenceFromWords } from 'glost';
+
+const sentence1 = createSentenceFromWords(words1, "th", "thai", "สวัสดี");
+const sentence2 = createSentenceFromWords(words2, "th", "thai", "ขอบคุณ");
+
+const document = createDocumentFromSentences(
+  [sentence1, sentence2],
+  "th",
+  "thai",
+  { title: "Lesson 1" }
+);
+```
+
+**When to use:** When you already have sentences but want minimal boilerplate.
+
+### Before/After Comparison
+
+**Before (Verbose):**
+```typescript
+const sentence = createSentenceFromWords(words, "th", "thai", "สวัสดี");
+const paragraph = createParagraphFromSentences([sentence]);
+const doc = createDocumentFromParagraphs([paragraph], "th", "thai");
+```
+
+**After (Simplified):**
+```typescript
+const doc = createSimpleDocument(words, "th", "thai", { 
+  sentenceText: "สวัสดี" 
+});
+```
+
+**Result:** ~60% less code!
+
+---
+
 ## Document Structure
 
 A GLOST document has this hierarchy:

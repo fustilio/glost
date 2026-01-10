@@ -426,10 +426,10 @@ export type GLOSTSource = NlcstSource & {
  * Extends nlcst WordNode and adds GLOST-specific properties
  */
 export type GLOSTWord = Omit<NlcstWord, "children"> & {
-  /** Transcription data */
-  transcription: TransliterationData;
-  /** Linguistic metadata */
-  metadata: LinguisticMetadata;
+  /** Transcription data (optional - can be added by extensions) */
+  transcription?: TransliterationData;
+  /** Linguistic metadata (optional - can be added by extensions) */
+  metadata?: LinguisticMetadata;
   /** @deprecated Use extras.translations instead */
   shortDefinition?: string;
   /** @deprecated Use extras.translations instead */

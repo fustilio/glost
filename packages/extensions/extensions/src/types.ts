@@ -319,6 +319,44 @@ export interface ProcessorOptions {
    * - "lastWins": Silently use last-write-wins
    */
   conflictStrategy?: "error" | "warn" | "lastWins";
+
+  /**
+   * Enable debug mode for verbose logging
+   * 
+   * When enabled, logs detailed information about:
+   * - Which extensions are running
+   * - How many nodes each processes
+   * - Processing times
+   * - Skip events
+   * 
+   * Default: false
+   * 
+   * @example
+   * ```typescript
+   * processGLOST(doc, extensions, { debug: true });
+   * ```
+   */
+  debug?: boolean;
+
+  /**
+   * Callback invoked when an extension skips a node
+   * 
+   * Useful for debugging why extensions aren't applying.
+   * 
+   * @param extensionId - ID of the extension that skipped
+   * @param node - The node that was skipped
+   * @param reason - Why it was skipped
+   * 
+   * @example
+   * ```typescript
+   * processGLOST(doc, extensions, {
+   *   onSkip: (id, node, reason) => {
+   *     console.log(`${id} skipped node: ${reason}`);
+   *   }
+   * });
+   * ```
+   */
+  onSkip?: (extensionId: string, node: any, reason: string) => void;
 }
 
 /**

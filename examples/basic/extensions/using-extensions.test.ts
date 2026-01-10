@@ -12,14 +12,19 @@ import { describe, it, expect } from "vitest";
 
 import {
   createSimpleWord,
+  createSimpleDocument,
   createSentenceFromWords,
   createParagraphFromSentences,
   createDocumentFromParagraphs,
   getAllWords,
+  getFirstWord,
   getWordText,
+  NODE_TYPES,
 } from "glost";
 
 import {
+  processGLOST,
+  processGLOSTWithMeta,
   processGLOSTWithExtensions,
   processGLOSTWithExtensionsAsync,
   FrequencyExtension,
@@ -41,12 +46,45 @@ function createSampleDocument() {
     return word;
   });
 
-  const sentence = createSentenceFromWords(words, "en", "latin", "Learn linguistics today.");
-  const paragraph = createParagraphFromSentences([sentence]);
-  return createDocumentFromParagraphs([paragraph], "en", "latin", { title: "Language Learning" });
+  return createSimpleDocument(words, "en", "latin", {
+    sentenceText: "Learn linguistics today.",
+    metadata: { title: "Language Learning" },
+  });
 }
 
 describe("Using Built-in Extensions", () => {
+  describe("Simplified API Processing", () => {
+    it("processes with extensions and returns document directly", async () => {
+      const document = createSampleDocument();
+
+      // Returns document directly, no need for .document extraction
+      const processed = await processGLOST(document, [
+        FrequencyExtension,
+        DifficultyExtension,
+      ]);
+
+      expect(processed.type).toBe(NODE_TYPES.ROOT);
+      
+      // Use helper to get first word
+      const firstWord = getFirstWord(processed);
+      expect(firstWord?.extras?.frequency).toBeDefined();
+    });
+
+    it("processes with metadata when needed", async () => {
+      const document = createSampleDocument();
+
+      // Returns full result with metadata
+      const result = await processGLOSTWithMeta(document, [
+        FrequencyExtension,
+        DifficultyExtension,
+      ]);
+
+      expect(result.metadata.appliedExtensions).toContain("frequency");
+      expect(result.metadata.appliedExtensions).toContain("difficulty");
+      expect(result.document.type).toBe(NODE_TYPES.ROOT);
+    });
+  });
+
   describe("Single Extension Processing", () => {
     it("processes a document with FrequencyExtension", () => {
       const document = createSampleDocument();

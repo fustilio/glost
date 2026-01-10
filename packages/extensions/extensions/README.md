@@ -21,6 +21,57 @@ pnpm add glost-extensions
 
 ## Usage
 
+### Simplified Processing (Recommended)
+
+```typescript
+import { processGLOST } from "glost-extensions";
+import { createSimpleDocument } from "glost";
+import { createTranscriptionExtension } from "glost-transcription";
+
+// Create document
+const document = createSimpleDocument(words, "th", "thai");
+
+// Process with extensions - returns document directly
+const processed = await processGLOST(document, [
+  createTranscriptionExtension({ provider, targetLanguage: "th" })
+]);
+
+// Access processed document immediately
+const words = getAllWords(processed);
+```
+
+### Processing with Metadata
+
+When you need detailed processing information:
+
+```typescript
+import { processGLOSTWithMeta } from "glost-extensions";
+
+// Returns full result with metadata
+const result = await processGLOSTWithMeta(document, [
+  myExtension
+]);
+
+console.log(result.document);  // Transformed document
+console.log(result.metadata);  // Processing metadata
+console.log(result.metadata.appliedExtensions);  // Which extensions ran
+```
+
+### Legacy API (Still Supported)
+
+```typescript
+import { 
+  processGLOSTWithExtensions,
+  processGLOSTWithExtensionsAsync 
+} from "glost-extensions";
+
+// Sync processing
+const result = processGLOSTWithExtensions(document, [extension]);
+
+// Async processing
+const result = await processGLOSTWithExtensionsAsync(document, [extension]);
+```
+
 ### Basic Processing
 
 ```typescript
@@ -116,9 +167,19 @@ See the [Extensions README](./src/extensions/README.md) for the full list of bui
 
 ### Processing Functions
 
-- `processGLOSTWithExtensions(doc, extensions, options?)` - Process with extensions
+**Simplified API (Recommended):**
+- `processGLOST(doc, extensions, options?)` - Returns document directly
+- `processGLOSTWithMeta(doc, extensions, options?)` - Returns document with metadata
+
+**Legacy API:**
+- `processGLOSTWithExtensions(doc, extensions, options?)` - Sync processing
 - `processGLOSTWithExtensionsAsync(doc, extensions, options?)` - Async processing
 - `processGLOSTWithExtensionIds(doc, ids, options?)` - Process by IDs
+
+**When to use which:**
+- Use `processGLOST()` for most cases (90%+ of usage)
+- Use `processGLOSTWithMeta()` when you need processing details
+- Legacy APIs remain for backward compatibility
 
 **Options:**
 - `lenient` - Continue on errors (default: false)

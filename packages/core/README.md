@@ -21,6 +21,29 @@ pnpm add glost
 
 ## Usage
 
+### Simple Document Creation (Recommended)
+
+```typescript
+import { createSimpleDocument, getAllWords, NODE_TYPES } from "glost";
+import type { GLOSTWord, GLOSTRoot } from "glost";
+
+// Create a simple document from words
+const words = [
+  createGLOSTWordNode({ value: "hello", lang: "en", script: "latin" }),
+  createGLOSTWordNode({ value: "world", lang: "en", script: "latin" })
+];
+
+const document = createSimpleDocument(words, "en", "latin", {
+  sentenceText: "hello world"
+});
+
+// Access words with type-safe helpers
+const allWords = getAllWords(document);
+console.log(allWords.length); // 2
+```
+
+### Manual Word Creation
+
 ```typescript
 import { createGLOSTWordNode, createGLOSTRootNode } from "glost";
 import type { GLOSTWord, GLOSTRoot } from "glost";

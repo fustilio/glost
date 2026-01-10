@@ -13,8 +13,8 @@ import { createGLOSTWordNode } from 'glost';
 export interface CreateJapaneseWordOptions {
   /** Japanese text */
   text: string;
-  /** Romaji romanization */
-  romaji: string;
+  /** Romaji romanization (optional) */
+  romaji?: string;
   /** Part of speech (default: "unknown") */
   partOfSpeech?: string;
   /** Furigana reading */
@@ -22,16 +22,20 @@ export interface CreateJapaneseWordOptions {
 }
 
 /**
- * Create a Japanese word node with romaji transcription
+ * Create a Japanese word node with optional romaji transcription
  *
  * @example
  * ```typescript
+ * // With transcription
  * const word = createJapaneseWord({
  *   text: "こんにちは",
  *   romaji: "konnichiwa",
  *   partOfSpeech: "interjection",
  *   furigana: "こんにちは"
  * });
+ * 
+ * // Without transcription (to be added by extensions)
+ * const word = createJapaneseWord({ text: "こんにちは" });
  * ```
  */
 export function createJapaneseWord(
@@ -39,19 +43,21 @@ export function createJapaneseWord(
 ): GLOSTWord {
   const { text, romaji, partOfSpeech = "unknown", furigana } = options;
 
-  const transcription: TransliterationData = {
-    romaji: {
-      text: romaji,
-      syllables: [text],
-    },
-  };
-
-  if (furigana) {
-    transcription.furigana = {
-      text: furigana,
-      syllables: [text],
-    };
-  }
+  // Only create transcription if romaji or furigana is provided
+  const transcription: TransliterationData | undefined = (romaji || furigana) ? {
+    ...(romaji && {
+      romaji: {
+        text: romaji,
+        syllables: [text],
+      },
+    }),
+    ...(furigana && {
+      furigana: {
+        text: furigana,
+        syllables: [text],
+      },
+    }),
+  } : undefined;
 
   const metadata: LinguisticMetadata = {
     partOfSpeech,

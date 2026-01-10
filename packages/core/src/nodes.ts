@@ -24,10 +24,10 @@ import type {
 export interface CreateWordNodeOptions {
   /** The text value of the word */
   value: string;
-  /** Transcription data (IPA, romanization, etc.) */
-  transcription: TransliterationData;
-  /** Linguistic metadata (part of speech, etc.) */
-  metadata: LinguisticMetadata;
+  /** Transcription data (IPA, romanization, etc.) - optional */
+  transcription?: TransliterationData;
+  /** Linguistic metadata (part of speech, etc.) - optional */
+  metadata?: LinguisticMetadata;
   /** Language code (ISO-639-1, ISO-639-3, or BCP-47) */
   lang?: LanguageCode;
   /** Script system used */

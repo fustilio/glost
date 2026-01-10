@@ -535,7 +535,7 @@ export function getWordTranscription(
   word: GLOSTWord,
   system: TranscriptionSystem,
 ): string | null {
-  return word.transcription[system]?.text ?? null;
+  return word.transcription?.[system]?.text ?? null;
 }
 
 /**
@@ -545,7 +545,7 @@ export function hasWordTranscription(
   word: GLOSTWord,
   system: TranscriptionSystem,
 ): boolean {
-  return system in word.transcription && !!word.transcription[system]?.text;
+  return !!word.transcription && system in word.transcription && !!word.transcription[system]?.text;
 }
 
 /**

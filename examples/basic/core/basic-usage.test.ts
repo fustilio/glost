@@ -15,18 +15,66 @@ import {
   createGLOSTParagraphNode,
   createGLOSTRootNode,
   createSimpleWord,
+  createSimpleDocument,
+  createDocumentFromSentences,
   createSentenceFromWords,
   createParagraphFromSentences,
   createDocumentFromParagraphs,
   getWordText,
   getWordTranscription,
   getAllWords,
+  getFirstWord,
+  NODE_TYPES,
   type GLOSTWord,
   type TransliterationData,
   type LinguisticMetadata,
 } from "glost";
 
 describe("Basic Usage", () => {
+  describe("Simplified Document Creation", () => {
+    it("creates a document from words with one function call", () => {
+      const words = [
+        createSimpleWord("Hello", "həˈloʊ", "ipa", "interjection"),
+        createSimpleWord("world", "wɜːrld", "ipa", "noun"),
+      ];
+
+      const document = createSimpleDocument(words, "en", "latin", {
+        sentenceText: "Hello world!",
+        metadata: { title: "Greeting" },
+      });
+
+      expect(document.type).toBe(NODE_TYPES.ROOT);
+      expect(document.metadata?.title).toBe("Greeting");
+
+      // Use helper to get first word
+      const firstWord = getFirstWord(document);
+      expect(firstWord).toBeDefined();
+      expect(getWordText(firstWord!)).toBe("Hello");
+
+      // Get all words
+      const allWords = getAllWords(document);
+      expect(allWords).toHaveLength(2);
+    });
+
+    it("creates a document from sentences", () => {
+      const words1 = [createSimpleWord("First", "fɜːrst", "ipa", "adjective")];
+      const words2 = [createSimpleWord("Second", "ˈsekənd", "ipa", "adjective")];
+
+      const sentence1 = createSentenceFromWords(words1, "en", "latin", "First.");
+      const sentence2 = createSentenceFromWords(words2, "en", "latin", "Second.");
+
+      const document = createDocumentFromSentences(
+        [sentence1, sentence2],
+        "en",
+        "latin",
+        { title: "Multiple Sentences" }
+      );
+
+      expect(document.metadata?.title).toBe("Multiple Sentences");
+      expect(getAllWords(document)).toHaveLength(2);
+    });
+  });
+
   describe("Creating Word Nodes", () => {
     it("creates a word with full transcription and metadata", () => {
       const transcription: TransliterationData = {

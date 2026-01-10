@@ -13,22 +13,26 @@ import { createGLOSTWordNode } from 'glost';
 export interface CreateKoreanWordOptions {
   /** Korean text (Hangul) */
   text: string;
-  /** Romanization (RR: Revised Romanization) */
-  romanization: string;
+  /** Romanization (RR: Revised Romanization) - optional */
+  romanization?: string;
   /** Part of speech (default: "unknown") */
   partOfSpeech?: string;
 }
 
 /**
- * Create a Korean word node with romanization
+ * Create a Korean word node with optional romanization
  *
  * @example
  * ```typescript
+ * // With romanization
  * const word = createKoreanWord({
  *   text: "안녕하세요",
  *   romanization: "annyeonghaseyo",
  *   partOfSpeech: "interjection"
  * });
+ * 
+ * // Without romanization (to be added by extensions)
+ * const word = createKoreanWord({ text: "안녕하세요" });
  * ```
  */
 export function createKoreanWord(
@@ -36,12 +40,13 @@ export function createKoreanWord(
 ): GLOSTWord {
   const { text, romanization, partOfSpeech = "unknown" } = options;
 
-  const transcription: TransliterationData = {
+  // Only create transcription if romanization is provided
+  const transcription: TransliterationData | undefined = romanization ? {
     romanization: {
       text: romanization,
       syllables: [text],
     },
-  };
+  } : undefined;
 
   const metadata: LinguisticMetadata = {
     partOfSpeech,

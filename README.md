@@ -23,26 +23,23 @@ npm install glost-th glost-ja
 ```
 
 ```typescript
-import { createSentenceFromWords } from 'glost';
+import { createSimpleDocument, getAllWords } from 'glost';
 import { createThaiWord } from 'glost-th';
-import { getLanguageName } from 'glost-common';
 
+// Create words
 const words = [
-  createThaiWord({ 
-    text: "สวัสดี", 
-    rtgs: "sawatdi", 
-    partOfSpeech: "interjection" 
-  }),
-  createThaiWord({ 
-    text: "ครับ", 
-    rtgs: "khrap", 
-    partOfSpeech: "particle" 
-  })
+  createThaiWord({ text: "สวัสดี" }),
+  createThaiWord({ text: "ครับ" })
 ];
 
-const sentence = createSentenceFromWords(words, "th", "thai", "สวัสดีครับ");
+// Create document in one step
+const document = createSimpleDocument(words, "th", "thai", {
+  sentenceText: "สวัสดีครับ"
+});
 
-console.log(getLanguageName("th")); // "Thai"
+// Access words with type-safe helpers
+const allWords = getAllWords(document);
+console.log(allWords.length); // 2
 ```
 
 ## Packages
