@@ -1,0 +1,27 @@
+{
+  "name": "glost-core-api-example",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Examples demonstrating GLOST core API for working with large documents",
+  "keywords": [
+    "glost",
+    "core",
+    "performance",
+    "example"
+  ],
+  "author": "fustilio",
+  "license": "MIT",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "glost-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

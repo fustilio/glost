@@ -388,7 +388,7 @@ Before publishing your package:
 
 See these for complete examples:
 - [Example Data](../../packages/extensions/src/example-data/README.md)
-- [Composition Pattern Tests](../../examples/extensions/composition-pattern.test.ts)
+- [Composition Pattern Tests](../../examples/demos/glost-extensions-api-example/)
 - [Package Templates](../../packages/extensions/templates/USAGE.md)
 
 ## Need Help?

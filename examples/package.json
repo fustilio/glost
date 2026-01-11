@@ -2,25 +2,30 @@
   "name": "glost-examples",
   "version": "1.0.0",
   "private": true,
-  "description": "Working examples demonstrating GLOST extension packages",
+  "description": "Examples and demos demonstrating GLOST features",
   "scripts": {
-    "example:frequency": "tsx frequency-demo.ts",
-    "example:pos": "tsx pos-demo.ts",
-    "example:difficulty": "tsx difficulty-demo.ts",
-    "example:gender": "tsx gender-demo.ts",
-    "example:clause-segmenter": "tsx clause-segmenter-demo.ts",
-    "examples": "npm run example:frequency && npm run example:pos && npm run example:difficulty && npm run example:gender && npm run example:clause-segmenter"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:demos": "pnpm --filter './demos/**' test",
+    "test:webapps": "pnpm --filter './web-apps/**' test",
+    "test:benchmarks": "pnpm --filter './benchmarks/**' test",
+    "bench": "vitest bench"
   },
   "dependencies": {
-    "glost-frequency": "workspace:*",
-    "glost-pos": "workspace:*",
-    "glost-difficulty": "workspace:*",
-    "glost-gender": "workspace:*",
-    "glost-clause-segmenter": "workspace:*",
-    "glost-extensions": "workspace:*"
+    "glost": "workspace:*",
+    "glost-core": "workspace:*",
+    "glost-extensions": "workspace:*",
+    "glost-processor": "workspace:*",
+    "glost-registry": "workspace:*",
+    "glost-presets": "workspace:*",
+    "glost-transcription": "workspace:*",
+    "glost-th": "workspace:*",
+    "glost-ja": "workspace:*",
+    "glost-ko": "workspace:*"
   },
   "devDependencies": {
     "tsx": "^4.7.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vitest": "^3.0.5"
   }
 }

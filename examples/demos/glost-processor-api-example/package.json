@@ -1,0 +1,30 @@
+{
+  "name": "glost-processor-api-example",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Examples demonstrating GLOST processor API for unified-style pipelines",
+  "keywords": [
+    "glost",
+    "processor",
+    "pipeline",
+    "example"
+  ],
+  "author": "fustilio",
+  "license": "MIT",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "glost": "workspace:*",
+    "glost-processor": "workspace:*",
+    "glost-registry": "workspace:*",
+    "glost-presets": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

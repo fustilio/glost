@@ -1,221 +1,151 @@
-# GLOST X * Y Pattern: Language + Feature Matrix
+# Language × Feature Matrix
 
-This document visualizes how GLOST's modular architecture allows you to **mix and match** language packages with feature frameworks.
+Visual guide showing how GLOST's modular architecture enables combining any language package with any feature framework.
 
-## 🧬 The Pattern
+## The X × Y Pattern
 
 ```
-Language Package (X)  ×  Feature Framework (Y)  =  Specialized Extension
+Language Package (X) × Feature Framework (Y) = Specific Extension
 ```
 
-Each language package provides language-specific constants, utilities, and helpers.  
-Each feature framework provides a generic extension pattern (transcription, translation, etc.).  
-**Combine them to create powerful, specialized extensions!**
+This modular pattern enables:
 
-## 📊 Current Matrix
+- **Reusability**: Each component can be used across multiple combinations
+- **Modularity**: Language and feature logic are separate
+- **Scalability**: Easy to add new languages or features
+- **Consistency**: Uniform API across all combinations
 
-| Language (X) ↓ / Feature (Y) → | Transcription | Translation | Frequency | Difficulty | POS | Clause |
-|--------------------------------|---------------|-------------|-----------|------------|-----|---------|
-| **Thai (th)** | ✅ [Example](./glost-th-transcription-example/) | ⚪ Possible | ⚪ Possible | ⚪ Possible | ⚪ Possible | ⚪ Possible |
-| **Japanese (ja)** | ✅ [Example](./glost-ja-transcription-example/) | ⚪ Possible | ⚪ Possible | ⚪ Possible | ⚪ Possible | ⚪ Possible |
-| **Korean (ko)** | ✅ [Example](./glost-ko-transcription-example/) | ⚪ Possible | ⚪ Possible | ⚪ Possible | ⚪ Possible | ⚪ Possible |
-| **English (en)** | ⚪ Possible | ⚪ Possible | ⚪ Possible | ⚪ Possible | ⚪ Possible | ⚪ Possible |
+## Current Implementation Status
 
-**Legend:**
-- ✅ = Example available
-- ⚪ = Possible (framework exists, just needs implementation)
-- ❌ = Not applicable
+### Language + Transcription
 
-## 🎯 What Each Component Provides
+| Language | Package | Example | Status |
+|----------|---------|---------|--------|
+| **Thai** | `glost-th` | [`glost-th-transcription-example`](./demos/glost-th-transcription-example/) | ✓ Implemented |
+| **Japanese** | `glost-ja` | [`glost-ja-transcription-example`](./demos/glost-ja-transcription-example/) | ✓ Implemented |
+| **Korean** | `glost-ko` | [`glost-ko-transcription-example`](./demos/glost-ko-transcription-example/) | ✓ Implemented |
+| **English** | `glost-en` | [`glost-en-transcription-example`](./demos/glost-en-transcription-example/) | ✓ Implemented |
 
-### Language Packages (X)
+### Full Extension Suites
 
-Each language package (`glost-{lang}`) provides:
+Comprehensive examples showing multiple extensions working together:
 
-1. **Constants** - Language-specific constants
-   - Script Unicode ranges
-   - Transcription scheme definitions
-   - Regular expressions for script detection
-   - Language metadata (ISO codes, script names, direction)
+| Language | Example | Extensions Included | Status |
+|----------|---------|---------------------|--------|
+| **Thai** | [`glost-th-extensions-suite-example`](./demos/glost-th-extensions-suite-example/) | Transcription, Translation, Word Joiner, Syllable Segmenter | ✓ Implemented |
+| **Thai** | [`glost-th-multi-extension-pipeline-example`](./demos/glost-th-multi-extension-pipeline-example/) | Full pipeline with all Thai extensions | ✓ Implemented |
 
-2. **Utilities** - Helper functions
-   - Script detection (`isThaiCharacter`, `isHiragana`, `isHangulSyllable`)
-   - Text analysis (`containsJapaneseCharacters`, `analyzeText`)
-   - Script conversion (`decomposeHangul`, `composeHangul`)
-   - Validation (`isValidTranscriptionScheme`)
+## Available Language Packages (X)
 
-3. **Type Definitions** - TypeScript types
-   - Transcription scheme types
-   - Provider interfaces
-   - Language-specific types
+| Package | Description | Script Systems |
+|---------|-------------|----------------|
+| [`glost-th`](../packages/languages/th/) | Thai language support | Thai script, RTGS romanization |
+| [`glost-ja`](../packages/languages/ja/) | Japanese language support | Hiragana, Katakana, Kanji, Romaji |
+| [`glost-ko`](../packages/languages/ko/) | Korean language support | Hangul, Romanization |
+| [`glost-en`](../packages/languages/en/) | English language support | Latin script, IPA |
 
-4. **Helpers** - Document creation
-   - `createThaiWord()`, `createJapaneseWord()`, `createKoreanWord()`
+## Available Feature Frameworks (Y)
 
-### Feature Frameworks (Y)
+| Package | Description | Use Cases |
+|---------|-------------|-----------|
+| [`glost-transcription`](../packages/extensions/transcription/) | Add transcription/transliteration | Romanization, phonetic notation |
+| [`glost-translation`](../packages/extensions/translation/) | Add translations | Glosses, definitions |
+| [`glost-frequency`](../packages/extensions/frequency/) | Word frequency analysis | Difficulty assessment |
+| [`glost-pos`](../packages/extensions/pos/) | Part-of-speech tagging | Grammar analysis |
+| [`glost-difficulty`](../packages/extensions/difficulty/) | Difficulty scoring | Learning materials |
+| [`glost-gender`](../packages/extensions/gender/) | Grammatical gender | Language learning |
+| [`glost-clause-segmenter`](../packages/extensions/clause-segmenter/) | Clause segmentation | Syntax analysis |
 
-Each feature framework (`glost-{feature}`) provides:
+## Possible Combinations
 
-1. **Extension Pattern** - Generic extension logic
-   - Base extension creator
+Any language can be combined with any feature:
+
+```
+4 Languages × 7 Features = 28 Possible Combinations
+```
+
+### Example Combinations (Not Yet Implemented)
+
+- Thai + Translation
+- Japanese + Frequency
+- Korean + Part-of-Speech
+- English + Difficulty
+- Thai + Gender
+- ... and many more!
+
+## How It Works
+
+Each combination is created by:
+
+1. **Language Package** provides:
+   - Language-specific tokenization
+   - Script system definitions
+   - Language metadata helpers
+
+2. **Feature Framework** provides:
+   - Generic extension interface
    - Processing logic
-   - Document transformation
+   - Data structures
 
-2. **Provider Interface** - What you need to implement
-   - Data lookup interface
-   - Scheme validation
-   - Metadata retrieval
+3. **Combination** creates:
+   - Language-specific implementation
+   - Provider integration
+   - Complete working extension
 
-3. **Type Safety** - TypeScript support
-   - Generic types
-   - Type inference
-   - Provider contracts
+### Example Code
 
-### Current Language Packages
-
-| Package | Scripts | Special Features |
-|---------|---------|------------------|
-| **glost-th** | Thai | Tone marks, syllable segmentation, 5-tone system |
-| **glost-ja** | Hiragana, Katakana, Kanji | Script detection, Jamo analysis, pitch accent |
-| **glost-ko** | Hangul | Jamo decomposition/composition, syllable analysis |
-| **glost-en** | Latin | Basic support |
-
-### Current Feature Frameworks
-
-| Framework | Purpose | What It Does |
-|-----------|---------|--------------|
-| **glost-transcription** | Romanization/phonetics | Adds transcription metadata to word nodes |
-| **glost-translation** | Definitions/glosses | Adds translation metadata to word nodes |
-| **glost-frequency** | Word frequency | Adds frequency metadata based on corpus |
-| **glost-difficulty** | Learning difficulty | Adds difficulty ratings for learners |
-| **glost-pos** | Part of speech | Adds grammatical category metadata |
-| **glost-clause-segmenter** | Syntax analysis | Segments sentences into clauses |
-
-## 🚀 How to Create New Combinations
-
-### Example: Thai + Translation
-
-1. **Use the language package**:
 ```typescript
-import { THAI_TRANSCRIPTION_SCHEMES, isThaiCharacter } from 'glost-th';
-```
+// 1. Import language support
+import { createThaiProcessor } from "glost-th";
 
-2. **Use the feature framework**:
-```typescript
-import { createTranslationExtension } from 'glost-translation';
-```
+// 2. Import feature framework
+import { createTranscriptionExtension } from "glost-transcription";
 
-3. **Implement the provider** with your data:
-```typescript
-const thaiTranslationProvider = {
-  getTranslation(word: string, targetLang: string) {
-    // Your Thai→English dictionary lookup
-    return demoData[word]?.translations[targetLang];
+// 3. Create provider
+const provider = {
+  async transcribe(text: string) {
+    // Language-specific implementation
+    return transcribeThaiToRTGS(text);
   }
 };
+
+// 4. Combine them
+export function createThaiTranscriptionExtension() {
+  return createTranscriptionExtension({
+    targetLanguage: "th",
+    provider,
+  });
+}
 ```
 
-4. **Create the extension**:
-```typescript
-export const thaiTranslationExtension = createTranslationExtension({
-  targetLanguage: 'th',
-  provider: thaiTranslationProvider
-});
-```
+## Adding New Combinations
 
-## 📦 Example Packages
+To add a new language + feature combination:
 
-This directory contains working examples demonstrating the X * Y pattern:
+1. Create a new example directory: `demos/glost-{lang}-{feature}-example/`
+2. Implement the provider interface for that feature
+3. Combine the language package with the feature framework
+4. Add tests to verify functionality
 
-### Transcription Examples
+See [Creating Custom Extensions](../docs/guides/custom-extensions.md) for detailed instructions.
 
-- **[glost-th-transcription-example](./glost-th-transcription-example/)** - Thai transcription (RTGS, Paiboon+, IPA, AUA)
-- **[glost-ja-transcription-example](./glost-ja-transcription-example/)** - Japanese transcription (Romaji, Hepburn, Hiragana)
-- **[glost-ko-transcription-example](./glost-ko-transcription-example/)** - Korean transcription (RR, MR, Yale)
+## Benefits
 
-### Comprehensive Examples
+### For Library Users
 
-- **[glost-extensions-thai](./glost-extensions-thai/)** - Full Thai language learning suite with multiple extensions
+- **Consistency**: Same API across all languages
+- **Flexibility**: Mix and match as needed
+- **Discoverability**: Clear naming patterns
 
-## 🌍 Expanding the Matrix
+### For Contributors
 
-### Adding a New Language
+- **Clarity**: Separate concerns for language vs. feature
+- **Maintainability**: Changes to one don't affect others
+- **Testability**: Test language and feature logic independently
 
-1. Create `packages/languages/{lang}/`
-2. Add `constants.ts` with language-specific constants
-3. Add `helpers.ts` with word creation helpers
-4. Export everything from `index.ts`
-5. Build and publish
+## See Also
 
-**Now you can use it with ANY feature framework!**
-
-### Adding a New Feature
-
-1. Create `packages/extensions/{feature}/`
-2. Define the provider interface
-3. Implement the extension creator
-4. Add type definitions
-
-**Now you can use it with ANY language package!**
-
-## 🎓 Learning Path
-
-**Beginner**: Start with a single example
-- Pick a language you're learning
-- Try the transcription example
-- See how X * Y works
-
-**Intermediate**: Combine multiple features
-- Add translation to transcription
-- Create a pipeline with 2-3 extensions
-- Learn about composition
-
-**Advanced**: Create new combinations
-- Pick a new X * Y pair
-- Implement the provider with your data
-- Contribute back to the ecosystem
-
-## 💡 Design Principles
-
-1. **Modularity** - Each package does one thing well
-2. **Reusability** - Mix and match freely
-3. **Consistency** - Same patterns across all combinations
-4. **Type Safety** - Full TypeScript support
-5. **Documentation** - Every combination is documented
-
-## 🔮 Future Possibilities
-
-### More Languages
-- Spanish (es)
-- French (fr)
-- German (de)
-- Chinese (zh)
-- Arabic (ar)
-- Hindi (hi)
-- ... any language!
-
-### More Features
-- **glost-audio** - Link to pronunciation audio
-- **glost-morphology** - Break words into morphemes
-- **glost-etymology** - Word origin information
-- **glost-collocations** - Common word combinations
-- **glost-examples** - Usage examples
-- ... any feature!
-
-### Matrix Growth
-
-With **10 languages** × **10 features** = **100 possible combinations**  
-With **50 languages** × **20 features** = **1,000 possible combinations**
-
-**All following the same pattern!**
-
-## 📚 See Also
-
-- [Main README](../README.md) - Project overview
-- [Core Documentation](../docs/packages/core.md) - GLOST core concepts
-- [Extension Guide](../docs/guides/custom-extensions.md) - Creating custom extensions
-- [Architecture](../docs/ARCHITECTURE_SUMMARY.md) - System architecture
-
----
-
-**The power of X * Y: Infinite combinations from finite components.** 🎯
+- [Examples README](./README.md) - Full list of examples
+- [GLOST Architecture](../docs/ARCHITECTURE_SUMMARY.md) - System overview
+- [Extension Guide](../docs/guides/custom-extensions.md) - Creating extensions
+- [Multi-Language Architecture](../docs/guides/multi-language-architecture.md) - Design patterns

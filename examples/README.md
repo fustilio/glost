@@ -1,105 +1,163 @@
-# Mix & Match Pattern Examples
+# GLOST Examples
 
-Examples demonstrating the **X * Y modular pattern** for GLOST extensions.
+Comprehensive examples and demos demonstrating GLOST features organized by category.
 
-## Visual Matrix
+## 📂 Structure
 
-See **[X * Y Matrix Documentation](./MATRIX.md)** for all possible language + feature combinations.
+Examples are organized into three main categories:
 
-## The Pattern
+- **`demos/`** - Simple, focused examples demonstrating specific features
+- **`web-apps/`** - Full web applications with UI (built with Vite)
+- **`benchmarks/`** - Performance tests and stress tests
 
-```
-Language Package (X) × Feature Framework (Y) = Specific Extension
-```
+## 🚀 Getting Started
 
-This enables reusability, modularity, scalability, and consistency across language and feature combinations.
+### Quick Start
 
-## Examples
-
-### Language + Transcription
-
-| Example | X (Language) | Y (Feature) | Status |
-|---------|-------------|-------------|--------|
-| [glost-th-transcription-example](./glost-th-transcription-example/) | `glost-th` | `glost-transcription` | 6 tests ✓ |
-| [glost-ja-transcription-example](./glost-ja-transcription-example/) | `glost-ja` | `glost-transcription` | 4 tests ✓ |
-| [glost-ko-transcription-example](./glost-ko-transcription-example/) | `glost-ko` | `glost-transcription` | 4 tests ✓ |
-
-### Full Extension Suite
-
-| Example | Description | Extensions |
-|---------|-------------|------------|
-| [glost-extensions-thai](./glost-extensions-thai/) | Comprehensive Thai extension suite | Transcription, Translation, Word Joiner, Syllable Segmenter, Pipelines |
-
-## Quick Start
-
-Each example follows the same structure:
-
-```typescript
-// 1. Import language support
-import { /* language helpers */ } from "glost-{lang}";
-
-// 2. Import feature framework
-import { create{Feature}Extension } from "glost-{feature}";
-
-// 3. Create provider
-const provider = { /* Implementation */ };
-
-// 4. Combine them
-export function create{Lang}{Feature}Extension() {
-  return create{Feature}Extension({
-    targetLanguage: "{lang}",
-    provider,
-  });
-}
-```
-
-## Available Combinations
-
-### Current Examples
-- Thai + Transcription
-- Japanese + Transcription
-- Korean + Transcription
-
-### Possible Combinations
-Any language package can be combined with any feature framework.
-
-## Language Packages (X)
-
-| Package | Description |
-|---------|-------------|
-| [`glost-th`](../packages/languages/th/) | Thai language support |
-| [`glost-ja`](../packages/languages/ja/) | Japanese language support |
-| [`glost-ko`](../packages/languages/ko/) | Korean language support |
-| [`glost-en`](../packages/languages/en/) | English language support |
-
-## Feature Frameworks (Y)
-
-| Package | Description |
-|---------|-------------|
-| [`glost-transcription`](../packages/extensions/transcription/) | Transcription extension framework |
-| [`glost-translation`](../packages/extensions/translation/) | Translation extension framework |
-| [`glost-frequency`](../packages/extensions/frequency/) | Frequency analysis framework |
-
-## Testing
-
-Each example includes comprehensive tests:
+The best place to start is the **Quick Start Example**:
 
 ```bash
-cd examples/glost-{lang}-transcription-example
+cd demos/glost-quick-start-example
 pnpm test
 ```
 
-Tests verify transcriptions are added correctly, multiple words and schemes work, and non-target languages are ignored.
+This demonstrates basic GLOST usage: creating documents, working with nodes, and tree traversal.
 
-## See Also
+## 📚 Examples by Category
 
-- **[X * Y Matrix](./MATRIX.md)** - Visual guide to all language + feature combinations
-- [GLOST Core](../packages/core/) - Core GLOST types and utilities
-- [GLOST Extensions](../packages/extensions/extensions/) - Extension processor
-- [Language Packages](../packages/languages/) - All language support packages
-- [Extension Frameworks](../packages/extensions/) - All extension frameworks
-- [Creating Custom Extensions](../docs/guides/custom-extensions.md) - Extension development guide
+### Language-Agnostic Demos
 
-## License
+Examples that work with any language:
+
+| Example | Description | Tests |
+|---------|-------------|-------|
+| [`glost-quick-start-example`](./demos/glost-quick-start-example/) | Basic GLOST operations and document creation | ✓ |
+| [`glost-core-api-example`](./demos/glost-core-api-example/) | Core API usage with large documents | ✓ |
+| [`glost-extensions-api-example`](./demos/glost-extensions-api-example/) | Extension system patterns and composition | ✓ |
+| [`glost-processor-api-example`](./demos/glost-processor-api-example/) | Unified-style processor API with pipelines | ✓ |
+
+### Language-Specific Demos
+
+Examples demonstrating language-specific features:
+
+| Example | Language | Description | Tests |
+|---------|----------|-------------|-------|
+| [`glost-ja-transcription-example`](./demos/glost-ja-transcription-example/) | Japanese | Japanese transcription with romaji | ✓ |
+| [`glost-ko-transcription-example`](./demos/glost-ko-transcription-example/) | Korean | Korean transcription with romanization | ✓ |
+| [`glost-th-transcription-example`](./demos/glost-th-transcription-example/) | Thai | Thai transcription with RTGS | ✓ |
+| [`glost-th-extensions-suite-example`](./demos/glost-th-extensions-suite-example/) | Thai | Comprehensive Thai extension suite | ✓ |
+| [`glost-th-multi-extension-pipeline-example`](./demos/glost-th-multi-extension-pipeline-example/) | Thai | Multi-extension pipeline demonstration | ✓ |
+
+### Web Applications
+
+Full-featured web applications with UI:
+
+| Example | Description | Tech Stack |
+|---------|-------------|------------|
+| [`glost-composition-demo-example`](./web-apps/glost-composition-demo-example/) | Interactive composition patterns demo | Vite + TypeScript |
+| [`glost-transcription-demo-example`](./web-apps/glost-transcription-demo-example/) | Interactive transcription playground | Vite + TypeScript |
+
+### Performance & Benchmarks
+
+Stress tests and performance benchmarks:
+
+| Example | Description | Focus |
+|---------|-------------|-------|
+| [`glost-stress-tests-example`](./benchmarks/glost-stress-tests-example/) | Large document stress tests | Performance |
+
+## 🧪 Running Examples
+
+### Run All Tests
+
+```bash
+# From examples/ directory
+pnpm test
+```
+
+### Run Category Tests
+
+```bash
+# Test all demos
+pnpm test:demos
+
+# Test web apps
+pnpm test:webapps
+
+# Test benchmarks
+pnpm test:benchmarks
+```
+
+### Run Specific Example
+
+```bash
+# Navigate to example
+cd demos/glost-quick-start-example
+
+# Run tests
+pnpm test
+
+# Watch mode
+pnpm test:watch
+```
+
+### Run Web Apps
+
+```bash
+# Navigate to web app
+cd web-apps/glost-composition-demo-example
+
+# Start dev server
+pnpm dev
+
+# Build for production
+pnpm build
+```
+
+## 📋 Language × Feature Matrix
+
+See **[MATRIX.md](./MATRIX.md)** for a visual guide showing all possible language + feature combinations.
+
+## 🏗️ Example Structure
+
+Each example follows a consistent structure:
+
+```
+glost-{name}-example/
+├── package.json          # Dependencies and scripts
+├── README.md             # Example-specific documentation
+├── tsconfig.json         # TypeScript configuration
+├── vitest.config.ts      # Test configuration (if applicable)
+└── src/
+    ├── index.ts          # Main entry point
+    └── __tests__/        # Co-located tests
+        └── *.test.ts
+```
+
+## 📖 Learn More
+
+### Core Concepts
+
+- [Getting Started Guide](../docs/getting-started.md)
+- [GLOST Core Documentation](../docs/packages/core.md)
+- [Extension Guide](../docs/guides/custom-extensions.md)
+
+### API Documentation
+
+- [Processor API](../docs/packages/processor.md)
+- [Registry API](../docs/packages/registry.md)
+- [Presets](../docs/packages/presets.md)
+
+### Language Support
+
+- [Thai Language](../packages/languages/th/)
+- [Japanese Language](../packages/languages/ja/)
+- [Korean Language](../packages/languages/ko/)
+- [English Language](../packages/languages/en/)
+
+## 🤝 Contributing
+
+Want to add a new example? See [CONTRIBUTING.md](../CONTRIBUTING.md).
+
+## 📝 License
 
 MIT

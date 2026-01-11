@@ -18,9 +18,9 @@ import type {
   GLOSTSentence,
   GLOSTWord,
   LanguageCode,
-} from "glost";
+} from "glost-core";
 import { visit } from "unist-util-visit";
-import { getWordText, getAllClauses } from "glost";
+import { getWordText, getAllClauses } from "glost-core";
 
 /**
  * Negation type

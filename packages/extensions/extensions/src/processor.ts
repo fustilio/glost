@@ -12,7 +12,7 @@ import type {
   GLOSTParagraph,
   GLOSTRoot,
   GLOSTExtras,
-} from "glost";
+} from "glost-core";
 import { visit } from "unist-util-visit";
 import type {
   GLOSTExtension,

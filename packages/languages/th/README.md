@@ -146,7 +146,7 @@ This is a **pure language support package** containing:
 - ✅ Thai GLOST node helpers
 - ✅ Type definitions and interfaces
 
-**Note:** This package does NOT include demo data or test vocabularies. For examples with demo data, see the `glost-extensions-thai` example package.
+**Note:** This package does NOT include demo data or test vocabularies. For examples with demo data, see the `glost-th-extensions-suite-example` example package.
 
 ## API Reference
 
@@ -250,7 +250,7 @@ Each entry includes:
 
 ## Examples
 
-See the [`examples/glost-extensions-thai/examples/`](../../examples/glost-extensions-thai/examples/) directory for complete examples:
+See the [`examples/demos/glost-th-extensions-suite-example/examples/`](../../examples/demos/glost-th-extensions-suite-example/examples/) directory for complete examples:
 
 - **`thai-constants-demo.ts`** - Comprehensive demo of all constants and utilities
 
@@ -281,7 +281,7 @@ export const ThaiTranscriptionExtension = createTranscriptionExtension({
 });
 ```
 
-**For complete examples with demo data**, see the [`glost-extensions-thai`](../../examples/glost-extensions-thai/) example package.
+**For complete examples with demo data**, see the [`glost-th-extensions-suite-example`](../../examples/demos/glost-th-extensions-suite-example/) example package.
 
 ### Thai Text Processing
 

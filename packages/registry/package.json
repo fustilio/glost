@@ -1,0 +1,45 @@
+{
+  "name": "glost-registry",
+  "version": "0.5.0",
+  "description": "Plugin registry with discovery, metadata, and validation for GLOST",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "glost",
+    "registry",
+    "plugin",
+    "discovery",
+    "metadata"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "glost-core": "workspace:*",
+    "glost-extensions": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.6.0"
+  },
+  "peerDependencies": {
+    "glost-core": "^0.5.0"
+  }
+}

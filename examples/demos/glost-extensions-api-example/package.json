@@ -1,0 +1,32 @@
+{
+  "name": "glost-extensions-api-example",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Examples demonstrating GLOST extension system usage",
+  "keywords": [
+    "glost",
+    "extensions",
+    "example"
+  ],
+  "author": "fustilio",
+  "license": "MIT",
+  "scripts": {
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "glost": "workspace:*",
+    "glost-core": "workspace:*",
+    "glost-extensions": "workspace:*",
+    "glost-transcription": "workspace:*",
+    "glost-frequency": "workspace:*",
+    "glost-difficulty": "workspace:*",
+    "glost-pos": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

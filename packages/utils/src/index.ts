@@ -114,5 +114,5 @@ export {
   getLanguageFallback,
   normalizeLanguageTag,
   isValidLanguageTag,
-} from "glost";
+} from "glost-core";
 

@@ -7,7 +7,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTRoot, GLOSTNode } from 'glost';
+import type { GLOSTRoot, GLOSTNode } from 'glost-core';
 
 /**
  * Options for transcription schema migration

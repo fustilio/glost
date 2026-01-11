@@ -4,8 +4,8 @@
  * Normalize content for GLOST conversion
  */
 
-import type { GLOSTRoot, GLOSTWord, LanguageCode } from "glost";
-import { getAllWords } from "glost";
+import type { GLOSTRoot, GLOSTWord, LanguageCode } from "glost-core";
+import { getAllWords } from "glost-core";
 
 /**
  * Normalized content structure

@@ -44,7 +44,7 @@
     },
     "./segmenter": {
       "types": "./dist/segmenter/index.d.ts",
-      "default": "./dist/segmenter/js"
+      "default": "./dist/segmenter/index.js"
     }
   },
   "files": [

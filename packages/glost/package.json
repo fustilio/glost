@@ -1,0 +1,60 @@
+{
+  "name": "glost",
+  "version": "0.5.0",
+  "description": "GLOST - Glossed Syntax Tree for language learning and multilingual text processing",
+  "author": "fustilio",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fustilio/glost.git",
+    "directory": "packages/glost"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./processor": {
+      "types": "./dist/processor.d.ts",
+      "default": "./dist/processor.js"
+    },
+    "./registry": {
+      "types": "./dist/registry.d.ts",
+      "default": "./dist/registry.js"
+    },
+    "./presets": {
+      "types": "./dist/presets.d.ts",
+      "default": "./dist/presets.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "glost-core": "workspace:*",
+    "glost-processor": "workspace:*",
+    "glost-registry": "workspace:*",
+    "glost-presets": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.3"
+  },
+  "keywords": [
+    "glost",
+    "glossed-syntax-tree",
+    "nlcst",
+    "multilingual",
+    "language-learning",
+    "linguistics",
+    "syntax-tree",
+    "unist",
+    "processor",
+    "pipeline",
+    "unified"
+  ]
+}

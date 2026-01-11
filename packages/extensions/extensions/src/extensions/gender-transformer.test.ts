@@ -10,8 +10,8 @@ import {
 } from "./gender-transformer";
 import { processGLOSTWithExtensions } from "../processor.js";
 import { createMockGLOSTDocument } from "../test-utils.js";
-import type { GLOSTWord, GLOSTSentence } from "glost";
-import { getAllWords, getAllSentences, getWordText } from "glost";
+import type { GLOSTWord, GLOSTSentence } from "glost-core";
+import { getAllWords, getAllSentences, getWordText } from "glost-core";
 
 describe("GenderTransformerExtension", () => {
   it("should have correct metadata", () => {

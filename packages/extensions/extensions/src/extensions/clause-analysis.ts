@@ -7,7 +7,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTRoot, GLOSTClause } from "glost";
+import type { GLOSTRoot, GLOSTClause } from "glost-core";
 import { visit } from "unist-util-visit";
 import type { GLOSTExtension, ExtensionContext } from "../types.js";
 import { ExtensionDependencyError } from "../errors.js";

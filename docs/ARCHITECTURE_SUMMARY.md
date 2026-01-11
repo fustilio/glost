@@ -93,4 +93,4 @@ import { ThaiPaiboonGoogleExtension } from
 - [Naming Conventions](conventions/naming.md)
 - [Creating Data Source Packages](guides/creating-data-source-packages.md)
 - [Package Templates Usage](../packages/extensions/templates/USAGE.md)
-- [Composition Pattern Examples](../examples/extensions/composition-pattern.test.ts)
+- [Composition Pattern Examples](../examples/demos/glost-extensions-api-example/)

@@ -1,0 +1,20 @@
+{
+  "name": "glost-transcription-demo-example",
+  "private": true,
+  "version": "0.0.4",
+  "type": "module",
+  "description": "Simple transcription demo using extension packages",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "glost": "workspace:*",
+    "glost-extensions": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "vite": "^5.2.0"
+  }
+}

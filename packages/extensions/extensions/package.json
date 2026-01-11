@@ -14,30 +14,37 @@
   "types": "./src/index.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     },
     "./processor": {
-      "types": "./src/processor.ts",
-      "default": "./src/processor.ts"
+      "types": "./dist/processor.d.ts",
+      "default": "./dist/processor.js"
     },
     "./registry": {
-      "types": "./src/registry.ts",
-      "default": "./src/registry.ts"
+      "types": "./dist/registry.d.ts",
+      "default": "./dist/registry.js"
     },
     "./extensions": {
-      "types": "./src/extensions/index.ts",
-      "default": "./src/extensions/index.ts"
+      "types": "./dist/extensions/index.d.ts",
+      "default": "./dist/extensions/index.js"
+    },
+    "./example-data": {
+      "types": "./dist/example-data/index.d.ts",
+      "default": "./dist/example-data/index.js"
     }
   },
+  "sideEffects": false,
   "scripts": {
     "build": "tsc",
+    "build:example-data": "tsc -p tsconfig.example-data.json",
+    "build:all": "pnpm run build && pnpm run build:example-data",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
     "lint": "echo 'No linting configured'"
   },
   "dependencies": {
-    "glost": "workspace:*",
+    "glost-core": "workspace:*",
     "glost-common": "workspace:*",
     "unist-util-visit": "^5.0.0"
   },

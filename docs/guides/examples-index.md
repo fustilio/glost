@@ -1,170 +1,207 @@
-# Extension Examples Index
+# Examples Index
 
-Quick reference for all extension examples with expected output previews.
+Comprehensive guide to GLOST examples organized by category and use case.
 
-## 🔢 Frequency Extension
+## 📂 Organization
 
-**File**: `examples/frequency-demo.ts`
+Examples are organized into three main categories:
 
-**What it shows**:
-```
-Input: "The ephemeral nature of social media posts makes archival challenging"
+1. **[demos/](../../examples/demos/)** - Focused examples demonstrating specific features
+2. **[web-apps/](../../examples/web-apps/)** - Full web applications with UI
+3. **[benchmarks/](../../examples/benchmarks/)** - Performance tests and stress tests
 
-Output:
-  ■■■■ "the"        → Very Common (6M occurrences) Priority: 4/4
-  ■□□□ "ephemeral"  → Rare (43 occurrences)        Priority: 1/4
-  ■■■□ "nature"     → Common (14K occurrences)     Priority: 3/4
-  
-Recommendation: Focus on 6 common words, skip 2 rare words
-Text difficulty: Intermediate (20% rare vocabulary)
-```
+## 🚀 Quick Start
 
-**Learn**: Prioritize high-impact vocabulary
+New to GLOST? Start here:
 
----
+1. **[Quick Start Example](../../examples/demos/glost-quick-start-example/)** - Basic GLOST operations
+2. **[Core API Example](../../examples/demos/glost-core-api-example/)** - Working with large documents
+3. **[Extensions API Example](../../examples/demos/glost-extensions-api-example/)** - Extension patterns
+4. **[Processor API Example](../../examples/demos/glost-processor-api-example/)** - Unified-style pipelines
 
-## 📝 Part-of-Speech Extension
+## 📚 By Category
 
-**File**: `examples/pos-demo.ts`
+### Language-Agnostic Examples
 
-**What it shows**:
-```
-Input: "The quick brown fox jumps over the lazy dog"
+Examples that work with any language:
 
-Output:
-  🔵 "the"    → Article
-  🟢 "quick"  → Adjective
-  🟢 "brown"  → Adjective
-  🔴 "fox"    → Noun
-  🟡 "jumps"  → Verb
-  
-Pattern: [Art][Adj][Adj][Noun][Verb]
-Adjective-Noun pairs found: "quick fox", "brown fox", "lazy dog"
-```
+| Example | Description | Concepts |
+|---------|-------------|----------|
+| [Quick Start](../../examples/demos/glost-quick-start-example/) | Basic document creation and manipulation | Nodes, Trees, Traversal |
+| [Core API](../../examples/demos/glost-core-api-example/) | Large document handling | Performance, Memory |
+| [Extensions API](../../examples/demos/glost-extensions-api-example/) | Extension system usage | Composition, Plugins |
+| [Processor API](../../examples/demos/glost-processor-api-example/) | Unified-style pipelines | Fluent API, Presets |
 
-**Learn**: Grammar patterns become visible
+### Language-Specific Examples
 
----
+Examples demonstrating language-specific features:
 
-## 📊 Difficulty Extension
+#### Japanese
 
-**File**: `examples/difficulty-demo.ts`
+| Example | Description | Features |
+|---------|-------------|----------|
+| [Japanese Transcription](../../examples/demos/glost-ja-transcription-example/) | Japanese romaji transcription | Hiragana, Katakana, Kanji |
 
-**What it shows**:
-```
-Text 1: "I go to school"
-  🟢 Beginner (100% A1-A2 words)
-  
-Text 2: "The government announced regulations"
-  🟡 Intermediate (60% B1-B2 words)
-  
-Text 3: "The aforementioned protocol requires meticulous attention"
-  🔴 Advanced (44% C1-C2 words)
-  
-Recommendation: Student at B1 level should read Text 2
-```
+#### Korean
 
-**Learn**: Automatic text leveling for adaptive learning
+| Example | Description | Features |
+|---------|-------------|----------|
+| [Korean Transcription](../../examples/demos/glost-ko-transcription-example/) | Korean romanization | Hangul, Jamo decomposition |
 
----
+#### Thai
 
-## ⚤ Gender Extension
+| Example | Description | Features |
+|---------|-------------|----------|
+| [Thai Transcription](../../examples/demos/glost-th-transcription-example/) | Thai RTGS romanization | Thai script, Tone marks |
+| [Thai Extensions Suite](../../examples/demos/glost-th-extensions-suite-example/) | Comprehensive Thai extensions | Multiple extensions, Pipelines |
+| [Thai Multi-Extension Pipeline](../../examples/demos/glost-th-multi-extension-pipeline-example/) | Full Thai processing pipeline | Extension composition |
 
-**File**: `examples/gender-demo.ts`
+### Web Applications
 
-**What it shows**:
-```
-French Input: "chat" "maison" "livre"
+Interactive demos with UI:
 
-Output:
-  ♂ "chat"   → Masculine → use "le chat"  ✓
-  ♀ "maison" → Feminine  → use "la maison" ✓
-  ♂ "livre"  → Masculine → use "le livre"  ✓
-  
-Common mistake: "la chat" ❌
-Correct: "le chat" ✅
+| Example | Description | Tech Stack |
+|---------|-------------|------------|
+| [Composition Demo](../../examples/web-apps/glost-composition-demo-example/) | Interactive extension composition | Vite, TypeScript |
+| [Transcription Demo](../../examples/web-apps/glost-transcription-demo-example/) | Live transcription playground | Vite, TypeScript |
 
-Pattern discovered: Words ending in "-tion" are 96% feminine
-```
+### Performance & Benchmarks
 
-**Learn**: Master article selection with gender data
+| Example | Description | Focus |
+|---------|-------------|-------|
+| [Stress Tests](../../examples/benchmarks/glost-stress-tests-example/) | Large document stress tests | Performance, Memory |
 
----
+## 🎯 By Use Case
 
-## 🔗 Clause Segmenter Extension
+### I want to...
 
-**File**: `examples/clause-segmenter-demo.ts`
+#### Learn the Basics
 
-**What it shows**:
-```
-Input: "The student who studied hard passed the exam because she understood"
+→ Start with [Quick Start Example](../../examples/demos/glost-quick-start-example/)
 
-Output:
-  [Main]     The student passed the exam
-  [Relative] who studied hard (describes which student)
-  [Causal]   because she understood (explains why)
-  
-Complexity: 3 clauses (Complex sentence)
-Core meaning: "student passed" (2 words)
-Supporting details: modifier + reason (7 words)
-```
+#### Build a Language Learning App
 
-**Learn**: Break complex sentences into digestible chunks
+→ See [Processor API Example](../../examples/demos/glost-processor-api-example/)
 
----
+#### Add Transcription to My Language
 
-## Running the Examples
+→ Check language-specific transcription examples:
+- [Japanese](../../examples/demos/glost-ja-transcription-example/)
+- [Korean](../../examples/demos/glost-ko-transcription-example/)
+- [Thai](../../examples/demos/glost-th-transcription-example/)
+
+#### Create Custom Extensions
+
+→ Study [Extensions API Example](../../examples/demos/glost-extensions-api-example/)
+
+#### Optimize Performance
+
+→ Review [Core API Example](../../examples/demos/glost-core-api-example/) and [Stress Tests](../../examples/benchmarks/glost-stress-tests-example/)
+
+#### Build a Web Interface
+
+→ Explore web app examples:
+- [Composition Demo](../../examples/web-apps/glost-composition-demo-example/)
+- [Transcription Demo](../../examples/web-apps/glost-transcription-demo-example/)
+
+## 🧪 Running Examples
+
+### All Examples
 
 ```bash
-# Single demo
-npm run example:frequency
-
-# All demos
-npm run examples
+cd examples
+pnpm test
 ```
 
-## Expected Runtime
+### By Category
 
-- Frequency demo: ~200ms
-- POS demo: ~150ms
-- Difficulty demo: ~180ms
-- Gender demo: ~100ms
-- Clause Segmenter demo: ~120ms
+```bash
+# Demos
+pnpm test:demos
 
-**Total**: ~750ms for all demos
+# Web Apps
+pnpm test:webapps
 
-## What You'll See
+# Benchmarks
+pnpm test:benchmarks
+```
 
-Each demo follows this structure:
+### Specific Example
 
-1. **Header**: What the demo demonstrates
-2. **Input**: Sample text
-3. **Processing**: Word-by-word/sentence-by-sentence analysis
-4. **Output**: Structured results with visual indicators
-5. **Value**: Concrete benefit demonstrated
+```bash
+cd examples/demos/glost-quick-start-example
+pnpm test
+```
 
-## Data Quality
+### Web Apps (Dev Mode)
 
-All demos use **real, validated data**:
+```bash
+cd examples/web-apps/glost-composition-demo-example
+pnpm dev
+```
 
-- ✅ British National Corpus (frequency)
-- ✅ Stanford CoreNLP (POS)
-- ✅ Official CEFR lists (difficulty)
-- ✅ Validated dictionaries (gender)
-- ✅ Penn Treebank rules (clauses)
+## 📖 Additional Resources
 
-**Zero heuristics. Zero guessing.**
+### Core Concepts
 
-## Next Steps
+- [Getting Started](../getting-started.md)
+- [GLOST Core](../packages/core.md)
+- [Architecture Summary](../ARCHITECTURE_SUMMARY.md)
 
-After running examples:
+### Extension Development
 
-1. Read full guides in `docs/guides/`
-2. Check integration patterns in `MIGRATION_EXTENSIONS.md`
-3. Obtain data for your target language
-4. Implement your own providers
-5. Build your application
+- [Creating Custom Extensions](./custom-extensions.md)
+- [Using Extensions](./using-extensions.md)
+- [Extension Guides](./README.md)
+
+### API Documentation
+
+- [Processor API](./processor-api.md)
+- [Registry](./registry.md)
+- [Presets](../packages/presets.md)
+
+### Language Support
+
+- [Multi-Language Architecture](./multi-language-architecture.md)
+- [Japanese Guide](./japanese.md)
+- [Thai Guide](./thai.md)
+
+## 🗺️ Language × Feature Matrix
+
+See [MATRIX.md](../../examples/MATRIX.md) for a complete matrix showing all possible language + feature combinations.
+
+## 🏗️ Example Structure
+
+All examples follow a consistent structure:
+
+```
+glost-{name}-example/
+├── package.json          # Dependencies and scripts
+├── README.md             # Example-specific docs
+├── tsconfig.json         # TypeScript config
+├── vitest.config.ts      # Test config (optional)
+└── src/
+    ├── index.ts          # Main entry point
+    └── __tests__/        # Co-located tests
+        └── *.test.ts
+```
+
+## 🤝 Contributing
+
+Want to add a new example? See [CONTRIBUTING.md](../../CONTRIBUTING.md) for guidelines.
+
+### Naming Conventions
+
+- **Language-Agnostic**: `glost-{feature}-example`
+- **Language-Specific**: `glost-{lang}-{feature}-example`
+- **Web Apps**: `glost-{name}-demo-example`
+- **Benchmarks**: `glost-{name}-example`
+
+All examples:
+- Must be marked `"private": true`
+- Should include tests in `src/__tests__/`
+- Should have a descriptive README.md
 
 ---
 
-**Pro Tip**: Run demos with your own text by modifying the input strings in each file. See what happens with real content from your domain!
+**For the most up-to-date list of examples, see [examples/README.md](../../examples/README.md)**

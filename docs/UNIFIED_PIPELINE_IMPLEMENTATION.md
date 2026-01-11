@@ -1,0 +1,167 @@
+# Unified-Style Pipeline & Registry - Implementation Summary
+
+## Overview
+
+GLOST v0.5.0 implements a comprehensive unified/remark-style pipeline and registry system, transforming it from a good extension system into a powerful, discoverable plugin ecosystem.
+
+## What Was Built
+
+### 1. Unified-Style Processor API ✅
+
+**Package:** `glost-processor`
+
+Fluent processor API similar to unified/remark:
+
+```typescript
+const processor = glost()
+  .use(transcription, { scheme: "ipa" })
+  .use(translation, { target: "en" })
+  .use(frequency)
+  .freeze();
+
+const result = await processor.process(document);
+```
+
+**Features:**
+- Fluent `.use()` chaining
+- Plugin functions, extension objects, or string IDs
+- Preset support
+- Hooks and middleware (before, after, onError, onSkip, onProgress)
+- Data storage for sharing state
+- Freezing for reuse
+- Enhanced error handling and processing reports
+
+**Documentation:** [Processor API Guide](./guides/processor-api.md)
+
+### 2. Enhanced Plugin Registry ✅
+
+**Package:** `glost-registry`
+
+Comprehensive plugin registry with discovery, metadata, and validation:
+
+```typescript
+pluginRegistry.register(myExtension, {
+  version: "1.0.0",
+  category: "enhancer",
+  tags: ["transcription"],
+  supports: { languages: ["th"], async: true }
+});
+
+const plugins = pluginRegistry.search({ language: "th" });
+const report = pluginRegistry.checkConflicts(["plugin1", "plugin2"]);
+```
+
+**Features:**
+- Rich plugin metadata
+- Discovery and search
+- Validation (options, compatibility, dependencies)
+- Conflict detection
+- Dependency resolution
+- Statistics
+
+**Documentation:** [Registry Guide](./guides/registry.md)
+
+### 3. CLI Tools ✅
+
+**Package:** `glost-cli`
+
+Command-line tools for plugin management:
+
+```bash
+glost plugins list
+glost plugins search transcription
+glost plugins info transcription
+glost plugins validate transcription translation frequency
+glost plugins create MyPlugin
+```
+
+**Documentation:** [CLI README](../packages/cli/README.md)
+
+### 4. Presets System ✅
+
+**Package:** `glost-presets`
+
+Pre-configured plugin combinations for common use cases:
+
+```typescript
+import { languageLearningPreset } from "glost-presets";
+
+const processor = glost()
+  .use(languageLearningPreset);
+```
+
+**Built-in Presets:**
+- **Language Learning** - Full stack (transcription, translation, frequency, difficulty, POS)
+- **Reading App** - Interactive reading (transcription, translation, clause segmentation)
+- **Vocabulary Builder** - Word focus (frequency, difficulty, translation)
+- **Grammar Analyzer** - Grammar focus (POS, clause segmentation, gender)
+- **Minimal** - Just the essentials (transcription, translation)
+
+**Documentation:** [Presets README](../packages/presets/README.md)
+
+## Architecture
+
+```
+glost/
+├── packages/
+│   ├── glost/              # Main facade package
+│   ├── glost-core/         # Core types and nodes
+│   ├── processor/          # Fluent processor API
+│   ├── registry/           # Plugin registry
+│   ├── presets/            # Preset configurations
+│   └── cli/                # CLI tools
+```
+
+## Benefits
+
+### For Users
+1. **Intuitive API** - Familiar unified/remark-style interface
+2. **Plugin Discovery** - Easily find and explore plugins
+3. **Safe Composition** - Automatic conflict detection
+4. **Presets** - Quick setup with common configurations
+5. **CLI Tools** - Command-line plugin management
+
+### For Plugin Authors
+1. **Rich Metadata** - Describe capabilities and requirements
+2. **Discoverability** - Users can find plugins easily
+3. **Validation** - Automatic option validation
+4. **Conflict Declaration** - Declare incompatibilities
+
+### For the Ecosystem
+1. **Standardization** - Common patterns and practices
+2. **Interoperability** - Plugins work together seamlessly
+3. **Growth** - Easy to add new plugins
+4. **Quality** - Validation ensures quality
+
+## Backwards Compatibility
+
+The old API still works but is deprecated:
+
+```typescript
+// Old API (deprecated, will be removed in v1.0)
+import { processGLOSTWithExtensions } from "glost-extensions";
+const result = processGLOSTWithExtensions(doc, [ext1, ext2]);
+
+// New API (recommended)
+import { glost } from "glost";
+const result = await glost().use(ext1).use(ext2).process(document);
+```
+
+## Migration
+
+See the [Migration Guide](./migration/MIGRATION_v0.4_to_v0.5.md) for detailed migration instructions.
+
+## Status
+
+✅ **All features implemented and documented**
+✅ **4 new packages created**
+✅ **Backwards compatible with v0.4.x**
+✅ **Ready for production use**
+
+## Resources
+
+- [Migration Guide](./migration/MIGRATION_v0.4_to_v0.5.md)
+- [Processor API Guide](./guides/processor-api.md)
+- [Registry Guide](./guides/registry.md)
+- [Package Refactoring](./PACKAGE_REFACTORING.md)
+- [Release Notes v0.5.0](./releases/RELEASE_NOTES_v0.5.0.md)

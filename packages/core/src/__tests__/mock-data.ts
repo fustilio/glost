@@ -3,7 +3,7 @@ import {
   createGLOSTSentenceNode,
   createGLOSTParagraphNode,
   createGLOSTRootNode
-} from 'glost/nodes';
+} from 'glost-core';
 
 import type {
   GLOSTWord} from '../types.js';

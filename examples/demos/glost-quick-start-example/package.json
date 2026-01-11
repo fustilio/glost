@@ -1,0 +1,26 @@
+{
+  "name": "glost-quick-start-example",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Quick start guide demonstrating basic GLOST usage",
+  "keywords": [
+    "glost",
+    "quick-start",
+    "example"
+  ],
+  "author": "fustilio",
+  "license": "MIT",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "glost-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

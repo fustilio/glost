@@ -7,7 +7,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTWord } from "glost";
+import type { GLOSTWord } from "glost-core";
 import type { GLOSTExtension } from "../types.js";
 import { ExtensionDependencyError } from "../errors.js";
 // Types moved to separate packages

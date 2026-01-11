@@ -23,7 +23,13 @@ export function createExampleVitestConfig(
   languagePackages: string[] = []
 ): UserConfig {
   // Calculate paths relative to the example directory
-  const monorepoRoot = resolve(exampleDir, '../..');
+  // Examples can be in examples/ or examples/demos/, so find monorepo root
+  let monorepoRoot = exampleDir;
+  while (!monorepoRoot.endsWith('examples')) {
+    monorepoRoot = resolve(monorepoRoot, '..');
+  }
+  monorepoRoot = resolve(monorepoRoot, '..');
+  
   const packagesDir = resolve(monorepoRoot, 'packages');
   const nodeModulesDir = resolve(monorepoRoot, 'node_modules');
 
@@ -52,6 +58,18 @@ export function createExampleVitestConfig(
     {
       find: 'glost-translation',
       replacement: resolve(packagesDir, 'extensions/translation/src/index.ts'),
+    },
+    {
+      find: 'glost-frequency',
+      replacement: resolve(packagesDir, 'extensions/frequency/src/index.ts'),
+    },
+    {
+      find: 'glost-difficulty',
+      replacement: resolve(packagesDir, 'extensions/difficulty/src/index.ts'),
+    },
+    {
+      find: 'glost-pos',
+      replacement: resolve(packagesDir, 'extensions/pos/src/index.ts'),
     },
     // External dependencies (need exact paths in monorepo)
     {

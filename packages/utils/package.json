@@ -45,7 +45,7 @@
     "lint": "echo 'No linting configured'"
   },
   "dependencies": {
-    "glost": "workspace:*",
+    "glost-core": "workspace:*",
     "glost-common": "workspace:*"
   },
   "devDependencies": {

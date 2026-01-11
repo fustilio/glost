@@ -1,0 +1,28 @@
+{
+  "name": "glost-stress-tests-example",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Stress tests and performance benchmarks for GLOST",
+  "keywords": [
+    "glost",
+    "stress-test",
+    "benchmark",
+    "performance",
+    "example"
+  ],
+  "author": "fustilio",
+  "license": "MIT",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "glost-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

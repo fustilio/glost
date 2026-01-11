@@ -5,28 +5,22 @@
 ### Patch Changes
 
 - Updated dependencies
-  - glost-extensions@0.3.0
-  - glost-common@0.2.0
-  - glost@0.4.0
 
 ## 0.2.0
 
 ### Minor Changes
 
-- Externalized language-specific helpers and data-dependent extensions into dedicated packages. Language helpers (`createThaiWord`, `createJapaneseWord`) moved to `glost-th` and `glost-ja`. Extensions (frequency, difficulty, POS, gender, clause-segmenter, transcription, translation) now require explicit data providers instead of fallback data. See `MIGRATION_EXTENSIONS.md` for migration guide.
+- Externalized language-specific helpers and data-dependent extensions into dedicated packages
+- Extensions now require explicit data providers instead of fallback data
 
 ### Patch Changes
 
 - Updated dependencies
-  - glost@0.3.0
-  - glost-extensions@0.2.0
-  - glost-common@0.1.3
 
 ## 0.1.0
 
 ### Minor Changes
 
-- Initial release of glost-gender package
-- Extracted from glost-extensions core
+- Initial release: Gender analysis extension
 - Separated gender lookup (provider) from formatting (enhancer)
 - Support for language-specific gender providers

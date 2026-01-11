@@ -11,9 +11,9 @@
  */
 
 import type { GLOSTExtension } from "../types.js";
-import type { GLOSTRoot, GLOSTWord, GLOSTSentence } from "glost";
+import type { GLOSTRoot, GLOSTWord, GLOSTSentence } from "glost-core";
 import { visit } from "unist-util-visit";
-import { getWordText } from "glost";
+import { getWordText } from "glost-core";
 
 /**
  * Target gender type

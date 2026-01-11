@@ -5,8 +5,8 @@
  * and hydrating GLOST documents with additional data from various sources.
  */
 
-import type { GLOSTWord, GLOSTRoot, GLOSTNode, GLOSTParagraph, GLOSTSentence, TransliterationData } from "glost";
-import { getAllWords, isGLOSTWord, isGLOSTParagraph, isGLOSTSentence } from "glost";
+import type { GLOSTWord, GLOSTRoot, GLOSTNode, GLOSTParagraph, GLOSTSentence, TransliterationData } from "glost-core";
+import { getAllWords, isGLOSTWord, isGLOSTParagraph, isGLOSTSentence } from "glost-core";
 import type { ITranscriptionProvider } from "./interfaces.js";
 
 /**

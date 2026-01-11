@@ -16,13 +16,13 @@ import type {
   LanguageCode,
   ScriptSystem,
   TransliterationData,
-} from "glost";
+} from "glost-core";
 import {
   createGLOSTWordNode,
   createGLOSTSentenceNode,
   createGLOSTParagraphNode,
   createGLOSTRootNode,
-} from "glost/nodes";
+} from "glost-core";
 import type { ILanguageStrategy, ITranscriptionProvider } from "./interfaces.js";
 import type { GlostLanguage } from "glost-common";
 

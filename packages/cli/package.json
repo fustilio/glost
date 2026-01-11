@@ -1,0 +1,43 @@
+{
+  "name": "glost-cli",
+  "version": "0.5.0",
+  "description": "Command-line tools for GLOST plugin management and discovery",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "glost": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run --passWithNoTests"
+  },
+  "keywords": [
+    "glost",
+    "cli",
+    "tools",
+    "plugins"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "glost-core": "workspace:*",
+    "glost-registry": "workspace:*",
+    "glost-extensions": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.6.0"
+  }
+}
