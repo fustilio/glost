@@ -56,7 +56,11 @@
   "dependencies": {
     "glost": "workspace:*",
     "glost-common": "workspace:*",
-    "glost-frequency": "workspace:*"
+    "glost-transcription": "workspace:*",
+    "glost-translation": "workspace:*",
+    "glost-frequency": "workspace:*",
+    "glost-difficulty": "workspace:*",
+    "glost-pos": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

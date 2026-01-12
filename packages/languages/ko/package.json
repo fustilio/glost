@@ -31,6 +31,10 @@
     "./helpers": {
       "types": "./dist/helpers.d.ts",
       "default": "./dist/helpers.js"
+    },
+    "./extensions": {
+      "types": "./dist/extensions/index.d.ts",
+      "default": "./dist/extensions/index.js"
     }
   },
   "files": [
@@ -44,7 +48,12 @@
   },
   "dependencies": {
     "glost": "workspace:*",
-    "glost-common": "workspace:*"
+    "glost-common": "workspace:*",
+    "glost-transcription": "workspace:*",
+    "glost-translation": "workspace:*",
+    "glost-frequency": "workspace:*",
+    "glost-difficulty": "workspace:*",
+    "glost-pos": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

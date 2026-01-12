@@ -7,15 +7,48 @@
  * @packageDocumentation
  */
 
+// Transcription
+export { 
+  ThaiTranscriptionProvider,
+  createThaiTranscriptionProvider,
+  thaiTranscriptionProvider,
+  type ThaiTranscriptionProviderOptions,
+  type ThaiTranscriptionData
+} from "./transcription.js";
+
+// Translation
 export {
+  ThaiTranslationProvider,
+  createThaiTranslationProvider,
+  thaiTranslationProvider,
+  type ThaiTranslationProviderOptions,
+  type ThaiTranslationData
+} from "./translation.js";
+
+// Frequency
+export {
+  ThaiFrequencyProvider,
   createThaiFrequencyProvider,
+  thaiFrequencyProvider,
   type ThaiFrequencyProviderOptions,
+  type ThaiFrequencyData
 } from "./frequency.js";
 
-export { thaiTranscriptionProvider } from "./transcription.js";
-export { thaiTranslationProvider } from "./translation.js";
+// Difficulty
+export {
+  ThaiDifficultyProvider,
+  createThaiDifficultyProvider,
+  thaiDifficultyProvider,
+  type ThaiDifficultyProviderOptions,
+  type ThaiDifficultyData
+} from "./difficulty.js";
 
-// TODO: Add other Thai providers as needed:
-// - createThaiPOSProvider
-// - createThaiDifficultyProvider
-// - etc.
+// Part of Speech
+export {
+  ThaiPOSProvider,
+  createThaiPOSProvider,
+  thaiPOSProvider,
+  type ThaiPOSProviderOptions,
+  type ThaiPOSData
+} from "./pos.js";
+

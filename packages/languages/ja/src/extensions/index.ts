@@ -1,18 +1,50 @@
 /**
  * Japanese Extension Providers
  * 
- * This module exports extension providers for Japanese language.
- * These are skeleton implementations to be replaced with actual Japanese language data.
- * 
  * @packageDocumentation
  */
 
+// Transcription
+export { 
+  JapaneseTranscriptionProvider,
+  createJapaneseTranscriptionProvider,
+  japaneseTranscriptionProvider,
+  type JapaneseTranscriptionProviderOptions,
+  type JapaneseTranscriptionData
+} from "./transcription.js";
+
+// Translation
 export {
+  JapaneseTranslationProvider,
+  createJapaneseTranslationProvider,
+  japaneseTranslationProvider,
+  type JapaneseTranslationProviderOptions,
+  type JapaneseTranslationData
+} from "./translation.js";
+
+// Frequency
+export {
+  JapaneseFrequencyProvider,
   createJapaneseFrequencyProvider,
+  japaneseFrequencyProvider,
   type JapaneseFrequencyProviderOptions,
+  type JapaneseFrequencyData
 } from "./frequency.js";
 
-// TODO: Add other Japanese providers as needed:
-// - createJapanesePOSProvider (using MeCab/ChaSen tags)
-// - createJapaneseDifficultyProvider (using JLPT levels)
-// - etc.
+// Difficulty
+export {
+  JapaneseDifficultyProvider,
+  createJapaneseDifficultyProvider,
+  japaneseDifficultyProvider,
+  type JapaneseDifficultyProviderOptions,
+  type JapaneseDifficultyData
+} from "./difficulty.js";
+
+// Part of Speech
+export {
+  JapanesePOSProvider,
+  createJapanesePOSProvider,
+  japanesePOSProvider,
+  type JapanesePOSProviderOptions,
+  type JapanesePOSData
+} from "./pos.js";

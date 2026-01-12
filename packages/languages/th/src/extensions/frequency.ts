@@ -1,72 +1,154 @@
 /**
  * Thai Frequency Provider
  * 
- * Example frequency provider for Thai language.
- * This is a skeleton implementation - replace with actual Thai corpus data.
+ * Provides word frequency data for Thai language based on corpus analysis.
  * 
  * @packageDocumentation
  */
 
+import { BaseDataProvider, type BaseProviderOptions } from "glost-common";
+import type { DataLoader, GlostLanguage } from "glost-common";
 import type { FrequencyProvider, FrequencyLevel } from "glost-frequency";
-import type { GlostLanguage } from "glost-common";
+
+/**
+ * Thai frequency data structure
+ */
+export interface ThaiFrequencyData {
+  [word: string]: FrequencyLevel;
+}
 
 /**
  * Thai frequency provider options
  */
-export interface ThaiFrequencyProviderOptions {
+export interface ThaiFrequencyProviderOptions extends BaseProviderOptions {
   /**
-   * Custom frequency data source (optional)
-   * Replace with actual Thai corpus frequency data
+   * Custom data loader for frequency data
+   * 
+   * Load from:
+   * - Thai National Corpus frequency data
+   * - Dictionary-based frequency rankings
+   * - Custom Thai language resources
+   * 
+   * @example
+   * ```typescript
+   * import { createJsonLoader } from "glost-common";
+   * 
+   * const provider = createThaiFrequencyProvider({
+   *   dataLoader: createJsonLoader({
+   *     path: './data/thai-frequency.json'
+   *   })
+   * });
+   * ```
    */
-  frequencyData?: Map<string, FrequencyLevel>;
+  dataLoader?: DataLoader<ThaiFrequencyData>;
+}
+
+/**
+ * Thai frequency provider class
+ * 
+ * Provides lazy-loaded frequency data with proper error handling.
+ * 
+ * @example
+ * ```typescript
+ * import { createThaiFrequencyProvider } from "glost-th/extensions";
+ * import { createJsonLoader, createCachedLoader } from "glost-common";
+ * 
+ * // With caching
+ * const provider = createThaiFrequencyProvider({
+ *   dataLoader: createCachedLoader({
+ *     loader: createJsonLoader({
+ *       path: './thai-frequency.json'
+ *     }),
+ *     ttl: 3600000, // 1 hour
+ *     storageKey: 'thai-frequency-cache'
+ *   }),
+ *   debug: true
+ * });
+ * 
+ * // Use with extension
+ * import { createFrequencyExtension } from "glost-frequency";
+ * 
+ * const extension = createFrequencyExtension({
+ *   targetLanguage: "th",
+ *   provider
+ * });
+ * ```
+ */
+export class ThaiFrequencyProvider extends BaseDataProvider<ThaiFrequencyData> implements FrequencyProvider {
+  protected supportedLanguages = ["th" as const];
+  private dataLoader?: DataLoader<ThaiFrequencyData>;
+
+  constructor(options: ThaiFrequencyProviderOptions = {}) {
+    super(options);
+    this.dataLoader = options.dataLoader;
+  }
+
+  /**
+   * Load frequency data
+   */
+  protected async loadData(): Promise<ThaiFrequencyData> {
+    if (!this.dataLoader) {
+      this.log(
+        "No data loader provided for Thai frequency. Provider will return undefined.",
+        "warn"
+      );
+      return {};
+    }
+
+    try {
+      const data = await this.dataLoader.load();
+      this.log(`Loaded frequency data for ${Object.keys(data).length} Thai words`, "info");
+      return data;
+    } catch (error) {
+      this.log(
+        `Failed to load Thai frequency data: ${error instanceof Error ? error.message : String(error)}`,
+        "error"
+      );
+      return {};
+    }
+  }
+
+  /**
+   * Get frequency level for a Thai word
+   * 
+   * @param word - Thai word to check
+   * @param language - Language code (must be 'th')
+   * @returns Frequency level or undefined
+   */
+  async getFrequency(
+    word: string,
+    language: GlostLanguage
+  ): Promise<FrequencyLevel | undefined> {
+    if (language !== "th") {
+      return undefined;
+    }
+
+    if (!word || typeof word !== "string" || word.trim().length === 0) {
+      return undefined;
+    }
+
+    return this.withErrorHandling(async () => {
+      const data = await this.ensureLoaded();
+      return data[word.trim()];
+    });
+  }
 }
 
 /**
  * Create Thai frequency provider
  * 
- * This is an example implementation. For production use, replace with:
- * - Thai National Corpus frequency data
- * - Dictionary-based frequency rankings
- * - Other Thai language resources
- * 
  * @param options - Provider options
- * @returns Frequency provider for Thai
- * 
- * @example
- * ```typescript
- * import { createThaiFrequencyProvider } from "glost-th/extensions";
- * 
- * const provider = createThaiFrequencyProvider({
- *   frequencyData: myThaiFrequencyMap
- * });
- * ```
+ * @returns ThaiFrequencyProvider instance
  */
 export function createThaiFrequencyProvider(
-  options: ThaiFrequencyProviderOptions = {},
-): FrequencyProvider {
-  const { frequencyData } = options;
-
-  return {
-    async getFrequency(
-      word: string,
-      language: GlostLanguage,
-    ): Promise<FrequencyLevel | undefined> {
-      if (language !== "th") {
-        return undefined;
-      }
-
-      // Check custom frequency data
-      if (frequencyData && frequencyData.has(word)) {
-        return frequencyData.get(word);
-      }
-
-      // TODO: Replace with actual Thai frequency data
-      // This is just a placeholder
-      console.warn(
-        "[Thai Frequency Provider] No frequency data loaded. Using fallback.",
-      );
-
-      return undefined;
-    },
-  };
+  options: ThaiFrequencyProviderOptions = {}
+): ThaiFrequencyProvider {
+  return new ThaiFrequencyProvider(options);
 }
+
+/**
+ * Default Thai frequency provider instance
+ * 
+ * Note: Returns undefined for all queries until a data loader is configured.
+ */
+export const thaiFrequencyProvider = new ThaiFrequencyProvider();

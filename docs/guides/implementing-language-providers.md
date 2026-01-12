@@ -1,0 +1,432 @@
+# Implementing Language Providers
+
+This guide shows you how to create language-specific providers using the GLOST provider infrastructure.
+
+## Overview
+
+GLOST v0.5+ provides a complete foundation for building language providers:
+
+- **Base Classes**: `BaseDataProvider` and `BaseLanguageProvider` handle common functionality
+- **Data Loaders**: Load from JSON, APIs, or custom sources
+- **Testing Utilities**: Standardized testing helpers
+- **Templates**: Production-ready templates to get started quickly
+
+## Quick Start
+
+### 1. Choose Provider Type
+
+| Provider Type | Purpose | Interface |
+|---------------|---------|-----------|
+| **Transcription** | Romanization, IPA, phonetic notation | `TranscriptionProvider` |
+| **Translation** | Word definitions, glosses | `TranslationProvider` |
+| **Frequency** | Word frequency/commonness | `FrequencyProvider` |
+| **Difficulty** | Learning difficulty (CEFR, JLPT, etc.) | `DifficultyProvider` |
+| **POS** | Part-of-speech tagging | `POSProvider` |
+
+### 2. Copy Template
+
+```bash
+cp packages/extensions/templates/provider-template.ts.template \
+   packages/languages/[LANG]/src/extensions/[type].ts
+```
+
+### 3. Replace Placeholders
+
+See [`PROVIDER_TEMPLATE.md`](../../packages/extensions/templates/PROVIDER_TEMPLATE.md) for complete placeholder list.
+
+### 4. Implement `loadData()` and `getData()`
+
+```typescript
+export class MyLanguageFrequencyProvider extends BaseDataProvider<FrequencyData> {
+  protected supportedLanguages = ["my" as const];
+  
+  protected async loadData(): Promise<FrequencyData> {
+    if (!this.dataLoader) {
+      this.log("No data loader provided", "warn");
+      return {};
+    }
+    const data = await this.dataLoader.load();
+    return data;
+  }
+  
+  async getFrequency(word: string, language: GlostLanguage): Promise<FrequencyLevel | undefined> {
+    if (language !== "my") return undefined;
+    if (!word?.trim()) return undefined;
+    
+    return this.withErrorHandling(async () => {
+      const data = await this.ensureLoaded();
+      return data[word.trim()];
+    });
+  }
+}
+```
+
+## Data Loading Strategies
+
+### Option 1: JSON Files
+
+Best for: Small to medium datasets (< 100MB)
+
+```typescript
+import { createJsonLoader } from "glost-common";
+
+const provider = createMyProvider({
+  dataLoader: createJsonLoader({
+    path: './data/my-language-frequency.json',
+    transform: (data) => {
+      // Optional: transform loaded data
+      return data;
+    }
+  })
+});
+```
+
+### Option 2: HTTP APIs
+
+Best for: Dynamic data, cloud services
+
+```typescript
+import { createApiLoader } from "glost-common";
+
+const provider = createMyProvider({
+  dataLoader: createApiLoader({
+    url: 'https://api.example.com/language-data',
+    headers: { 'Authorization': 'Bearer TOKEN' },
+    retry: { maxAttempts: 3, delayMs: 1000 }
+  })
+});
+```
+
+### Option 3: Custom Loader
+
+Best for: Databases, complex sources
+
+```typescript
+import type { DataLoader } from "glost-common";
+
+const customLoader: DataLoader<MyData> = {
+  async load() {
+    const db = await connectDatabase();
+    const rows = await db.query('SELECT * FROM dictionary');
+    return processRows(rows);
+  },
+  
+  async isAvailable() {
+    return await checkDatabaseConnection();
+  }
+};
+
+const provider = createMyProvider({
+  dataLoader: customLoader
+});
+```
+
+### Option 4: Cached Loader
+
+Best for: Slow sources, API rate limits
+
+```typescript
+import { createCachedLoader, createApiLoader } from "glost-common";
+
+const provider = createMyProvider({
+  dataLoader: createCachedLoader({
+    loader: createApiLoader({ url: 'https://api.example.com/data' }),
+    ttl: 3600000, // 1 hour
+    storageKey: 'my-language-cache'
+  })
+});
+```
+
+## Best Practices
+
+### 1. Follow "No Data > Bad Data"
+
+**✅ DO**: Return undefined when you don't have reliable data
+
+```typescript
+async getFrequency(word: string): Promise<FrequencyLevel | undefined> {
+  const data = await this.ensureLoaded();
+  const result = data[word];
+  
+  // Return undefined if not found - don't guess!
+  return result;
+}
+```
+
+**❌ DON'T**: Guess or use heuristics
+
+```typescript
+// BAD - Don't do this!
+async getFrequency(word: string): Promise<FrequencyLevel> {
+  const data = await this.ensureLoaded();
+  const result = data[word];
+  
+  // NEVER guess based on word length or other heuristics
+  if (!result) {
+    return word.length <= 3 ? 'common' : 'rare'; // WRONG!
+  }
+  
+  return result;
+}
+```
+
+### 2. Validate Inputs
+
+```typescript
+async getData(word: string, language: GlostLanguage) {
+  // Validate language
+  if (!this.validateLanguage(language)) {
+    return undefined;
+  }
+  
+  // Validate input
+  if (!word || typeof word !== 'string' || word.trim().length === 0) {
+    return undefined;
+  }
+  
+  // Proceed with lookup
+  return this.withErrorHandling(async () => {
+    const data = await this.ensureLoaded();
+    return data[word.trim()];
+  });
+}
+```
+
+### 3. Use Error Handling Helpers
+
+```typescript
+// ✅ Use withErrorHandling - logs errors, returns undefined
+return this.withErrorHandling(async () => {
+  const data = await this.ensureLoaded();
+  return processData(data, word);
+});
+
+// ❌ Raw try-catch - might throw, inconsistent error handling
+try {
+  const data = await this.ensureLoaded();
+  return processData(data, word);
+} catch (error) {
+  console.error(error); // Manual logging
+  throw error; // Breaks graceful degradation
+}
+```
+
+### 4. Support Preloading
+
+```typescript
+// Users can preload for better performance
+const provider = createMyProvider({ dataLoader });
+
+// Optional: Preload before processing starts
+await provider.preload();
+
+// Now getData() calls won't have loading delay
+const result = await provider.getData('word', 'lang');
+```
+
+### 5. Log Appropriately
+
+```typescript
+// Info: Major operations
+this.log('Loading frequency data...', 'info');
+this.log(`Loaded ${count} entries`, 'info');
+
+// Warn: Missing configuration
+this.log('No data loader provided', 'warn');
+
+// Error: Failures
+this.log(`Failed to load: ${error.message}`, 'error');
+```
+
+## Testing Your Provider
+
+### Basic Tests
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import { testProvider } from 'glost-common';
+
+describe('MyLanguageFrequencyProvider', () => {
+  it('returns frequency for known words', async () => {
+    const provider = createMyProvider({
+      dataLoader: {
+        async load() {
+          return {
+            'hello': 'common' as const,
+            'goodbye': 'uncommon' as const
+          };
+        }
+      }
+    });
+
+    const result = await provider.getFrequency('hello', 'my');
+    expect(result).toBe('common');
+  });
+
+  it('returns undefined for unknown words', async () => {
+    const provider = createMyProvider({
+      dataLoader: { async load() { return {}; } }
+    });
+
+    const result = await provider.getFrequency('unknown', 'my');
+    expect(result).toBeUndefined();
+  });
+
+  it('returns undefined for unsupported languages', async () => {
+    const provider = createMyProvider();
+    const result = await provider.getFrequency('word', 'en');
+    expect(result).toBeUndefined();
+  });
+});
+```
+
+### Using Test Utilities
+
+```typescript
+import { testProvider, testLanguageSupport, testNoDataBadData } from 'glost-common';
+
+describe('MyProvider', () => {
+  it('passes standard provider tests', async () => {
+    const results = await testProvider(
+      async (word, lang) => provider.getData(word, lang),
+      [
+        { input: 'hello', expected: 'common', language: 'my' },
+        { input: 'rare-word', expected: 'rare', language: 'my' },
+        { input: 'unknown', expected: undefined, language: 'my' }
+      ]
+    );
+    
+    expect(results.success).toBe(true);
+  });
+
+  it('supports correct languages', async () => {
+    const results = await testLanguageSupport(
+      async (word, lang) => provider.getData(word, lang),
+      ['my'],
+      'test'
+    );
+    
+    expect(results.success).toBe(true);
+  });
+
+  it('follows No Data > Bad Data philosophy', async () => {
+    const results = await testNoDataBadData(
+      async (word) => provider.getData(word, 'my'),
+      ['', null, undefined, '###invalid###']
+    );
+    
+    expect(results.success).toBe(true);
+  });
+});
+```
+
+## Integration with Extensions
+
+Once your provider is complete, use it with GLOST extensions:
+
+```typescript
+// 1. Create provider
+import { createMyLanguageFrequencyProvider } from 'glost-my/extensions';
+import { createJsonLoader } from 'glost-common';
+
+const provider = createMyLanguageFrequencyProvider({
+  dataLoader: createJsonLoader({ path: './data.json' })
+});
+
+// 2. Create extension
+import { createFrequencyExtension } from 'glost-frequency';
+
+const extension = createFrequencyExtension({
+  targetLanguage: "my",
+  provider
+});
+
+// 3. Use in processor
+import { glost } from 'glost';
+
+const processor = glost()
+  .use(extension)
+  .freeze();
+
+const result = await processor.process(document);
+```
+
+## Complete Example: Spanish Frequency Provider
+
+```typescript
+/**
+ * Spanish Frequency Provider
+ */
+import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "glost-common";
+import type { FrequencyProvider, FrequencyLevel } from "glost-frequency";
+
+export interface SpanishFrequencyData {
+  [word: string]: FrequencyLevel;
+}
+
+export interface SpanishFrequencyProviderOptions extends BaseProviderOptions {
+  dataLoader?: DataLoader<SpanishFrequencyData>;
+}
+
+export class SpanishFrequencyProvider extends BaseDataProvider<SpanishFrequencyData> implements FrequencyProvider {
+  protected supportedLanguages = ["es" as const];
+  private dataLoader?: DataLoader<SpanishFrequencyData>;
+
+  constructor(options: SpanishFrequencyProviderOptions = {}) {
+    super(options);
+    this.dataLoader = options.dataLoader;
+  }
+
+  protected async loadData(): Promise<SpanishFrequencyData> {
+    if (!this.dataLoader) {
+      this.log("No data loader provided for Spanish frequency.", "warn");
+      return {};
+    }
+
+    try {
+      const data = await this.dataLoader.load();
+      this.log(`Loaded frequency data for ${Object.keys(data).length} Spanish words`, "info");
+      return data;
+    } catch (error) {
+      this.log(`Failed to load Spanish frequency data: ${error instanceof Error ? error.message : String(error)}`, "error");
+      return {};
+    }
+  }
+
+  async getFrequency(word: string, language: GlostLanguage): Promise<FrequencyLevel | undefined> {
+    if (language !== "es") {
+      return undefined;
+    }
+
+    if (!word || typeof word !== "string" || word.trim().length === 0) {
+      return undefined;
+    }
+
+    return this.withErrorHandling(async () => {
+      const data = await this.ensureLoaded();
+      return data[word.trim().toLowerCase()]; // Spanish: normalize case
+    });
+  }
+}
+
+export function createSpanishFrequencyProvider(
+  options: SpanishFrequencyProviderOptions = {}
+): SpanishFrequencyProvider {
+  return new SpanishFrequencyProvider(options);
+}
+
+export const spanishFrequencyProvider = new SpanishFrequencyProvider();
+```
+
+## See Also
+
+- [Provider Template](../../packages/extensions/templates/PROVIDER_TEMPLATE.md) - Detailed template documentation
+- [Provider Philosophy](../PROVIDER_PHILOSOPHY.md) - "No Data > Bad Data" principle
+- [Multi-Language Architecture](./multi-language-architecture.md) - Language package patterns
+- [Creating Data Source Packages](./creating-data-source-packages.md) - Separate data packages
+
+## Questions?
+
+- Check existing providers: [Thai](../../packages/languages/th/src/extensions/), [Japanese](../../packages/languages/ja/src/extensions/), [Korean](../../packages/languages/ko/src/extensions/)
+- Review [base classes](../../packages/common/src/providers/) for available methods
+- See [data loaders](../../packages/common/src/data-loaders/) for loading options

@@ -62,7 +62,9 @@
     "glost-clause-segmenter": "workspace:*",
     "glost-transcription": "workspace:*",
     "glost-translation": "workspace:*",
-    "glost-frequency": "workspace:*"
+    "glost-frequency": "workspace:*",
+    "glost-difficulty": "workspace:*",
+    "glost-pos": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

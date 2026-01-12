@@ -20,6 +20,7 @@
 - [Custom Extensions](./guides/custom-extensions.md) - Create your own plugins
 
 ### 🌍 Language Implementation
+- [Implementing Language Providers](./guides/implementing-language-providers.md) ⭐ - Complete provider infrastructure guide
 - [Multi-Language Architecture](./guides/multi-language-architecture.md) - Language support patterns
 - [Implementing Transcription Providers](./guides/implementing-transcription-providers.md) - Provider patterns
 - [Creating Data Source Packages](./guides/creating-data-source-packages.md) - Package creation

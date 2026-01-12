@@ -1,0 +1,234 @@
+/**
+ * [LANG] [PROVIDER_TYPE] Provider Template
+ * 
+ * This is a production-ready template for creating [PROVIDER_TYPE] providers.
+ * Replace placeholders with actual values:
+ * 
+ * - [LANG] -> Language code (e.g., 'th', 'ja', 'ko')
+ * - [LANGUAGE] -> Language name (e.g., 'Thai', 'Japanese', 'Korean')
+ * - [PROVIDER_TYPE] -> Provider type (e.g., 'Frequency', 'Translation', 'Transcription')
+ * - [ProviderType] -> Provider type PascalCase (e.g., 'FrequencyProvider')
+ * - [EXTENSION_TYPE] -> Extension type (e.g., 'glost-frequency', 'glost-translation')
+ * 
+ * @packageDocumentation
+ */
+
+import { BaseDataProvider, type BaseProviderOptions } from "glost-common";
+import type { DataLoader } from "glost-common";
+import type { GlostLanguage } from "glost-common";
+// Import the specific provider interface for your extension type:
+// import type { FrequencyProvider, FrequencyLevel } from "glost-frequency";
+// import type { TranslationProvider } from "glost-translation";
+// import type { TranscriptionProvider } from "glost-transcription";
+
+/**
+ * Options for [LANG] [PROVIDER_TYPE] provider
+ */
+export interface [LANGUAGE][ProviderType]Options extends BaseProviderOptions {
+  /**
+   * Custom data loader
+   * 
+   * If not provided, will attempt to load from default location
+   */
+  dataLoader?: DataLoader<[DataType]>;
+
+  /**
+   * Additional provider-specific options
+   */
+  // Add your options here
+  // Example: scheme?: 'ipa' | 'romanization';
+}
+
+/**
+ * Data structure returned by loader
+ * 
+ * Define the shape of your data
+ */
+export interface [DataType] {
+  // Example for frequency provider:
+  // [word: string]: FrequencyLevel;
+  
+  // Example for translation provider:
+  // [word: string]: string | string[];
+  
+  // Example for transcription provider:
+  // [word: string]: { ipa?: string; romanization?: string };
+}
+
+/**
+ * [LANGUAGE] [PROVIDER_TYPE] Provider
+ * 
+ * Provides [description of what this provider does]
+ * 
+ * Features:
+ * - Lazy loading of data
+ * - Memory-efficient caching
+ * - Graceful error handling
+ * - Follows "No Data > Bad Data" philosophy
+ * 
+ * @example
+ * ```typescript
+ * import { create[LANGUAGE][ProviderType] } from "glost-[LANG]/extensions";
+ * import { createJsonLoader } from "glost-common";
+ * 
+ * const provider = create[LANGUAGE][ProviderType]({
+ *   dataLoader: createJsonLoader({
+ *     path: './data/[lang]-[type].json'
+ *   }),
+ *   debug: true
+ * });
+ * 
+ * // Use with extension
+ * import { create[ProviderType]Extension } from "[EXTENSION_TYPE]";
+ * 
+ * const extension = create[ProviderType]Extension({
+ *   targetLanguage: "[LANG]",
+ *   provider
+ * });
+ * ```
+ */
+export class [LANGUAGE][ProviderType] extends BaseDataProvider<[DataType]> {
+  protected supportedLanguages = ["[LANG]" as const];
+  private dataLoader?: DataLoader<[DataType]>;
+
+  constructor(options: [LANGUAGE][ProviderType]Options = {}) {
+    super(options);
+    this.dataLoader = options.dataLoader;
+  }
+
+  /**
+   * Load data from source
+   * 
+   * Override this if you need custom loading logic
+   */
+  protected async loadData(): Promise<[DataType]> {
+    if (!this.dataLoader) {
+      this.log(
+        "No data loader provided. Provider will return undefined for all queries.",
+        "warn"
+      );
+      // Return empty data structure following "No Data > Bad Data"
+      return {} as [DataType];
+    }
+
+    try {
+      const data = await this.dataLoader.load();
+      this.log(`Loaded ${Object.keys(data).length} entries`, "info");
+      return data;
+    } catch (error) {
+      this.log(
+        `Failed to load data: ${error instanceof Error ? error.message : String(error)}`,
+        "error"
+      );
+      // Return empty on error, don't throw
+      return {} as [DataType];
+    }
+  }
+
+  /**
+   * Get data for a word
+   * 
+   * Implement the provider interface method here
+   * 
+   * @param word - Word to look up
+   * @param language - Language code
+   * @returns Data if found, undefined otherwise
+   */
+  async getData(
+    word: string,
+    language: GlostLanguage
+  ): Promise<[ReturnType] | undefined> {
+    // Validate language support
+    if (!this.validateLanguage(language)) {
+      return undefined;
+    }
+
+    // Validate input
+    if (!word || typeof word !== "string" || word.trim().length === 0) {
+      return undefined;
+    }
+
+    return this.withErrorHandling(async () => {
+      const data = await this.ensureLoaded();
+      
+      // Implement your lookup logic here
+      // Example for simple key-value lookup:
+      // return data[word];
+      
+      // Example with normalization:
+      // const normalized = word.toLowerCase().trim();
+      // return data[normalized];
+      
+      // Following "No Data > Bad Data": return undefined if not found
+      return undefined;
+    });
+  }
+}
+
+/**
+ * Create [LANGUAGE] [PROVIDER_TYPE] provider
+ * 
+ * Factory function for creating provider instances
+ * 
+ * @param options - Provider options
+ * @returns Provider instance
+ * 
+ * @example
+ * ```typescript
+ * // With custom data loader
+ * const provider = create[LANGUAGE][ProviderType]({
+ *   dataLoader: createJsonLoader({
+ *     path: './data.json',
+ *     transform: (obj) => new Map(Object.entries(obj))
+ *   })
+ * });
+ * 
+ * // With API loader
+ * const provider = create[LANGUAGE][ProviderType]({
+ *   dataLoader: createApiLoader({
+ *     url: 'https://api.example.com/data',
+ *     retry: { maxAttempts: 3, delayMs: 1000 }
+ *   })
+ * });
+ * 
+ * // With cached loader
+ * const provider = create[LANGUAGE][ProviderType]({
+ *   dataLoader: createCachedLoader({
+ *     loader: jsonLoader,
+ *     ttl: 3600000, // 1 hour
+ *     storageKey: '[lang]-[type]-cache'
+ *   })
+ * });
+ * ```
+ */
+export function create[LANGUAGE][ProviderType](
+  options: [LANGUAGE][ProviderType]Options = {}
+): [LANGUAGE][ProviderType] {
+  return new [LANGUAGE][ProviderType](options);
+}
+
+/**
+ * Default [LANGUAGE] [PROVIDER_TYPE] provider instance
+ * 
+ * Pre-configured provider with sensible defaults.
+ * Returns undefined for all queries (no data loaded).
+ * 
+ * To use with actual data, create your own instance with a data loader.
+ * 
+ * @example
+ * ```typescript
+ * import { [lang][ProviderType] } from "glost-[LANG]/extensions";
+ * 
+ * // This will return undefined (no data)
+ * const result = await [lang][ProviderType].getData("word", "[LANG]");
+ * 
+ * // Instead, create with data:
+ * import { create[LANGUAGE][ProviderType] } from "glost-[LANG]/extensions";
+ * import { createJsonLoader } from "glost-common";
+ * 
+ * const myProvider = create[LANGUAGE][ProviderType]({
+ *   dataLoader: createJsonLoader({ path: './my-data.json' })
+ * });
+ * ```
+ */
+export const [lang][ProviderType] = new [LANGUAGE][ProviderType]();

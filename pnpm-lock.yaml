@@ -612,9 +612,21 @@ importers:
       glost-common:
         specifier: workspace:*
         version: link:../../common
+      glost-difficulty:
+        specifier: workspace:*
+        version: link:../../extensions/difficulty
       glost-frequency:
         specifier: workspace:*
         version: link:../../extensions/frequency
+      glost-pos:
+        specifier: workspace:*
+        version: link:../../extensions/pos
+      glost-transcription:
+        specifier: workspace:*
+        version: link:../../extensions/transcription
+      glost-translation:
+        specifier: workspace:*
+        version: link:../../extensions/translation
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -634,6 +646,21 @@ importers:
       glost-common:
         specifier: workspace:*
         version: link:../../common
+      glost-difficulty:
+        specifier: workspace:*
+        version: link:../../extensions/difficulty
+      glost-frequency:
+        specifier: workspace:*
+        version: link:../../extensions/frequency
+      glost-pos:
+        specifier: workspace:*
+        version: link:../../extensions/pos
+      glost-transcription:
+        specifier: workspace:*
+        version: link:../../extensions/transcription
+      glost-translation:
+        specifier: workspace:*
+        version: link:../../extensions/translation
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -656,9 +683,15 @@ importers:
       glost-common:
         specifier: workspace:*
         version: link:../../common
+      glost-difficulty:
+        specifier: workspace:*
+        version: link:../../extensions/difficulty
       glost-frequency:
         specifier: workspace:*
         version: link:../../extensions/frequency
+      glost-pos:
+        specifier: workspace:*
+        version: link:../../extensions/pos
       glost-transcription:
         specifier: workspace:*
         version: link:../../extensions/transcription
