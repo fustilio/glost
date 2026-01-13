@@ -1,0 +1,136 @@
+# GLOST Documentation
+
+**Current Version:** v0.5.0
+
+**GLOST** (Glossed Syntax Tree) is a framework for processing multilingual text with language learning annotations using a unified/remark-style plugin system.
+
+## Quick Links
+
+### 🚀 Getting Started
+- [Installation & Quick Start](/getting-started)
+- [Why GLOST?](/why)
+- [Release Notes v0.5.0](/releases/RELEASE_NOTES_v0.5.0)
+- [Migration Guide v0.4 → v0.5](/migration/MIGRATION_v0.4_to_v0.5)
+
+### 📚 Core Guides
+- [Processor API](/guides/processor-api) - Unified-style processor with fluent `.use()` API
+- [Plugin Registry](/guides/registry) - Discovery, validation, and conflict detection
+- [Creating Documents](/guides/creating-documents) - Build GLOST documents
+- [Using Extensions](/guides/using-extensions) - Process with plugins
+- [Custom Extensions](/guides/custom-extensions) - Create your own plugins
+
+### 🌍 Language Implementation
+- [Implementing Language Providers](/guides/implementing-language-providers) ⭐ - Complete provider infrastructure guide
+- [Multi-Language Architecture](/guides/multi-language-architecture) - Language support patterns
+- [Implementing Transcription Providers](/guides/implementing-transcription-providers) - Provider patterns
+- [Creating Data Source Packages](/guides/creating-data-source-packages) - Package creation
+- [Thai Guide](/guides/thai) - Thai-specific features
+- [Japanese Guide](/guides/japanese) - Japanese-specific features
+
+## Package Reference
+
+### Main Packages
+| Package | Description |
+|---------|-------------|
+| [glost](https://github.com/fustilio/glost/tree/main/packages/glost) | Main facade package |
+| [glost-core](/packages/core) | Core types and nodes |
+| [glost-processor](https://github.com/fustilio/glost/tree/main/packages/processor) | Processor API |
+| [glost-registry](https://github.com/fustilio/glost/tree/main/packages/registry) | Plugin registry |
+| [glost-presets](https://github.com/fustilio/glost/tree/main/packages/presets) | Preset configurations |
+| [glost-cli](https://github.com/fustilio/glost/tree/main/packages/cli) | CLI tools |
+
+### Supporting Packages
+| Package | Description |
+|---------|-------------|
+| [glost-common](https://github.com/fustilio/glost/tree/main/packages/common) | Language utilities |
+| [glost-extensions](/packages/extensions) | Extension system |
+| [glost-utils](/packages/utils) | Text utilities |
+
+### Language Packages
+| Package | Description |
+|---------|-------------|
+| [glost-th](https://github.com/fustilio/glost/tree/main/packages/languages/th) | Thai language support |
+| [glost-ja](https://github.com/fustilio/glost/tree/main/packages/languages/ja) | Japanese language support |
+| [glost-ko](https://github.com/fustilio/glost/tree/main/packages/languages/ko) | Korean language support |
+| [glost-en](https://github.com/fustilio/glost/tree/main/packages/languages/en) | English language support |
+
+### Extensions
+| Extension | Description |
+|-----------|-------------|
+| [Transcription](/packages/transcription) | Phonetic transcription |
+| [Translation](/packages/translation) | Text translation |
+| [Frequency](https://github.com/fustilio/glost/tree/main/packages/extensions/frequency) | Word frequency |
+| [Difficulty](https://github.com/fustilio/glost/tree/main/packages/extensions/difficulty) | Difficulty scoring |
+| [POS](https://github.com/fustilio/glost/tree/main/packages/extensions/pos) | Part-of-speech tagging |
+| [Gender](https://github.com/fustilio/glost/tree/main/packages/extensions/gender) | Grammatical gender |
+| [Clause Segmenter](https://github.com/fustilio/glost/tree/main/packages/extensions/clause-segmenter) | Clause segmentation |
+
+### Plugins
+| Plugin | Description |
+|--------|-------------|
+| [glost-inkle](/packages/inkle) | Ink/Inkle integration |
+
+## Core Concepts
+
+- [Node Types](/concepts/nodes) - Understanding GLOST's node hierarchy
+- [Extensions](/concepts/extensions) - Extension system architecture
+
+## Standards & Reference
+
+- [API Reference](/api) - Complete API documentation
+- [Language Codes](/languages) - ISO-639-1, ISO-639-3, BCP-47
+- [Proficiency Levels](/proficiency) - CEFR, JLPT, HSK, TOPIK mappings
+- [Metadata Schema](/standards/metadata-schema) - Standard metadata structure
+- [Naming Conventions](/conventions/naming) - Package naming patterns
+
+## Architecture & Philosophy
+
+- [Architecture Summary](/ARCHITECTURE_SUMMARY) - SRP/SSOT principles and composable design
+- [Package Refactoring](/PACKAGE_REFACTORING) - v0.5.0 package structure changes
+- [Unified Pipeline Implementation](/UNIFIED_PIPELINE_IMPLEMENTATION) - v0.5.0 technical details
+- [Provider Philosophy](/PROVIDER_PHILOSOPHY) - "No Data > Bad Data" principle
+
+## Ecosystem & Community
+
+- [Ecosystem Overview](/ecosystem) - Core framework, standards, community packages
+- [Contributing Guide](https://github.com/fustilio/glost/blob/main/CONTRIBUTING) - How to contribute
+- [Examples](https://github.com/fustilio/glost/tree/main/examples) - Code examples and use cases
+
+## Version History
+
+- **v0.5.0** (Current) - [Release Notes](/releases/RELEASE_NOTES_v0.5.0) - Unified-style processor, enhanced registry, CLI tools, presets
+- **v0.4.0** - Extension system, multi-language support
+- **v0.3.0** - Core types and document creation
+
+## Quick Example
+
+```typescript
+import { glost } from 'glost';
+import { languageLearningPreset } from 'glost/presets';
+import { createThaiWord, createSimpleDocument } from 'glost';
+
+// Create processor with preset
+const processor = glost()
+  .use(languageLearningPreset)
+  .freeze();
+
+// Create document
+const document = createSimpleDocument(
+  [
+    createThaiWord({ text: "สวัสดี" }),
+    createThaiWord({ text: "ครับ" })
+  ],
+  "th",
+  "thai",
+  { sentenceText: "สวัสดีครับ" }
+);
+
+// Process
+const result = await processor.process(document);
+```
+
+## Support
+
+- 📖 [Documentation](https://github.com/fustilio/glost/tree/main/docs)
+- 💬 [GitHub Discussions](https://github.com/fustilio/glost/discussions)
+- 🐛 [Issue Tracker](https://github.com/fustilio/glost/issues)

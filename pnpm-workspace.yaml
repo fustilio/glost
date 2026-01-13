@@ -6,6 +6,7 @@ packages:
   - examples/demos/*
   - examples/web-apps/*
   - examples/benchmarks/*
+  - docs
 
 catalog:
   typescript: ^5.8.3

@@ -1,0 +1,25 @@
+{
+  "name": "glost-docs",
+  "version": "0.5.0",
+  "description": "GLOST Documentation with Nextra v4",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "build": "next build",
+    "start": "next start -p 3001",
+    "export": "next build && next export"
+  },
+  "dependencies": {
+    "next": "^14.2.19",
+    "nextra": "^3.2.2",
+    "nextra-theme-docs": "^3.2.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.10",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "typescript": "^5.8.3"
+  }
+}

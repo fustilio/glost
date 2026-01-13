@@ -31,7 +31,7 @@ const result = await processor.process(document);
 - Freezing for reuse
 - Enhanced error handling and processing reports
 
-**Documentation:** [Processor API Guide](./guides/processor-api.md)
+**Documentation:** [Processor API Guide](./guides/processor-api)
 
 ### 2. Enhanced Plugin Registry ✅
 
@@ -59,7 +59,7 @@ const report = pluginRegistry.checkConflicts(["plugin1", "plugin2"]);
 - Dependency resolution
 - Statistics
 
-**Documentation:** [Registry Guide](./guides/registry.md)
+**Documentation:** [Registry Guide](./guides/registry)
 
 ### 3. CLI Tools ✅
 
@@ -75,7 +75,7 @@ glost plugins validate transcription translation frequency
 glost plugins create MyPlugin
 ```
 
-**Documentation:** [CLI README](../packages/cli/README.md)
+**Documentation:** [CLI README](../packages/cli/README)
 
 ### 4. Presets System ✅
 
@@ -97,7 +97,7 @@ const processor = glost()
 - **Grammar Analyzer** - Grammar focus (POS, clause segmentation, gender)
 - **Minimal** - Just the essentials (transcription, translation)
 
-**Documentation:** [Presets README](../packages/presets/README.md)
+**Documentation:** [Presets README](../packages/presets/README)
 
 ## Architecture
 
@@ -149,7 +149,7 @@ const result = await glost().use(ext1).use(ext2).process(document);
 
 ## Migration
 
-See the [Migration Guide](./migration/MIGRATION_v0.4_to_v0.5.md) for detailed migration instructions.
+See the [Migration Guide](./migration/MIGRATION_v0.4_to_v0.5) for detailed migration instructions.
 
 ## Status
 
@@ -160,8 +160,8 @@ See the [Migration Guide](./migration/MIGRATION_v0.4_to_v0.5.md) for detailed mi
 
 ## Resources
 
-- [Migration Guide](./migration/MIGRATION_v0.4_to_v0.5.md)
-- [Processor API Guide](./guides/processor-api.md)
-- [Registry Guide](./guides/registry.md)
-- [Package Refactoring](./PACKAGE_REFACTORING.md)
-- [Release Notes v0.5.0](./releases/RELEASE_NOTES_v0.5.0.md)
+- [Migration Guide](./migration/MIGRATION_v0.4_to_v0.5)
+- [Processor API Guide](./guides/processor-api)
+- [Registry Guide](./guides/registry)
+- [Package Refactoring](./PACKAGE_REFACTORING)
+- [Release Notes v0.5.0](./releases/RELEASE_NOTES_v0.5.0)

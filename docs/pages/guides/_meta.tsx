@@ -1,0 +1,20 @@
+export default {
+  README: 'Overview',
+  'processor-api': 'Processor API',
+  registry: 'Plugin Registry',
+  'creating-documents': 'Creating Documents',
+  'using-extensions': 'Using Extensions',
+  'custom-extensions': 'Custom Extensions',
+  'implementing-language-providers': 'Implementing Language Providers',
+  'implementing-transcription-providers': 'Implementing Transcription Providers',
+  'multi-language-architecture': 'Multi-Language Architecture',
+  'creating-data-source-packages': 'Creating Data Source Packages',
+  thai: 'Thai Guide',
+  japanese: 'Japanese Guide',
+  'difficulty-extension-guide': 'Difficulty Extension',
+  'frequency-extension-guide': 'Frequency Extension',
+  'pos-extension-guide': 'POS Extension',
+  'gender-extension-guide': 'Gender Extension',
+  'clause-segmenter-extension-guide': 'Clause Segmenter Extension',
+  'examples-index': 'Examples Index'
+}
