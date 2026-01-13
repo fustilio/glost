@@ -1,6 +1,4 @@
-import React from 'react'
-
-export default {
+const config = {
   logo: <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>📖 GLOST</span>,
   project: {
     link: 'https://github.com/fustilio/glost',
@@ -10,13 +8,13 @@ export default {
     content: (
       <span>
         MIT {new Date().getFullYear()} ©{' '}
-        <a href="https://github.com/fustilio/glost" target="_blank">
+        <a href="https://github.com/fustilio/glost" target="_blank" rel="noopener noreferrer">
           GLOST
         </a>
       </span>
     ),
   },
-  head: (
+  head: () => (
     <>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta property="og:title" content="GLOST Documentation" />
@@ -40,3 +38,5 @@ export default {
     labels: 'feedback',
   },
 }
+
+export default config
