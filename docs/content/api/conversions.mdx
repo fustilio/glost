@@ -1,0 +1,114 @@
+# Language-Specific Conversions
+
+Convert between language-specific proficiency tests and the unified numeric scale.
+
+## HSK (Chinese)
+
+```typescript
+hskToNumeric("HSK 1")  // 1
+hskToNumeric("HSK 4")  // 4
+numericToHSK(4)        // "HSK 4"
+
+type HSKLevel = "HSK 1" | "HSK 2" | "HSK 3" | "HSK 4" | "HSK 5" | "HSK 6"
+```
+
+## JLPT (Japanese)
+
+```typescript
+jlptToNumeric("N5")  // 1
+jlptToNumeric("N3")  // 3
+numericToJLPT(3)     // "N3"
+
+type JLPTLevel = "N5" | "N4" | "N3" | "N2" | "N1"
+```
+
+## TOPIK (Korean)
+
+```typescript
+topikToNumeric("TOPIK I-1")   // 1
+topikToNumeric("TOPIK II-4")  // 4
+numericToTOPIK(4)             // "TOPIK II-4"
+
+type TOPIKLevel = "TOPIK I-1" | "TOPIK I-2" | "TOPIK II-3" |
+                  "TOPIK II-4" | "TOPIK II-5" | "TOPIK II-6"
+```
+
+## ILR
+
+```typescript
+ilrToNumeric("2")   // 3
+ilrToNumeric("3")   // 4
+numericToILR(4)     // "3"
+
+type ILRLevel = "0" | "0+" | "1" | "1+" | "2" | "2+" |
+                "3" | "3+" | "4" | "4+" | "5"
+```
+
+## ACTFL
+
+```typescript
+actflToNumeric("Intermediate Mid")  // 3
+numericToACTFL(3)                   // "Intermediate Mid"
+
+type ACTFLLevel = "Novice Low" | "Novice Mid" | "Novice High" |
+                  "Intermediate Low" | "Intermediate Mid" | "Intermediate High" |
+                  "Advanced Low" | "Advanced Mid" | "Advanced High" |
+                  "Superior" | "Distinguished"
+```
+
+## IELTS
+
+```typescript
+ieltsToNumeric(6.5)  // 4
+numericToIELTS(4)    // 6.5
+
+type IELTSBand = 1 | 1.5 | 2 | 2.5 | ... | 9
+```
+
+## TOEFL
+
+```typescript
+toeflToNumeric(95)   // 4
+numericToTOEFL(4)    // 109
+
+type TOEFLScore = number  // 0-120
+```
+
+## Cambridge
+
+```typescript
+cambridgeToNumeric("FCE")  // 4
+numericToCambridge(4)      // "FCE"
+
+type CambridgeLevel = "KET" | "PET" | "FCE" | "CAE" | "CPE"
+```
+
+## DELE (Spanish)
+
+```typescript
+deleToNumeric("B2")  // 4
+numericToDELE(4)     // "B2"
+
+type DELELevel = "A1" | "A2" | "B1" | "B2" | "C1" | "C2"
+```
+
+## DELF/DALF (French)
+
+```typescript
+delfDalfToNumeric("B2")    // 4
+numericToDELFDALF(4)       // "B2"
+
+type DELFLevel = "A1" | "A2" | "B1" | "B2"
+type DALFLevel = "C1" | "C2"
+```
+
+## Goethe (German)
+
+```typescript
+goetheToNumeric("Goethe-Zertifikat B2")  // 4
+numericToGoethe(4)                        // "Goethe-Zertifikat B2"
+
+type GoetheLevel = "Start Deutsch 1" | "Start Deutsch 2" |
+                   "Goethe-Zertifikat B1" | "Goethe-Zertifikat B2" |
+                   "Goethe-Zertifikat C1" | "Goethe-Zertifikat C2"
+```

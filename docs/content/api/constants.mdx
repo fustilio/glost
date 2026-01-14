@@ -1,0 +1,66 @@
+# Constants & Schemas
+
+Data constants and Zod schemas for validation.
+
+## LANGUAGE_DATA
+
+Complete language database (ISO-639-3 indexed).
+
+```typescript
+const LANGUAGE_DATA: Record<string, {
+  name: string
+  nativeName: string
+  iso1?: string
+}>
+```
+
+## ISO Mappings
+
+```typescript
+// "en" → "eng"
+const ISO639_1_TO_3: Record<string, string>
+
+// "eng" → "en"
+const ISO639_3_TO_1: Record<string, string>
+```
+
+## DEFAULT_REGIONS
+
+Default regions for languages.
+
+```typescript
+const DEFAULT_REGIONS: Record<string, string>
+// { en: "US", th: "TH", ja: "JP", ... }
+```
+
+## SPECIAL_CODES
+
+Non-language special codes.
+
+```typescript
+const SPECIAL_CODES = ["ipa", "und", "mul", "zxx"] as const
+```
+
+## Level Arrays
+
+```typescript
+const CEFR_LEVELS = ["Pre-A1", "A1", "A2", "B1", "B2", "C1", "C2"] as const
+const HSK_LEVELS = ["HSK 1", "HSK 2", "HSK 3", "HSK 4", "HSK 5", "HSK 6"] as const
+const JLPT_LEVELS = ["N5", "N4", "N3", "N2", "N1"] as const
+const TOPIK_LEVELS = ["TOPIK I-1", "TOPIK I-2", "TOPIK II-3", "TOPIK II-4", "TOPIK II-5", "TOPIK II-6"] as const
+const CAMBRIDGE_LEVELS = ["KET", "PET", "FCE", "CAE", "CPE"] as const
+```
+
+## Zod Schemas
+
+### languageCodeSchema
+
+Validates common language codes.
+
+```typescript
+import { languageCodeSchema } from "glost-common"
+
+languageCodeSchema.safeParse("en").success   // true
+languageCodeSchema.safeParse("eng").success  // true
+languageCodeSchema.safeParse("xyz").success  // false
+```

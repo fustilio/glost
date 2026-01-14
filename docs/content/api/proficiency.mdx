@@ -1,0 +1,102 @@
+# Proficiency Functions
+
+Work with language proficiency levels across different standards.
+
+## cefrToNumeric / numericToCEFR
+
+Convert between CEFR and numeric levels.
+
+```typescript
+cefrToNumeric("Pre-A1")  // 0
+cefrToNumeric("A1")      // 1
+cefrToNumeric("B1")      // 3
+cefrToNumeric("C2")      // 6
+
+numericToCEFR(0)    // "Pre-A1"
+numericToCEFR(3)    // "B1"
+numericToCEFR(2.7)  // "B1" (rounds)
+```
+
+## toNumericLevel
+
+Convert any standard's level to numeric.
+
+```typescript
+function toNumericLevel(
+  value: string | number,
+  standard: ProficiencyStandard
+): ProficiencyLevel
+```
+
+```typescript
+toNumericLevel("B1", "cefr")    // 3
+toNumericLevel("HSK 4", "hsk")  // 4
+toNumericLevel("N3", "jlpt")    // 3
+toNumericLevel(95, "toefl")     // 4
+toNumericLevel(6.5, "ielts")    // 4
+```
+
+## fromNumericLevel
+
+Convert numeric level to a specific standard.
+
+```typescript
+function fromNumericLevel(
+  level: ProficiencyLevel,
+  standard: ProficiencyStandard
+): string | number
+```
+
+```typescript
+fromNumericLevel(4, "cefr")   // "B2"
+fromNumericLevel(4, "jlpt")   // "N2"
+fromNumericLevel(4, "ielts")  // 6.5
+fromNumericLevel(4, "toefl")  // 109
+```
+
+## getProficiencyInfo
+
+Get complete proficiency information.
+
+```typescript
+getProficiencyInfo(3)
+// {
+//   numeric: 3,
+//   cefr: "B1",
+//   description: "B1 - Intermediate",
+//   canDo: [
+//     "Deal with most situations while traveling",
+//     "Produce simple connected text on familiar topics",
+//     "Describe experiences, events, dreams, and ambitions"
+//   ]
+// }
+```
+
+## meetsLevel
+
+Check if a level meets a requirement.
+
+```typescript
+meetsLevel(3, 2)  // true
+meetsLevel(3, 3)  // true
+meetsLevel(3, 4)  // false
+```
+
+## levelProgress
+
+Calculate progress between two levels (returns 0-100).
+
+```typescript
+levelProgress(2.5, 2, 3)  // 50
+levelProgress(2.0, 2, 3)  // 0
+levelProgress(3.0, 2, 3)  // 100
+```
+
+## levelsBetween
+
+Get CEFR levels between two numeric values.
+
+```typescript
+levelsBetween(1, 3)  // ["A1", "A2", "B1"]
+levelsBetween(0, 6)  // ["Pre-A1", "A1", "A2", "B1", "B2", "C1", "C2"]
+```

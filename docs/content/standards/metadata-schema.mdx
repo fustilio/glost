@@ -10,23 +10,23 @@ This document defines the recommended metadata structure for GLOST implementatio
 interface StandardGLOSTMetadata {
   // Frequency classification
   frequency?: "very-common" | "common" | "uncommon" | "rare";
-  
+
   // Learning difficulty
   difficulty?: "beginner" | "intermediate" | "advanced";
-  
+
   // CEFR proficiency level
   cefr?: "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
-  
+
   // Part of speech (recommend Universal Dependencies tags)
   partOfSpeech?: string;
-  
+
   // Cultural context and usage notes
   culturalNotes?: string;
   usageNotes?: string;
-  
+
   // Grammatical gender
   gender?: "masculine" | "feminine" | "neutral" | "common";
-  
+
   // Curriculum metadata
   lesson?: number;
   unit?: string;
@@ -41,9 +41,9 @@ Metadata should be stored in `extras.metadata` on word nodes:
 ```typescript
 const word = createGLOSTWordNode(
   "สวัสดี",
-  { 
+  {
     rtgs: { text: "sawatdi", system: "rtgs" },
-    ipa: { text: "sa.wàt.diː", system: "ipa" }
+    ipa: { text: "sa.wàt.diː", system: "ipa" },
   },
   { partOfSpeech: "interjection" },
   "word",
@@ -55,9 +55,9 @@ const word = createGLOSTWordNode(
       frequency: "very-common",
       difficulty: "beginner",
       cefr: "A1",
-      culturalNotes: "Standard Thai greeting used any time of day"
-    }
-  }
+      culturalNotes: "Standard Thai greeting used any time of day",
+    },
+  },
 );
 ```
 
@@ -68,12 +68,14 @@ const word = createGLOSTWordNode(
 Word frequency classification based on corpus analysis or word lists.
 
 **Values:**
+
 - `"very-common"` - Top 500-1000 words, essential vocabulary
 - `"common"` - Top 1000-5000 words, frequently encountered
 - `"uncommon"` - Top 5000-20000 words, less frequent
 - `"rare"` - Beyond top 20000, specialized vocabulary
 
 **Use cases:**
+
 - Filter content by vocabulary level
 - Highlight unfamiliar words
 - Generate frequency-based word lists
@@ -84,11 +86,13 @@ Word frequency classification based on corpus analysis or word lists.
 Pedagogical difficulty level for language learners.
 
 **Values:**
+
 - `"beginner"` - A1-A2 level, basic vocabulary
 - `"intermediate"` - B1-B2 level, everyday communication
 - `"advanced"` - C1-C2 level, sophisticated usage
 
 **Notes:**
+
 - May differ from frequency (common words can be difficult)
 - Consider morphological complexity, irregularity, semantic range
 - Based on teaching experience and learner feedback
@@ -98,6 +102,7 @@ Pedagogical difficulty level for language learners.
 Common European Framework of Reference proficiency level.
 
 **Values:**
+
 - `"A1"` - Breakthrough (basic phrases)
 - `"A2"` - Waystage (simple everyday situations)
 - `"B1"` - Threshold (familiar matters)
@@ -106,6 +111,7 @@ Common European Framework of Reference proficiency level.
 - `"C2"` - Mastery (precise, nuanced expression)
 
 **Use cases:**
+
 - Align content with standardized proficiency levels
 - Map to other systems (JLPT, HSK, TOPIK)
 - Generate CEFR-aligned materials
@@ -115,6 +121,7 @@ Common European Framework of Reference proficiency level.
 Part of speech tag using Universal Dependencies tagset.
 
 **Recommended values:**
+
 - `"noun"` - Noun (common, proper)
 - `"verb"` - Verb
 - `"adj"` - Adjective
@@ -130,6 +137,7 @@ Part of speech tag using Universal Dependencies tagset.
 **See:** [Universal Dependencies POS tags](https://universaldependencies.org/u/pos/)
 
 **Notes:**
+
 - Use language-specific subtypes where needed
 - Store full form, not abbreviations
 - Enables grammatical filtering and analysis
@@ -139,13 +147,15 @@ Part of speech tag using Universal Dependencies tagset.
 Cultural context, usage notes, pragmatic information.
 
 **Examples:**
+
 ```typescript
-culturalNotes: "Used in formal business settings, shows respect"
-culturalNotes: "Informal slang, primarily used by young people"
-culturalNotes: "Historical term, considered archaic in modern usage"
+culturalNotes: "Used in formal business settings, shows respect";
+culturalNotes: "Informal slang, primarily used by young people";
+culturalNotes: "Historical term, considered archaic in modern usage";
 ```
 
 **Use cases:**
+
 - Teach appropriate usage
 - Provide cultural context
 - Warn about sensitive terms
@@ -156,10 +166,11 @@ culturalNotes: "Historical term, considered archaic in modern usage"
 General usage guidance, collocations, common patterns.
 
 **Examples:**
+
 ```typescript
-usageNotes: "Often followed by が particle"
-usageNotes: "Typically used with plural nouns"
-usageNotes: "Informal variant of より formal term"
+usageNotes: "Often followed by が particle";
+usageNotes: "Typically used with plural nouns";
+usageNotes: "Informal variant of より formal term";
 ```
 
 ### gender
@@ -167,12 +178,14 @@ usageNotes: "Informal variant of より formal term"
 Grammatical gender (not biological gender).
 
 **Values:**
+
 - `"masculine"` - Masculine gender (der, le, el)
 - `"feminine"` - Feminine gender (die, la)
 - `"neutral"` - Neuter gender (das, lo)
 - `"common"` - Common gender (de in Dutch)
 
 **Languages:**
+
 - Applicable to: German, French, Spanish, Italian, Portuguese, etc.
 - Not applicable to: English, Thai, Chinese, Japanese, Korean
 
@@ -181,13 +194,15 @@ Grammatical gender (not biological gender).
 Curriculum organization metadata.
 
 **Examples:**
+
 ```typescript
-lesson: 5
-unit: "daily-routines"
-topic: "food-and-dining"
+lesson: 5;
+unit: "daily-routines";
+topic: "food-and-dining";
 ```
 
 **Use cases:**
+
 - Organize vocabulary by curriculum
 - Track learner progress through lessons
 - Generate unit-specific word lists
@@ -230,24 +245,24 @@ For batch metadata management, use JSON format:
 Use built-in extensions to enhance metadata display:
 
 ```typescript
-import { 
+import {
   processGLOSTWithExtensions,
   FrequencyExtension,
   DifficultyExtension,
-  PartOfSpeechExtension
-} from 'glost-extensions';
+  PartOfSpeechExtension,
+} from "glost-extensions";
 
 const result = processGLOSTWithExtensions(document, [
-  FrequencyExtension,    // Adds display colors/labels
-  DifficultyExtension,   // Adds difficulty indicators
-  PartOfSpeechExtension  // Adds POS abbreviations
+  FrequencyExtension, // Adds display colors/labels
+  DifficultyExtension, // Adds difficulty indicators
+  PartOfSpeechExtension, // Adds POS abbreviations
 ]);
 
 // Access enriched data
 const word = result.document.children[0];
-console.log(word.extras?.frequency?.display);  // "Very Common"
-console.log(word.extras?.frequency?.color);    // "#22c55e"
-console.log(word.extras?.difficulty?.level);   // "beginner"
+console.log(word.extras?.frequency?.display); // "Very Common"
+console.log(word.extras?.frequency?.color); // "#22c55e"
+console.log(word.extras?.difficulty?.level); // "beginner"
 ```
 
 ## Language-Specific Extensions
@@ -260,7 +275,7 @@ For language-specific metadata fields, use separate namespaces:
     // Standard fields
     frequency: "common",
     difficulty: "intermediate",
-    
+
     // Language-specific
     thai: {
       toneClass: "mid",
@@ -283,12 +298,12 @@ For language-specific metadata fields, use separate namespaces:
 Basic validation helper:
 
 ```typescript
-import { isValidMetadata } from 'glost-utils';
+import { isValidMetadata } from "glost-utils";
 
 const metadata = {
   frequency: "very-common",
   difficulty: "beginner",
-  cefr: "A1"
+  cefr: "A1",
 };
 
 if (isValidMetadata(metadata)) {
@@ -305,16 +320,16 @@ If you have existing metadata, map to standard schema:
 ```typescript
 // Before
 const oldMeta = {
-  level: 1,           // Your custom level
-  type: "n",          // Your custom POS
-  freq: "high"        // Your custom frequency
+  level: 1, // Your custom level
+  type: "n", // Your custom POS
+  freq: "high", // Your custom frequency
 };
 
 // After
 const newMeta = {
   difficulty: "beginner",
   partOfSpeech: "noun",
-  frequency: "very-common"
+  frequency: "very-common",
 };
 ```
 
@@ -327,7 +342,7 @@ You can adopt fields incrementally:
 metadata: { frequency: "common" }
 
 // Phase 2: Add difficulty
-metadata: { 
+metadata: {
   frequency: "common",
   difficulty: "intermediate"
 }
@@ -376,18 +391,26 @@ Validate metadata before processing:
 
 ```typescript
 function validateMetadata(meta: unknown): meta is StandardGLOSTMetadata {
-  if (!meta || typeof meta !== 'object') return false;
-  
+  if (!meta || typeof meta !== "object") return false;
+
   const m = meta as Record<string, unknown>;
-  
-  if (m.frequency && !['very-common', 'common', 'uncommon', 'rare'].includes(m.frequency as string)) {
+
+  if (
+    m.frequency &&
+    !["very-common", "common", "uncommon", "rare"].includes(
+      m.frequency as string,
+    )
+  ) {
     return false;
   }
-  
-  if (m.difficulty && !['beginner', 'intermediate', 'advanced'].includes(m.difficulty as string)) {
+
+  if (
+    m.difficulty &&
+    !["beginner", "intermediate", "advanced"].includes(m.difficulty as string)
+  ) {
     return false;
   }
-  
+
   return true;
 }
 ```
@@ -397,8 +420,8 @@ function validateMetadata(meta: unknown): meta is StandardGLOSTMetadata {
 Provide sensible defaults:
 
 ```typescript
-const frequency = word.extras?.metadata?.frequency ?? 'common';
-const difficulty = word.extras?.metadata?.difficulty ?? 'intermediate';
+const frequency = word.extras?.metadata?.frequency ?? "common";
+const difficulty = word.extras?.metadata?.difficulty ?? "intermediate";
 ```
 
 ## Examples
@@ -487,7 +510,3 @@ const difficulty = word.extras?.metadata?.difficulty ?? 'intermediate';
 - [Proficiency Levels](../proficiency.md)
 - [Creating Documents](../guides/creating-documents.md)
 - [Part of Speech Extension](../packages/extensions.md#partofspeechextension)
-
-## Credits
-
-This schema is based on production implementations across 7 languages and has been validated with 1,000+ words in real applications.

@@ -1,0 +1,113 @@
+# Language Code Functions
+
+Convert and validate language codes between ISO-639-1, ISO-639-3, and BCP-47.
+
+## toISO639_3
+
+Convert any language code to ISO-639-3 format.
+
+```typescript
+function toISO639_3(code: string): string
+```
+
+```typescript
+toISO639_3("en")       // "eng"
+toISO639_3("en-US")    // "eng"
+toISO639_3("zh-Hans")  // "zho"
+```
+
+## toISO639_1
+
+Convert to ISO-639-1 format if possible.
+
+```typescript
+function toISO639_1(code: string): string | undefined
+```
+
+```typescript
+toISO639_1("eng")  // "en"
+toISO639_1("cmn")  // undefined (no ISO-639-1)
+toISO639_1("th")   // "th"
+```
+
+## getLanguageName
+
+Get the English name of a language.
+
+```typescript
+function getLanguageName(code: string): string
+```
+
+```typescript
+getLanguageName("th")   // "Thai"
+getLanguageName("cmn")  // "Mandarin Chinese"
+```
+
+## getNativeLanguageName
+
+Get the native name of a language.
+
+```typescript
+function getNativeLanguageName(code: string): string
+```
+
+```typescript
+getNativeLanguageName("ja")  // "日本語"
+getNativeLanguageName("th")  // "ไทย"
+getNativeLanguageName("ar")  // "العربية"
+```
+
+## isValidLanguageCode
+
+Check if a code is a known language code.
+
+```typescript
+function isValidLanguageCode(code: string): boolean
+```
+
+```typescript
+isValidLanguageCode("en")     // true
+isValidLanguageCode("en-US")  // true
+isValidLanguageCode("xyz")    // false
+```
+
+## isSpecialCode
+
+Check if a code is a special (non-language) code.
+
+```typescript
+function isSpecialCode(code: string): boolean
+```
+
+```typescript
+isSpecialCode("ipa")  // true
+isSpecialCode("und")  // true
+isSpecialCode("en")   // false
+```
+
+## getLanguageInfo
+
+Get complete information about a language.
+
+```typescript
+function getLanguageInfo(code: string): {
+  code: string
+  iso3: string
+  iso1: string | undefined
+  name: string
+  nativeName: string
+  bcp47: string
+}
+```
+
+```typescript
+getLanguageInfo("th")
+// {
+//   code: "th",
+//   iso3: "tha",
+//   iso1: "th",
+//   name: "Thai",
+//   nativeName: "ไทย",
+//   bcp47: "tha-TH"
+// }
+```

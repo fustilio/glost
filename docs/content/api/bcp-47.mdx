@@ -1,0 +1,91 @@
+# BCP-47 Functions
+
+Parse and build BCP-47 language tags.
+
+## parseBCP47
+
+Parse a BCP-47 tag into components.
+
+```typescript
+function parseBCP47(tag: string): {
+  language: string
+  script?: string
+  region?: string
+}
+```
+
+```typescript
+parseBCP47("en")
+// { language: "en" }
+
+parseBCP47("en-US")
+// { language: "en", region: "US" }
+
+parseBCP47("zh-Hans-CN")
+// { language: "zh", script: "Hans", region: "CN" }
+
+parseBCP47("SR-latn-rs")  // Normalizes case
+// { language: "sr", script: "Latn", region: "RS" }
+```
+
+## buildBCP47
+
+Build a BCP-47 tag from components.
+
+```typescript
+function buildBCP47(components: {
+  language: string
+  script?: string
+  region?: string
+}): string
+```
+
+```typescript
+buildBCP47({ language: "en" })
+// "en"
+
+buildBCP47({ language: "zh", script: "Hans", region: "CN" })
+// "zh-Hans-CN"
+```
+
+## normalizeBCP47
+
+Normalize a BCP-47 tag to standard casing.
+
+```typescript
+function normalizeBCP47(tag: string): string
+```
+
+```typescript
+normalizeBCP47("EN-us")       // "en-US"
+normalizeBCP47("ZH-HANS-cn")  // "zh-Hans-CN"
+```
+
+## isValidBCP47
+
+Check if a string is a valid BCP-47 format.
+
+```typescript
+function isValidBCP47(tag: string): boolean
+```
+
+```typescript
+isValidBCP47("en")          // true
+isValidBCP47("zh-Hans-CN")  // true
+isValidBCP47("")            // false
+isValidBCP47("x")           // false
+```
+
+## toBCP47WithRegion
+
+Get BCP-47 tag with default region.
+
+```typescript
+function toBCP47WithRegion(code: string): string
+```
+
+```typescript
+toBCP47WithRegion("en")   // "en-US"
+toBCP47WithRegion("th")   // "th-TH"
+toBCP47WithRegion("cmn")  // "cmn-CN"
+```
