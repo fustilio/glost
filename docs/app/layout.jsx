@@ -1,4 +1,4 @@
-import { Footer, Layout, Navbar } from 'nextra-theme-docs'
+import { Footer, Layout, Navbar, ThemeSwitch } from 'nextra-theme-docs'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
@@ -15,7 +15,9 @@ const navbar = (
   <Navbar
     logo={<span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>GLOST</span>}
     projectLink="https://github.com/fustilio/glost"
-  />
+  >
+    <ThemeSwitch />
+  </Navbar>
 )
 
 const footer = (

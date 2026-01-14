@@ -4,7 +4,22 @@ This guide covers the basics of using GLOST.
 
 ## Installation
 
-See the [main README](../README.md#quick-start) for installation instructions.
+```bash
+npm install glost
+```
+
+For language-specific features, install the corresponding language package:
+
+```bash
+# Thai support
+npm install glost-th
+
+# Japanese support
+npm install glost-ja
+
+# Korean support
+npm install glost-ko
+```
 
 ## Basic Usage
 
@@ -14,18 +29,22 @@ See the [main README](../README.md#quick-start) for installation instructions.
 import { createGLOSTWordNode, createSimpleWord } from 'glost';
 
 // Full control with createGLOSTWordNode
-const word = createGLOSTWordNode(
-  "hello",                                    // text value
-  { ipa: { text: "həˈloʊ", system: "ipa" } }, // transcription
-  { partOfSpeech: "interjection" },           // metadata
-  "word",                                     // level
-  "en",                                       // language
-  "latin",                                    // script
-  { translations: { th: "สวัสดี" } }          // extras
-);
+const word = createGLOSTWordNode({
+  value: "hello",
+  transcription: { ipa: { text: "həˈloʊ" } },
+  metadata: { partOfSpeech: "interjection" },
+  lang: "en",
+  script: "latin",
+  extras: { translations: { th: "สวัสดี" } }
+});
 
 // Simplified helper
-const simple = createSimpleWord("hello", "həˈloʊ", "ipa");
+const simple = createSimpleWord({
+  text: "hello",
+  transliteration: "həˈloʊ",
+  system: "ipa",
+  partOfSpeech: "interjection"
+});
 ```
 
 ### Creating Thai Words
@@ -34,12 +53,15 @@ const simple = createSimpleWord("hello", "həˈloʊ", "ipa");
 import { createThaiWord } from 'glost-th';
 
 const thaiWord = createThaiWord({
-  text:
-  "สวัสดี",      // text
-  "sa-wat-dii",  // RTGS romanization
-  "interjection", // part of speech
-  2              // number of syllables
-);
+  text: "สวัสดี",
+  rtgs: "sawatdi",
+  partOfSpeech: "interjection",
+  tone: 2,
+  syllables: ["sa", "wat", "di"]
+});
+
+// Minimal - just text (transcription can be added by extensions)
+const minimalWord = createThaiWord({ text: "สวัสดี" });
 ```
 
 ### Creating Japanese Words
@@ -48,12 +70,14 @@ const thaiWord = createThaiWord({
 import { createJapaneseWord } from 'glost-ja';
 
 const japaneseWord = createJapaneseWord({
-  text:
-  "今日は",        // text
-  "konnichiwa",    // romaji
-  "interjection",  // part of speech
-  "こんにちは"     // furigana (optional)
-);
+  text: "こんにちは",
+  romaji: "konnichiwa",
+  partOfSpeech: "interjection",
+  furigana: "こんにちは"
+});
+
+// Minimal - just text
+const minimalWord = createJapaneseWord({ text: "こんにちは" });
 ```
 
 ### Building Documents
@@ -62,7 +86,8 @@ const japaneseWord = createJapaneseWord({
 import {
   createSentenceFromWords,
   createParagraphFromSentences,
-  createDocumentFromParagraphs
+  createDocumentFromParagraphs,
+  createSimpleDocument
 } from 'glost';
 
 // Build a sentence from words
@@ -79,9 +104,17 @@ const paragraph = createParagraphFromSentences([sentence1, sentence2]);
 // Build a document from paragraphs
 const document = createDocumentFromParagraphs(
   [paragraph],
-  "th",                    // document language
-  "thai",                  // document script
-  { title: "Greetings" }   // metadata
+  "th",
+  "thai",
+  { title: "Greetings" }
+);
+
+// Or use the simplified helper for quick prototypes
+const quickDoc = createSimpleDocument(
+  [word1, word2],
+  "th",
+  "thai",
+  { sentenceText: "สวัสดีครับ" }
 );
 ```
 
@@ -96,32 +129,51 @@ const words = getAllWords(document);
 // Access word data
 words.forEach(word => {
   console.log(getWordText(word));                    // "สวัสดี"
-  console.log(getWordTranscription(word, "rtgs"));   // "sa-wat-dii"
-  console.log(getWordTranscription(word, "ipa"));    // "sa.wàt.diː"
+  console.log(getWordTranscription(word, "rtgs"));   // "sawatdi"
 });
 
 // Get all sentences
 const sentences = getAllSentences(document);
 ```
 
-## Using Extensions
+## Using the Processor API
 
-Extensions enrich your GLOST documents with additional metadata:
+The v0.5+ processor uses a fluent API:
 
 ```typescript
-import { processGLOSTWithExtensions, FrequencyExtension, DifficultyExtension } from 'glost-extensions';
+import { glost, createSimpleDocument } from 'glost';
+import { createThaiWord } from 'glost-th';
 
-const result = processGLOSTWithExtensions(document, [
-  FrequencyExtension,
-  DifficultyExtension
-]);
+// Create a document
+const words = [
+  createThaiWord({ text: "สวัสดี", rtgs: "sawatdi" }),
+  createThaiWord({ text: "ครับ", rtgs: "khrap" })
+];
+const document = createSimpleDocument(words, "th", "thai");
 
-// Check what was applied
-console.log(result.metadata.appliedExtensions);
-// ["frequency", "difficulty"]
+// Process with plugins
+const result = await glost()
+  .use(myPlugin)
+  .use(anotherPlugin)
+  .process(document);
 
 // Access the processed document
-const enrichedDoc = result.document;
+const processedDoc = result.document;
+```
+
+### Using Presets
+
+```typescript
+import { glost } from 'glost';
+import { languageLearningPreset } from 'glost/presets';
+
+const processor = glost()
+  .use(languageLearningPreset)
+  .freeze();  // Freeze for reuse
+
+// Process multiple documents
+const result1 = await processor.process(doc1);
+const result2 = await processor.process(doc2);
 ```
 
 ## Language Code Flexibility
@@ -136,22 +188,17 @@ getLanguageName("tha");     // "Thai"
 toISO639_3("en");           // "eng"
 ```
 
-See [API Reference](./api) for complete language code and proficiency level functions.
+See [API Reference](/docs/api) for complete language code and proficiency level functions.
 
 ## Type Safety
 
 GLOST provides type guards for safe node handling:
 
 ```typescript
-import { isGLOSTWord, isGLOSTSentence, hasChildren } from 'glost/guards';
+import { isGLOSTWord, isGLOSTSentence } from 'glost';
 
 if (isGLOSTWord(node)) {
   // TypeScript knows node is GLOSTWord
   console.log(node.transcription);
-}
-
-if (hasChildren(node)) {
-  // Safe to access node.children
-  node.children.forEach(child => processChild(child));
 }
 ```

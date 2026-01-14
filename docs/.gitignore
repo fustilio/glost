@@ -11,6 +11,9 @@ coverage/
 out/
 build/
 
+# pagefind search index
+public/_pagefind/
+
 # production
 dist/
 

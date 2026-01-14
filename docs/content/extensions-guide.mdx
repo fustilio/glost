@@ -14,13 +14,13 @@ Extensions add powerful capabilities to GLOST documents:
 
 Each has a **comprehensive guide** with real examples and working demos:
 
-| Extension | Purpose | Guide | Demo |
-|-----------|---------|-------|------|
-| 🔢 **Frequency** | Vocabulary prioritization | [Guide](./docs/guides/frequency-extension-guide) | [Demo](./examples/frequency-demo.ts) |
-| 📝 **POS** | Grammar visualization | [Guide](./docs/guides/pos-extension-guide) | [Demo](./examples/pos-demo.ts) |
-| 📊 **Difficulty** | Text leveling | [Guide](./docs/guides/difficulty-extension-guide) | [Demo](./examples/difficulty-demo.ts) |
-| ⚤ **Gender** | Article selection | [Guide](./docs/guides/gender-extension-guide) | [Demo](./examples/gender-demo.ts) |
-| 🔗 **Clause Segmenter** | Sentence breakdown | [Guide](./docs/guides/clause-segmenter-extension-guide) | [Demo](./examples/clause-segmenter-demo.ts) |
+| Extension | Purpose | Guide |
+|-----------|---------|-------|
+| 🔢 **Frequency** | Vocabulary prioritization | [Guide](/docs/guides/frequency-extension-guide) |
+| 📝 **POS** | Grammar visualization | [Guide](/docs/guides/pos-extension-guide) |
+| 📊 **Difficulty** | Text leveling | [Guide](/docs/guides/difficulty-extension-guide) |
+| ⚤ **Gender** | Article selection | [Guide](/docs/guides/gender-extension-guide) |
+| 🔗 **Clause Segmenter** | Sentence breakdown | [Guide](/docs/guides/clause-segmenter-extension-guide) |
 
 ### Additional Analyzers & Transformers
 
@@ -70,16 +70,16 @@ Copy-paste examples you can run immediately
 ### I want to...
 
 **...understand a specific extension**
-→ Read its guide: [`docs/guides/[name]-extension-guide.md`](./docs/guides/)
+→ Read its guide: See the table above
 
 **...see working examples**
-→ Run demos: `npm run examples` (see [`examples/`](./examples/))
+→ Run demos: `npm run examples` (see [examples](https://github.com/fustilio/glost/tree/main/examples))
 
 **...migrate existing code**
-→ Read: [MIGRATION_EXTENSIONS.md](./MIGRATION_EXTENSIONS)
+→ Read: [Migration Guide](/docs/migration/v0.4-to-v0.5)
 
 **...understand the philosophy**
-→ Read: [PROVIDER_PHILOSOPHY.md](./docs/PROVIDER_PHILOSOPHY)
+→ Read: [Provider Philosophy](/docs/provider-philosophy)
 
 **...implement a provider**
 → See guide examples + language packages (`glost-th/extensions`, `glost-ja/extensions`)
@@ -105,7 +105,7 @@ Each guide shows:
 - Data requirements
 - Performance characteristics
 
-**Start here**: [docs/guides/README.md](./docs/guides/README)
+**Start here**: [Guides Index](/docs/guides)
 
 ### 3. Run the Demo
 
@@ -256,7 +256,7 @@ const [gen, enh] = createFrequencyExtension({
 
 **Result**: High accuracy or graceful degradation. Never misleading data.
 
-📖 **Read**: [PROVIDER_PHILOSOPHY.md](./docs/PROVIDER_PHILOSOPHY)
+📖 **Read**: [Provider Philosophy](/docs/provider-philosophy)
 
 ## Running Examples
 
@@ -276,7 +276,7 @@ Each demo outputs:
 3. Visual representation
 4. Measurable value demonstrated
 
-📖 **See**: [examples/README.md](./examples/README)
+📖 **See**: [Examples](https://github.com/fustilio/glost/tree/main/examples)
 
 ## Real-World Applications
 
@@ -315,27 +315,26 @@ Each demo outputs:
 ## Documentation Index
 
 ### Core Concepts
-- [Extension System](./docs/concepts/extensions) - How extensions work
-- [Provider Philosophy](./docs/PROVIDER_PHILOSOPHY) - Data quality principles
-- [Extension Types](./docs/packages/extensions) - Categories and roles
+- [Extension System](/docs/concepts/extensions) - How extensions work
+- [Provider Philosophy](/docs/provider-philosophy) - Data quality principles
+- [Extension Types](/docs/packages/extensions) - Categories and roles
 
-### Guides (Show, Don't Tell)
-- [Guide Index](./docs/guides/README) - All extension guides
-- [Examples Index](./docs/guides/examples-index) - Example previews
+### Guides
+- [Guide Index](/docs/guides) - All extension guides
+- [Examples Index](/docs/guides/examples-index) - Example previews
 - Individual guides: See table at top
 
 ### Migration & Technical
-- [Migration Guide](./MIGRATION_EXTENSIONS) - Upgrade existing code
-- [Provider Philosophy](./docs/PROVIDER_PHILOSOPHY) - Data quality principles
-- [Naming Conventions](./docs/conventions/naming) - Package patterns
+- [Migration Guide](/docs/migration/v0.4-to-v0.5) - Upgrade existing code
+- [Naming Conventions](/docs/conventions/naming) - Package patterns
 
 ### Package Documentation
-- [Extensions Package](./packages/extensions/README) - Core system
-- [Frequency Package](./packages/extensions/frequency/README)
-- [POS Package](./packages/extensions/pos/README)
-- [Difficulty Package](./packages/extensions/difficulty/README)
-- [Gender Package](./packages/extensions/gender/README)
-- [Clause Segmenter Package](./packages/extensions/clause-segmenter/README)
+- [Extensions Package](https://github.com/fustilio/glost/tree/main/packages/extensions) - Core system
+- [Frequency Package](https://github.com/fustilio/glost/tree/main/packages/extensions/frequency)
+- [POS Package](https://github.com/fustilio/glost/tree/main/packages/extensions/pos)
+- [Difficulty Package](https://github.com/fustilio/glost/tree/main/packages/extensions/difficulty)
+- [Gender Package](https://github.com/fustilio/glost/tree/main/packages/extensions/gender)
+- [Clause Segmenter Package](https://github.com/fustilio/glost/tree/main/packages/extensions/clause-segmenter)
 
 ## Contributing
 
@@ -347,7 +346,7 @@ Found a better use case? Have real data for a language?
 4. Add examples to the guide
 5. Submit a PR
 
-See [CONTRIBUTING.md](./CONTRIBUTING) for guidelines.
+See [CONTRIBUTING.md](https://github.com/fustilio/glost/blob/main/CONTRIBUTING.md) for guidelines.
 
 ## Next Steps
 

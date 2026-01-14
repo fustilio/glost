@@ -7,25 +7,25 @@
 ## Quick Links
 
 ### 🚀 Getting Started
-- [Installation & Quick Start](/getting-started)
-- [Why GLOST?](/why)
-- [Release Notes v0.5.0](/releases/RELEASE_NOTES_v0.5.0)
-- [Migration Guide v0.4 → v0.5](/migration/MIGRATION_v0.4_to_v0.5)
+- [Installation & Quick Start](/docs/getting-started)
+- [Why GLOST?](/docs/why)
+- [Release Notes v0.5.0](/docs/releases/v0.5.0)
+- [Migration Guide v0.4 → v0.5](/docs/migration/v0.4-to-v0.5)
 
 ### 📚 Core Guides
-- [Processor API](/guides/processor-api) - Unified-style processor with fluent `.use()` API
-- [Plugin Registry](/guides/registry) - Discovery, validation, and conflict detection
-- [Creating Documents](/guides/creating-documents) - Build GLOST documents
-- [Using Extensions](/guides/using-extensions) - Process with plugins
-- [Custom Extensions](/guides/custom-extensions) - Create your own plugins
+- [Processor API](/docs/guides/processor-api) - Unified-style processor with fluent `.use()` API
+- [Plugin Registry](/docs/guides/registry) - Discovery, validation, and conflict detection
+- [Creating Documents](/docs/guides/creating-documents) - Build GLOST documents
+- [Using Extensions](/docs/guides/using-extensions) - Process with plugins
+- [Custom Extensions](/docs/guides/custom-extensions) - Create your own plugins
 
 ### 🌍 Language Implementation
-- [Implementing Language Providers](/guides/implementing-language-providers) ⭐ - Complete provider infrastructure guide
-- [Multi-Language Architecture](/guides/multi-language-architecture) - Language support patterns
-- [Implementing Transcription Providers](/guides/implementing-transcription-providers) - Provider patterns
-- [Creating Data Source Packages](/guides/creating-data-source-packages) - Package creation
-- [Thai Guide](/guides/thai) - Thai-specific features
-- [Japanese Guide](/guides/japanese) - Japanese-specific features
+- [Implementing Language Providers](/docs/guides/implementing-language-providers) ⭐ - Complete provider infrastructure guide
+- [Multi-Language Architecture](/docs/guides/multi-language-architecture) - Language support patterns
+- [Implementing Transcription Providers](/docs/guides/implementing-transcription-providers) - Provider patterns
+- [Creating Data Source Packages](/docs/guides/creating-data-source-packages) - Package creation
+- [Thai Guide](/docs/guides/thai) - Thai-specific features
+- [Japanese Guide](/docs/guides/japanese) - Japanese-specific features
 
 ## Package Reference
 
@@ -33,7 +33,7 @@
 | Package | Description |
 |---------|-------------|
 | [glost](https://github.com/fustilio/glost/tree/main/packages/glost) | Main facade package |
-| [glost-core](/packages/core) | Core types and nodes |
+| [glost-core](/docs/packages/core) | Core types and nodes |
 | [glost-processor](https://github.com/fustilio/glost/tree/main/packages/processor) | Processor API |
 | [glost-registry](https://github.com/fustilio/glost/tree/main/packages/registry) | Plugin registry |
 | [glost-presets](https://github.com/fustilio/glost/tree/main/packages/presets) | Preset configurations |
@@ -43,8 +43,8 @@
 | Package | Description |
 |---------|-------------|
 | [glost-common](https://github.com/fustilio/glost/tree/main/packages/common) | Language utilities |
-| [glost-extensions](/packages/extensions) | Extension system |
-| [glost-utils](/packages/utils) | Text utilities |
+| [glost-extensions](/docs/packages/extensions) | Extension system |
+| [glost-utils](/docs/packages/utils) | Text utilities |
 
 ### Language Packages
 | Package | Description |
@@ -57,8 +57,8 @@
 ### Extensions
 | Extension | Description |
 |-----------|-------------|
-| [Transcription](/packages/transcription) | Phonetic transcription |
-| [Translation](/packages/translation) | Text translation |
+| [Transcription](/docs/packages/transcription) | Phonetic transcription |
+| [Translation](/docs/packages/translation) | Text translation |
 | [Frequency](https://github.com/fustilio/glost/tree/main/packages/extensions/frequency) | Word frequency |
 | [Difficulty](https://github.com/fustilio/glost/tree/main/packages/extensions/difficulty) | Difficulty scoring |
 | [POS](https://github.com/fustilio/glost/tree/main/packages/extensions/pos) | Part-of-speech tagging |
@@ -68,37 +68,37 @@
 ### Plugins
 | Plugin | Description |
 |--------|-------------|
-| [glost-inkle](/packages/inkle) | Ink/Inkle integration |
+| [glost-inkle](/docs/packages/inkle) | Ink/Inkle integration |
 
 ## Core Concepts
 
-- [Node Types](/concepts/nodes) - Understanding GLOST's node hierarchy
-- [Extensions](/concepts/extensions) - Extension system architecture
+- [Node Types](/docs/concepts/nodes) - Understanding GLOST's node hierarchy
+- [Extensions](/docs/concepts/extensions) - Extension system architecture
 
 ## Standards & Reference
 
-- [API Reference](/api) - Complete API documentation
-- [Language Codes](/languages) - ISO-639-1, ISO-639-3, BCP-47
-- [Proficiency Levels](/proficiency) - CEFR, JLPT, HSK, TOPIK mappings
-- [Metadata Schema](/standards/metadata-schema) - Standard metadata structure
-- [Naming Conventions](/conventions/naming) - Package naming patterns
+- [API Reference](/docs/api) - Complete API documentation
+- [Language Codes](/docs/languages) - ISO-639-1, ISO-639-3, BCP-47
+- [Proficiency Levels](/docs/proficiency) - CEFR, JLPT, HSK, TOPIK mappings
+- [Metadata Schema](/docs/standards/metadata-schema) - Standard metadata structure
+- [Naming Conventions](/docs/conventions/naming) - Package naming patterns
 
 ## Architecture & Philosophy
 
-- [Architecture Summary](/ARCHITECTURE_SUMMARY) - SRP/SSOT principles and composable design
-- [Package Refactoring](/PACKAGE_REFACTORING) - v0.5.0 package structure changes
-- [Unified Pipeline Implementation](/UNIFIED_PIPELINE_IMPLEMENTATION) - v0.5.0 technical details
-- [Provider Philosophy](/PROVIDER_PHILOSOPHY) - "No Data > Bad Data" principle
+- [Architecture Summary](/docs/architecture-summary) - SRP/SSOT principles and composable design
+- [Package Refactoring](/docs/package-refactoring) - v0.5.0 package structure changes
+- [Unified Pipeline Implementation](/docs/unified-pipeline) - v0.5.0 technical details
+- [Provider Philosophy](/docs/provider-philosophy) - "No Data > Bad Data" principle
 
 ## Ecosystem & Community
 
-- [Ecosystem Overview](/ecosystem) - Core framework, standards, community packages
+- [Ecosystem Overview](/docs/ecosystem) - Core framework, standards, community packages
 - [Contributing Guide](https://github.com/fustilio/glost/blob/main/CONTRIBUTING) - How to contribute
 - [Examples](https://github.com/fustilio/glost/tree/main/examples) - Code examples and use cases
 
 ## Version History
 
-- **v0.5.0** (Current) - [Release Notes](/releases/RELEASE_NOTES_v0.5.0) - Unified-style processor, enhanced registry, CLI tools, presets
+- **v0.5.0** (Current) - [Release Notes](/docs/releases/v0.5.0) - Unified-style processor, enhanced registry, CLI tools, presets
 - **v0.4.0** - Extension system, multi-language support
 - **v0.3.0** - Core types and document creation
 
