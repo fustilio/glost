@@ -1,0 +1,281 @@
+# Plugin System
+
+GLOST's plugin system allows documents to be enriched with additional metadata and structural transformations.
+
+## Overview
+
+Plugins can:
+
+1. **Transform** - Modify the document tree structure
+2. **Visit** - Process specific node types
+3. **Enhance** - Add metadata to nodes
+
+## Plugin Interface
+
+```typescript
+interface Plugin {
+  id: string;              // Unique identifier
+  name: string;            // Human-readable name
+  description?: string;
+
+  // Global tree transformation
+  transform?: (tree: GLOSTRoot) => GLOSTRoot | Promise<GLOSTRoot>;
+
+  // Node-specific visitors
+  visit?: {
+    word?: (node: GLOSTWord) => GLOSTWord | void | Promise<GLOSTWord | void>;
+    sentence?: (node: GLOSTSentence) => GLOSTSentence | void | Promise<GLOSTSentence | void>;
+    paragraph?: (node: GLOSTParagraph) => GLOSTParagraph | void | Promise<GLOSTParagraph | void>;
+  };
+
+  // Metadata enrichment
+  enhanceMetadata?: (node: GLOSTWord) => Partial<GLOSTExtras> | void | Promise<Partial<GLOSTExtras> | void>;
+
+  // Dependencies
+  dependencies?: string[];
+
+  // Configuration
+  options?: Record<string, unknown>;
+}
+```
+
+## Processing Pipeline
+
+1. **Registration** - Plugins are registered in the registry
+2. **Dependency Resolution** - Topological sort determines order
+3. **Transform Phase** - Global tree transformations
+4. **Visit Phase** - Node-specific modifications
+5. **Enhance Phase** - Metadata enrichment
+6. **Result** - Returns processed document and statistics
+
+## Using Plugins
+
+### Basic Usage
+
+```typescript
+import { glost } from 'glost';
+
+const result = await glost()
+  .use(frequencyPlugin)
+  .use(difficultyPlugin)
+  .process(document);
+
+// Access result
+const enrichedDoc = result.document;
+console.log(result.stats.pluginCount); // 2
+```
+
+### Async Plugins
+
+Plugins that fetch data work automatically:
+
+```typescript
+import { glost } from 'glost';
+import { createTranslationPlugin } from 'glost-translation';
+
+const translationPlugin = createTranslationPlugin({
+  targetLanguage: "th",
+  nativeLanguage: "en",
+  lookupTranslation: async (word, lang) => {
+    const response = await fetch(`/api/dictionary/${lang}/${word}`);
+    return response.json();
+  }
+});
+
+const result = await glost()
+  .use(translationPlugin)
+  .process(document);
+```
+
+### Plugin Registry
+
+```typescript
+import { pluginRegistry } from 'glost';
+
+// Register a plugin globally
+pluginRegistry.register(MyPlugin);
+
+// Get by ID
+const plugin = pluginRegistry.get("my-plugin");
+
+// Use registered plugins by ID
+const result = await glost()
+  .use("frequency")
+  .use("difficulty")
+  .process(document);
+```
+
+## Built-in Plugins
+
+### Metadata Plugins
+
+#### frequencyPlugin
+
+Enriches words with frequency display data.
+
+```typescript
+import { glost } from 'glost';
+import { frequencyPlugin } from 'glost-plugins';
+
+const result = await glost()
+  .use(frequencyPlugin)
+  .process(document);
+
+// Expects words to have extras.metadata.frequency set
+// Adds: extras.frequency.display, extras.frequency.color, extras.frequency.priority
+```
+
+#### difficultyPlugin
+
+Enriches words with difficulty display data.
+
+```typescript
+import { difficultyPlugin } from 'glost-plugins';
+
+// Expects words to have extras.metadata.difficulty set
+// Adds: extras.difficulty.display, extras.difficulty.color, extras.difficulty.level
+```
+
+#### posPlugin
+
+Enriches words with POS display data.
+
+```typescript
+import { posPlugin } from 'glost-plugins';
+
+// Uses metadata.partOfSpeech
+// Adds: extras.pos.abbreviation, extras.pos.color, extras.pos.description
+```
+
+#### culturalNotesPlugin
+
+Adds cultural context display data.
+
+```typescript
+import { culturalNotesPlugin } from 'glost-plugins';
+
+// Uses extras.metadata.culturalNotes
+// Adds formatted cultural notes for display
+```
+
+#### genderPlugin
+
+Handles grammatical gender.
+
+```typescript
+import { genderPlugin } from 'glost-plugins';
+
+// Adds gender-related display data
+```
+
+### Transformer Plugins
+
+#### createClauseSegmenterPlugin
+
+Segments sentences into clauses.
+
+```typescript
+import { glost } from 'glost';
+import { createClauseSegmenterPlugin } from 'glost-plugins';
+
+const segmenter = createClauseSegmenterPlugin({
+  markers: ["that", "which", "because", "although"]
+});
+
+const result = await glost()
+  .use(segmenter)
+  .process(document);
+
+// Transforms sentences to contain GLOSTClause nodes
+```
+
+#### createGenderTransformerPlugin
+
+Transforms text with gender variants.
+
+```typescript
+import { createGenderTransformerPlugin } from 'glost-plugins';
+
+const transformer = createGenderTransformerPlugin({
+  targetGender: "female",
+  displayFormat: "replace" // or "show-both", "inline-toggle"
+});
+
+// Input: "Hello {monsieur|madame}"
+// Output: "Hello madame" (with targetGender: "female")
+```
+
+#### negationTransformerPlugin
+
+Marks negated clauses.
+
+```typescript
+import { negationTransformerPlugin } from 'glost-plugins';
+
+// Depends on clause-segmenter
+// Adds negation metadata to clauses containing negative words
+```
+
+## Processing Result
+
+```typescript
+interface ProcessingResult {
+  document: GLOSTRoot;       // Processed document
+  stats: ProcessingStats;    // Timing, plugin count, etc.
+  errors: ProcessingError[]; // Any errors encountered
+  warnings: ProcessingWarning[]; // Non-fatal issues
+}
+```
+
+## Dependency Resolution
+
+Plugins can declare dependencies:
+
+```typescript
+const negationTransformerPlugin: Plugin = {
+  id: "negation-transformer",
+  name: "Negation Transformer",
+  dependencies: ["clause-segmenter"], // Runs after clause-segmenter
+  // ...
+};
+```
+
+The processor automatically:
+- Resolves dependencies using topological sort
+- Detects circular dependencies (throws error)
+- Ensures plugins run in correct order
+
+## Creating Custom Plugins
+
+See the [Creating Custom Plugins](/docs/guides/custom-plugins) guide.
+
+### Quick Example
+
+```typescript
+const MyPlugin: Plugin = {
+  id: "my-plugin",
+  name: "My Custom Plugin",
+
+  enhanceMetadata: (node) => {
+    return {
+      metadata: {
+        myCustomField: computeValue(node)
+      }
+    };
+  }
+};
+
+// Use it
+const result = await glost()
+  .use(MyPlugin)
+  .process(document);
+```
+
+## Best Practices
+
+1. **Use unique IDs** - Avoid conflicts with other plugins
+2. **Declare dependencies** - Let the system handle ordering
+3. **Handle errors gracefully** - Failed plugins shouldn't crash processing
+4. **Keep plugins focused** - One plugin, one responsibility
+5. **Use async sparingly** - Only when external data is needed
+6. **Document your plugins** - Describe what they add/transform

@@ -1,6 +1,6 @@
 export default {
   core: 'glost-core',
-  extensions: 'glost-extensions',
+  plugins: 'glost-plugins',
   utils: 'glost-utils',
   transcription: 'Transcription',
   translation: 'Translation',

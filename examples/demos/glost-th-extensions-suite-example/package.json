@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "glost": "workspace:*",
-    "glost-extensions": "workspace:*",
+    "glost-plugins": "workspace:*",
     "glost-th": "workspace:*",
     "glost-transcription": "workspace:*",
     "glost-translation": "workspace:*",

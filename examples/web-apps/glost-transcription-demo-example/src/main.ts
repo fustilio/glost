@@ -8,8 +8,8 @@
  * NOTE: For a more comprehensive demo, see examples/composition-demo
  */
 
-import { processGLOSTWithExtensions } from "glost-extensions";
-import type { GLOSTExtension } from "glost-extensions";
+import { processGLOSTWithExtensions } from "glost-plugins";
+import type { GLOSTExtension } from "glost-plugins";
 import {
   createSimpleWord,
   createSentenceFromWords,

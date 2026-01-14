@@ -321,7 +321,7 @@ console.log(analyzeTone("ก้า"));  // "Falling"
 
 - **`glost`** - Core GLOST types and utilities
 - **`glost-common`** - Common types and utilities
-- **`glost-extensions`** - Extension system framework
+- **`glost-plugins`** - Extension system framework
 - **`glost-transcription`** - Transcription extension framework
 - **`glost-translation`** - Translation extension framework
 

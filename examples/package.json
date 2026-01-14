@@ -14,7 +14,7 @@
   "dependencies": {
     "glost": "workspace:*",
     "glost-core": "workspace:*",
-    "glost-extensions": "workspace:*",
+    "glost-plugins": "workspace:*",
     "glost-processor": "workspace:*",
     "glost-registry": "workspace:*",
     "glost-presets": "workspace:*",

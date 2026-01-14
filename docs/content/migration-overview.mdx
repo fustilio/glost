@@ -20,7 +20,7 @@ This document contains the latest migration guide for upgrading to the current G
 **Quick Start:**
 ```typescript
 // Old (v0.4)
-import { processGLOSTWithExtensions } from "glost-extensions";
+import { processGLOSTWithExtensions } from "glost-plugins";
 const result = processGLOSTWithExtensions(doc, [ext1, ext2]);
 
 // New (v0.5)
@@ -34,7 +34,7 @@ const result = await glost().use(ext1).use(ext2).process(doc);
 
 - [Full Migration Guide](/docs/migration/v0.4-to-v0.5) - Complete details and examples
 - [Release Notes](/docs/releases/v0.5.0) - What's new in v0.5.0
-- [Extensions Guide](/docs/extensions-guide) - Working with the extension system
+- [Plugins Guide](/docs/plugins-guide) - Working with the plugin system
 - [Provider Philosophy](/docs/provider-philosophy) - Understanding data quality principles
 
 ## Need Help?

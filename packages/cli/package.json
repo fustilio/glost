@@ -33,11 +33,11 @@
   "dependencies": {
     "glost-core": "workspace:*",
     "glost-registry": "workspace:*",
-    "glost-extensions": "workspace:*"
+    "glost-plugins": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "typescript": "^5.3.3",
-    "vitest": "^1.6.0"
+    "vitest": "catalog:"
   }
 }

@@ -16,14 +16,17 @@ Japanese has unique characteristics that GLOST handles:
 ### Basic Japanese Word
 
 ```typescript
-import { createJapaneseWord } from 'glost';
+import { createJapaneseWord } from 'glost-ja';
 
-const word = createJapaneseWord(
-  "今日",          // kanji
-  "kyou",          // romaji
-  "noun",          // part of speech
-  "きょう"          // furigana (optional)
-);
+const word = createJapaneseWord({
+  text: "今日",
+  romaji: "kyou",
+  partOfSpeech: "noun",
+  furigana: "きょう"
+});
+
+// Minimal - just text
+const minimalWord = createJapaneseWord({ text: "今日" });
 ```
 
 ### With Full Transcription Data
@@ -31,21 +34,20 @@ const word = createJapaneseWord(
 ```typescript
 import { createGLOSTWordNode } from 'glost';
 
-const word = createGLOSTWordNode(
-  "今日",
-  {
-    romaji: { text: "kyou", system: "romaji" },
-    furigana: { text: "きょう", system: "furigana" },
-    ipa: { text: "kʲoː", system: "ipa" }
+const word = createGLOSTWordNode({
+  value: "今日",
+  transcription: {
+    romaji: { text: "kyou" },
+    furigana: { text: "きょう" },
+    ipa: { text: "kʲoː" }
   },
-  { 
+  metadata: {
     partOfSpeech: "noun",
     usage: "Used for 'today'"
   },
-  "word",
-  "ja",
-  "japanese"
-);
+  lang: "ja",
+  script: "kanji"
+});
 ```
 
 ## Script Types
@@ -55,7 +57,14 @@ const word = createGLOSTWordNode(
 Chinese characters with Japanese readings:
 
 ```typescript
-const word = createJapaneseWord("日本", "nihon", "noun", "にほん");
+import { createJapaneseWord } from 'glost-ja';
+
+const word = createJapaneseWord({
+  text: "日本",
+  romaji: "nihon",
+  partOfSpeech: "noun",
+  furigana: "にほん"
+});
 ```
 
 ### Hiragana
@@ -63,14 +72,15 @@ const word = createJapaneseWord("日本", "nihon", "noun", "にほん");
 Native Japanese syllabary:
 
 ```typescript
-const word = createGLOSTWordNode(
-  "これ",
-  { romaji: { text: "kore", system: "romaji" } },
-  { partOfSpeech: "pronoun" },
-  "word",
-  "ja",
-  "hiragana"
-);
+import { createGLOSTWordNode } from 'glost';
+
+const word = createGLOSTWordNode({
+  value: "これ",
+  transcription: { romaji: { text: "kore" } },
+  metadata: { partOfSpeech: "pronoun" },
+  lang: "ja",
+  script: "hiragana"
+});
 ```
 
 ### Katakana
@@ -78,14 +88,15 @@ const word = createGLOSTWordNode(
 Used for foreign words:
 
 ```typescript
-const word = createGLOSTWordNode(
-  "コンピューター",
-  { romaji: { text: "konpyuutaa", system: "romaji" } },
-  { partOfSpeech: "noun", etymology: "English: computer" },
-  "word",
-  "ja",
-  "katakana"
-);
+import { createGLOSTWordNode } from 'glost';
+
+const word = createGLOSTWordNode({
+  value: "コンピューター",
+  transcription: { romaji: { text: "konpyuutaa" } },
+  metadata: { partOfSpeech: "noun", etymology: "English: computer" },
+  lang: "ja",
+  script: "katakana"
+});
 ```
 
 ## Furigana (Reading Aids)
@@ -95,7 +106,14 @@ Furigana shows the reading of kanji.
 ### Simple Furigana
 
 ```typescript
-const word = createJapaneseWord("食べる", "taberu", "verb", "たべる");
+import { createJapaneseWord } from 'glost-ja';
+
+const word = createJapaneseWord({
+  text: "食べる",
+  romaji: "taberu",
+  partOfSpeech: "verb",
+  furigana: "たべる"
+});
 ```
 
 ### Ruby-Style Furigana
@@ -105,22 +123,22 @@ For complex kanji-furigana alignment:
 ```typescript
 import { createGLOSTWordNode } from 'glost';
 
-const word = createGLOSTWordNode(
-  "東京",
-  {
+const word = createGLOSTWordNode({
+  value: "東京",
+  transcription: {
     furigana: {
-      text: [
-        { base: "東", ruby: "とう" },
-        { base: "京", ruby: "きょう" }
-      ],
-      system: "furigana"
+      text: "とうきょう",
+      ruby: [
+        { base: "東", reading: "とう" },
+        { base: "京", reading: "きょう" }
+      ]
     },
-    romaji: { text: "toukyou", system: "romaji" }
+    romaji: { text: "toukyou" }
   },
-  { partOfSpeech: "proper noun" },
-  "word",
-  "ja"
-);
+  metadata: { partOfSpeech: "proper noun" },
+  lang: "ja",
+  script: "kanji"
+});
 ```
 
 ## Word Segmentation
@@ -130,11 +148,14 @@ Japanese has no spaces between words.
 ### Manual Segmentation
 
 ```typescript
+import { createJapaneseWord } from 'glost-ja';
+import { createSentenceFromWords } from 'glost';
+
 const words = [
-  createJapaneseWord("私", "watashi", "pronoun", "わたし"),
-  createJapaneseWord("は", "wa", "particle"),
-  createJapaneseWord("学生", "gakusei", "noun", "がくせい"),
-  createJapaneseWord("です", "desu", "copula")
+  createJapaneseWord({ text: "私", romaji: "watashi", partOfSpeech: "pronoun", furigana: "わたし" }),
+  createJapaneseWord({ text: "は", romaji: "wa", partOfSpeech: "particle" }),
+  createJapaneseWord({ text: "学生", romaji: "gakusei", partOfSpeech: "noun", furigana: "がくせい" }),
+  createJapaneseWord({ text: "です", romaji: "desu", partOfSpeech: "copula" })
 ];
 
 const sentence = createSentenceFromWords(
@@ -145,39 +166,24 @@ const sentence = createSentenceFromWords(
 );
 ```
 
-### With Custom Segmenter
-
-```typescript
-import { convertTextToGLOST } from 'glost-utils';
-
-const document = convertTextToGLOST("私は学生です", {
-  language: "ja",
-  script: "japanese",
-  languageStrategy: {
-    segmentWords: (text) => {
-      // Use MeCab, Kuromoji, or similar
-      return segmentJapaneseText(text);
-    }
-  }
-});
-```
-
 ## Particles
 
 Japanese particles are crucial for grammar:
 
 ```typescript
+import { createJapaneseWord } from 'glost-ja';
+
 // Topic marker
-const wa = createJapaneseWord("は", "wa", "particle");
+const wa = createJapaneseWord({ text: "は", romaji: "wa", partOfSpeech: "particle" });
 
 // Object marker
-const wo = createJapaneseWord("を", "wo", "particle");
+const wo = createJapaneseWord({ text: "を", romaji: "wo", partOfSpeech: "particle" });
 
 // Subject marker
-const ga = createJapaneseWord("が", "ga", "particle");
+const ga = createJapaneseWord({ text: "が", romaji: "ga", partOfSpeech: "particle" });
 
 // Direction marker
-const ni = createJapaneseWord("に", "ni", "particle");
+const ni = createJapaneseWord({ text: "に", romaji: "ni", partOfSpeech: "particle" });
 ```
 
 ## Politeness Levels
@@ -187,28 +193,44 @@ Japanese has multiple politeness registers:
 ### Plain Form
 
 ```typescript
-const eat = createJapaneseWord("食べる", "taberu", "verb", "たべる");
+import { createJapaneseWord } from 'glost-ja';
+
+const eat = createJapaneseWord({
+  text: "食べる",
+  romaji: "taberu",
+  partOfSpeech: "verb",
+  furigana: "たべる"
+});
 ```
 
 ### Polite Form (ます)
 
 ```typescript
-const eatPolite = createJapaneseWord("食べます", "tabemasu", "verb", "たべます");
+import { createJapaneseWord } from 'glost-ja';
+
+const eatPolite = createJapaneseWord({
+  text: "食べます",
+  romaji: "tabemasu",
+  partOfSpeech: "verb",
+  furigana: "たべます"
+});
 ```
 
 ### Marking Formality
 
 ```typescript
-const word = createGLOSTWordNode(
-  "食べます",
-  { romaji: { text: "tabemasu", system: "romaji" } },
-  { 
+import { createGLOSTWordNode } from 'glost';
+
+const word = createGLOSTWordNode({
+  value: "食べます",
+  transcription: { romaji: { text: "tabemasu" } },
+  metadata: {
     partOfSpeech: "verb",
     formality: "formal"
   },
-  "word",
-  "ja"
-);
+  lang: "ja",
+  script: "hiragana"
+});
 ```
 
 ## Kanji Readings
@@ -218,37 +240,41 @@ Kanji can have multiple readings:
 ### On'yomi (Chinese Reading)
 
 ```typescript
-const word = createGLOSTWordNode(
-  "山",
-  {
-    furigana: { text: "さん", system: "furigana" },
-    romaji: { text: "san", system: "romaji" }
+import { createGLOSTWordNode } from 'glost';
+
+const word = createGLOSTWordNode({
+  value: "山",
+  transcription: {
+    furigana: { text: "さん" },
+    romaji: { text: "san" }
   },
-  { 
+  metadata: {
     partOfSpeech: "noun",
     usage: "On reading, used in compounds"
   },
-  "word",
-  "ja"
-);
+  lang: "ja",
+  script: "kanji"
+});
 ```
 
 ### Kun'yomi (Japanese Reading)
 
 ```typescript
-const word = createGLOSTWordNode(
-  "山",
-  {
-    furigana: { text: "やま", system: "furigana" },
-    romaji: { text: "yama", system: "romaji" }
+import { createGLOSTWordNode } from 'glost';
+
+const word = createGLOSTWordNode({
+  value: "山",
+  transcription: {
+    furigana: { text: "やま" },
+    romaji: { text: "yama" }
   },
-  { 
+  metadata: {
     partOfSpeech: "noun",
     usage: "Kun reading, standalone"
   },
-  "word",
-  "ja"
-);
+  lang: "ja",
+  script: "kanji"
+});
 ```
 
 ## Sentence Structure
@@ -256,12 +282,15 @@ const word = createGLOSTWordNode(
 ### Basic Sentence
 
 ```typescript
+import { createJapaneseWord } from 'glost-ja';
+import { createSentenceFromWords } from 'glost';
+
 const words = [
-  createJapaneseWord("私", "watashi", "pronoun", "わたし"),
-  createJapaneseWord("は", "wa", "particle"),
-  createJapaneseWord("本", "hon", "noun", "ほん"),
-  createJapaneseWord("を", "wo", "particle"),
-  createJapaneseWord("読みます", "yomimasu", "verb", "よみます")
+  createJapaneseWord({ text: "私", romaji: "watashi", partOfSpeech: "pronoun", furigana: "わたし" }),
+  createJapaneseWord({ text: "は", romaji: "wa", partOfSpeech: "particle" }),
+  createJapaneseWord({ text: "本", romaji: "hon", partOfSpeech: "noun", furigana: "ほん" }),
+  createJapaneseWord({ text: "を", romaji: "wo", partOfSpeech: "particle" }),
+  createJapaneseWord({ text: "読みます", romaji: "yomimasu", partOfSpeech: "verb", furigana: "よみます" })
 ];
 
 const sentence = createSentenceFromWords(
@@ -275,19 +304,20 @@ const sentence = createSentenceFromWords(
 ### With Translation
 
 ```typescript
-const sentence = createGLOSTSentenceNode(
-  "私は本を読みます",
-  "ja",
-  "japanese",
-  words,
-  undefined,
-  {
+import { createGLOSTSentenceNode } from 'glost';
+
+const sentence = createGLOSTSentenceNode({
+  originalText: "私は本を読みます",
+  lang: "ja",
+  script: "japanese",
+  children: words,
+  extras: {
     translations: {
       en: "I read a book.",
       th: "ฉันอ่านหนังสือ"
     }
   }
-);
+});
 ```
 
 ## JLPT Levels
@@ -295,27 +325,28 @@ const sentence = createGLOSTSentenceNode(
 Map difficulty to JLPT:
 
 ```typescript
-const word = createGLOSTWordNode(
-  "食べる",
-  { romaji: { text: "taberu", system: "romaji" } },
-  { partOfSpeech: "verb" },
-  "word",
-  "ja",
-  undefined,
-  {
+import { createGLOSTWordNode } from 'glost';
+
+const word = createGLOSTWordNode({
+  value: "食べる",
+  transcription: { romaji: { text: "taberu" } },
+  metadata: { partOfSpeech: "verb" },
+  lang: "ja",
+  script: "hiragana",
+  extras: {
     metadata: {
       difficulty: "beginner",
       jlptLevel: "N5"
     }
   }
-);
+});
 ```
 
 ## Document Example
 
 ```typescript
+import { createJapaneseWord } from 'glost-ja';
 import {
-  createJapaneseWord,
   createSentenceFromWords,
   createParagraphFromSentences,
   createDocumentFromParagraphs
@@ -323,14 +354,14 @@ import {
 
 // Create a Japanese lesson document
 const greeting1 = [
-  createJapaneseWord("こんにちは", "konnichiwa", "interjection")
+  createJapaneseWord({ text: "こんにちは", romaji: "konnichiwa", partOfSpeech: "interjection" })
 ];
 
 const greeting2 = [
-  createJapaneseWord("私", "watashi", "pronoun", "わたし"),
-  createJapaneseWord("は", "wa", "particle"),
-  createJapaneseWord("田中", "tanaka", "proper noun", "たなか"),
-  createJapaneseWord("です", "desu", "copula")
+  createJapaneseWord({ text: "私", romaji: "watashi", partOfSpeech: "pronoun", furigana: "わたし" }),
+  createJapaneseWord({ text: "は", romaji: "wa", partOfSpeech: "particle" }),
+  createJapaneseWord({ text: "田中", romaji: "tanaka", partOfSpeech: "proper noun", furigana: "たなか" }),
+  createJapaneseWord({ text: "です", romaji: "desu", partOfSpeech: "copula" })
 ];
 
 const sentences = [
@@ -344,36 +375,21 @@ const document = createDocumentFromParagraphs(
   [paragraph],
   "ja",
   "japanese",
-  {
-    title: "Japanese Self-Introduction",
-    lesson: 1,
-    jlptTarget: "N5"
-  }
+  { title: "Japanese Self-Introduction" }
 );
 ```
 
 ## Processing Japanese Documents
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from 'glost-extensions';
-import { createTranscriptionExtension } from 'glost-transcription';
+import { glost } from 'glost';
 
-const furiganaExt = createTranscriptionExtension({
-  targetLanguage: "ja",
-  lookupTranscription: async (word, lang) => {
-    // Fetch from Japanese dictionary API
-    const response = await fetch(`/api/jisho/${encodeURIComponent(word)}`);
-    const data = await response.json();
-    return {
-      furigana: data.reading,
-      romaji: data.romaji
-    };
-  }
-});
+const result = await glost()
+  .use(furiganaPlugin)
+  .use(frequencyPlugin)
+  .use(difficultyPlugin)
+  .process(document);
 
-const result = await processGLOSTWithExtensionsAsync(document, [
-  furiganaExt,
-  FrequencyExtension,
-  DifficultyExtension
-]);
+// Access processed document
+const processedDoc = result.document;
 ```

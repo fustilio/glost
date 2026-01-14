@@ -48,7 +48,7 @@ const koreanTranscriptionProvider: TranscriptionProvider = {
  * @example
  * ```typescript
  * import { createKoreanTranscriptionExtension } from "./korean-transcription.js";
- * import { processGLOSTWithExtensionsAsync } from "glost-extensions";
+ * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
  * 
  * const extension = createKoreanTranscriptionExtension();
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);

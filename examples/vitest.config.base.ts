@@ -48,28 +48,28 @@ export function createExampleVitestConfig(
       replacement: resolve(packagesDir, 'common/src/index.ts'),
     },
     {
-      find: 'glost-extensions',
-      replacement: resolve(packagesDir, 'extensions/extensions/src/index.ts'),
+      find: 'glost-plugins',
+      replacement: resolve(packagesDir, 'plugins/core/src/index.ts'),
     },
     {
       find: 'glost-transcription',
-      replacement: resolve(packagesDir, 'extensions/transcription/src/index.ts'),
+      replacement: resolve(packagesDir, 'plugins/transcription/src/index.ts'),
     },
     {
       find: 'glost-translation',
-      replacement: resolve(packagesDir, 'extensions/translation/src/index.ts'),
+      replacement: resolve(packagesDir, 'plugins/translation/src/index.ts'),
     },
     {
       find: 'glost-frequency',
-      replacement: resolve(packagesDir, 'extensions/frequency/src/index.ts'),
+      replacement: resolve(packagesDir, 'plugins/frequency/src/index.ts'),
     },
     {
       find: 'glost-difficulty',
-      replacement: resolve(packagesDir, 'extensions/difficulty/src/index.ts'),
+      replacement: resolve(packagesDir, 'plugins/difficulty/src/index.ts'),
     },
     {
       find: 'glost-pos',
-      replacement: resolve(packagesDir, 'extensions/pos/src/index.ts'),
+      replacement: resolve(packagesDir, 'plugins/pos/src/index.ts'),
     },
     // External dependencies (need exact paths in monorepo)
     {

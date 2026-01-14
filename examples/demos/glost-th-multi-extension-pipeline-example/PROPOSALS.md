@@ -108,7 +108,7 @@ describe("Document Helpers", () => {
 **Priority:** HIGH  
 **Effort:** MEDIUM (3-4 hours)  
 **Impact:** Major ergonomic improvement  
-**Status:** ✅ Completed - Available in `glost-extensions@latest`
+**Status:** ✅ Completed - Available in `glost-plugins@latest`
 
 ### Problem
 `processGLOSTWithExtensionsAsync` returns `{document, metadata}` wrapper, not the document directly. This is surprising and causes confusion.

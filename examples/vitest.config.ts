@@ -22,7 +22,7 @@ export default defineConfig({
   resolve: {
     alias: {
       'glost': path.resolve(__dirname, '../packages/core/src/index.ts'),
-      'glost-extensions': path.resolve(__dirname, '../packages/extensions/extensions/src/index.ts'),
+      'glost-plugins': path.resolve(__dirname, '../packages/plugins/core/src/index.ts'),
       'glost-th': path.resolve(__dirname, '../packages/languages/th/src/index.ts'),
       'glost-ja': path.resolve(__dirname, '../packages/languages/ja/src/index.ts'),
       'glost-ko': path.resolve(__dirname, '../packages/languages/ko/src/index.ts'),

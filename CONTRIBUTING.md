@@ -27,7 +27,7 @@ GLOST v0.5.0 is a monorepo with the following key packages:
 
 ### Supporting Packages
 - **glost-common** - Language utilities
-- **glost-extensions** - Extension system
+- **glost-plugins** - Extension system
 - **glost-utils** - Text utilities
 
 ### Language Packages

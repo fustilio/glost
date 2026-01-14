@@ -15,7 +15,7 @@ import {
   createParagraphFromSentences,
   createDocumentFromParagraphs,
 } from 'glost';
-import { processGLOST, type GLOSTExtension } from 'glost-extensions';
+import { processGLOST, type GLOSTExtension } from 'glost-plugins';
 
 // Helper to create large documents
 function createLargeDocument(wordCount: number) {

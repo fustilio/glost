@@ -1,0 +1,341 @@
+# Multi-Language Text
+
+GloST is designed for multilingual content. This guide shows how to handle different languages, scripts, and transcription systems in your application.
+
+## Language Configuration
+
+Define configurations for each language:
+
+```tsx
+import type { LanguageConfig } from "glost-react";
+
+const japaneseConfig: LanguageConfig = {
+  lang: "ja",
+  script: "kanji",
+  name: "Japanese",
+  transcriptionSystems: {
+    furigana: {
+      id: "furigana",
+      label: "Furigana",
+      position: "above",
+      hideWhenSameAsText: true,
+    },
+    romaji: {
+      id: "romaji",
+      label: "Romaji",
+      position: "above",
+    },
+  },
+  defaultTranscriptionSystem: "furigana",
+  defaultLevel: 2,
+};
+
+const thaiConfig: LanguageConfig = {
+  lang: "th",
+  script: "thai",
+  name: "Thai",
+  transcriptionSystems: {
+    "paiboon+": {
+      id: "paiboon+",
+      label: "Paiboon+",
+      position: "below",
+    },
+    rtgs: {
+      id: "rtgs",
+      label: "RTGS",
+      position: "below",
+    },
+    ipa: {
+      id: "ipa",
+      label: "IPA",
+      position: "below",
+    },
+  },
+  defaultTranscriptionSystem: "paiboon+",
+  defaultLevel: 2,
+};
+
+const chineseConfig: LanguageConfig = {
+  lang: "zh",
+  script: "hanzi",
+  name: "Chinese",
+  transcriptionSystems: {
+    pinyin: {
+      id: "pinyin",
+      label: "Pinyin",
+      position: "above",
+    },
+    zhuyin: {
+      id: "zhuyin",
+      label: "Zhuyin (Bopomofo)",
+      position: "above",
+    },
+  },
+  defaultTranscriptionSystem: "pinyin",
+  defaultLevel: 2,
+};
+```
+
+## Language-Aware Component
+
+Create a component that adapts to different languages:
+
+```tsx
+import { SimpleRubyWord } from "glost-react";
+import type { GLOSTWord } from "glost";
+
+const languageConfigs = {
+  ja: japaneseConfig,
+  th: thaiConfig,
+  zh: chineseConfig,
+};
+
+function LanguageAwareWord({ word }: { word: GLOSTWord }) {
+  const lang = word.lang?.split("-")[0] ?? "en";
+  const config = languageConfigs[lang];
+
+  if (!config) {
+    // No transcription config for this language
+    return <span>{getWordText(word)}</span>;
+  }
+
+  const defaultSystem = config.defaultTranscriptionSystem;
+  const position = config.transcriptionSystems[defaultSystem]?.position ?? "below";
+
+  return (
+    <SimpleRubyWord
+      word={word}
+      transcriptionSystem={defaultSystem}
+      rubyPosition={position === "above" ? "over" : "under"}
+    />
+  );
+}
+```
+
+## Multi-Language Document
+
+Render a document with mixed languages:
+
+```tsx
+import { getAllSentences, getAllWords } from "glost";
+import { GloSTSentence, RubyWord } from "glost-react";
+
+function MultiLanguageDocument({ document }) {
+  const sentences = getAllSentences(document);
+
+  return (
+    <div className="space-y-4">
+      {sentences.map((sentence, idx) => {
+        const lang = sentence.lang?.split("-")[0];
+        const config = languageConfigs[lang];
+
+        return (
+          <GloSTSentence
+            key={idx}
+            sentence={sentence}
+            displayLevel={config?.defaultLevel ?? 1}
+            transcriptionSystem={config?.defaultTranscriptionSystem}
+            showTranslation
+          />
+        );
+      })}
+    </div>
+  );
+}
+```
+
+## Language Strategies
+
+Create rendering strategies for each language:
+
+```tsx
+import type { LanguageRenderingStrategy } from "glost-react";
+import { containsKanji, isAllHiragana } from "glost-react";
+import { getWordText } from "glost";
+
+const japaneseStrategy: LanguageRenderingStrategy = {
+  shouldShowTranscription: (word, system) => {
+    if (system === "furigana") {
+      const text = getWordText(word);
+      // Hide furigana for pure hiragana words
+      return containsKanji(text) || !isAllHiragana(text);
+    }
+    return true;
+  },
+  getRubyPosition: () => "over",
+};
+
+const thaiStrategy: LanguageRenderingStrategy = {
+  shouldShowTranscription: () => true,
+  getRubyPosition: () => "under",
+};
+
+const chineseStrategy: LanguageRenderingStrategy = {
+  shouldShowTranscription: () => true,
+  getRubyPosition: () => "over",
+};
+
+const strategies = {
+  ja: japaneseStrategy,
+  th: thaiStrategy,
+  zh: chineseStrategy,
+};
+```
+
+## Transcription System Selector
+
+Let users choose their preferred transcription system:
+
+```tsx
+import { useState } from "react";
+import { RubyWord, getAvailableTranscriptionSystems } from "glost-react";
+
+function WordWithSystemSelector({ word, languageConfig }) {
+  const systems = getAvailableTranscriptionSystems(languageConfig);
+  const [system, setSystem] = useState(languageConfig.defaultTranscriptionSystem);
+
+  return (
+    <div>
+      <select
+        value={system}
+        onChange={(e) => setSystem(e.target.value)}
+        className="mb-2"
+      >
+        {systems.map((sys) => (
+          <option key={sys} value={sys}>
+            {languageConfig.transcriptionSystems[sys].label}
+          </option>
+        ))}
+      </select>
+
+      <RubyWord
+        word={word}
+        displayLevel={2}
+        transcriptionSystem={system}
+        languageStrategy={strategies[languageConfig.lang.split("-")[0]]}
+      />
+    </div>
+  );
+}
+```
+
+## Creating Multi-Language Documents
+
+```tsx
+import {
+  createSimpleDocument,
+  createJapaneseWord,
+  createThaiWord,
+  createChineseWord
+} from "glost";
+
+// Japanese sentence
+const jpWords = [
+  createJapaneseWord({
+    text: "私",
+    transcription: { furigana: { text: "わたし", system: "furigana" } },
+    translation: "I"
+  }),
+  createJapaneseWord({
+    text: "は",
+    transcription: { furigana: { text: "は", system: "furigana" } },
+    translation: "(topic marker)"
+  }),
+  createJapaneseWord({
+    text: "日本語",
+    transcription: { furigana: { text: "にほんご", system: "furigana" } },
+    translation: "Japanese"
+  }),
+];
+
+const jpDoc = createSimpleDocument(jpWords, "ja", "kanji", {
+  sentenceText: "私は日本語を勉強しています"
+});
+
+// Thai sentence
+const thWords = [
+  createThaiWord({
+    text: "ผม",
+    transcription: { "paiboon+": { text: "pǒm", system: "paiboon+" } },
+    translation: "I (male)"
+  }),
+  createThaiWord({
+    text: "เรียน",
+    transcription: { "paiboon+": { text: "rian", system: "paiboon+" } },
+    translation: "study"
+  }),
+  createThaiWord({
+    text: "ภาษาไทย",
+    transcription: { "paiboon+": { text: "paa-sǎa tai", system: "paiboon+" } },
+    translation: "Thai language"
+  }),
+];
+
+const thDoc = createSimpleDocument(thWords, "th", "thai", {
+  sentenceText: "ผมเรียนภาษาไทย"
+});
+```
+
+## Handling Missing Transcriptions
+
+Gracefully handle words without transcription data:
+
+```tsx
+function SafeWord({ word, transcriptionSystem }) {
+  const transcription = getWordTranscription(word, transcriptionSystem);
+
+  if (!transcription) {
+    // Fall back to plain text
+    return <span>{getWordText(word)}</span>;
+  }
+
+  return (
+    <SimpleRubyWord
+      word={word}
+      transcriptionSystem={transcriptionSystem}
+    />
+  );
+}
+```
+
+## Script Detection
+
+Detect script to choose appropriate rendering:
+
+```tsx
+function detectScript(text: string): string {
+  if (/[\u4e00-\u9faf]/.test(text)) return "cjk";
+  if (/[\u3040-\u309f]/.test(text)) return "hiragana";
+  if (/[\u30a0-\u30ff]/.test(text)) return "katakana";
+  if (/[\u0e00-\u0e7f]/.test(text)) return "thai";
+  if (/[\uac00-\ud7af]/.test(text)) return "hangul";
+  if (/[\u0600-\u06ff]/.test(text)) return "arabic";
+  return "latin";
+}
+
+function SmartWord({ word }) {
+  const text = getWordText(word);
+  const script = detectScript(text);
+
+  const config = scriptToConfig[script];
+  // ... render based on detected script
+}
+```
+
+## Supported Languages
+
+GloST has built-in support for:
+
+| Language | Script | Transcription Systems |
+|----------|--------|----------------------|
+| Japanese | Kanji/Kana | Furigana, Romaji |
+| Chinese | Hanzi | Pinyin, Zhuyin |
+| Thai | Thai | Paiboon+, RTGS, AUA, IPA |
+| Korean | Hangul | Revised Romanization, McCune-Reischauer |
+| Vietnamese | Latin | None needed (already Latin) |
+
+## Next Steps
+
+- [Ruby Annotations](/docs/examples/ruby-annotations) - Deep dive into ruby rendering
+- [Implementing Language Providers](/docs/guides/implementing-language-providers) - Add new languages
+- [Transcription Providers](/docs/guides/implementing-transcription-providers) - Create custom transcription

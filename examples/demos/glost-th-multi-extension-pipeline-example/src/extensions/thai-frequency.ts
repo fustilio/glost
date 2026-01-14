@@ -47,7 +47,7 @@ export const thaiFrequencyProvider: FrequencyProvider = {
  * @example
  * ```typescript
  * import { createThaiFrequencyExtension } from "./extensions/thai-frequency";
- * import { processGLOSTWithExtensionsAsync } from "glost-extensions";
+ * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
  * 
  * const [generator, enhancer] = createThaiFrequencyExtension();
  * const result = await processGLOSTWithExtensionsAsync(document, [generator, enhancer]);

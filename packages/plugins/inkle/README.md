@@ -113,7 +113,7 @@ inklecate -o story.json story.ink
 
 - `glost` - Core GLOST types
 - `glost-utils` - Document manipulation utilities
-- `glost-extensions` - Enhance with metadata
+- `glost-plugins` - Enhance with metadata
 
 ## License
 

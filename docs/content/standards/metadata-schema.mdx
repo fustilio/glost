@@ -240,23 +240,19 @@ For batch metadata management, use JSON format:
 }
 ```
 
-## Extensions Integration
+## Plugin Integration
 
-Use built-in extensions to enhance metadata display:
+Use built-in plugins to enhance metadata display:
 
 ```typescript
-import {
-  processGLOSTWithExtensions,
-  FrequencyExtension,
-  DifficultyExtension,
-  PartOfSpeechExtension,
-} from "glost-extensions";
+import { glost } from "glost";
+import { frequencyPlugin, difficultyPlugin, posPlugin } from "glost-plugins";
 
-const result = processGLOSTWithExtensions(document, [
-  FrequencyExtension, // Adds display colors/labels
-  DifficultyExtension, // Adds difficulty indicators
-  PartOfSpeechExtension, // Adds POS abbreviations
-]);
+const result = await glost()
+  .use(frequencyPlugin)    // Adds display colors/labels
+  .use(difficultyPlugin)   // Adds difficulty indicators
+  .use(posPlugin)          // Adds POS abbreviations
+  .process(document);
 
 // Access enriched data
 const word = result.document.children[0];
@@ -265,7 +261,7 @@ console.log(word.extras?.frequency?.color); // "#22c55e"
 console.log(word.extras?.difficulty?.level); // "beginner"
 ```
 
-## Language-Specific Extensions
+## Language-Specific Plugins
 
 For language-specific metadata fields, use separate namespaces:
 
@@ -506,7 +502,7 @@ const difficulty = word.extras?.metadata?.difficulty ?? "intermediate";
 
 ## See Also
 
-- [Extension System](../concepts/extensions.md)
+- [Plugin System](../concepts/plugins.md)
 - [Proficiency Levels](../proficiency.md)
 - [Creating Documents](../guides/creating-documents.md)
-- [Part of Speech Extension](../packages/extensions.md#partofspeechextension)
+- [Part of Speech Extension](../packages/plugins.md#partofspeechextension)

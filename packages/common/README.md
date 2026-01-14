@@ -146,7 +146,7 @@ import { ... } from "glost-common/utils/zod";
 ## Related Packages
 
 - `glost` - Core GLOST types and nodes
-- `glost-extensions` - Extension system
+- `glost-plugins` - Extension system
 - `glost-utils` - Document manipulation utilities
 
 ## License

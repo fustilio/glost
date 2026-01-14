@@ -132,7 +132,7 @@ This package follows the [GLOST Multi-Language Architecture](https://github.com/
 
 - [`glost`](../core) - Core GLOST types and node factories
 - [`glost-common`](../common) - Common language utilities
-- [`glost-extensions`](../extensions/extensions) - Extension system
+- [`glost-plugins`](../extensions/extensions) - Extension system
 - [`glost-th`](../th) - Thai language support
 
 ## Documentation

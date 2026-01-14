@@ -17,7 +17,8 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "glost-core": "workspace:*"
+    "glost": "workspace:*",
+    "glost-plugins": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

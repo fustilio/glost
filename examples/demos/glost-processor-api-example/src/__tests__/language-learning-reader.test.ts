@@ -19,7 +19,7 @@ import {
 
 import { createThaiWord } from "glost-th";
 
-import { processGLOSTWithExtensions } from "glost-extensions";
+import { processGLOSTWithExtensions } from "glost-plugins";
 
 // A sample Thai lesson - greeting and basic conversation
 function createThaiLessonDocument(): GLOSTRoot {

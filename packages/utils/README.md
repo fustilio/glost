@@ -150,7 +150,7 @@ import type { ILanguageStrategy } from "glost-utils/interfaces";
 
 - `glost` - Core GLOST types and nodes
 - `glost-common` - Common utilities
-- `glost-extensions` - Extension system
+- `glost-plugins` - Extension system
 
 ## License
 

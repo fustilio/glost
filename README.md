@@ -59,7 +59,7 @@ const result = await processor.process(document);
 
 ### Supporting Packages
 - **[glost-common](./packages/common)** - Language utilities and shared code
-- **[glost-extensions](./packages/extensions/extensions)** - Extension system
+- **[glost-plugins](./packages/extensions/extensions)** - Extension system
 - **[glost-utils](./packages/utils)** - Text utilities
 
 ### Language Packages
@@ -112,7 +112,7 @@ glost                    - Main facade package
 
 Supporting packages:
   ├── glost-common       - Language utilities
-  ├── glost-extensions   - Extension system
+  ├── glost-plugins   - Extension system
   ├── glost-utils        - Text utilities
   ├── glost-cli          - CLI tools
   │

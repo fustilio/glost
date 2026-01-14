@@ -5,10 +5,10 @@
  * These help test composition patterns and discover ergonomic issues.
  */
 
-import type { GLOSTExtension } from "glost-extensions";
+import type { GLOSTExtension } from "glost-plugins";
 import type { GLOSTRoot, GLOSTWord } from "glost";
 import { NODE_TYPES, getAllWords } from "glost";
-import { processGLOST } from "glost-extensions";
+import { processGLOST } from "glost-plugins";
 
 /**
  * Pipeline execution result with timing and metadata

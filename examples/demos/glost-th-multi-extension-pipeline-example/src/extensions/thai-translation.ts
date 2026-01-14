@@ -43,7 +43,7 @@ export const thaiTranslationProvider: TranslationProvider = {
  * @example
  * ```typescript
  * import { createThaiTranslationExtension } from "./extensions/thai-translation";
- * import { processGLOSTWithExtensionsAsync } from "glost-extensions";
+ * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
  * 
  * const extension = createThaiTranslationExtension();
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);

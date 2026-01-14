@@ -48,7 +48,7 @@ const japaneseTranscriptionProvider: TranscriptionProvider = {
  * @example
  * ```typescript
  * import { createJapaneseTranscriptionExtension } from "./japanese-transcription.js";
- * import { processGLOSTWithExtensionsAsync } from "glost-extensions";
+ * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
  * 
  * const extension = createJapaneseTranscriptionExtension();
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);

@@ -16,14 +16,18 @@ Thai has unique characteristics that GLOST handles:
 ### Basic Thai Word
 
 ```typescript
-import { createThaiWord } from 'glost';
+import { createThaiWord } from 'glost-th';
 
-const word = createThaiWord(
-  "สวัสดี",        // Thai text
-  "sawatdi",       // RTGS romanization
-  "interjection",  // part of speech
-  4                // syllable count (optional)
-);
+const word = createThaiWord({
+  text: "สวัสดี",
+  rtgs: "sawatdi",
+  partOfSpeech: "interjection",
+  tone: 2,
+  syllables: ["sa", "wat", "di"]
+});
+
+// Minimal - just text
+const minimalWord = createThaiWord({ text: "สวัสดี" });
 ```
 
 ### With Multiple Transcriptions
@@ -31,27 +35,25 @@ const word = createThaiWord(
 ```typescript
 import { createGLOSTWordNode } from 'glost';
 
-const word = createGLOSTWordNode(
-  "สวัสดี",
-  {
-    rtgs: { text: "sawatdi", system: "rtgs" },
-    ipa: { text: "sa.wàt.diː", system: "ipa" },
-    paiboon: { 
-      text: "sa-wat-dii", 
-      system: "paiboon",
+const word = createGLOSTWordNode({
+  value: "สวัสดี",
+  transcription: {
+    rtgs: { text: "sawatdi" },
+    ipa: { text: "sa.wàt.diː" },
+    paiboon: {
+      text: "sa-wat-dii",
       tone: 2,
       syllables: ["sa", "wat", "dii"]
     },
-    aua: { text: "sàwàtdii", system: "aua" }
+    aua: { text: "sàwàtdii" }
   },
-  { 
+  metadata: {
     partOfSpeech: "interjection",
     formality: "formal"
   },
-  "word",
-  "th",
-  "thai"
-);
+  lang: "th",
+  script: "thai"
+});
 ```
 
 ## Transcription Systems
@@ -61,7 +63,7 @@ const word = createGLOSTWordNode(
 Official government romanization:
 
 ```typescript
-{ rtgs: { text: "sawatdi", system: "rtgs" } }
+{ rtgs: { text: "sawatdi" } }
 ```
 
 Features:
@@ -74,7 +76,7 @@ Features:
 Precise phonetic representation:
 
 ```typescript
-{ ipa: { text: "sa.wàt.diː", system: "ipa" } }
+{ ipa: { text: "sa.wàt.diː" } }
 ```
 
 Features:
@@ -87,13 +89,12 @@ Features:
 Popular learning system:
 
 ```typescript
-{ 
-  paiboon: { 
-    text: "sa-wat-dii", 
-    system: "paiboon",
+{
+  paiboon: {
+    text: "sa-wat-dii",
     tone: 2,
     syllables: ["sa", "wat", "dii"]
-  } 
+  }
 }
 ```
 
@@ -107,7 +108,7 @@ Features:
 Another learning-focused system:
 
 ```typescript
-{ aua: { text: "sàwàtdii", system: "aua" } }
+{ aua: { text: "sàwàtdii" } }
 ```
 
 ## Word Segmentation
@@ -117,9 +118,12 @@ Thai has no spaces, so word segmentation is needed.
 ### Manual Segmentation
 
 ```typescript
+import { createThaiWord } from 'glost-th';
+import { createSentenceFromWords } from 'glost';
+
 const words = [
-  createThaiWord("สวัสดี", "sawatdi", "interjection"),
-  createThaiWord("ครับ", "khrap", "particle")
+  createThaiWord({ text: "สวัสดี", rtgs: "sawatdi", partOfSpeech: "interjection" }),
+  createThaiWord({ text: "ครับ", rtgs: "khrap", partOfSpeech: "particle" })
 ];
 
 const sentence = createSentenceFromWords(
@@ -130,24 +134,6 @@ const sentence = createSentenceFromWords(
 );
 ```
 
-### With Custom Segmenter
-
-```typescript
-import { convertTextToGLOST } from 'glost-utils';
-
-const document = convertTextToGLOST("สวัสดีครับ", {
-  language: "th",
-  script: "thai",
-  languageStrategy: {
-    segmentWords: (text) => {
-      // Use your preferred Thai word segmentation library
-      // e.g., deepcut, pythainlp, or custom rules
-      return segmentThaiText(text);
-    }
-  }
-});
-```
-
 ## Tone Information
 
 Thai has 5 tones that change word meaning.
@@ -155,20 +141,21 @@ Thai has 5 tones that change word meaning.
 ### Storing Tone Data
 
 ```typescript
-const word = createGLOSTWordNode(
-  "มา",
-  {
-    rtgs: { text: "ma", system: "rtgs" },
-    ipa: { 
-      text: "maː", 
-      system: "ipa",
+import { createGLOSTWordNode } from 'glost';
+
+const word = createGLOSTWordNode({
+  value: "มา",
+  transcription: {
+    rtgs: { text: "ma" },
+    ipa: {
+      text: "maː",
       tone: 1  // Mid tone
     }
   },
-  { partOfSpeech: "verb" },
-  "word",
-  "th"
-);
+  metadata: { partOfSpeech: "verb" },
+  lang: "th",
+  script: "thai"
+});
 ```
 
 ### Tone Numbers
@@ -186,32 +173,35 @@ const word = createGLOSTWordNode(
 Thai uses gendered politeness particles:
 
 ```typescript
-// Male speaker
-const khrap = createThaiWord("ครับ", "khrap", "particle");
+import { createThaiWord } from 'glost-th';
 
-// Female speaker  
-const kha = createThaiWord("ค่ะ", "kha", "particle");
+// Male speaker
+const khrap = createThaiWord({ text: "ครับ", rtgs: "khrap", partOfSpeech: "particle" });
+
+// Female speaker
+const kha = createThaiWord({ text: "ค่ะ", rtgs: "kha", partOfSpeech: "particle" });
 ```
 
 ### Gender Variants
 
 ```typescript
-const word = createGLOSTWordNode(
-  "ครับ/ค่ะ",
-  {
-    rtgs: { 
-      text: "khrap/kha", 
-      system: "rtgs",
+import { createGLOSTWordNode } from 'glost';
+
+const word = createGLOSTWordNode({
+  value: "ครับ/ค่ะ",
+  transcription: {
+    rtgs: {
+      text: "khrap/kha",
       variants: [
         { text: "khrap", context: "male" },
         { text: "kha", context: "female" }
       ]
     }
   },
-  { partOfSpeech: "particle" },
-  "word",
-  "th"
-);
+  metadata: { partOfSpeech: "particle" },
+  lang: "th",
+  script: "thai"
+});
 ```
 
 ## Sentence Structure
@@ -219,11 +209,14 @@ const word = createGLOSTWordNode(
 ### Basic Thai Sentence
 
 ```typescript
+import { createThaiWord } from 'glost-th';
+import { createSentenceFromWords } from 'glost';
+
 const words = [
-  createThaiWord("ผม", "phom", "pronoun"),      // I (male)
-  createThaiWord("กิน", "kin", "verb"),         // eat
-  createThaiWord("ข้าว", "khao", "noun"),       // rice
-  createThaiWord("ครับ", "khrap", "particle")   // polite
+  createThaiWord({ text: "ผม", rtgs: "phom", partOfSpeech: "pronoun" }),      // I (male)
+  createThaiWord({ text: "กิน", rtgs: "kin", partOfSpeech: "verb" }),         // eat
+  createThaiWord({ text: "ข้าว", rtgs: "khao", partOfSpeech: "noun" }),       // rice
+  createThaiWord({ text: "ครับ", rtgs: "khrap", partOfSpeech: "particle" })   // polite
 ];
 
 const sentence = createSentenceFromWords(
@@ -237,26 +230,27 @@ const sentence = createSentenceFromWords(
 ### With Translations
 
 ```typescript
-const sentence = createGLOSTSentenceNode(
-  "ผมกินข้าวครับ",
-  "th",
-  "thai",
-  words,
-  undefined,
-  {
+import { createGLOSTSentenceNode } from 'glost';
+
+const sentence = createGLOSTSentenceNode({
+  originalText: "ผมกินข้าวครับ",
+  lang: "th",
+  script: "thai",
+  children: words,
+  extras: {
     translations: {
       en: "I eat rice.",
       ja: "私はご飯を食べます。"
     }
   }
-);
+});
 ```
 
 ## Document Example
 
 ```typescript
+import { createThaiWord } from 'glost-th';
 import {
-  createThaiWord,
   createSentenceFromWords,
   createParagraphFromSentences,
   createDocumentFromParagraphs
@@ -264,13 +258,13 @@ import {
 
 // Create a Thai lesson document
 const greeting = [
-  createThaiWord("สวัสดี", "sawatdi", "interjection"),
-  createThaiWord("ครับ", "khrap", "particle")
+  createThaiWord({ text: "สวัสดี", rtgs: "sawatdi", partOfSpeech: "interjection" }),
+  createThaiWord({ text: "ครับ", rtgs: "khrap", partOfSpeech: "particle" })
 ];
 
 const response = [
-  createThaiWord("สวัสดี", "sawatdi", "interjection"),
-  createThaiWord("ค่ะ", "kha", "particle")
+  createThaiWord({ text: "สวัสดี", rtgs: "sawatdi", partOfSpeech: "interjection" }),
+  createThaiWord({ text: "ค่ะ", rtgs: "kha", partOfSpeech: "particle" })
 ];
 
 const sentences = [
@@ -285,9 +279,7 @@ const document = createDocumentFromParagraphs(
   "th",
   "thai",
   {
-    title: "Thai Greetings",
-    lesson: 1,
-    level: "beginner"
+    title: "Thai Greetings"
   }
 );
 ```
@@ -295,21 +287,14 @@ const document = createDocumentFromParagraphs(
 ## Processing Thai Documents
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from 'glost-extensions';
-import { createTranscriptionExtension } from 'glost-transcription';
+import { glost } from 'glost';
 
-const transcriptionExt = createTranscriptionExtension({
-  targetLanguage: "th",
-  lookupTranscription: async (word, lang) => {
-    // Fetch from Thai dictionary API
-    const response = await fetch(`/api/thai-dict/${encodeURIComponent(word)}`);
-    return response.json();
-  }
-});
+const result = await glost()
+  .use(transcriptionPlugin)
+  .use(frequencyPlugin)
+  .use(difficultyPlugin)
+  .process(document);
 
-const result = await processGLOSTWithExtensionsAsync(document, [
-  transcriptionExt,
-  FrequencyExtension,
-  DifficultyExtension
-]);
+// Access processed document
+const processedDoc = result.document;
 ```

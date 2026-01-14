@@ -19,7 +19,7 @@
   "dependencies": {
     "glost": "workspace:*",
     "glost-common": "workspace:*",
-    "glost-extensions": "workspace:*",
+    "glost-plugins": "workspace:*",
     "glost-ja": "workspace:*",
     "glost-transcription": "workspace:*"
   },

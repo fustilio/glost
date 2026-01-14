@@ -26,13 +26,13 @@ GLOST v0.5+ provides a complete foundation for building language providers:
 ### 2. Copy Template
 
 ```bash
-cp packages/extensions/templates/provider-template.ts.template \
+cp packages/plugins/templates/provider-template.ts.template \
    packages/languages/[LANG]/src/extensions/[type].ts
 ```
 
 ### 3. Replace Placeholders
 
-See [`PROVIDER_TEMPLATE.md`](../../packages/extensions/templates/PROVIDER_TEMPLATE.md) for complete placeholder list.
+See [`PROVIDER_TEMPLATE.md`](../../packages/plugins/templates/PROVIDER_TEMPLATE.md) for complete placeholder list.
 
 ### 4. Implement `loadData()` and `getData()`
 
@@ -420,7 +420,7 @@ export const spanishFrequencyProvider = new SpanishFrequencyProvider();
 
 ## See Also
 
-- [Provider Template](../../packages/extensions/templates/PROVIDER_TEMPLATE.md) - Detailed template documentation
+- [Provider Template](../../packages/plugins/templates/PROVIDER_TEMPLATE.md) - Detailed template documentation
 - [Provider Philosophy](../PROVIDER_PHILOSOPHY.md) - "No Data > Bad Data" principle
 - [Multi-Language Architecture](./multi-language-architecture.md) - Language package patterns
 - [Creating Data Source Packages](./creating-data-source-packages.md) - Separate data packages

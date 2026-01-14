@@ -50,7 +50,7 @@ glost-[lang]/
   "dependencies": {
     "glost": "^0.2.0",
     "glost-common": "^0.2.0",
-    "glost-extensions": "^0.2.0"
+    "glost-plugins": "^0.2.0"
   }
 }
 ```
@@ -150,7 +150,7 @@ export interface ThaiWord {
 
 ```typescript
 // glost-th/src/transcriptions/provider.ts
-import { TranscriptionProvider } from 'glost-extensions';
+import { TranscriptionProvider } from 'glost-plugins';
 
 export const ThaiTranscriptionProvider: TranscriptionProvider = {
   getTranscription(text: string, scheme: string): string | undefined {

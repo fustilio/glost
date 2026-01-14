@@ -85,7 +85,7 @@ export function createThaiTranscriptionExtension() {
 
 ```typescript
 import { createThaiTranscriptionExtension } from "glost-th-transcription-example";
-import { processGLOSTWithExtensionsAsync } from "glost-extensions";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
 import { createGLOSTRootNode, createGLOSTSentenceNode, createGLOSTWordNode } from "glost";
 
 // Create a document with Thai words
@@ -162,7 +162,7 @@ This pattern works for any X * Y combination:
 - `glost` - Core GLOST types
 - `glost-th` - Thai language support (X)
 - `glost-transcription` - Transcription framework (Y)
-- `glost-extensions` - Extension processor
+- `glost-plugins` - Extension processor
 - `glost-common` - Common utilities
 
 ## Installation
@@ -205,7 +205,7 @@ All tests verify:
 ### Related Packages
 - [`glost-th`](../../packages/languages/th/) - Thai language support base
 - [`glost-transcription`](../../packages/extensions/transcription/) - Transcription framework
-- [`glost-extensions-thai`](../glost-extensions-thai/) - Full Thai extension suite
+- [`glost-plugins-thai`](../glost-plugins-thai/) - Full Thai extension suite
 
 ### Documentation
 - [Examples Overview](../README.md) - All examples

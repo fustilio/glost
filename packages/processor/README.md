@@ -241,7 +241,7 @@ processor.use("transcription");
 
 **Old API:**
 ```typescript
-import { processGLOSTWithExtensions } from "glost-extensions";
+import { processGLOSTWithExtensions } from "glost-plugins";
 
 const result = processGLOSTWithExtensions(doc, [ext1, ext2, ext3]);
 ```

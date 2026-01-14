@@ -8,7 +8,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-extensions";
+import type { GLOSTExtension } from "glost-plugins";
 import type { GlostLanguage } from "glost-common";
 
 import {
@@ -92,8 +92,8 @@ export interface ThaiPipelineOptions {
  *
  * @example
  * ```typescript
- * import { createThaiPronunciationPipeline } from "glost-extensions-thai";
- * import { processGLOSTWithExtensions } from "glost-extensions";
+ * import { createThaiPronunciationPipeline } from "glost-plugins-thai";
+ * import { processGLOSTWithExtensions } from "glost-plugins";
  *
  * const extensions = createThaiPronunciationPipeline();
  * const result = processGLOSTWithExtensions(document, extensions);
@@ -144,7 +144,7 @@ export function createThaiPronunciationPipeline(
  *
  * @example
  * ```typescript
- * import { createThaiDialoguePipeline } from "glost-extensions-thai";
+ * import { createThaiDialoguePipeline } from "glost-plugins-thai";
  *
  * // For male speaker practice
  * const extensions = createThaiDialoguePipeline({ gender: "male" });
@@ -200,7 +200,7 @@ export function createThaiDialoguePipeline(
  *
  * @example
  * ```typescript
- * import { createThaiGrammarPipeline } from "glost-extensions-thai";
+ * import { createThaiGrammarPipeline } from "glost-plugins-thai";
  *
  * const extensions = createThaiGrammarPipeline();
  *
@@ -260,7 +260,7 @@ export function createThaiGrammarPipeline(
  *
  * @example
  * ```typescript
- * import { createThaiComprehensivePipeline } from "glost-extensions-thai";
+ * import { createThaiComprehensivePipeline } from "glost-plugins-thai";
  *
  * const extensions = createThaiComprehensivePipeline({
  *   gender: "female",

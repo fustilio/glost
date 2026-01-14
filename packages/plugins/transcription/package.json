@@ -1,0 +1,42 @@
+{
+  "name": "glost-transcription",
+  "version": "0.4.0",
+  "description": "Transcription extension for GLOST - adds pronunciation data",
+  "author": "fustilio",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fustilio/glost.git",
+    "directory": "packages/plugins/transcription"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest --passWithNoTests"
+  },
+  "dependencies": {
+    "glost": "workspace:*",
+    "glost-common": "workspace:*",
+    "glost-plugins": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "keywords": [
+    "glost",
+    "transcription",
+    "pronunciation",
+    "ipa",
+    "romanization"
+  ]
+}

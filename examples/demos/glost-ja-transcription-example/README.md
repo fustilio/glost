@@ -43,7 +43,7 @@ examples/glost-ja-transcription-example/
 
 ```typescript
 import { createJapaneseTranscriptionExtension } from "glost-ja-transcription-example";
-import { processGLOSTWithExtensionsAsync } from "glost-extensions";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
 
 const extension = createJapaneseTranscriptionExtension();
 const result = await processGLOSTWithExtensionsAsync(document, [extension]);

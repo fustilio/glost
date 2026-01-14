@@ -17,7 +17,7 @@ GLOST v0.5 introduces a unified/remark-style processor API with:
 ### Before (v0.4.x)
 
 ```typescript
-import { processGLOSTWithExtensions } from "glost-extensions";
+import { processGLOSTWithExtensions } from "glost-plugins";
 import { transcriptionExtension } from "glost-transcription";
 import { translationExtension } from "glost-translation";
 import { frequencyExtension } from "glost-frequency";
@@ -309,7 +309,7 @@ Some import paths have changed:
 #### Old
 
 ```typescript
-import { processGLOSTWithExtensions } from "glost-extensions";
+import { processGLOSTWithExtensions } from "glost-plugins";
 ```
 
 #### New
@@ -325,7 +325,7 @@ Extensions are now automatically registered when used:
 #### Old
 
 ```typescript
-import { registerExtension } from "glost-extensions";
+import { registerExtension } from "glost-plugins";
 
 registerExtension(myExtension);
 ```
@@ -362,7 +362,7 @@ The old API still works in v0.5:
 
 ```typescript
 // This still works!
-import { processGLOSTWithExtensions } from "glost-extensions";
+import { processGLOSTWithExtensions } from "glost-plugins";
 
 const result = processGLOSTWithExtensions(doc, [ext1, ext2]);
 ```
@@ -387,7 +387,7 @@ pnpm add glost-processor glost-registry glost-presets
 
 ```typescript
 // Before
-import { processGLOSTWithExtensions } from "glost-extensions";
+import { processGLOSTWithExtensions } from "glost-plugins";
 
 // After
 import { glost } from "glost-processor";

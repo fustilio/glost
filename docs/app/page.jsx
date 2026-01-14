@@ -22,7 +22,7 @@ export default function HomePage() {
       <h1 className={styles.heroTitle}>
         Process multilingual text
         <br />
-        with GLOST
+        with GloST
       </h1>
 
       <p className={styles.heroSubtitle}>

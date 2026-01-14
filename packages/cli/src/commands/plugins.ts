@@ -278,7 +278,7 @@ export function createPluginTemplate(name: string): void {
  * TODO: Add description
  */
 
-import type { GLOSTExtension } from "glost-extensions";
+import type { GLOSTExtension } from "glost-plugins";
 
 export const ${name}Extension: GLOSTExtension = {
   id: "${name.toLowerCase()}",

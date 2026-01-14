@@ -43,7 +43,7 @@ examples/glost-ko-transcription-example/
 
 ```typescript
 import { createKoreanTranscriptionExtension } from "glost-ko-transcription-example";
-import { processGLOSTWithExtensionsAsync } from "glost-extensions";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
 
 const extension = createKoreanTranscriptionExtension();
 const result = await processGLOSTWithExtensionsAsync(document, [extension]);

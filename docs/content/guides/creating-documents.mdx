@@ -59,8 +59,8 @@ const doc = createDocumentFromParagraphs([paragraph], "th", "thai");
 
 **After (Simplified):**
 ```typescript
-const doc = createSimpleDocument(words, "th", "thai", { 
-  sentenceText: "สวัสดี" 
+const doc = createSimpleDocument(words, "th", "thai", {
+  sentenceText: "สวัสดี"
 });
 ```
 
@@ -88,15 +88,14 @@ GLOSTRoot (document)
 ```typescript
 import { createGLOSTWordNode } from 'glost';
 
-const word = createGLOSTWordNode(
-  "hello",                                     // text
-  { ipa: { text: "heloʊ", system: "ipa" } },  // transcription
-  { partOfSpeech: "interjection" },            // metadata
-  "word",                                      // level
-  "en",                                        // language
-  "latin",                                     // script
-  { translations: { th: "สวัสดี" } }           // extras
-);
+const word = createGLOSTWordNode({
+  value: "hello",
+  transcription: { ipa: { text: "heloʊ" } },
+  metadata: { partOfSpeech: "interjection" },
+  lang: "en",
+  script: "latin",
+  extras: { translations: { th: "สวัสดี" } }
+});
 ```
 
 ### Simple Word
@@ -106,7 +105,11 @@ When you just need text and transcription:
 ```typescript
 import { createSimpleWord } from 'glost';
 
-const word = createSimpleWord("hello", "heloʊ", "ipa");
+const word = createSimpleWord({
+  text: "hello",
+  transliteration: "heloʊ",
+  system: "ipa"
+});
 ```
 
 ### Thai Word
@@ -117,12 +120,12 @@ With RTGS romanization:
 import { createThaiWord } from 'glost-th';
 
 const word = createThaiWord({
-  text:
-  "สวัสดี",        // Thai text
-  "sawatdi",       // RTGS romanization
-  "interjection",  // part of speech
-  4                // syllable count (optional)
-);
+  text: "สวัสดี",
+  rtgs: "sawatdi",
+  partOfSpeech: "interjection",
+  tone: 2,
+  syllables: ["sa", "wat", "di"]
+});
 ```
 
 ### Japanese Word
@@ -133,12 +136,11 @@ With romaji and furigana:
 import { createJapaneseWord } from 'glost-ja';
 
 const word = createJapaneseWord({
-  text:
-  "今日",          // kanji
-  "kyou",          // romaji
-  "noun",          // part of speech
-  "きょう"          // furigana (optional)
-);
+  text: "今日",
+  romaji: "kyou",
+  partOfSpeech: "noun",
+  furigana: "きょう"
+});
 ```
 
 ## Creating Sentences
@@ -146,7 +148,7 @@ const word = createJapaneseWord({
 ### From Words
 
 ```typescript
-import { createSentenceFromWords, createGLOSTWhiteSpaceNode } from 'glost';
+import { createSentenceFromWords } from 'glost';
 import { createThaiWord } from 'glost-th';
 
 const words = [
@@ -174,18 +176,18 @@ import {
   createGLOSTPunctuationNode
 } from 'glost';
 
-const sentence = createGLOSTSentenceNode(
-  "Hello, world!",
-  "en",
-  "latin",
-  [
-    createGLOSTWordNode("Hello", undefined, { partOfSpeech: "interjection" }),
+const sentence = createGLOSTSentenceNode({
+  originalText: "Hello, world!",
+  lang: "en",
+  script: "latin",
+  children: [
+    createGLOSTWordNode({ value: "Hello", metadata: { partOfSpeech: "interjection" } }),
     createGLOSTPunctuationNode(","),
     createGLOSTWhiteSpaceNode(" "),
-    createGLOSTWordNode("world", undefined, { partOfSpeech: "noun" }),
+    createGLOSTWordNode({ value: "world", metadata: { partOfSpeech: "noun" } }),
     createGLOSTPunctuationNode("!")
   ]
-);
+});
 ```
 
 ## Creating Paragraphs
@@ -220,13 +222,13 @@ const document = createDocumentFromParagraphs(
 ```typescript
 import { createGLOSTRootNode } from 'glost';
 
-const document = createGLOSTRootNode(
-  "th",
-  "thai",
-  [paragraph],
-  { title: "Lesson 1", author: "John" },
-  { customField: "value" }
-);
+const document = createGLOSTRootNode({
+  lang: "th",
+  script: "thai",
+  children: [paragraph],
+  metadata: { title: "Lesson 1", author: "John" },
+  extras: { customField: "value" }
+});
 ```
 
 ## Adding Rich Metadata
@@ -234,34 +236,36 @@ const document = createGLOSTRootNode(
 ### Word Translations
 
 ```typescript
-const word = createGLOSTWordNode(
-  "สวัสดี",
-  { rtgs: { text: "sawatdi", system: "rtgs" } },
-  { partOfSpeech: "interjection" },
-  "word",
-  "th",
-  "thai",
-  {
+import { createGLOSTWordNode } from 'glost';
+
+const word = createGLOSTWordNode({
+  value: "สวัสดี",
+  transcription: { rtgs: { text: "sawatdi" } },
+  metadata: { partOfSpeech: "interjection" },
+  lang: "th",
+  script: "thai",
+  extras: {
     translations: {
       en: "hello",
       ja: "こんにちは",
       zh: "你好"
     }
   }
-);
+});
 ```
 
 ### Extended Metadata
 
 ```typescript
-const word = createGLOSTWordNode(
-  "สวัสดี",
-  { rtgs: { text: "sawatdi", system: "rtgs" } },
-  { partOfSpeech: "interjection", formality: "formal" },
-  "word",
-  "th",
-  "thai",
-  {
+import { createGLOSTWordNode } from 'glost';
+
+const word = createGLOSTWordNode({
+  value: "สวัสดี",
+  transcription: { rtgs: { text: "sawatdi" } },
+  metadata: { partOfSpeech: "interjection", formality: "formal" },
+  lang: "th",
+  script: "thai",
+  extras: {
     translations: { en: "hello" },
     metadata: {
       difficulty: "beginner",
@@ -271,51 +275,28 @@ const word = createGLOSTWordNode(
       examples: ["สวัสดีครับ ผมชื่อจอห์น"]
     }
   }
-);
+});
 ```
 
 ### Multiple Transcriptions
 
 ```typescript
-const word = createGLOSTWordNode(
-  "สวัสดี",
-  {
-    rtgs: { text: "sawatdi", system: "rtgs" },
-    ipa: { text: "sa.wàt.diː", system: "ipa" },
-    paiboon: { 
-      text: "sa-wat-dii", 
-      system: "paiboon",
+import { createGLOSTWordNode } from 'glost';
+
+const word = createGLOSTWordNode({
+  value: "สวัสดี",
+  transcription: {
+    rtgs: { text: "sawatdi" },
+    ipa: { text: "sa.wàt.diː" },
+    paiboon: {
+      text: "sa-wat-dii",
       syllables: ["sa", "wat", "dii"],
       tone: 2
     }
   },
-  { partOfSpeech: "interjection" },
-  "word",
-  "th"
-);
-```
-
-## Converting from Plain Text
-
-For basic conversion:
-
-```typescript
-import { convertTextToGLOST } from 'glost-utils';
-
-const document = convertTextToGLOST("Hello world!", {
-  language: "en",
-  script: "latin"
-});
-```
-
-For languages without spaces:
-
-```typescript
-const document = convertTextToGLOST("สวัสดีครับ", {
-  language: "th",
-  languageStrategy: {
-    segmentWords: (text) => ["สวัสดี", "ครับ"]
-  }
+  metadata: { partOfSpeech: "interjection" },
+  lang: "th",
+  script: "thai"
 });
 ```
 

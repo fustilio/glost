@@ -36,7 +36,7 @@ Examples:
 
 ```bash
 # Copy template
-cp -r packages/extensions/templates/data-source-package packages/data-sources/th-datasource-lexitron
+cp -r packages/plugins/templates/data-source-package packages/data-sources/th-datasource-lexitron
 
 # Navigate to new package
 cd packages/data-sources/th-datasource-lexitron
@@ -142,7 +142,7 @@ Examples:
 
 ```bash
 # Copy template
-cp -r packages/extensions/templates/transcription-system-package packages/transcription-systems/th-transcription-paiboon
+cp -r packages/plugins/templates/transcription-system-package packages/transcription-systems/th-transcription-paiboon
 
 # Navigate to new package
 cd packages/transcription-systems/th-transcription-paiboon
@@ -267,7 +267,7 @@ Example: `glost-th-lookup-transcription-paiboon-lexitron`
 // glost-th-lookup-transcription-paiboon-lexitron/src/index.ts
 import { queryLexitron } from 'glost-th-datasource-lexitron';
 import { transcribeToPaiboon } from 'glost-th-transcription-paiboon';
-import { createTranscriptionGeneratorExtension } from 'glost-extensions-transcription';
+import { createTranscriptionGeneratorExtension } from 'glost-plugins-transcription';
 
 /**
  * Create lookup function (pure composition)
@@ -387,12 +387,12 @@ Before publishing your package:
 ## Examples
 
 See these for complete examples:
-- [Example Data](../../packages/extensions/src/example-data/README.md)
-- [Composition Pattern Tests](../../examples/demos/glost-extensions-api-example/)
-- [Package Templates](../../packages/extensions/templates/USAGE.md)
+- [Example Data](../../packages/plugins/src/example-data/README.md)
+- [Composition Pattern Tests](../../examples/demos/glost-plugins-api-example/)
+- [Package Templates](../../packages/plugins/templates/USAGE.md)
 
 ## Need Help?
 
 - Check [Naming Conventions](../conventions/naming.md)
 - Review [SRP/SSOT Architecture](../../.cursor/plans/naming_conventions_srp_architecture.md)
-- See [Template Usage Guide](../../packages/extensions/templates/USAGE.md)
+- See [Template Usage Guide](../../packages/plugins/templates/USAGE.md)

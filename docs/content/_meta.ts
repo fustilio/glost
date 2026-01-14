@@ -1,7 +1,8 @@
 export default {
   index: 'Introduction',
   'getting-started': 'Getting Started',
-  why: 'Why GLOST?',
+  why: 'Why GloST?',
+  examples: 'Examples',
   '---': {
     type: 'separator'
   },
@@ -30,7 +31,7 @@ export default {
   },
   'architecture-summary': 'Architecture',
   'provider-philosophy': 'Provider Philosophy',
-  'extensions-guide': 'Extensions Guide',
+  'plugins-guide': 'Plugins Guide',
   'package-refactoring': {
     display: 'hidden'
   },

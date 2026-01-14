@@ -19,7 +19,7 @@ import {
   getFirstWord,
 } from "glost";
 import { createThaiWord } from "glost-th";
-import { processGLOST } from "glost-extensions";
+import { processGLOST } from "glost-plugins";
 import {
   createThaiTranscriptionExtension,
   createThaiTranslationExtension,

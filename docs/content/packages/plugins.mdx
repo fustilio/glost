@@ -1,0 +1,302 @@
+# glost-plugins
+
+Plugin system and built-in plugins for GLOST documents.
+
+## Installation
+
+```bash
+pnpm add glost-plugins
+```
+
+## Processing with Plugins
+
+Use the v0.5+ processor API:
+
+```typescript
+import { glost } from 'glost';
+import { frequencyPlugin, difficultyPlugin } from 'glost-plugins';
+
+const result = await glost()
+  .use(frequencyPlugin)
+  .use(difficultyPlugin)
+  .process(document);
+
+console.log(result.document);       // Processed document
+console.log(result.stats);          // Processing statistics
+```
+
+## Plugin Registry
+
+### Global Registry
+
+```typescript
+import { pluginRegistry } from 'glost';
+
+pluginRegistry.register(plugin);
+pluginRegistry.registerAll([plugin1, plugin2]);
+pluginRegistry.get("plugin-id");
+pluginRegistry.getAll();
+pluginRegistry.has("plugin-id");
+pluginRegistry.unregister("plugin-id");
+pluginRegistry.clear();
+pluginRegistry.resolveDependencies(["id1", "id2"]);
+```
+
+### Using Registered Plugins
+
+```typescript
+import { glost, pluginRegistry } from 'glost';
+
+pluginRegistry.register(myPlugin);
+
+// Use by ID
+const result = await glost()
+  .use("my-plugin")
+  .use("frequency")
+  .process(document);
+```
+
+## Processing Result
+
+```typescript
+interface ProcessingResult {
+  document: GLOSTRoot;
+  stats: ProcessingStats;
+  errors: ProcessingError[];
+  warnings: ProcessingWarning[];
+}
+```
+
+## Built-in Plugins
+
+### frequencyPlugin
+
+Enriches words with frequency display data.
+
+```typescript
+import { glost } from 'glost';
+import { frequencyPlugin, createFrequencyPlugin } from 'glost-plugins';
+
+// Use default
+const result = await glost()
+  .use(frequencyPlugin)
+  .process(document);
+
+// Or create with options
+const freq = createFrequencyPlugin({
+  colorScheme: "warm"
+});
+
+const result = await glost()
+  .use(freq)
+  .process(document);
+```
+
+**Expects:** `extras.metadata.frequency` on words
+**Adds:** `extras.frequency.display`, `extras.frequency.color`, `extras.frequency.priority`
+
+### difficultyPlugin
+
+Enriches words with difficulty display data.
+
+```typescript
+import { difficultyPlugin, createDifficultyPlugin } from 'glost-plugins';
+```
+
+**Expects:** `extras.metadata.difficulty` on words
+**Adds:** `extras.difficulty.display`, `extras.difficulty.color`, `extras.difficulty.level`
+
+### posPlugin
+
+Enriches words with POS display data.
+
+```typescript
+import { posPlugin, createPosPlugin } from 'glost-plugins';
+```
+
+**Expects:** `metadata.partOfSpeech` on words
+**Adds:** `extras.pos.abbreviation`, `extras.pos.color`, `extras.pos.description`
+
+### genderPlugin
+
+Adds grammatical gender display data.
+
+```typescript
+import { genderPlugin, createGenderPlugin } from 'glost-plugins';
+```
+
+### culturalNotesPlugin
+
+Formats cultural notes for display.
+
+```typescript
+import { culturalNotesPlugin, createCulturalNotesPlugin } from 'glost-plugins';
+```
+
+**Expects:** `extras.metadata.culturalNotes` on words
+**Adds:** Formatted cultural notes display data
+
+### createClauseSegmenterPlugin
+
+Transformer that segments sentences into clauses.
+
+```typescript
+import { glost } from 'glost';
+import { createClauseSegmenterPlugin } from 'glost-plugins';
+
+const segmenter = createClauseSegmenterPlugin({
+  markers: ["that", "which", "because", "although", "if", "when"]
+});
+
+const result = await glost()
+  .use(segmenter)
+  .process(document);
+```
+
+**Transforms:** Sentences to contain `GLOSTClause` nodes
+
+### createGenderTransformerPlugin
+
+Transforms text with gender variants.
+
+```typescript
+import { createGenderTransformerPlugin } from 'glost-plugins';
+
+const transformer = createGenderTransformerPlugin({
+  targetGender: "female",       // "male" | "female"
+  displayFormat: "replace"      // "replace" | "show-both" | "inline-toggle"
+});
+```
+
+**Input format:** `"{masculine|feminine}"` in text
+**Output:** Based on targetGender and displayFormat
+
+### negationTransformerPlugin
+
+Marks clauses containing negation.
+
+```typescript
+import { negationTransformerPlugin } from 'glost-plugins';
+```
+
+**Dependencies:** `clause-segmenter` (must run first)
+**Adds:** Negation metadata to clauses
+
+## Plugin Interface
+
+```typescript
+interface Plugin {
+  id: string;
+  name: string;
+  description?: string;
+
+  transform?: (tree: GLOSTRoot) => GLOSTRoot | Promise<GLOSTRoot>;
+
+  visit?: {
+    word?: (node: GLOSTWord) => GLOSTWord | void | Promise<GLOSTWord | void>;
+    sentence?: (node: GLOSTSentence) => GLOSTSentence | void | Promise<GLOSTSentence | void>;
+    paragraph?: (node: GLOSTParagraph) => GLOSTParagraph | void | Promise<GLOSTParagraph | void>;
+    clause?: (node: GLOSTClause) => GLOSTClause | void | Promise<GLOSTClause | void>;
+    phrase?: (node: GLOSTPhrase) => GLOSTPhrase | void | Promise<GLOSTPhrase | void>;
+  };
+
+  enhanceMetadata?: (node: GLOSTWord) => Partial<GLOSTExtras> | void | Promise<Partial<GLOSTExtras> | void>;
+
+  dependencies?: string[];
+  options?: Record<string, unknown>;
+}
+```
+
+## Creating Plugins
+
+### Metadata Enhancement Pattern
+
+```typescript
+const MyMetadataPlugin: Plugin = {
+  id: "my-metadata",
+  name: "My Metadata Plugin",
+
+  enhanceMetadata: (node) => {
+    const value = computeSomething(node);
+    return {
+      metadata: {
+        myField: value
+      }
+    };
+  }
+};
+```
+
+### Visitor Pattern
+
+```typescript
+const MyVisitorPlugin: Plugin = {
+  id: "my-visitor",
+  name: "My Visitor Plugin",
+
+  visit: {
+    word: (node) => {
+      // Return modified node or void
+      return {
+        ...node,
+        extras: {
+          ...node.extras,
+          processed: true
+        }
+      };
+    },
+    sentence: (node) => {
+      // Process sentences
+    }
+  }
+};
+```
+
+### Transform Pattern
+
+```typescript
+const MyTransformPlugin: Plugin = {
+  id: "my-transform",
+  name: "My Transform Plugin",
+
+  transform: (tree) => {
+    // Return completely new tree structure
+    return modifyTree(tree);
+  }
+};
+```
+
+### Async Pattern
+
+```typescript
+const MyAsyncPlugin: Plugin = {
+  id: "my-async",
+  name: "My Async Plugin",
+
+  visit: {
+    word: async (node) => {
+      const data = await fetchExternalData(node);
+      return {
+        ...node,
+        extras: { ...node.extras, externalData: data }
+      };
+    }
+  }
+};
+```
+
+### With Dependencies
+
+```typescript
+const MyDependentPlugin: Plugin = {
+  id: "my-dependent",
+  name: "My Dependent Plugin",
+  dependencies: ["clause-segmenter"], // Runs after clause-segmenter
+
+  visit: {
+    clause: (node) => {
+      // Process clauses created by clause-segmenter
+    }
+  }
+};
+```

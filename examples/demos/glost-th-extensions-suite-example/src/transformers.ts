@@ -2,7 +2,7 @@
  * Thai-specific Transformer Extensions
  *
  * Pre-configured transformer extensions optimized for Thai language learning.
- * Leverages the base extensions from glost-extensions with Thai-specific
+ * Leverages the base extensions from glost-plugins with Thai-specific
  * configurations.
  *
  * @packageDocumentation
@@ -14,7 +14,7 @@ import {
   type GenderTransformerOptions,
   type NegationTransformerOptions,
   type GLOSTExtension,
-} from "glost-extensions";
+} from "glost-plugins";
 
 // Note: createClauseSegmenterExtension has moved to glost-clause-segmenter package
 // and has a different API. Commenting out until we can properly implement it.
@@ -52,7 +52,7 @@ export interface ThaiSyllableOptions
  *
  * @example
  * ```typescript
- * import { createThaiSyllableSegmenter } from "glost-extensions-thai";
+ * import { createThaiSyllableSegmenter } from "glost-plugins-thai";
  *
  * const extension = createThaiSyllableSegmenter();
  *
@@ -108,7 +108,7 @@ export interface ThaiGenderOptions extends Partial<GenderTransformerOptions> {
  *
  * @example
  * ```typescript
- * import { createThaiGenderTransformer } from "glost-extensions-thai";
+ * import { createThaiGenderTransformer } from "glost-plugins-thai";
  *
  * // For male speaker
  * const maleExt = createThaiGenderTransformer({ perspective: "male" });
@@ -156,7 +156,7 @@ export const ThaiGenderTransformer = createThaiGenderTransformer();
  *
  * @example
  * ```typescript
- * import { createThaiClauseSegmenter } from "glost-extensions-thai";
+ * import { createThaiClauseSegmenter } from "glost-plugins-thai";
  *
  * const extension = createThaiClauseSegmenter();
  *
@@ -227,7 +227,7 @@ export interface ThaiNegationOptions
  * import {
  *   createThaiClauseSegmenter,
  *   createThaiNegationTransformer
- * } from "glost-extensions-thai";
+ * } from "glost-plugins-thai";
  *
  * const result = processGLOSTWithExtensions(document, [
  *   createThaiClauseSegmenter(),

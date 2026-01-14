@@ -1,23 +1,23 @@
-# GLOST Documentation
+# GloST Documentation
 
 **Current Version:** v0.5.0
 
-**GLOST** (Glossed Syntax Tree) is a framework for processing multilingual text with language learning annotations using a unified/remark-style plugin system.
+**GloST** (Glossed Syntax Tree) is a framework for processing multilingual text with language learning annotations using a unified/remark-style plugin system.
 
 ## Quick Links
 
 ### 🚀 Getting Started
 - [Installation & Quick Start](/docs/getting-started)
-- [Why GLOST?](/docs/why)
+- [Why GloST?](/docs/why)
 - [Release Notes v0.5.0](/docs/releases/v0.5.0)
 - [Migration Guide v0.4 → v0.5](/docs/migration/v0.4-to-v0.5)
 
 ### 📚 Core Guides
 - [Processor API](/docs/guides/processor-api) - Unified-style processor with fluent `.use()` API
 - [Plugin Registry](/docs/guides/registry) - Discovery, validation, and conflict detection
-- [Creating Documents](/docs/guides/creating-documents) - Build GLOST documents
-- [Using Extensions](/docs/guides/using-extensions) - Process with plugins
-- [Custom Extensions](/docs/guides/custom-extensions) - Create your own plugins
+- [Creating Documents](/docs/guides/creating-documents) - Build GloST documents
+- [Using Plugins](/docs/guides/using-plugins) - Process with plugins
+- [Custom Plugins](/docs/guides/custom-plugins) - Create your own plugins
 
 ### 🌍 Language Implementation
 - [Implementing Language Providers](/docs/guides/implementing-language-providers) ⭐ - Complete provider infrastructure guide
@@ -43,7 +43,7 @@
 | Package | Description |
 |---------|-------------|
 | [glost-common](https://github.com/fustilio/glost/tree/main/packages/common) | Language utilities |
-| [glost-extensions](/docs/packages/extensions) | Extension system |
+| [glost-plugins](/docs/packages/plugins) | Extension system |
 | [glost-utils](/docs/packages/utils) | Text utilities |
 
 ### Language Packages
@@ -59,11 +59,11 @@
 |-----------|-------------|
 | [Transcription](/docs/packages/transcription) | Phonetic transcription |
 | [Translation](/docs/packages/translation) | Text translation |
-| [Frequency](https://github.com/fustilio/glost/tree/main/packages/extensions/frequency) | Word frequency |
-| [Difficulty](https://github.com/fustilio/glost/tree/main/packages/extensions/difficulty) | Difficulty scoring |
-| [POS](https://github.com/fustilio/glost/tree/main/packages/extensions/pos) | Part-of-speech tagging |
-| [Gender](https://github.com/fustilio/glost/tree/main/packages/extensions/gender) | Grammatical gender |
-| [Clause Segmenter](https://github.com/fustilio/glost/tree/main/packages/extensions/clause-segmenter) | Clause segmentation |
+| [Frequency](https://github.com/fustilio/glost/tree/main/packages/plugins/frequency) | Word frequency |
+| [Difficulty](https://github.com/fustilio/glost/tree/main/packages/plugins/difficulty) | Difficulty scoring |
+| [POS](https://github.com/fustilio/glost/tree/main/packages/plugins/pos) | Part-of-speech tagging |
+| [Gender](https://github.com/fustilio/glost/tree/main/packages/plugins/gender) | Grammatical gender |
+| [Clause Segmenter](https://github.com/fustilio/glost/tree/main/packages/plugins/clause-segmenter) | Clause segmentation |
 
 ### Plugins
 | Plugin | Description |
@@ -72,8 +72,8 @@
 
 ## Core Concepts
 
-- [Node Types](/docs/concepts/nodes) - Understanding GLOST's node hierarchy
-- [Extensions](/docs/concepts/extensions) - Extension system architecture
+- [Node Types](/docs/concepts/nodes) - Understanding GloST's node hierarchy
+- [Plugins](/docs/concepts/plugins) - Plugin system architecture
 
 ## Standards & Reference
 

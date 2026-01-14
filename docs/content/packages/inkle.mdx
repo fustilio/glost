@@ -58,20 +58,21 @@ Create language learning games using Ink stories:
 
 ### Annotated Stories
 
-Parse Ink stories and enrich them with GLOST extensions:
+Parse Ink stories and enrich them with GLOST plugins:
 
 ```typescript
+import { glost } from 'glost';
 import { parseInkJSON } from 'glost-inkle';
-import { processGLOSTWithExtensions, FrequencyExtension } from 'glost-extensions';
+import { frequencyPlugin, difficultyPlugin } from 'glost-plugins';
 
 // Parse Ink story
 const document = parseInkJSON(inkStory, { language: "th" });
 
 // Enrich with language learning metadata
-const result = processGLOSTWithExtensions(document, [
-  FrequencyExtension,
-  DifficultyExtension
-]);
+const result = await glost()
+  .use(frequencyPlugin)
+  .use(difficultyPlugin)
+  .process(document);
 ```
 
 ### Story-Based Learning

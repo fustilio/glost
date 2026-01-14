@@ -12,7 +12,7 @@
 
 import { describe, it, expect } from "vitest";
 
-import type { GLOSTExtension } from "glost-extensions";
+import type { GLOSTExtension } from "glost-plugins";
 import type {
   GLOSTWord,
   GLOSTSentence,
@@ -35,7 +35,7 @@ import {
 
 import {
   processGLOSTWithExtensions,
-} from "glost-extensions";
+} from "glost-plugins";
 
 import { createFrequencyExtension } from "glost-frequency";
 

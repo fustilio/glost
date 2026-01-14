@@ -20,7 +20,7 @@ Comprehensive naming conventions for the GLOST ecosystem following SRP (Single R
 | `glost` | Core types and node creation | Node factories, type definitions |
 | `glost-common` | Shared utilities and language codes | Language info, validators |
 | `glost-utils` | Text parsing and manipulation | Text utilities, parsers |
-| `glost-extensions` | Extension system | Extension interface, processor |
+| `glost-plugins` | Extension system | Extension interface, processor |
 
 **Naming Rules:**
 - Simple, descriptive names
@@ -29,15 +29,15 @@ Comprehensive naming conventions for the GLOST ecosystem following SRP (Single R
 
 ### 2. Extension Packages
 
-**Pattern:** `glost-extensions-[type]`
+**Pattern:** `glost-plugins-[type]`
 
 | Type | Responsibility | Example |
 |------|----------------|---------|
-| Translation | Translation generation API | `glost-extensions-translation` |
-| Transcription | Transcription generation API | `glost-extensions-transcription` |
+| Translation | Translation generation API | `glost-plugins-translation` |
+| Transcription | Transcription generation API | `glost-plugins-transcription` |
 
 **Naming Rules:**
-- Always prefixed with `glost-extensions-`
+- Always prefixed with `glost-plugins-`
 - Describes the extension category
 - Contains extension interface, not implementation
 
@@ -131,7 +131,7 @@ For transcription strategies that work across languages:
 - `glost-plugin-react` - React components
 - `glost-plugin-vue` - Vue components
 
-## Extension Naming (Within glost-extensions)
+## Extension Naming (Within glost-plugins)
 
 Extensions are categorized by their purpose:
 
@@ -175,8 +175,8 @@ Extensions are categorized by their purpose:
 **Purpose:** Create new data from external sources
 
 **Examples:**
-- `TranslationGeneratorExtension` (in `glost-extensions-translation`)
-- `TranscriptionGeneratorExtension` (in `glost-extensions-transcription`)
+- `TranslationGeneratorExtension` (in `glost-plugins-translation`)
+- `TranscriptionGeneratorExtension` (in `glost-plugins-transcription`)
 
 **Responsibility:**
 - ✅ Fetch data from external sources
@@ -213,7 +213,7 @@ Extensions are categorized by their purpose:
 ### Extension Categories
 
 ```
-packages/extensions/src/extensions/
+packages/plugins/src/extensions/
 ├── enhancers/          # Display metadata enhancers (future)
 │   ├── frequency.ts
 │   ├── difficulty.ts
@@ -289,7 +289,7 @@ For multi-language packages, use `multi`:
 | What | Pattern | Example |
 |------|---------|---------|
 | Core package | `glost-[name]` | `glost-common` |
-| Extension package | `glost-extensions-[type]` | `glost-extensions-transcription` |
+| Extension package | `glost-plugins-[type]` | `glost-plugins-transcription` |
 | Data source | `glost-[lang]-datasource-[source]` | `glost-th-datasource-lexitron` |
 | Transcription | `glost-[lang]-transcription-[system]` | `glost-th-transcription-paiboon` |
 | Lookup factory | `glost-[lang]-lookup-[type]-[system]-[source]` | `glost-th-lookup-transcription-paiboon-lexitron` |
@@ -299,5 +299,5 @@ For multi-language packages, use `multi`:
 
 - [SRP/SSOT Architecture](../../.cursor/plans/naming_conventions_srp_architecture.md)
 - [Creating Data Source Packages](../guides/creating-data-source-packages.md)
-- [Package Templates](../../packages/extensions/templates/USAGE.md)
-- [Example Data](../../packages/extensions/src/example-data/README.md)
+- [Package Templates](../../packages/plugins/templates/USAGE.md)
+- [Example Data](../../packages/plugins/src/example-data/README.md)

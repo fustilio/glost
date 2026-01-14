@@ -9,12 +9,12 @@ GLOST follows a composable, principle-driven architecture based on SRP (Single R
 ```
 ┌────────────────────────────────────────────────────┐
 │  Layer 1: Core Foundation                          │
-│  glost, glost-common, glost-utils, glost-extensions│
+│  glost, glost-common, glost-utils, glost-plugins│
 └────────────────────────────────────────────────────┘
                          ↓
 ┌────────────────────────────────────────────────────┐
 │  Layer 2: Extension APIs                           │
-│  glost-extensions-translation, transcription       │
+│  glost-plugins-translation, transcription       │
 └────────────────────────────────────────────────────┘
                          ↓
 ┌────────────────────────────────────────────────────┐
@@ -45,7 +45,7 @@ Build complex functionality by composing simple, focused components rather than 
 | Type | Pattern | Example |
 |------|---------|---------|
 | Core | `glost-[name]` | `glost-common` |
-| Extensions | `glost-extensions-[type]` | `glost-extensions-transcription` |
+| Extensions | `glost-plugins-[type]` | `glost-plugins-transcription` |
 | Data Source | `glost-[lang]-datasource-[source]` | `glost-th-datasource-lexitron` |
 | Transcription | `glost-[lang]-transcription-[system]` | `glost-th-transcription-paiboon` |
 | Lookup | `glost-[lang]-lookup-[type]-[system]-[source]` | `glost-th-lookup-transcription-paiboon-lexitron` |
@@ -92,5 +92,5 @@ import { ThaiPaiboonGoogleExtension } from
 
 - [Naming Conventions](conventions/naming)
 - [Creating Data Source Packages](guides/creating-data-source-packages)
-- [Package Templates Usage](../packages/extensions/templates/USAGE)
-- [Composition Pattern Examples](../examples/demos/glost-extensions-api-example/)
+- [Package Templates Usage](../packages/plugins/templates/USAGE)
+- [Composition Pattern Examples](../examples/demos/glost-plugins-api-example/)

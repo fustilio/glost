@@ -1,0 +1,233 @@
+# Using Extensions
+
+This guide covers processing GLOST documents with extensions using the v0.5+ processor API.
+
+## Basic Usage
+
+```typescript
+import { glost } from 'glost';
+
+const result = await glost()
+  .use(frequencyPlugin)
+  .use(difficultyPlugin)
+  .process(document);
+
+console.log(result.document);  // Processed document
+console.log(result.stats);     // Processing statistics
+```
+
+## Processing Result
+
+Every processing call returns a `ProcessingResult`:
+
+```typescript
+interface ProcessingResult {
+  document: GLOSTRoot;          // Processed document
+  stats: ProcessingStats;       // Timing, plugin count, etc.
+  errors: ProcessingError[];    // Any errors encountered
+  warnings: ProcessingWarning[]; // Non-fatal issues
+}
+```
+
+## Using Presets
+
+Presets bundle related plugins together:
+
+```typescript
+import { glost } from 'glost';
+import { languageLearningPreset, minimalPreset } from 'glost/presets';
+
+// Full language learning stack
+const result = await glost()
+  .use(languageLearningPreset)
+  .process(document);
+
+// Or minimal preset for basic processing
+const result = await glost()
+  .use(minimalPreset)
+  .process(document);
+```
+
+### Available Presets
+
+- `languageLearningPreset` - Full language learning stack
+- `readingAppPreset` - Interactive reading features
+- `vocabularyBuilderPreset` - Word frequency and difficulty
+- `grammarAnalyzerPreset` - POS and clause analysis
+- `minimalPreset` - Just the essentials
+
+## Freezing Processors
+
+For reuse across multiple documents, freeze the processor:
+
+```typescript
+import { glost } from 'glost';
+
+const processor = glost()
+  .use(frequencyPlugin)
+  .use(difficultyPlugin)
+  .freeze();
+
+// Reuse across documents
+const result1 = await processor.process(doc1);
+const result2 = await processor.process(doc2);
+const result3 = await processor.process(doc3);
+```
+
+## Plugin Registry
+
+### Search for Plugins
+
+```typescript
+import { pluginRegistry } from 'glost';
+
+// Find plugins by language
+const thaiPlugins = pluginRegistry.search({ language: "th" });
+
+// Find plugins by category
+const transcriptionPlugins = pluginRegistry.search({ category: "transcription" });
+```
+
+### Check for Conflicts
+
+```typescript
+import { pluginRegistry } from 'glost';
+
+const report = pluginRegistry.checkConflicts(["plugin1", "plugin2"]);
+
+if (report.hasConflicts) {
+  console.log("Conflicts:", report.conflicts);
+}
+```
+
+## Plugin Order
+
+Plugins run in the order provided. For dependencies, list them first:
+
+```typescript
+const result = await glost()
+  .use(clauseSegmenterPlugin)     // Must run first
+  .use(negationTransformerPlugin) // Depends on clauses
+  .process(document);
+```
+
+## Combining Plugins
+
+### All at Once
+
+```typescript
+const result = await glost()
+  // Data fetching
+  .use(translationPlugin)
+  .use(transcriptionPlugin)
+  // Structure
+  .use(clauseSegmenterPlugin)
+  // Metadata
+  .use(frequencyPlugin)
+  .use(difficultyPlugin)
+  .use(posPlugin)
+  .process(document);
+```
+
+### In Stages
+
+```typescript
+// Stage 1: Fetch external data
+const withTranslations = await glost()
+  .use(translationPlugin)
+  .use(transcriptionPlugin)
+  .process(document);
+
+// Stage 2: Analyze structure
+const withStructure = await glost()
+  .use(clauseSegmenterPlugin)
+  .process(withTranslations.document);
+
+// Stage 3: Enrich metadata
+const final = await glost()
+  .use(frequencyPlugin)
+  .use(difficultyPlugin)
+  .process(withStructure.document);
+```
+
+## Hooks and Middleware
+
+### Before/After Hooks
+
+```typescript
+const result = await glost()
+  .before("frequency", (doc) => {
+    console.log("Starting frequency analysis...");
+  })
+  .use(frequencyPlugin)
+  .after("frequency", (doc) => {
+    console.log("Frequency analysis complete!");
+  })
+  .process(document);
+```
+
+### Error Handling
+
+```typescript
+const result = await glost()
+  .use(frequencyPlugin)
+  .use(difficultyPlugin)
+  .onError((error, pluginId) => {
+    console.error(`Plugin ${pluginId} failed:`, error.message);
+  })
+  .process(document);
+
+// Check for errors
+if (result.errors.length > 0) {
+  result.errors.forEach(({ plugin, error }) => {
+    console.warn(`Plugin ${plugin} failed:`, error.message);
+  });
+}
+```
+
+### Progress Tracking
+
+```typescript
+const result = await glost()
+  .use(plugin1)
+  .use(plugin2)
+  .use(plugin3)
+  .onProgress((stats) => {
+    console.log(`Progress: ${stats.completed}/${stats.total}`);
+  })
+  .process(document);
+```
+
+## Sharing Data Between Plugins
+
+```typescript
+const result = await glost()
+  .data("config", { theme: "dark", locale: "th" })
+  .data("cache", new Map())
+  .use(plugin1)
+  .use(plugin2)
+  .process(document);
+```
+
+## Accessing Enriched Data
+
+```typescript
+import { getAllWords } from 'glost';
+
+const words = getAllWords(result.document);
+
+words.forEach(word => {
+  console.log("Text:", word.children[0].value);
+  console.log("Frequency:", word.extras?.frequency);
+  console.log("Difficulty:", word.extras?.difficulty);
+  console.log("Translation:", word.extras?.translations?.en);
+});
+```
+
+## Performance Tips
+
+1. **Freeze reusable processors** - Avoid rebuilding for each document
+2. **Batch related plugins** - Run related plugins together
+3. **Cache external data** - In your provider functions
+4. **Filter before processing** - Don't process unnecessary content
+5. **Use presets** - They're optimized for common use cases

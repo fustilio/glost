@@ -7,7 +7,7 @@
  */
 
 import type { GLOSTRoot } from "glost-core";
-import type { GLOSTExtension, ProcessorOptions as ExtensionProcessorOptions } from "glost-extensions";
+import type { GLOSTExtension, ProcessorOptions as ExtensionProcessorOptions } from "glost-plugins";
 
 /**
  * Plugin function signature

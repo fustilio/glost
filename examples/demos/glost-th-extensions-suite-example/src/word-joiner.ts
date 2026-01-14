@@ -9,7 +9,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTASTExtension } from "glost-extensions";
+import type { GLOSTASTExtension } from "glost-plugins";
 import type {
   GLOSTRoot,
   GLOSTSentence,
@@ -375,7 +375,7 @@ function processSentence(
  *
  * @example
  * ```typescript
- * import { createThaiWordJoinerExtension } from "glost-extensions-thai";
+ * import { createThaiWordJoinerExtension } from "glost-plugins-thai";
  *
  * const extension = createThaiWordJoinerExtension({
  *   maxCombinationLength: 4,

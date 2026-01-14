@@ -1,0 +1,64 @@
+# Examples
+
+Learn how to use GloST through practical examples. These examples demonstrate common patterns for rendering multilingual text with annotations.
+
+## What You'll Find Here
+
+### [Ruby Annotations](/docs/examples/ruby-annotations)
+Learn how to render text with ruby annotations (furigana, pinyin, romanization) using GloST React components.
+
+### [Progressive Display](/docs/examples/progressive-display)
+Implement the 5-level progressive disclosure system to gradually reveal linguistic information.
+
+### [Multi-Language Text](/docs/examples/multi-language)
+Work with multiple languages in a single document, handling different scripts and transcription systems.
+
+### [Dialogues & Conversations](/docs/examples/dialogues)
+Create and render conversational dialogues with speaker attribution, perfect for language learning scenarios.
+
+## Quick Start
+
+Install the packages:
+
+```bash
+npm install glost glost-react
+```
+
+Create a simple word with ruby annotation:
+
+```tsx
+import { SimpleRubyWord } from "glost-react";
+import { createJapaneseWord } from "glost";
+
+const word = createJapaneseWord({
+  text: "日本語",
+  transcription: {
+    furigana: { text: "にほんご", system: "furigana" }
+  },
+  translation: "Japanese language"
+});
+
+function Example() {
+  return (
+    <SimpleRubyWord
+      word={word}
+      transcriptionSystem="furigana"
+      rubyPosition="over"
+      showDefinition
+    />
+  );
+}
+```
+
+## Package Overview
+
+| Package | Purpose |
+|---------|---------|
+| `glost` | Core types, document creation, tree traversal |
+| `glost-react` | React components for rendering with ruby annotations |
+| `glost-dialogue` | Dialogue and conversation support |
+| `glost-processor` | Unified-style processor for plugins |
+
+## Live Examples
+
+Check out the [GloST Playground](https://github.com/fustilio/glost/tree/main/examples) for interactive examples you can run locally.

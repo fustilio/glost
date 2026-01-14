@@ -187,7 +187,7 @@ See [glost-ja documentation](../languages/ja/README.md).
 
 ### Core Packages
 - `glost-common` - Shared utilities and language configs
-- `glost-extensions` - Extension system for transforming GLOST trees
+- `glost-plugins` - Extension system for transforming GLOST trees
 - `glost-utils` - Utilities for working with GLOST documents
 
 ### Language Packages

@@ -10,7 +10,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-extensions";
+import type { GLOSTExtension } from "glost-plugins";
 import type { GLOSTRoot, GLOSTWord, GLOSTSyllable, GLOSTCharacter } from "glost";
 import { visit } from "unist-util-visit";
 import { getWordText } from "glost";
@@ -332,7 +332,7 @@ function segmentThaiWord(
  *
  * @example
  * ```typescript
- * import { createThaiSyllableSegmenterExtension } from "glost-extensions-thai";
+ * import { createThaiSyllableSegmenterExtension } from "glost-plugins-thai";
  *
  * const extension = createThaiSyllableSegmenterExtension({
  *   segmentAllThai: true,
@@ -404,8 +404,8 @@ export function createThaiSyllableSegmenterExtension(
  *
  * @example
  * ```typescript
- * import { ThaiSyllableSegmenterExtension } from "glost-extensions-thai";
- * import { processGLOSTWithExtensions } from "glost-extensions";
+ * import { ThaiSyllableSegmenterExtension } from "glost-plugins-thai";
+ * import { processGLOSTWithExtensions } from "glost-plugins";
  *
  * const result = processGLOSTWithExtensions(document, [
  *   ThaiSyllableSegmenterExtension,

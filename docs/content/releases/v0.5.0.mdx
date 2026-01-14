@@ -95,7 +95,7 @@ The core package has been renamed:
 
 ```typescript
 // v0.4.x - Still works but deprecated
-import { processGLOSTWithExtensions } from "glost-extensions";
+import { processGLOSTWithExtensions } from "glost-plugins";
 const result = processGLOSTWithExtensions(doc, [ext1, ext2]);
 
 // v0.5.0 - Recommended
@@ -126,7 +126,7 @@ npm install glost@0.5.0
 2. Update imports:
 ```typescript
 // Old
-import { processGLOSTWithExtensions } from "glost-extensions";
+import { processGLOSTWithExtensions } from "glost-plugins";
 
 // New
 import { glost } from "glost";

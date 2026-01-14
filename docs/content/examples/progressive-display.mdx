@@ -1,0 +1,233 @@
+# Progressive Display
+
+GloST React includes a 5-level progressive display system that gradually reveals linguistic information. This is useful for language learning applications where you want to control how much detail learners see.
+
+## Display Levels
+
+| Level | What's Shown |
+|-------|-------------|
+| **1** | Text only (no annotations) |
+| **2** | Text + transcription (pronunciation) |
+| **3** | Text + transcription + definition |
+| **4** | Text + transcription + definition + part of speech |
+| **5** | Full detail (all metadata including difficulty) |
+
+## Basic Usage
+
+```tsx
+import { RubyWord } from "glost-react";
+
+function ProgressiveWord({ word, level }) {
+  return (
+    <RubyWord
+      word={word}
+      displayLevel={level}
+      transcriptionSystem="furigana"
+    />
+  );
+}
+
+// Level 1: 漢字
+// Level 2: 漢字 (with かんじ above)
+// Level 3: 漢字 + "kanji" definition
+// Level 4: 漢字 + "kanji" + "noun"
+// Level 5: 漢字 + "kanji" + "noun" + "beginner"
+```
+
+## Interactive Level Selector
+
+```tsx
+import { useState } from "react";
+import { RubyWord, DisplayLevel } from "glost-react";
+
+function InteractiveExample({ word }) {
+  const [level, setLevel] = useState<DisplayLevel>(2);
+
+  return (
+    <div>
+      <div className="mb-4">
+        <label>Display Level: </label>
+        <select
+          value={level}
+          onChange={(e) => setLevel(Number(e.target.value) as DisplayLevel)}
+        >
+          <option value={1}>1 - Text only</option>
+          <option value={2}>2 - With pronunciation</option>
+          <option value={3}>3 - With definition</option>
+          <option value={4}>4 - With grammar</option>
+          <option value={5}>5 - Full detail</option>
+        </select>
+      </div>
+
+      <RubyWord
+        word={word}
+        displayLevel={level}
+        transcriptionSystem="furigana"
+      />
+    </div>
+  );
+}
+```
+
+## Level Configuration
+
+Access level configurations programmatically:
+
+```tsx
+import { getLevelConfig, shouldShowAtLevel } from "glost-react";
+
+// Get full config for a level
+const config = getLevelConfig(3);
+// { text: true, transcription: true, shortDefinition: true, partOfSpeech: false, difficulty: false }
+
+// Check specific features
+shouldShowAtLevel(3, "shortDefinition"); // true
+shouldShowAtLevel(3, "partOfSpeech");    // false
+```
+
+## Custom Level Rendering
+
+For full control, use the `useSpacingFlags` hook:
+
+```tsx
+import { useSpacingFlags, useWordData } from "glost-react";
+import { getWordText } from "glost";
+
+function CustomProgressiveWord({ word, displayLevel, transcriptionSystem }) {
+  const flags = useSpacingFlags(displayLevel, transcriptionSystem);
+  const data = useWordData(word, transcriptionSystem);
+
+  return (
+    <div className="word-container">
+      {/* Always show text */}
+      <span className="text-2xl">{data.text}</span>
+
+      {/* Level 2+: Show transcription */}
+      {flags.hasTranscription && data.transcription && (
+        <div className="text-sm text-gray-500">{data.transcription}</div>
+      )}
+
+      {/* Level 3+: Show definition */}
+      {flags.needsLevel3 && data.translation && (
+        <div className="text-xs">{data.translation}</div>
+      )}
+
+      {/* Level 4+: Show part of speech */}
+      {flags.needsLevel4 && data.partOfSpeech && (
+        <div className="text-xs text-blue-600">{data.partOfSpeech}</div>
+      )}
+
+      {/* Level 5: Show difficulty */}
+      {flags.needsLevel5 && data.difficulty && (
+        <span className="badge">{data.difficulty}</span>
+      )}
+    </div>
+  );
+}
+```
+
+## Render Props Approach
+
+The `RubyWord` component accepts render props for each level:
+
+```tsx
+import { RubyWord, getDifficultyStyles } from "glost-react";
+
+<RubyWord
+  word={word}
+  displayLevel={5}
+  transcriptionSystem="furigana"
+  renderText={(text) => (
+    <span className="text-3xl font-serif">{text}</span>
+  )}
+  renderRuby={(rt) => (
+    <rt className="text-sm text-gray-500">{rt}</rt>
+  )}
+  renderDefinition={(def) => (
+    <div className="text-sm mt-1 text-gray-700">{def}</div>
+  )}
+  renderPartOfSpeech={(pos) => (
+    <div className="text-xs text-blue-600 capitalize">{pos}</div>
+  )}
+  renderDifficulty={(diff) => (
+    <span style={getDifficultyStyles(diff)}>{diff}</span>
+  )}
+/>
+```
+
+## Sentence-Level Progressive Display
+
+Apply progressive display to entire sentences:
+
+```tsx
+import { GloSTSentence } from "glost-react";
+
+function ProgressiveSentence({ sentence, level }) {
+  return (
+    <GloSTSentence
+      sentence={sentence}
+      displayLevel={level}
+      transcriptionSystem="pinyin"
+      showTranslation={level >= 3}
+    />
+  );
+}
+```
+
+## Language-Specific Levels
+
+Different languages may warrant different default levels:
+
+```tsx
+const languageDefaults = {
+  "ja": 2,  // Japanese: show furigana by default
+  "zh": 2,  // Chinese: show pinyin by default
+  "th": 2,  // Thai: show romanization by default
+  "en": 1,  // English: text only
+};
+
+function SmartWord({ word, language }) {
+  const defaultLevel = languageDefaults[language] ?? 1;
+  const [level, setLevel] = useState(defaultLevel);
+
+  return (
+    <RubyWord
+      word={word}
+      displayLevel={level}
+      transcriptionSystem={getDefaultTranscription(language)}
+    />
+  );
+}
+```
+
+## Use Cases
+
+### Beginner Mode
+Set level 5 to show all information including difficulty ratings:
+```tsx
+<RubyWord word={word} displayLevel={5} />
+```
+
+### Reading Practice
+Set level 2 for pronunciation aids without definitions:
+```tsx
+<RubyWord word={word} displayLevel={2} />
+```
+
+### Comprehension Test
+Set level 1 to hide all aids:
+```tsx
+<RubyWord word={word} displayLevel={1} />
+```
+
+### Vocabulary Study
+Set level 3-4 for definitions and grammar:
+```tsx
+<RubyWord word={word} displayLevel={4} />
+```
+
+## Next Steps
+
+- [Ruby Annotations](/docs/examples/ruby-annotations) - Styling ruby annotations
+- [Plugins](/docs/guides/custom-plugins) - Add custom metadata at each level
+- [Multi-Language](/docs/examples/multi-language) - Handle multiple languages

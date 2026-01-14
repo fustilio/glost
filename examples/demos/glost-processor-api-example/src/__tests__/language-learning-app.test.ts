@@ -19,7 +19,7 @@ import {
 import { createThaiWord } from 'glost-th';
 import { createJapaneseWord } from 'glost-ja';
 import { createKoreanWord } from 'glost-ko';
-import { processGLOST, type GLOSTExtension } from 'glost-extensions';
+import { processGLOST, type GLOSTExtension } from 'glost-plugins';
 import {
   thaiGreetings,
   thaiParagraphs,

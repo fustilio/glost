@@ -54,7 +54,7 @@ const thaiTranscriptionProvider: TranscriptionProvider = {
  * @example
  * ```typescript
  * import { createThaiTranscriptionExtension } from "./thai-transcription.js";
- * import { processGLOSTWithExtensionsAsync } from "glost-extensions";
+ * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
  * 
  * const extension = createThaiTranscriptionExtension();
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);

@@ -1,5 +1,5 @@
 {
-  "name": "glost-extensions-api-example",
+  "name": "glost-plugins-api-example",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -18,7 +18,7 @@
   "dependencies": {
     "glost": "workspace:*",
     "glost-core": "workspace:*",
-    "glost-extensions": "workspace:*",
+    "glost-plugins": "workspace:*",
     "glost-transcription": "workspace:*",
     "glost-frequency": "workspace:*",
     "glost-difficulty": "workspace:*",

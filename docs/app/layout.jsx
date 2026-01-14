@@ -5,15 +5,15 @@ import 'nextra-theme-docs/style.css'
 
 export const metadata = {
   title: {
-    template: '%s – GLOST',
-    default: 'GLOST Documentation'
+    template: '%s – GloST',
+    default: 'GloST Documentation'
   },
-  description: 'GLOST (Glossed Syntax Tree) - A framework for processing multilingual text with language learning annotations',
+  description: 'GloST (Glossed Syntax Tree) - A framework for processing multilingual text with language learning annotations',
 }
 
 const navbar = (
   <Navbar
-    logo={<span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>GLOST</span>}
+    logo={<span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>GloST</span>}
     projectLink="https://github.com/fustilio/glost"
   >
     <ThemeSwitch />
@@ -22,7 +22,7 @@ const navbar = (
 
 const footer = (
   <Footer>
-    MIT {new Date().getFullYear()} © GLOST
+    MIT {new Date().getFullYear()} © GloST
   </Footer>
 )
 

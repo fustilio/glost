@@ -33,7 +33,7 @@ Examples that work with any language:
 |---------|-------------|-------|
 | [`glost-quick-start-example`](./demos/glost-quick-start-example/) | Basic GLOST operations and document creation | ✓ |
 | [`glost-core-api-example`](./demos/glost-core-api-example/) | Core API usage with large documents | ✓ |
-| [`glost-extensions-api-example`](./demos/glost-extensions-api-example/) | Extension system patterns and composition | ✓ |
+| [`glost-plugins-api-example`](./demos/glost-plugins-api-example/) | Extension system patterns and composition | ✓ |
 | [`glost-processor-api-example`](./demos/glost-processor-api-example/) | Unified-style processor API with pipelines | ✓ |
 
 ### Language-Specific Demos

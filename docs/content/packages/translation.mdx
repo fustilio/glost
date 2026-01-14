@@ -1,6 +1,6 @@
 # glost-translation
 
-Translation extension for GLOST documents.
+Translation plugin for GLOST documents.
 
 ## Installation
 
@@ -10,14 +10,14 @@ pnpm add glost-translation
 
 ## Usage
 
-### createTranslationExtension
+### createTranslationPlugin
 
-Create an extension that adds translations to words.
+Create a plugin that adds translations to words.
 
 ```typescript
-import { createTranslationExtension } from 'glost-translation';
+import { createTranslationPlugin } from 'glost-translation';
 
-const translationExt = createTranslationExtension({
+const translationPlugin = createTranslationPlugin({
   targetLanguage: "th",
   nativeLanguage: "en",
   lookupTranslation: async (word, language) => {
@@ -30,7 +30,7 @@ const translationExt = createTranslationExtension({
 ### Options
 
 ```typescript
-interface TranslationExtensionOptions {
+interface TranslationPluginOptions {
   targetLanguage: GlostLanguage;
   nativeLanguage?: GlostLanguage;
   lookupTranslation?: (
@@ -46,13 +46,13 @@ interface TranslationExtensionOptions {
 
 ### Processing
 
-Use with the async processor:
+Use with the v0.5+ processor API:
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from 'glost-extensions';
-import { createTranslationExtension } from 'glost-translation';
+import { glost } from 'glost';
+import { createTranslationPlugin } from 'glost-translation';
 
-const translationExt = createTranslationExtension({
+const translationPlugin = createTranslationPlugin({
   targetLanguage: "th",
   nativeLanguage: "en",
   lookupTranslation: async (word, lang) => {
@@ -65,14 +65,14 @@ const translationExt = createTranslationExtension({
   }
 });
 
-const result = await processGLOSTWithExtensionsAsync(document, [
-  translationExt
-]);
+const result = await glost()
+  .use(translationPlugin)
+  .process(document);
 ```
 
 ### What It Does
 
-The extension:
+The plugin:
 
 1. Visits each word node in the document
 2. Calls the `lookupTranslation` function with the word text
@@ -96,36 +96,44 @@ After processing, words will have translations in extras:
 
 ### Multiple Languages
 
-You can add translations for multiple languages by running the extension multiple times:
+You can add translations for multiple languages by using multiple plugins:
 
 ```typescript
-const toEnglish = createTranslationExtension({
+import { glost } from 'glost';
+import { createTranslationPlugin } from 'glost-translation';
+
+const toEnglish = createTranslationPlugin({
   targetLanguage: "th",
   nativeLanguage: "en",
   lookupTranslation: lookupEnglish
 });
 
-const toJapanese = createTranslationExtension({
+const toJapanese = createTranslationPlugin({
   targetLanguage: "th",
   nativeLanguage: "ja",
   lookupTranslation: lookupJapanese
 });
 
-const result = await processGLOSTWithExtensionsAsync(document, [
-  toEnglish,
-  toJapanese
-]);
+const result = await glost()
+  .use(toEnglish)
+  .use(toJapanese)
+  .process(document);
 
 // Result: word.extras.translations = { en: "hello", ja: "こんにちは" }
 ```
 
-### Combining with Other Extensions
+### Combining with Other Plugins
 
 ```typescript
-const result = await processGLOSTWithExtensionsAsync(document, [
-  createTranslationExtension({ targetLanguage: "th", lookupTranslation }),
-  createTranscriptionExtension({ targetLanguage: "th", lookupTranscription }),
-  FrequencyExtension,
-  DifficultyExtension
-]);
+import { glost } from 'glost';
+import { createTranslationPlugin } from 'glost-translation';
+import { createTranscriptionPlugin } from 'glost-transcription';
+import { frequencyPlugin, difficultyPlugin } from 'glost-plugins';
+
+const result = await glost()
+  .use(createTranslationPlugin({ targetLanguage: "th", lookupTranslation }))
+  .use(createTranscriptionPlugin({ targetLanguage: "th", lookupTranscription }))
+  .use(frequencyPlugin)
+  .use(difficultyPlugin)
+  .process(document);
 ```

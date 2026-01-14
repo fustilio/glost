@@ -125,7 +125,7 @@ glost/
 ├── glost-registry     # Plugin registry
 ├── glost-presets      # Preset configurations
 ├── glost-common       # Language utilities
-├── glost-extensions   # Extension system
+├── glost-plugins   # Extension system
 ├── glost-th           # Thai language support
 ├── glost-ja           # Japanese language support
 └── glost-cli          # CLI tools
@@ -274,7 +274,7 @@ GLOST is used for:
 ### Before (v0.4)
 
 ```typescript
-import { processGLOSTWithExtensions } from "glost-extensions";
+import { processGLOSTWithExtensions } from "glost-plugins";
 
 const result = processGLOSTWithExtensions(doc, [ext1, ext2, ext3]);
 ```

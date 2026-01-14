@@ -1,0 +1,284 @@
+# Dialogues & Conversations
+
+GloST Dialogue provides support for rendering conversations and dialogues, perfect for language learning scenarios like ordering food, asking directions, or practicing greetings.
+
+## Installation
+
+```bash
+npm install glost-dialogue glost glost-react
+```
+
+## Creating a Dialogue
+
+A dialogue groups multiple sentences into a conversation with speaker attribution:
+
+```typescript
+import { createDialogueFromTurns } from "glost-dialogue";
+import { createSentenceFromWords, createThaiWord } from "glost";
+
+// Define the participants
+const participants = [
+  { id: "customer", name: "You", role: "customer" },
+  { id: "vendor", name: "Shopkeeper", role: "vendor", gender: "female" },
+];
+
+// Create sentences for each turn
+const greeting = createSentenceFromWords([
+  createThaiWord({
+    text: "สวัสดี",
+    transcription: { "paiboon+": { text: "sà-wàt-dee", system: "paiboon+" } },
+    translation: "hello"
+  }),
+  createThaiWord({
+    text: "ครับ",
+    transcription: { "paiboon+": { text: "kráp", system: "paiboon+" } },
+    translation: "(polite particle, male)"
+  }),
+], "th", "thai", { sentenceText: "สวัสดีครับ" });
+
+const response = createSentenceFromWords([
+  createThaiWord({
+    text: "สวัสดี",
+    transcription: { "paiboon+": { text: "sà-wàt-dee", system: "paiboon+" } },
+    translation: "hello"
+  }),
+  createThaiWord({
+    text: "ค่ะ",
+    transcription: { "paiboon+": { text: "kâ", system: "paiboon+" } },
+    translation: "(polite particle, female)"
+  }),
+], "th", "thai", { sentenceText: "สวัสดีค่ะ" });
+
+// Create the dialogue
+const dialogue = createDialogueFromTurns({
+  lang: "th-TH",
+  participants,
+  context: "Greeting at a market stall",
+  title: "At the Market",
+  turns: [
+    { role: "customer", sentence: greeting },
+    { role: "vendor", sentence: response },
+  ],
+});
+```
+
+## Rendering Dialogues
+
+### Basic Rendering
+
+```tsx
+import { DialogueContainer, DialogueTurn } from "glost-dialogue/react";
+import { GloSTSentence } from "glost-react";
+
+function ConversationExample({ dialogue }) {
+  const participants = dialogue.extras?.dialogue?.participants ?? [];
+
+  return (
+    <DialogueContainer dialogue={dialogue} showParticipants>
+      {dialogue.children.map((sentence, index) => (
+        <DialogueTurn
+          key={index}
+          sentence={sentence}
+          participants={participants}
+          align="auto"
+          showSpeaker
+        >
+          <GloSTSentence
+            sentence={sentence}
+            displayLevel={2}
+            transcriptionSystem="paiboon+"
+          />
+        </DialogueTurn>
+      ))}
+    </DialogueContainer>
+  );
+}
+```
+
+### Chat-style Layout
+
+The `DialogueTurn` component automatically aligns messages based on speaker role:
+
+```tsx
+<DialogueTurn
+  sentence={sentence}
+  participants={participants}
+  align="auto"  // "customer", "me", "you" → right; others → left
+  showSpeaker
+>
+  {content}
+</DialogueTurn>
+```
+
+| Role | Alignment |
+|------|-----------|
+| `"me"`, `"you"`, `"customer"`, `"learner"`, `"student"`, `"user"` | Right |
+| All others | Left |
+
+### Custom Alignment
+
+Override automatic alignment:
+
+```tsx
+// Force all turns to the left
+<DialogueTurn align="left">...</DialogueTurn>
+
+// Force to the right
+<DialogueTurn align="right">...</DialogueTurn>
+```
+
+## Dialogue Structure
+
+### DialogueNode
+
+```typescript
+interface GLOSTDialogue {
+  type: "DialogueNode";
+  children: GLOSTSentence[];
+  lang?: string;
+  script?: string;
+  extras?: {
+    dialogue?: {
+      participants?: DialogueParticipant[];
+      context?: string;          // "At the restaurant"
+      title?: string;            // "Ordering Food"
+      difficulty?: "beginner" | "intermediate" | "advanced";
+    };
+  };
+}
+```
+
+### DialogueParticipant
+
+```typescript
+interface DialogueParticipant {
+  id: string;                    // "customer", "waiter"
+  name?: string;                 // "You", "Server"
+  gender?: "male" | "female";    // For TTS voice selection
+  role?: string;                 // "customer", "service staff"
+  avatar?: string;               // Optional avatar URL
+}
+```
+
+### Sentence Dialogue Info
+
+Each sentence can have dialogue metadata:
+
+```typescript
+interface SentenceDialogueInfo {
+  role: string;           // Participant ID who spoke
+  speaker?: string;       // Display name
+  turnIndex?: number;     // Position in conversation (0-indexed)
+  emotion?: "neutral" | "happy" | "sad" | "angry" | "surprised" | "questioning";
+}
+```
+
+## Adding Dialogue Info to Sentences
+
+```typescript
+import { addDialogueInfoToSentence } from "glost-dialogue";
+
+const sentenceWithDialogue = addDialogueInfoToSentence(sentence, {
+  role: "customer",
+  speaker: "You",
+  turnIndex: 0,
+  emotion: "questioning",
+});
+```
+
+## Type Guards
+
+```typescript
+import { isDialogueNode, hasSentenceDialogueInfo } from "glost-dialogue";
+
+// Check if a node is a DialogueNode
+if (isDialogueNode(node)) {
+  // Render as dialogue
+}
+
+// Check if sentence has dialogue info
+if (hasSentenceDialogueInfo(sentence)) {
+  const speaker = sentence.extras?.dialogue?.speaker;
+}
+```
+
+## Common Scenarios
+
+### Restaurant Ordering
+
+```typescript
+const restaurantDialogue = createDialogueFromTurns({
+  lang: "th-TH",
+  context: "Ordering at a Thai restaurant",
+  title: "At the Restaurant",
+  difficulty: "beginner",
+  participants: [
+    { id: "customer", name: "You" },
+    { id: "waiter", name: "Waiter" },
+  ],
+  turns: [
+    { role: "waiter", sentence: welcomeSentence },
+    { role: "customer", sentence: orderSentence },
+    { role: "waiter", sentence: confirmSentence },
+  ],
+});
+```
+
+### Asking Directions
+
+```typescript
+const directionsDialogue = createDialogueFromTurns({
+  context: "Asking for directions to the station",
+  participants: [
+    { id: "tourist", name: "You" },
+    { id: "local", name: "Local" },
+  ],
+  turns: [
+    { role: "tourist", sentence: askSentence, emotion: "questioning" },
+    { role: "local", sentence: answerSentence },
+    { role: "tourist", sentence: thanksSentence, emotion: "happy" },
+  ],
+});
+```
+
+## Custom Styling
+
+### Custom Speaker Labels
+
+```tsx
+<DialogueTurn
+  sentence={sentence}
+  participants={participants}
+  renderSpeaker={(speaker, info) => (
+    <div className="flex items-center gap-2">
+      <Avatar name={speaker} />
+      <span className="font-medium">{speaker}</span>
+      {info.emotion && <EmotionIcon emotion={info.emotion} />}
+    </div>
+  )}
+>
+  {content}
+</DialogueTurn>
+```
+
+### Custom Container
+
+```tsx
+<DialogueContainer
+  dialogue={dialogue}
+  renderHeader={(title, context) => (
+    <div className="bg-blue-100 p-4 rounded-t-lg">
+      <h3 className="font-bold">{title}</h3>
+      <p className="text-sm text-gray-600">{context}</p>
+    </div>
+  )}
+>
+  {children}
+</DialogueContainer>
+```
+
+## Next Steps
+
+- [Ruby Annotations](/docs/examples/ruby-annotations) - Add pronunciation to dialogue text
+- [Progressive Display](/docs/examples/progressive-display) - Control how much detail to show
+- [Multi-Language](/docs/examples/multi-language) - Create dialogues in different languages

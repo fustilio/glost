@@ -27,7 +27,7 @@ import {
   processGLOSTWithMeta,
   processGLOSTWithExtensions,
   processGLOSTWithExtensionsAsync,
-} from "glost-extensions";
+} from "glost-plugins";
 
 import { createFrequencyExtension } from "glost-frequency";
 import { createDifficultyExtension } from "glost-difficulty";

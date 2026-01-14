@@ -1,5 +1,5 @@
 /**
- * glost-extensions-thai
+ * glost-plugins-thai
  *
  * Thai language-specific GLOST extensions for transcription, translation,
  * and language learning transformations.
@@ -14,19 +14,19 @@
  * @example
  * ```typescript
  * // Basic transcription/translation
- * import { createThaiExtensions } from "glost-extensions-thai";
+ * import { createThaiExtensions } from "glost-plugins-thai";
  * const extensions = createThaiExtensions();
  *
  * // Pronunciation learning (syllables + transcription)
- * import { createThaiPronunciationPipeline } from "glost-extensions-thai";
+ * import { createThaiPronunciationPipeline } from "glost-plugins-thai";
  * const pipeline = createThaiPronunciationPipeline();
  *
  * // Dialogue practice (gender variants + syllables)
- * import { createThaiDialoguePipeline } from "glost-extensions-thai";
+ * import { createThaiDialoguePipeline } from "glost-plugins-thai";
  * const pipeline = createThaiDialoguePipeline({ gender: "male" });
  *
  * // Full analysis (everything)
- * import { createThaiComprehensivePipeline } from "glost-extensions-thai";
+ * import { createThaiComprehensivePipeline } from "glost-plugins-thai";
  * const pipeline = createThaiComprehensivePipeline();
  * ```
  */
@@ -89,7 +89,7 @@ export {
 // Legacy/Convenience exports
 // ============================================================================
 
-import type { GLOSTASTExtension } from "glost-extensions";
+import type { GLOSTASTExtension } from "glost-plugins";
 import { createThaiTranscriptionExtension } from "./transcription";
 import { createThaiTranslationExtension } from "./translation";
 import type { GlostLanguage } from "glost-common";
@@ -106,8 +106,8 @@ import type { GlostLanguage } from "glost-common";
  *
  * @example
  * ```typescript
- * import { createThaiExtensions } from "glost-extensions-thai";
- * import { processGLOSTWithExtensionsAsync } from "glost-extensions";
+ * import { createThaiExtensions } from "glost-plugins-thai";
+ * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
  *
  * const extensions = createThaiExtensions("en-US");
  * const result = await processGLOSTWithExtensionsAsync(document, extensions);

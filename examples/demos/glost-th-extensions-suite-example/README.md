@@ -101,7 +101,7 @@ Combine extensions for different use cases:
 
 ```typescript
 import { createThaiExtensions } from "glost-th-extensions-suite-example";
-import { processGLOSTWithExtensionsAsync } from "glost-extensions";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
 
 // Create both transcription and translation extensions
 const extensions = createThaiExtensions("en-US");
@@ -117,7 +117,7 @@ import {
   createThaiTranscriptionExtension,
   createThaiTranslationExtension,
 } from "glost-th-extensions-suite-example";
-import { processGLOSTWithExtensionsAsync } from "glost-extensions";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
 
 // Use only transcription
 const extensions = [createThaiTranscriptionExtension()];
@@ -141,7 +141,7 @@ import {
   createThaiWordJoinerExtension,
   ThaiSyllableSegmenterExtension,
 } from "glost-th-extensions-suite-example";
-import { processGLOSTWithExtensions } from "glost-extensions";
+import { processGLOSTWithExtensions } from "glost-plugins";
 
 // Word joiner combines chunks into composite words
 // Example: ซู + เปอร์ + มาร์เก็ต → ซูเปอร์มาร์เก็ต
@@ -164,7 +164,7 @@ import {
   createThaiDialoguePipeline,
   createThaiComprehensivePipeline,
 } from "glost-th-extensions-suite-example";
-import { processGLOSTWithExtensionsAsync } from "glost-extensions";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
 
 // Pronunciation-focused pipeline
 const pronunciationPipeline = createThaiPronunciationPipeline();
@@ -273,5 +273,5 @@ Each word includes:
 ## Dependencies
 
 - `glost` - Core GLOST types and utilities
-- `glost-extensions` - Extension system framework
+- `glost-plugins` - Extension system framework
 - `glost-th` - Thai language support (constants, utilit

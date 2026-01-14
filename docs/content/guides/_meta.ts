@@ -3,8 +3,8 @@ export default {
   'processor-api': 'Processor API',
   registry: 'Plugin Registry',
   'creating-documents': 'Creating Documents',
-  'using-extensions': 'Using Extensions',
-  'custom-extensions': 'Custom Extensions',
+  'using-plugins': 'Using Plugins',
+  'custom-plugins': 'Custom Plugins',
   '---': {
     type: 'separator',
     title: 'Language Providers'
@@ -21,13 +21,13 @@ export default {
   japanese: 'Japanese',
   '-----': {
     type: 'separator',
-    title: 'Extension Guides'
+    title: 'Plugin Guides'
   },
-  'difficulty-extension-guide': 'Difficulty',
-  'frequency-extension-guide': 'Frequency',
-  'pos-extension-guide': 'Part of Speech',
-  'gender-extension-guide': 'Gender',
-  'clause-segmenter-extension-guide': 'Clause Segmenter',
+  'difficulty-plugin-guide': 'Difficulty',
+  'frequency-plugin-guide': 'Frequency',
+  'pos-plugin-guide': 'Part of Speech',
+  'gender-plugin-guide': 'Gender',
+  'clause-segmenter-plugin-guide': 'Clause Segmenter',
   'examples-index': {
     display: 'hidden'
   }

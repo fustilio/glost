@@ -4,7 +4,7 @@
 
 **In language learning applications, inaccurate data is worse than no data.**
 
-This principle guides all GLOST extension packages that require external data sources.
+This principle guides all GLOST plugin packages that require external data sources.
 
 ## Why No Fallbacks?
 
@@ -22,7 +22,7 @@ Heuristic-based fallbacks are harmful because they mislead learners:
 
 ## The Alternative: Graceful Degradation
 
-GLOST extensions return `undefined` when they don't have data:
+GLOST plugins return `undefined` when they don't have data:
 
 ```typescript
 // ✅ Good: Return undefined when unsure
@@ -61,7 +61,7 @@ Use validated sources instead of fallbacks:
 
 ## Implementation Guidelines
 
-**For Extension Developers:**
+**For Plugin Developers:**
 - Never guess; return `undefined` when you don't have data
 - Document data requirements explicitly
 - Provide validation helpers

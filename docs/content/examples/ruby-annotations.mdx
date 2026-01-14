@@ -1,0 +1,255 @@
+# Ruby Annotations
+
+Ruby annotations are small text annotations placed above or below the main text, commonly used for:
+- **Furigana** in Japanese (reading aids above kanji)
+- **Pinyin** in Chinese (romanization above characters)
+- **Romanization** in Thai, Korean, and other scripts
+
+## Basic Example
+
+The simplest way to render a word with ruby annotation:
+
+```tsx
+import { SimpleRubyWord } from "glost-react";
+import { createJapaneseWord } from "glost";
+
+// Create a Japanese word with furigana
+const word = createJapaneseWord({
+  text: "漢字",
+  transcription: {
+    furigana: { text: "かんじ", system: "furigana" }
+  },
+  translation: "kanji (Chinese characters)"
+});
+
+function FuriganaExample() {
+  return (
+    <SimpleRubyWord
+      word={word}
+      transcriptionSystem="furigana"
+      rubyPosition="over"
+    />
+  );
+}
+```
+
+This renders:
+
+```
+  かんじ
+  漢字
+```
+
+## Ruby Position
+
+The `rubyPosition` prop controls where annotations appear:
+
+| Position | Description | Common Use |
+|----------|-------------|------------|
+| `"over"` | Above the text | Japanese furigana, Chinese pinyin |
+| `"under"` | Below the text | Thai romanization, Korean romanization |
+
+### Japanese (Over)
+
+```tsx
+<SimpleRubyWord
+  word={japaneseWord}
+  transcriptionSystem="furigana"
+  rubyPosition="over"
+/>
+```
+
+### Thai (Under)
+
+```tsx
+import { createThaiWord } from "glost";
+
+const thaiWord = createThaiWord({
+  text: "สวัสดี",
+  transcription: {
+    "paiboon+": { text: "sà-wàt-dee", system: "paiboon+" }
+  },
+  translation: "hello"
+});
+
+<SimpleRubyWord
+  word={thaiWord}
+  transcriptionSystem="paiboon+"
+  rubyPosition="under"
+/>
+```
+
+## Advanced: RubyWord Component
+
+For full control over styling, use the `RubyWord` component with render props:
+
+```tsx
+import { RubyWord } from "glost-react";
+
+function StyledFurigana({ word }) {
+  return (
+    <RubyWord
+      word={word}
+      displayLevel={2}
+      transcriptionSystem="furigana"
+      renderText={(text) => (
+        <span className="text-3xl font-serif">{text}</span>
+      )}
+      renderRuby={(transcription) => (
+        <rt className="text-sm text-red-600 font-sans">
+          {transcription}
+        </rt>
+      )}
+    />
+  );
+}
+```
+
+## Language Strategies
+
+For language-specific behavior (like hiding furigana for hiragana-only words), use a language strategy:
+
+```tsx
+import { RubyWord, containsKanji } from "glost-react";
+import { getWordText } from "glost";
+
+const japaneseStrategy = {
+  shouldShowTranscription: (word, system) => {
+    // Only show furigana if the word contains kanji
+    if (system === "furigana") {
+      return containsKanji(getWordText(word));
+    }
+    return true;
+  },
+  getRubyPosition: () => "over",
+};
+
+<RubyWord
+  word={word}
+  displayLevel={2}
+  transcriptionSystem="furigana"
+  languageStrategy={japaneseStrategy}
+/>
+```
+
+## Creating Words with Transcription
+
+### Japanese
+
+```tsx
+import { createJapaneseWord } from "glost";
+
+const word = createJapaneseWord({
+  text: "東京",
+  transcription: {
+    furigana: { text: "とうきょう", system: "furigana" },
+    romaji: { text: "tōkyō", system: "romaji" }
+  },
+  translation: "Tokyo"
+});
+```
+
+### Chinese
+
+```tsx
+import { createChineseWord } from "glost";
+
+const word = createChineseWord({
+  text: "你好",
+  transcription: {
+    pinyin: { text: "nǐ hǎo", system: "pinyin" }
+  },
+  translation: "hello"
+});
+```
+
+### Thai
+
+```tsx
+import { createThaiWord } from "glost";
+
+const word = createThaiWord({
+  text: "ขอบคุณ",
+  transcription: {
+    "paiboon+": { text: "kɔ̀ɔp-kun", system: "paiboon+" },
+    rtgs: { text: "khop khun", system: "rtgs" }
+  },
+  translation: "thank you"
+});
+```
+
+### Korean
+
+```tsx
+import { createKoreanWord } from "glost";
+
+const word = createKoreanWord({
+  text: "감사합니다",
+  transcription: {
+    rr: { text: "gamsahamnida", system: "rr" }
+  },
+  translation: "thank you"
+});
+```
+
+## HTML Output
+
+The components render standard HTML `<ruby>` elements:
+
+```html
+<ruby style="ruby-position: over;">
+  <span>漢字</span>
+  <rt>かんじ</rt>
+</ruby>
+```
+
+This is semantic HTML that works in all modern browsers and degrades gracefully in older ones.
+
+## Styling Tips
+
+### CSS for Ruby
+
+```css
+/* Control ruby text size */
+rt {
+  font-size: 0.5em;
+  color: #666;
+}
+
+/* Adjust ruby spacing */
+ruby {
+  ruby-align: center;
+}
+
+/* Style when ruby is below */
+ruby[style*="under"] rt {
+  font-family: monospace;
+}
+```
+
+### Tailwind CSS
+
+```tsx
+<RubyWord
+  word={word}
+  displayLevel={2}
+  transcriptionSystem="furigana"
+  className="inline-block"
+  renderText={(text) => (
+    <span className="text-2xl text-gray-900 dark:text-gray-100">
+      {text}
+    </span>
+  )}
+  renderRuby={(rt) => (
+    <rt className="text-xs text-gray-500 dark:text-gray-400 font-mono">
+      {rt}
+    </rt>
+  )}
+/>
+```
+
+## Next Steps
+
+- [Progressive Display](/docs/examples/progressive-display) - Add definitions and metadata
+- [Multi-Language](/docs/examples/multi-language) - Handle multiple languages
+- [Custom Plugins](/docs/guides/custom-plugins) - Add your own rendering logic
