@@ -803,6 +803,22 @@ importers:
         specifier: ^1.6.0
         version: 1.6.1(@types/node@20.19.27)(@vitest/ui@3.2.4(vitest@3.2.4))
 
+  packages/react:
+    dependencies:
+      glost:
+        specifier: workspace:*
+        version: link:../glost
+    devDependencies:
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.8
+      react:
+        specifier: ^19.0.0
+        version: 19.2.3
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+
   packages/registry:
     dependencies:
       glost-core:
