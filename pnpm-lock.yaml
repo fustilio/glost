@@ -454,12 +454,6 @@ importers:
         specifier: workspace:*
         version: link:../glost
     devDependencies:
-      '@types/react':
-        specifier: ^19.0.0
-        version: 19.2.8
-      react:
-        specifier: ^19.0.0
-        version: 19.2.3
       typescript:
         specifier: ^5.8.3
         version: 5.9.3

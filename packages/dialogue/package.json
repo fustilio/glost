@@ -1,7 +1,7 @@
 {
   "name": "glost-dialogue",
   "version": "0.5.0",
-  "description": "Dialogue and conversation support for GloST documents",
+  "description": "Dialogue syntax and helper functions for GloST documents",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -14,10 +14,6 @@
     "./types": {
       "types": "./dist/types/index.d.ts",
       "import": "./dist/types/index.js"
-    },
-    "./react": {
-      "types": "./dist/components/index.d.ts",
-      "import": "./dist/components/index.js"
     }
   },
   "files": [
@@ -33,17 +29,7 @@
   "dependencies": {
     "glost": "workspace:*"
   },
-  "peerDependencies": {
-    "react": ">=18.0.0"
-  },
-  "peerDependenciesMeta": {
-    "react": {
-      "optional": true
-    }
-  },
   "devDependencies": {
-    "@types/react": "^19.0.0",
-    "react": "^19.0.0",
     "typescript": "^5.8.3"
   },
   "keywords": [

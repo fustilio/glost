@@ -1,6 +1,6 @@
 # glost-dialogue
 
-Dialogue and conversation support for GloST documents.
+Dialogue syntax and helper functions for GloST documents.
 
 ## Installation
 
@@ -8,26 +8,21 @@ Dialogue and conversation support for GloST documents.
 npm install glost-dialogue glost
 ```
 
-For React components:
-```bash
-npm install glost-dialogue glost react
-```
-
 ## Features
 
 - **Dialogue Nodes**: Group sentences into conversations
 - **Speaker Attribution**: Track who said what
 - **Participant Management**: Define conversation participants with roles
-- **React Components**: Ready-to-use components for rendering dialogues
-- **Chat-style Rendering**: Automatic alignment based on speaker roles
+- **Type Guards**: Utilities for checking dialogue node types
+- **Factory Functions**: Easy creation of dialogue structures
 
 ## Quick Start
 
 ### Creating a Dialogue
 
 ```typescript
-import { createDialogueFromTurns, createSentenceFromWords } from "glost-dialogue";
-import { createThaiWord } from "glost";
+import { createDialogueFromTurns } from "glost-dialogue";
+import { createSentenceFromWords, createThaiWord } from "glost";
 
 // Define participants
 const participants = [
@@ -56,37 +51,6 @@ const dialogue = createDialogueFromTurns({
     { role: "shopkeeper", sentence: sentence2 },
   ],
 });
-```
-
-### Rendering with React
-
-```tsx
-import { DialogueContainer, DialogueTurn } from "glost-dialogue/react";
-import { GloSTSentence } from "glost-react";
-
-function DialogueExample({ dialogue }) {
-  const participants = dialogue.extras?.dialogue?.participants ?? [];
-
-  return (
-    <DialogueContainer dialogue={dialogue} showParticipants>
-      {dialogue.children.map((sentence, index) => (
-        <DialogueTurn
-          key={index}
-          sentence={sentence}
-          participants={participants}
-          align="auto"
-          showSpeaker
-        >
-          <GloSTSentence
-            sentence={sentence}
-            displayLevel={2}
-            transcriptionSystem="paiboon+"
-          />
-        </DialogueTurn>
-      ))}
-    </DialogueContainer>
-  );
-}
 ```
 
 ## Types
@@ -197,44 +161,6 @@ const context = getDialogueContext(dialogue);
 const speaker = getSentenceSpeaker(sentence, participants);
 ```
 
-## React Components
-
-### DialogueContainer
-
-Wraps dialogue content with optional header and participants list.
-
-```tsx
-<DialogueContainer
-  dialogue={dialogue}
-  showParticipants
-  renderHeader={(title, context) => (
-    <h3>{title} — {context}</h3>
-  )}
->
-  {children}
-</DialogueContainer>
-```
-
-### DialogueTurn
-
-Renders a single conversation turn with speaker label and chat-bubble styling.
-
-```tsx
-<DialogueTurn
-  sentence={sentence}
-  participants={participants}
-  align="auto"      // "left" | "right" | "auto"
-  showSpeaker
-  renderSpeaker={(speaker, info) => (
-    <span className="speaker">{speaker}</span>
-  )}
->
-  {sentenceContent}
-</DialogueTurn>
-```
-
-**Auto-alignment**: When `align="auto"`, turns from roles like "me", "you", "customer", "learner" align right; others align left.
-
 ## Use Cases
 
 ### Language Learning Dialogues
@@ -252,6 +178,39 @@ Enable learners to:
 - Practice both roles
 - Understand context
 - Follow turn-taking
+
+## Rendering Dialogues
+
+This package provides the data structures and utilities for dialogues. For rendering, use your preferred UI framework with the exported types and accessors:
+
+```typescript
+import {
+  GLOSTDialogue,
+  getDialogueParticipants,
+  getSentenceSpeaker,
+  hasSentenceDialogueInfo,
+} from "glost-dialogue";
+
+// Example: Render dialogue in any framework
+function renderDialogue(dialogue: GLOSTDialogue) {
+  const participants = getDialogueParticipants(dialogue);
+
+  return dialogue.children.map((sentence, index) => {
+    const speaker = getSentenceSpeaker(sentence, participants);
+    const dialogueInfo = hasSentenceDialogueInfo(sentence)
+      ? sentence.extras?.dialogue
+      : undefined;
+
+    return {
+      speaker,
+      turnIndex: dialogueInfo?.turnIndex ?? index,
+      emotion: dialogueInfo?.emotion,
+      role: dialogueInfo?.role,
+      // ... render sentence content
+    };
+  });
+}
+```
 
 ## License
 
