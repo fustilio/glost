@@ -33,8 +33,8 @@ const frenchNouns = [
 ### With Gender Data (From French Dictionary)
 
 ```typescript
-import { glost } from "glost";
-import { createGenderPlugin } from "glost-gender";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+import { createGenderExtension } from "glost-gender";
 import { createFrenchGenderProvider } from "./my-dictionary-provider";
 
 // Real dictionary data
@@ -48,14 +48,12 @@ const frenchGenders = new Map([
 ]);
 
 const provider = createFrenchGenderProvider({ dictionary: frenchGenders });
-const genderPlugin = createGenderPlugin({
+const [genderGen, genderEnh] = createGenderExtension({
   targetLanguage: "fr",
   provider
 });
 
-const result = await glost()
-  .use(genderPlugin)
-  .process(glostDoc);
+const result = await processGLOSTWithExtensionsAsync(glostDoc, [genderGen, genderEnh]);
 ```
 
 ### Output (Visualized)

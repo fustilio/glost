@@ -1,233 +1,209 @@
 # Using Extensions
 
-This guide covers processing GLOST documents with extensions using the v0.5+ processor API.
+This guide covers processing GLOST documents with extensions.
 
 ## Basic Usage
 
 ```typescript
-import { glost } from 'glost';
+import { processGLOST, type GLOSTExtension } from 'glost-plugins';
 
-const result = await glost()
-  .use(frequencyPlugin)
-  .use(difficultyPlugin)
-  .process(document);
+// Define extensions
+const myExtension: GLOSTExtension = {
+  id: 'my-extension',
+  name: 'My Extension',
+  visit: {
+    word: (node) => ({
+      ...node,
+      extras: { ...node.extras, processed: true }
+    })
+  }
+};
 
-console.log(result.document);  // Processed document
-console.log(result.stats);     // Processing statistics
+// Process document
+const result = processGLOST(document, [myExtension]);
 ```
 
-## Processing Result
+## Async Processing
 
-Every processing call returns a `ProcessingResult`:
+For extensions that fetch external data:
 
 ```typescript
-interface ProcessingResult {
-  document: GLOSTRoot;          // Processed document
-  stats: ProcessingStats;       // Timing, plugin count, etc.
-  errors: ProcessingError[];    // Any errors encountered
-  warnings: ProcessingWarning[]; // Non-fatal issues
-}
+import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
+
+const result = await processGLOSTWithExtensionsAsync(document, [
+  asyncExtension1,
+  asyncExtension2
+]);
 ```
 
-## Using Presets
+## Using Data-Enrichment Extensions
 
-Presets bundle related plugins together:
+Data-enrichment extensions (frequency, difficulty, etc.) are in separate packages:
 
 ```typescript
-import { glost } from 'glost';
-import { languageLearningPreset, minimalPreset } from 'glost/presets';
+import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
+import { createFrequencyExtension } from 'glost-frequency';
+import { createDifficultyExtension } from 'glost-difficulty';
 
-// Full language learning stack
-const result = await glost()
-  .use(languageLearningPreset)
-  .process(document);
+// Create extensions with providers
+const [freqGen, freqEnh] = createFrequencyExtension({
+  targetLanguage: 'th',
+  provider: myFrequencyProvider
+});
 
-// Or minimal preset for basic processing
-const result = await glost()
-  .use(minimalPreset)
-  .process(document);
+const [diffGen, diffEnh] = createDifficultyExtension({
+  targetLanguage: 'th',
+  provider: myDifficultyProvider
+});
+
+// Process document
+const result = await processGLOSTWithExtensionsAsync(document, [
+  freqGen, freqEnh,
+  diffGen, diffEnh
+]);
 ```
 
-### Available Presets
+## Extension Registry
 
-- `languageLearningPreset` - Full language learning stack
-- `readingAppPreset` - Interactive reading features
-- `vocabularyBuilderPreset` - Word frequency and difficulty
-- `grammarAnalyzerPreset` - POS and clause analysis
-- `minimalPreset` - Just the essentials
-
-## Freezing Processors
-
-For reuse across multiple documents, freeze the processor:
+### Register Extensions
 
 ```typescript
-import { glost } from 'glost';
+import {
+  registerExtension,
+  registerExtensions,
+  getExtension,
+  getAllExtensions
+} from 'glost-plugins';
 
-const processor = glost()
-  .use(frequencyPlugin)
-  .use(difficultyPlugin)
-  .freeze();
+// Register globally
+registerExtension(myExtension);
+registerExtensions([ext1, ext2]);
 
-// Reuse across documents
-const result1 = await processor.process(doc1);
-const result2 = await processor.process(doc2);
-const result3 = await processor.process(doc3);
+// Retrieve
+const ext = getExtension('my-extension');
+const all = getAllExtensions();
 ```
 
-## Plugin Registry
-
-### Search for Plugins
+### Process by ID
 
 ```typescript
-import { pluginRegistry } from 'glost';
+import { processGLOSTWithExtensionIds } from 'glost-plugins';
 
-// Find plugins by language
-const thaiPlugins = pluginRegistry.search({ language: "th" });
-
-// Find plugins by category
-const transcriptionPlugins = pluginRegistry.search({ category: "transcription" });
+// Process using registered extension IDs
+const result = processGLOSTWithExtensionIds(document, [
+  'cultural-notes',
+  'gender-transformer'
+]);
 ```
 
-### Check for Conflicts
+## Extension Dependencies
+
+Extensions can declare dependencies that must run first:
 
 ```typescript
-import { pluginRegistry } from 'glost';
-
-const report = pluginRegistry.checkConflicts(["plugin1", "plugin2"]);
-
-if (report.hasConflicts) {
-  console.log("Conflicts:", report.conflicts);
-}
+const myExtension: GLOSTExtension = {
+  id: 'my-extension',
+  name: 'My Extension',
+  dependencies: ['clause-analysis'], // Runs after clause-analysis
+  visit: {
+    clause: (node) => {
+      // Process clauses created by clause-analysis
+    }
+  }
+};
 ```
 
-## Plugin Order
+The processor automatically:
+- Resolves dependencies using topological sort
+- Detects circular dependencies (throws error)
+- Ensures extensions run in correct order
 
-Plugins run in the order provided. For dependencies, list them first:
-
-```typescript
-const result = await glost()
-  .use(clauseSegmenterPlugin)     // Must run first
-  .use(negationTransformerPlugin) // Depends on clauses
-  .process(document);
-```
-
-## Combining Plugins
+## Combining Extensions
 
 ### All at Once
 
 ```typescript
-const result = await glost()
-  // Data fetching
-  .use(translationPlugin)
-  .use(transcriptionPlugin)
-  // Structure
-  .use(clauseSegmenterPlugin)
-  // Metadata
-  .use(frequencyPlugin)
-  .use(difficultyPlugin)
-  .use(posPlugin)
-  .process(document);
+import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
+import { CulturalNotesExtension, createGenderTransformerExtension } from 'glost-plugins';
+import { createTranscriptionGeneratorExtension } from 'glost-transcription';
+import { createFrequencyExtension } from 'glost-frequency';
+
+const genderTransformer = createGenderTransformerExtension({
+  targetGender: 'female',
+  displayFormat: 'replace'
+});
+
+const transcription = createTranscriptionGeneratorExtension({
+  targetLanguage: 'th',
+  provider: myTranscriptionProvider
+});
+
+const [freqGen, freqEnh] = createFrequencyExtension({
+  targetLanguage: 'th',
+  provider: myFrequencyProvider
+});
+
+const result = await processGLOSTWithExtensionsAsync(document, [
+  transcription,
+  CulturalNotesExtension,
+  genderTransformer,
+  freqGen, freqEnh
+]);
 ```
 
 ### In Stages
 
 ```typescript
+import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
+
 // Stage 1: Fetch external data
-const withTranslations = await glost()
-  .use(translationPlugin)
-  .use(transcriptionPlugin)
-  .process(document);
+const withTranslations = await processGLOSTWithExtensionsAsync(document, [
+  translationExtension,
+  transcriptionExtension
+]);
 
 // Stage 2: Analyze structure
-const withStructure = await glost()
-  .use(clauseSegmenterPlugin)
-  .process(withTranslations.document);
+const withStructure = await processGLOSTWithExtensionsAsync(withTranslations, [
+  clauseAnalysisExtension
+]);
 
 // Stage 3: Enrich metadata
-const final = await glost()
-  .use(frequencyPlugin)
-  .use(difficultyPlugin)
-  .process(withStructure.document);
-```
-
-## Hooks and Middleware
-
-### Before/After Hooks
-
-```typescript
-const result = await glost()
-  .before("frequency", (doc) => {
-    console.log("Starting frequency analysis...");
-  })
-  .use(frequencyPlugin)
-  .after("frequency", (doc) => {
-    console.log("Frequency analysis complete!");
-  })
-  .process(document);
-```
-
-### Error Handling
-
-```typescript
-const result = await glost()
-  .use(frequencyPlugin)
-  .use(difficultyPlugin)
-  .onError((error, pluginId) => {
-    console.error(`Plugin ${pluginId} failed:`, error.message);
-  })
-  .process(document);
-
-// Check for errors
-if (result.errors.length > 0) {
-  result.errors.forEach(({ plugin, error }) => {
-    console.warn(`Plugin ${plugin} failed:`, error.message);
-  });
-}
-```
-
-### Progress Tracking
-
-```typescript
-const result = await glost()
-  .use(plugin1)
-  .use(plugin2)
-  .use(plugin3)
-  .onProgress((stats) => {
-    console.log(`Progress: ${stats.completed}/${stats.total}`);
-  })
-  .process(document);
-```
-
-## Sharing Data Between Plugins
-
-```typescript
-const result = await glost()
-  .data("config", { theme: "dark", locale: "th" })
-  .data("cache", new Map())
-  .use(plugin1)
-  .use(plugin2)
-  .process(document);
+const final = await processGLOSTWithExtensionsAsync(withStructure, [
+  freqGen, freqEnh,
+  diffGen, diffEnh
+]);
 ```
 
 ## Accessing Enriched Data
 
 ```typescript
-import { getAllWords } from 'glost';
+import { getAllWords } from 'glost-core';
 
-const words = getAllWords(result.document);
+const words = getAllWords(result);
 
 words.forEach(word => {
-  console.log("Text:", word.children[0].value);
-  console.log("Frequency:", word.extras?.frequency);
-  console.log("Difficulty:", word.extras?.difficulty);
-  console.log("Translation:", word.extras?.translations?.en);
+  console.log('Text:', word.children[0].value);
+  console.log('Frequency:', word.extras?.frequency);
+  console.log('Difficulty:', word.extras?.difficulty);
+  console.log('Translation:', word.extras?.translations?.en);
 });
 ```
 
+## Available Extension Packages
+
+| Package | Description |
+|---------|-------------|
+| `glost-plugins` | Core extensions (cultural notes, gender transformer, etc.) |
+| `glost-frequency` | Word frequency data |
+| `glost-difficulty` | Difficulty assessment |
+| `glost-pos` | Part-of-speech tagging |
+| `glost-transcription` | Transcription/romanization |
+| `glost-translation` | Translation data |
+| `glost-clause-segmenter` | Clause segmentation |
+
 ## Performance Tips
 
-1. **Freeze reusable processors** - Avoid rebuilding for each document
-2. **Batch related plugins** - Run related plugins together
-3. **Cache external data** - In your provider functions
-4. **Filter before processing** - Don't process unnecessary content
-5. **Use presets** - They're optimized for common use cases
+1. **Batch related extensions** - Run related extensions together
+2. **Cache external data** - In your provider functions
+3. **Filter before processing** - Don't process unnecessary content
+4. **Use async sparingly** - Only when external data is needed

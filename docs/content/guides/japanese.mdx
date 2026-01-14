@@ -382,14 +382,14 @@ const document = createDocumentFromParagraphs(
 ## Processing Japanese Documents
 
 ```typescript
-import { glost } from 'glost';
+import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
 
-const result = await glost()
-  .use(furiganaPlugin)
-  .use(frequencyPlugin)
-  .use(difficultyPlugin)
-  .process(document);
+const result = await processGLOSTWithExtensionsAsync(document, [
+  furiganaExtension,
+  freqGen, freqEnh,
+  diffGen, diffEnh
+]);
 
 // Access processed document
-const processedDoc = result.document;
+const processedDoc = result;
 ```

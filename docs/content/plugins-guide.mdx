@@ -223,13 +223,16 @@ export const thaiFrequencyProvider: FrequencyProvider = {
 };
 
 // Your app
-import { createFrequencyPlugin } from "glost-frequency";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+import { createFrequencyExtension } from "glost-frequency";
 import { thaiFrequencyProvider } from "glost-th/extensions";
 
-const frequencyPlugin = createFrequencyPlugin({
+const [freqGen, freqEnh] = createFrequencyExtension({
   targetLanguage: "th",
   provider: thaiFrequencyProvider
 });
+
+const result = await processGLOSTWithExtensionsAsync(doc, [freqGen, freqEnh]);
 ```
 
 **Benefits**:

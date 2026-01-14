@@ -1,6 +1,6 @@
 # glost-plugins
 
-Plugin system and built-in plugins for GLOST documents.
+Core extension system for GLOST document processing.
 
 ## Installation
 
@@ -8,190 +8,218 @@ Plugin system and built-in plugins for GLOST documents.
 pnpm add glost-plugins
 ```
 
-## Processing with Plugins
+## Overview
 
-Use the v0.5+ processor API:
+`glost-plugins` provides the core extension infrastructure:
+- Extension processing functions
+- Extension registry for managing extensions
+- Built-in extensions for common transformations
+- Type definitions for creating custom extensions
+
+Individual data-enrichment extensions (frequency, difficulty, POS, etc.) are in separate packages.
+
+## Processing with Extensions
 
 ```typescript
-import { glost } from 'glost';
-import { frequencyPlugin, difficultyPlugin } from 'glost-plugins';
+import { processGLOST, type GLOSTExtension } from 'glost-plugins';
 
-const result = await glost()
-  .use(frequencyPlugin)
-  .use(difficultyPlugin)
-  .process(document);
+// Define a custom extension
+const myExtension: GLOSTExtension = {
+  id: 'my-extension',
+  name: 'My Extension',
+  visit: {
+    word: (node) => ({
+      ...node,
+      extras: { ...node.extras, processed: true }
+    })
+  }
+};
 
-console.log(result.document);       // Processed document
-console.log(result.stats);          // Processing statistics
+// Process document
+const result = processGLOST(document, [myExtension]);
 ```
 
-## Plugin Registry
+### Async Processing
+
+```typescript
+import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
+
+const result = await processGLOSTWithExtensionsAsync(document, [
+  asyncExtension1,
+  asyncExtension2
+]);
+```
+
+## Extension Registry
 
 ### Global Registry
 
 ```typescript
-import { pluginRegistry } from 'glost';
+import {
+  extensionRegistry,
+  registerExtension,
+  registerExtensions,
+  getExtension,
+  getAllExtensions
+} from 'glost-plugins';
 
-pluginRegistry.register(plugin);
-pluginRegistry.registerAll([plugin1, plugin2]);
-pluginRegistry.get("plugin-id");
-pluginRegistry.getAll();
-pluginRegistry.has("plugin-id");
-pluginRegistry.unregister("plugin-id");
-pluginRegistry.clear();
-pluginRegistry.resolveDependencies(["id1", "id2"]);
+// Register extensions
+registerExtension(myExtension);
+registerExtensions([ext1, ext2]);
+
+// Get extensions
+const ext = getExtension('my-extension');
+const all = getAllExtensions();
 ```
 
-### Using Registered Plugins
+### Using Registered Extensions
 
 ```typescript
-import { glost, pluginRegistry } from 'glost';
+import { processGLOSTWithExtensionIds } from 'glost-plugins';
 
-pluginRegistry.register(myPlugin);
-
-// Use by ID
-const result = await glost()
-  .use("my-plugin")
-  .use("frequency")
-  .process(document);
+// Process using extension IDs from registry
+const result = processGLOSTWithExtensionIds(document, [
+  'cultural-notes',
+  'gender-transformer'
+]);
 ```
 
-## Processing Result
+## Built-in Extensions
 
-```typescript
-interface ProcessingResult {
-  document: GLOSTRoot;
-  stats: ProcessingStats;
-  errors: ProcessingError[];
-  warnings: ProcessingWarning[];
-}
-```
-
-## Built-in Plugins
-
-### frequencyPlugin
-
-Enriches words with frequency display data.
-
-```typescript
-import { glost } from 'glost';
-import { frequencyPlugin, createFrequencyPlugin } from 'glost-plugins';
-
-// Use default
-const result = await glost()
-  .use(frequencyPlugin)
-  .process(document);
-
-// Or create with options
-const freq = createFrequencyPlugin({
-  colorScheme: "warm"
-});
-
-const result = await glost()
-  .use(freq)
-  .process(document);
-```
-
-**Expects:** `extras.metadata.frequency` on words
-**Adds:** `extras.frequency.display`, `extras.frequency.color`, `extras.frequency.priority`
-
-### difficultyPlugin
-
-Enriches words with difficulty display data.
-
-```typescript
-import { difficultyPlugin, createDifficultyPlugin } from 'glost-plugins';
-```
-
-**Expects:** `extras.metadata.difficulty` on words
-**Adds:** `extras.difficulty.display`, `extras.difficulty.color`, `extras.difficulty.level`
-
-### posPlugin
-
-Enriches words with POS display data.
-
-```typescript
-import { posPlugin, createPosPlugin } from 'glost-plugins';
-```
-
-**Expects:** `metadata.partOfSpeech` on words
-**Adds:** `extras.pos.abbreviation`, `extras.pos.color`, `extras.pos.description`
-
-### genderPlugin
-
-Adds grammatical gender display data.
-
-```typescript
-import { genderPlugin, createGenderPlugin } from 'glost-plugins';
-```
-
-### culturalNotesPlugin
+### CulturalNotesExtension
 
 Formats cultural notes for display.
 
 ```typescript
-import { culturalNotesPlugin, createCulturalNotesPlugin } from 'glost-plugins';
+import {
+  CulturalNotesExtension,
+  createCulturalNotesExtension
+} from 'glost-plugins';
+
+// Use default
+const result = processGLOST(document, [CulturalNotesExtension]);
+
+// Or create with options
+const customExtension = createCulturalNotesExtension({
+  // options
+});
 ```
 
 **Expects:** `extras.metadata.culturalNotes` on words
 **Adds:** Formatted cultural notes display data
 
-### createClauseSegmenterPlugin
-
-Transformer that segments sentences into clauses.
-
-```typescript
-import { glost } from 'glost';
-import { createClauseSegmenterPlugin } from 'glost-plugins';
-
-const segmenter = createClauseSegmenterPlugin({
-  markers: ["that", "which", "because", "although", "if", "when"]
-});
-
-const result = await glost()
-  .use(segmenter)
-  .process(document);
-```
-
-**Transforms:** Sentences to contain `GLOSTClause` nodes
-
-### createGenderTransformerPlugin
+### GenderTransformerExtension
 
 Transforms text with gender variants.
 
 ```typescript
-import { createGenderTransformerPlugin } from 'glost-plugins';
+import { createGenderTransformerExtension } from 'glost-plugins';
 
-const transformer = createGenderTransformerPlugin({
-  targetGender: "female",       // "male" | "female"
-  displayFormat: "replace"      // "replace" | "show-both" | "inline-toggle"
+const transformer = createGenderTransformerExtension({
+  targetGender: 'female',      // 'male' | 'female'
+  displayFormat: 'replace'     // 'replace' | 'show-both' | 'inline-toggle'
 });
 ```
 
 **Input format:** `"{masculine|feminine}"` in text
 **Output:** Based on targetGender and displayFormat
 
-### negationTransformerPlugin
+### NegationTransformerExtension
 
 Marks clauses containing negation.
 
 ```typescript
-import { negationTransformerPlugin } from 'glost-plugins';
+import { NegationTransformerExtension } from 'glost-plugins';
 ```
 
-**Dependencies:** `clause-segmenter` (must run first)
+**Dependencies:** Clause analysis (must run first)
 **Adds:** Negation metadata to clauses
 
-## Plugin Interface
+### ReadingScoreExtension
+
+Computes reading difficulty scores.
 
 ```typescript
-interface Plugin {
+import { createReadingScoreExtension } from 'glost-plugins';
+
+const scorer = createReadingScoreExtension({
+  // options
+});
+```
+
+### LearnerHintsExtension
+
+Generates learner hints based on word metadata.
+
+```typescript
+import { createLearnerHintsExtension } from 'glost-plugins';
+
+const hints = createLearnerHintsExtension({
+  // options
+});
+```
+
+### ClauseAnalysisExtension
+
+Analyzes clause structure in sentences.
+
+```typescript
+import { createClauseAnalysisExtension } from 'glost-plugins';
+
+const analyzer = createClauseAnalysisExtension({
+  // options
+});
+```
+
+## Separate Extension Packages
+
+Data-enrichment extensions are in separate packages:
+
+| Package | Description | Install |
+|---------|-------------|---------|
+| `glost-frequency` | Word frequency data | `pnpm add glost-frequency` |
+| `glost-difficulty` | Difficulty assessment | `pnpm add glost-difficulty` |
+| `glost-pos` | Part-of-speech tagging | `pnpm add glost-pos` |
+| `glost-gender` | Grammatical gender | `pnpm add glost-gender` |
+| `glost-transcription` | Transcription/romanization | `pnpm add glost-transcription` |
+| `glost-translation` | Translation data | `pnpm add glost-translation` |
+| `glost-clause-segmenter` | Clause segmentation | `pnpm add glost-clause-segmenter` |
+
+Example using separate packages:
+
+```typescript
+import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
+import { createFrequencyExtension } from 'glost-frequency';
+import { createDifficultyExtension } from 'glost-difficulty';
+
+const [freqGen, freqEnh] = createFrequencyExtension({
+  targetLanguage: 'th',
+  provider: myFrequencyProvider
+});
+
+const [diffGen, diffEnh] = createDifficultyExtension({
+  targetLanguage: 'th',
+  provider: myDifficultyProvider
+});
+
+const result = await processGLOSTWithExtensionsAsync(document, [
+  freqGen, freqEnh,
+  diffGen, diffEnh
+]);
+```
+
+## Extension Interface
+
+```typescript
+interface GLOSTExtension {
   id: string;
   name: string;
   description?: string;
 
+  // Tree transformation (runs once)
   transform?: (tree: GLOSTRoot) => GLOSTRoot | Promise<GLOSTRoot>;
 
+  // Node visitors (runs for each matching node)
   visit?: {
     word?: (node: GLOSTWord) => GLOSTWord | void | Promise<GLOSTWord | void>;
     sentence?: (node: GLOSTSentence) => GLOSTSentence | void | Promise<GLOSTSentence | void>;
@@ -200,39 +228,24 @@ interface Plugin {
     phrase?: (node: GLOSTPhrase) => GLOSTPhrase | void | Promise<GLOSTPhrase | void>;
   };
 
-  enhanceMetadata?: (node: GLOSTWord) => Partial<GLOSTExtras> | void | Promise<Partial<GLOSTExtras> | void>;
-
+  // Extension dependencies (IDs of extensions that must run first)
   dependencies?: string[];
+
+  // Extension options
   options?: Record<string, unknown>;
 }
 ```
 
-## Creating Plugins
-
-### Metadata Enhancement Pattern
-
-```typescript
-const MyMetadataPlugin: Plugin = {
-  id: "my-metadata",
-  name: "My Metadata Plugin",
-
-  enhanceMetadata: (node) => {
-    const value = computeSomething(node);
-    return {
-      metadata: {
-        myField: value
-      }
-    };
-  }
-};
-```
+## Creating Custom Extensions
 
 ### Visitor Pattern
 
 ```typescript
-const MyVisitorPlugin: Plugin = {
-  id: "my-visitor",
-  name: "My Visitor Plugin",
+import type { GLOSTExtension } from 'glost-plugins';
+
+const MyVisitorExtension: GLOSTExtension = {
+  id: 'my-visitor',
+  name: 'My Visitor Extension',
 
   visit: {
     word: (node) => {
@@ -255,9 +268,9 @@ const MyVisitorPlugin: Plugin = {
 ### Transform Pattern
 
 ```typescript
-const MyTransformPlugin: Plugin = {
-  id: "my-transform",
-  name: "My Transform Plugin",
+const MyTransformExtension: GLOSTExtension = {
+  id: 'my-transform',
+  name: 'My Transform Extension',
 
   transform: (tree) => {
     // Return completely new tree structure
@@ -269,9 +282,9 @@ const MyTransformPlugin: Plugin = {
 ### Async Pattern
 
 ```typescript
-const MyAsyncPlugin: Plugin = {
-  id: "my-async",
-  name: "My Async Plugin",
+const MyAsyncExtension: GLOSTExtension = {
+  id: 'my-async',
+  name: 'My Async Extension',
 
   visit: {
     word: async (node) => {
@@ -288,15 +301,72 @@ const MyAsyncPlugin: Plugin = {
 ### With Dependencies
 
 ```typescript
-const MyDependentPlugin: Plugin = {
-  id: "my-dependent",
-  name: "My Dependent Plugin",
-  dependencies: ["clause-segmenter"], // Runs after clause-segmenter
+const MyDependentExtension: GLOSTExtension = {
+  id: 'my-dependent',
+  name: 'My Dependent Extension',
+  dependencies: ['clause-analysis'], // Runs after clause-analysis
 
   visit: {
     clause: (node) => {
-      // Process clauses created by clause-segmenter
+      // Process clauses created by clause-analysis
     }
   }
 };
+```
+
+## Exports
+
+### Types
+
+```typescript
+export type {
+  GLOSTExtension,
+  ExtensionContext,
+  ExtensionResult,
+  ProcessorOptions,
+} from 'glost-plugins';
+```
+
+### Processor Functions
+
+```typescript
+export {
+  processGLOSTWithExtensions,
+  processGLOSTWithExtensionsAsync,
+  processGLOSTWithExtensionIds,
+  processGLOST,
+  processGLOSTWithMeta,
+} from 'glost-plugins';
+```
+
+### Registry
+
+```typescript
+export {
+  extensionRegistry,
+  registerExtension,
+  registerExtensions,
+  getExtension,
+  getAllExtensions,
+} from 'glost-plugins';
+```
+
+### Utilities
+
+```typescript
+export {
+  deepMerge,
+  findConflicts,
+  type DeepMergeOptions
+} from 'glost-plugins';
+```
+
+### Errors
+
+```typescript
+export {
+  ExtensionDependencyError,
+  ExtensionConflictError,
+  MissingNodeTypeError,
+} from 'glost-plugins';
 ```

@@ -96,18 +96,35 @@ The plugin:
 | `furigana` | Japanese | Hiragana reading aid |
 | `pinyin` | Chinese | Standard romanization |
 
-### Combining with Other Plugins
+### Combining with Other Extensions
 
 ```typescript
-import { glost } from 'glost';
-import { createTranscriptionPlugin } from 'glost-transcription';
-import { createTranslationPlugin } from 'glost-translation';
-import { frequencyPlugin, difficultyPlugin } from 'glost-plugins';
+import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
+import { createTranscriptionGeneratorExtension } from 'glost-transcription';
+import { createTranslationGeneratorExtension } from 'glost-translation';
+import { createFrequencyExtension } from 'glost-frequency';
+import { createDifficultyExtension } from 'glost-difficulty';
 
-const result = await glost()
-  .use(createTranscriptionPlugin({ targetLanguage: "th", lookupTranscription }))
-  .use(createTranslationPlugin({ targetLanguage: "th", lookupTranslation }))
-  .use(frequencyPlugin)
-  .use(difficultyPlugin)
-  .process(document);
+// Create extensions
+const transcription = createTranscriptionGeneratorExtension({
+  targetLanguage: 'th',
+  provider: myTranscriptionProvider
+});
+
+const translation = createTranslationGeneratorExtension({
+  targetLanguage: 'th',
+  nativeLanguage: 'en',
+  provider: myTranslationProvider
+});
+
+const [freqGen, freqEnh] = createFrequencyExtension({
+  targetLanguage: 'th',
+  provider: myFrequencyProvider
+});
+
+const result = await processGLOSTWithExtensionsAsync(document, [
+  transcription,
+  translation,
+  freqGen, freqEnh
+]);
 ```

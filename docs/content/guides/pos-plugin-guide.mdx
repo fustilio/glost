@@ -28,8 +28,8 @@ const sentence = "The quick brown fox jumps over the lazy dog.";
 ### With POS Tagging
 
 ```typescript
-import { glost } from "glost";
-import { createPOSPlugin } from "glost-pos";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+import { createPOSExtension } from "glost-pos";
 import { createEnglishPOSProvider } from "./my-nlp-provider";
 
 // Real POS tagger (e.g., from dictionary or NLP model)
@@ -45,14 +45,12 @@ const posData = new Map([
 ]);
 
 const provider = createEnglishPOSProvider({ dictionary: posData });
-const posPlugin = createPOSPlugin({
+const [posGen, posEnh] = createPOSExtension({
   targetLanguage: "en",
   provider
 });
 
-const result = await glost()
-  .use(posPlugin)
-  .process(glostDoc);
+const result = await processGLOSTWithExtensionsAsync(glostDoc, [posGen, posEnh]);
 ```
 
 ### Output (Visualized)

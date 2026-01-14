@@ -107,64 +107,62 @@ All plugins follow the philosophy: **"No data is better than bad data."**
 ### Pattern 1: Basic Usage
 
 ```typescript
-import { glost } from "glost";
-import { createFrequencyPlugin } from "glost-frequency";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+import { createFrequencyExtension } from "glost-frequency";
 import { createFrequencyProvider } from "./my-provider";
 
 // 1. Create provider with real data
 const provider = createFrequencyProvider({ corpusData });
 
-// 2. Create plugin
-const frequencyPlugin = createFrequencyPlugin({
+// 2. Create extension
+const [freqGen, freqEnh] = createFrequencyExtension({
   targetLanguage: "en",
   provider
 });
 
 // 3. Process document
-const result = await glost()
-  .use(frequencyPlugin)
-  .process(doc);
+const result = await processGLOSTWithExtensionsAsync(doc, [freqGen, freqEnh]);
 ```
 
-### Pattern 2: Multi-Plugin Pipeline
+### Pattern 2: Multi-Extension Pipeline
 
 ```typescript
-import { glost } from "glost";
-import { createFrequencyPlugin } from "glost-frequency";
-import { createPOSPlugin } from "glost-pos";
-import { createDifficultyPlugin } from "glost-difficulty";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+import { createFrequencyExtension } from "glost-frequency";
+import { createDifficultyExtension } from "glost-difficulty";
 
-// Combine multiple plugins with fluent API
-const result = await glost()
-  .use(createFrequencyPlugin({ targetLanguage: "en", provider: freqProvider }))
-  .use(createPOSPlugin({ targetLanguage: "en", provider: posProvider }))
-  .use(createDifficultyPlugin({ targetLanguage: "en", provider: diffProvider }))
-  .process(doc);
+// Create extensions
+const [freqGen, freqEnh] = createFrequencyExtension({
+  targetLanguage: "en",
+  provider: freqProvider
+});
+
+const [diffGen, diffEnh] = createDifficultyExtension({
+  targetLanguage: "en",
+  provider: diffProvider
+});
+
+// Combine multiple extensions
+const result = await processGLOSTWithExtensionsAsync(doc, [
+  freqGen, freqEnh,
+  diffGen, diffEnh
+]);
 ```
 
 ### Pattern 3: Language-Specific Providers
 
 ```typescript
-import { glost } from "glost";
-import { createFrequencyPlugin } from "glost-frequency";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+import { createFrequencyExtension } from "glost-frequency";
 import { thaiFrequencyProvider } from "glost-th/extensions";
-import { japaneseFrequencyProvider } from "glost-ja/extensions";
 
-// Thai processor
-const thaiProcessor = glost()
-  .use(createFrequencyPlugin({
-    targetLanguage: "th",
-    provider: thaiFrequencyProvider
-  }))
-  .freeze();
+// Thai processing
+const [freqGen, freqEnh] = createFrequencyExtension({
+  targetLanguage: "th",
+  provider: thaiFrequencyProvider
+});
 
-// Japanese processor
-const japaneseProcessor = glost()
-  .use(createFrequencyPlugin({
-    targetLanguage: "ja",
-    provider: japaneseFrequencyProvider
-  }))
-  .freeze();
+const result = await processGLOSTWithExtensionsAsync(thaiDoc, [freqGen, freqEnh]);
 ```
 
 ## Getting Started

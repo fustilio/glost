@@ -122,18 +122,34 @@ const result = await glost()
 // Result: word.extras.translations = { en: "hello", ja: "こんにちは" }
 ```
 
-### Combining with Other Plugins
+### Combining with Other Extensions
 
 ```typescript
-import { glost } from 'glost';
-import { createTranslationPlugin } from 'glost-translation';
-import { createTranscriptionPlugin } from 'glost-transcription';
-import { frequencyPlugin, difficultyPlugin } from 'glost-plugins';
+import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
+import { createTranslationGeneratorExtension } from 'glost-translation';
+import { createTranscriptionGeneratorExtension } from 'glost-transcription';
+import { createFrequencyExtension } from 'glost-frequency';
 
-const result = await glost()
-  .use(createTranslationPlugin({ targetLanguage: "th", lookupTranslation }))
-  .use(createTranscriptionPlugin({ targetLanguage: "th", lookupTranscription }))
-  .use(frequencyPlugin)
-  .use(difficultyPlugin)
-  .process(document);
+// Create extensions
+const translation = createTranslationGeneratorExtension({
+  targetLanguage: 'th',
+  nativeLanguage: 'en',
+  provider: myTranslationProvider
+});
+
+const transcription = createTranscriptionGeneratorExtension({
+  targetLanguage: 'th',
+  provider: myTranscriptionProvider
+});
+
+const [freqGen, freqEnh] = createFrequencyExtension({
+  targetLanguage: 'th',
+  provider: myFrequencyProvider
+});
+
+const result = await processGLOSTWithExtensionsAsync(document, [
+  translation,
+  transcription,
+  freqGen, freqEnh
+]);
 ```

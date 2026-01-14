@@ -287,14 +287,14 @@ const document = createDocumentFromParagraphs(
 ## Processing Thai Documents
 
 ```typescript
-import { glost } from 'glost';
+import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
 
-const result = await glost()
-  .use(transcriptionPlugin)
-  .use(frequencyPlugin)
-  .use(difficultyPlugin)
-  .process(document);
+const result = await processGLOSTWithExtensionsAsync(document, [
+  transcriptionExtension,
+  freqGen, freqEnh,
+  diffGen, diffEnh
+]);
 
 // Access processed document
-const processedDoc = result.document;
+const processedDoc = result;
 ```

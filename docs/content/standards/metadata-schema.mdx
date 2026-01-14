@@ -240,22 +240,33 @@ For batch metadata management, use JSON format:
 }
 ```
 
-## Plugin Integration
+## Extension Integration
 
-Use built-in plugins to enhance metadata display:
+Use extensions from separate packages to enhance metadata display:
 
 ```typescript
-import { glost } from "glost";
-import { frequencyPlugin, difficultyPlugin, posPlugin } from "glost-plugins";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+import { createFrequencyExtension } from "glost-frequency";
+import { createDifficultyExtension } from "glost-difficulty";
 
-const result = await glost()
-  .use(frequencyPlugin)    // Adds display colors/labels
-  .use(difficultyPlugin)   // Adds difficulty indicators
-  .use(posPlugin)          // Adds POS abbreviations
-  .process(document);
+// Create extensions with providers
+const [freqGen, freqEnh] = createFrequencyExtension({
+  targetLanguage: 'th',
+  provider: myFrequencyProvider
+});
+
+const [diffGen, diffEnh] = createDifficultyExtension({
+  targetLanguage: 'th',
+  provider: myDifficultyProvider
+});
+
+const result = await processGLOSTWithExtensionsAsync(document, [
+  freqGen, freqEnh,
+  diffGen, diffEnh
+]);
 
 // Access enriched data
-const word = result.document.children[0];
+const word = result.children[0];
 console.log(word.extras?.frequency?.display); // "Very Common"
 console.log(word.extras?.frequency?.color); // "#22c55e"
 console.log(word.extras?.difficulty?.level); // "beginner"

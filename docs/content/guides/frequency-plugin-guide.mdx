@@ -23,8 +23,8 @@ const text = "The ephemeral nature of social media posts makes archival challeng
 ### With Frequency Data
 
 ```typescript
-import { glost } from "glost";
-import { createFrequencyPlugin } from "glost-frequency";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+import { createFrequencyExtension } from "glost-frequency";
 import { createEnglishFrequencyProvider } from "./my-corpus-provider";
 
 // Real corpus data (example from BNC)
@@ -42,14 +42,12 @@ const corpusFrequencies = new Map([
 ]);
 
 const provider = createEnglishFrequencyProvider({ corpusData: corpusFrequencies });
-const frequencyPlugin = createFrequencyPlugin({
+const [freqGen, freqEnh] = createFrequencyExtension({
   targetLanguage: "en",
   provider
 });
 
-const result = await glost()
-  .use(frequencyPlugin)
-  .process(glostDoc);
+const result = await processGLOSTWithExtensionsAsync(glostDoc, [freqGen, freqEnh]);
 ```
 
 ### Output (Visualized)
@@ -271,26 +269,24 @@ const corpusData = {
 ## Integration Example: Complete App
 
 ```typescript
-import { glost } from "glost";
-import { createFrequencyPlugin } from "glost-frequency";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+import { createFrequencyExtension } from "glost-frequency";
 import { convertTextToGLOST } from "glost-utils";
 
 // 1. Load corpus data
 const corpusData = await loadBritishNationalCorpus();
 const provider = createEnglishFrequencyProvider({ corpusData });
 
-// 2. Create and freeze processor for reuse
-const processor = glost()
-  .use(createFrequencyPlugin({
-    targetLanguage: "en",
-    provider
-  }))
-  .freeze();
+// 2. Create extensions
+const [freqGen, freqEnh] = createFrequencyExtension({
+  targetLanguage: "en",
+  provider
+});
 
 // 3. Process text
 const text = "Your learning material here...";
 const glostDoc = convertTextToGLOST(text, "en");
-const result = await processor.process(glostDoc);
+const result = await processGLOSTWithExtensionsAsync(glostDoc, [freqGen, freqEnh]);
 
 // 4. Render with highlighting
 function ReadingView({ document }) {

@@ -202,18 +202,15 @@ pluginRegistry.register(MyPlugin);
 pluginRegistry.registerAll([Plugin1, Plugin2, Plugin3]);
 ```
 
-### Using Registered Plugins
+### Using Registered Extensions
 
 ```typescript
-import { glost, pluginRegistry } from 'glost';
+import { processGLOST, getExtension } from 'glost-plugins';
 
-// Get plugin by ID
-const frequencyPlugin = pluginRegistry.get("frequency");
+// Get extension by ID
+const frequencyExtension = getExtension("frequency");
 
-const result = await glost()
-  .use(frequencyPlugin)
-  .use(MyPlugin)
-  .process(document);
+const result = processGLOST(document, [frequencyExtension, MyExtension]);
 ```
 
 ## Error Handling
@@ -256,11 +253,9 @@ describe('MyPlugin', () => {
 
     const doc = createSimpleDocument([word], "en", "latin");
 
-    const result = await glost()
-      .use(MyPlugin)
-      .process(doc);
+    const result = processGLOST(doc, [MyExtension]);
 
-    const processedWord = result.document.children[0].children[0].children[0];
+    const processedWord = result.children[0].children[0].children[0];
     expect(processedWord.extras?.metadata?.myField).toBeDefined();
   });
 });
@@ -327,17 +322,14 @@ export function createReadingTimePlugin(
 ## Using Custom Plugins
 
 ```typescript
-import { glost } from 'glost';
-import { createReadingTimePlugin } from './my-plugins';
+import { processGLOST } from 'glost-plugins';
+import { createReadingTimeExtension } from './my-extensions';
 
-const readingTime = createReadingTimePlugin({ wordsPerMinute: 180 });
+const readingTime = createReadingTimeExtension({ wordsPerMinute: 180 });
 
-const result = await glost()
-  .use(readingTime)
-  .use(frequencyPlugin)
-  .process(document);
+const result = processGLOST(document, [readingTime, frequencyExtension]);
 
-console.log(result.document.extras?.readingTime);
+console.log(result.extras?.readingTime);
 // { minutes: 5, wordCount: 850, sentenceCount: 42 }
 ```
 
