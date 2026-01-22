@@ -1,0 +1,280 @@
+# glost-dialogue
+
+Dialogue syntax definitions and helper functions for creating conversations in GloST documents.
+
+## Installation
+
+```bash
+npm install glost-dialogue glost
+```
+
+## Features
+
+- Dialogue node types for conversations
+- Speaker attribution and participant management
+- Factory functions for easy dialogue creation
+- Type guards for dialogue detection
+- Framework-agnostic (no React dependency)
+
+## Quick Start
+
+```typescript
+import { createDialogueFromTurns } from 'glost-dialogue';
+import { createSentenceFromWords, createThaiWord } from 'glost';
+
+// Define participants
+const participants = [
+  { id: 'customer', name: 'You', role: 'customer' },
+  { id: 'shopkeeper', name: 'Shopkeeper', role: 'vendor' }
+];
+
+// Create sentences
+const greeting = createSentenceFromWords([
+  createThaiWord({ text: 'สวัสดี' }),
+  createThaiWord({ text: 'ครับ' })
+], 'th', 'thai');
+
+const response = createSentenceFromWords([
+  createThaiWord({ text: 'สวัสดี' }),
+  createThaiWord({ text: 'ค่ะ' })
+], 'th', 'thai');
+
+// Create dialogue
+const dialogue = createDialogueFromTurns({
+  lang: 'th',
+  participants,
+  context: 'Greeting at a shop',
+  turns: [
+    { role: 'customer', sentence: greeting },
+    { role: 'shopkeeper', sentence: response }
+  ]
+});
+```
+
+## Types
+
+### DialogueParticipant
+
+Defines a conversation participant.
+
+```typescript
+interface DialogueParticipant {
+  id: string;                    // Unique identifier
+  name?: string;                 // Display name
+  gender?: 'male' | 'female';    // For TTS voice selection
+  role?: string;                 // Role description
+  avatar?: string;               // Avatar URL
+}
+```
+
+### GLOSTDialogue
+
+A dialogue node containing conversation sentences.
+
+```typescript
+interface GLOSTDialogue {
+  type: 'DialogueNode';
+  children: GLOSTSentence[];
+  lang?: string;
+  script?: string;
+  extras?: {
+    dialogue?: {
+      participants?: DialogueParticipant[];
+      context?: string;
+      title?: string;
+      difficulty?: 'beginner' | 'intermediate' | 'advanced';
+    };
+  };
+}
+```
+
+### SentenceDialogueInfo
+
+Per-sentence dialogue metadata.
+
+```typescript
+interface SentenceDialogueInfo {
+  role: string;           // Participant ID who spoke
+  speaker?: string;       // Display name
+  turnIndex?: number;     // Position in conversation
+  emotion?: 'neutral' | 'happy' | 'sad' | 'angry' | 'surprised' | 'questioning';
+}
+```
+
+## Factory Functions
+
+### createDialogueNode
+
+Create a dialogue node manually.
+
+```typescript
+import { createDialogueNode } from 'glost-dialogue';
+
+const dialogue = createDialogueNode({
+  children: [sentence1, sentence2],
+  lang: 'th',
+  participants: [{ id: 'A' }, { id: 'B' }],
+  context: 'Shopping',
+  title: 'At the Market'
+});
+```
+
+### createDialogueFromTurns
+
+Create a dialogue with automatic turn indexing.
+
+```typescript
+import { createDialogueFromTurns } from 'glost-dialogue';
+
+const dialogue = createDialogueFromTurns({
+  lang: 'ja',
+  participants: [
+    { id: 'student', name: 'You' },
+    { id: 'teacher', name: 'Sensei' }
+  ],
+  context: 'Classroom greeting',
+  turns: [
+    { role: 'student', sentence: s1, emotion: 'neutral' },
+    { role: 'teacher', sentence: s2, emotion: 'happy' }
+  ]
+});
+```
+
+### addDialogueInfoToSentence
+
+Add dialogue info to an existing sentence.
+
+```typescript
+import { addDialogueInfoToSentence } from 'glost-dialogue';
+
+const sentenceWithInfo = addDialogueInfoToSentence(sentence, {
+  role: 'customer',
+  speaker: 'You',
+  turnIndex: 0,
+  emotion: 'questioning'
+});
+```
+
+## Type Guards
+
+### isDialogueNode
+
+Check if a node is a dialogue.
+
+```typescript
+import { isDialogueNode } from 'glost-dialogue';
+
+if (isDialogueNode(node)) {
+  // node is GLOSTDialogue
+  console.log(node.extras?.dialogue?.context);
+}
+```
+
+### hasSentenceDialogueInfo
+
+Check if a sentence has dialogue info.
+
+```typescript
+import { hasSentenceDialogueInfo } from 'glost-dialogue';
+
+if (hasSentenceDialogueInfo(sentence)) {
+  // sentence has extras.dialogue
+  console.log(sentence.extras.dialogue.speaker);
+}
+```
+
+## Accessors
+
+### getDialogueParticipants
+
+```typescript
+import { getDialogueParticipants } from 'glost-dialogue';
+
+const participants = getDialogueParticipants(dialogue);
+// [{ id: 'customer', name: 'You' }, { id: 'shopkeeper', name: 'Shopkeeper' }]
+```
+
+### getDialogueContext
+
+```typescript
+import { getDialogueContext } from 'glost-dialogue';
+
+const context = getDialogueContext(dialogue);
+// 'Greeting at a shop'
+```
+
+### getDialogueTitle
+
+```typescript
+import { getDialogueTitle } from 'glost-dialogue';
+
+const title = getDialogueTitle(dialogue);
+// 'Lesson 1: Greetings'
+```
+
+### getSentenceSpeaker
+
+```typescript
+import { getSentenceSpeaker } from 'glost-dialogue';
+
+const speaker = getSentenceSpeaker(sentence, participants);
+// 'You' or 'Shopkeeper'
+```
+
+## Rendering Dialogues
+
+This package provides data structures only. Use your preferred framework to render:
+
+```typescript
+import {
+  GLOSTDialogue,
+  getDialogueParticipants,
+  getSentenceSpeaker,
+  hasSentenceDialogueInfo
+} from 'glost-dialogue';
+
+// Framework-agnostic rendering logic
+function renderDialogue(dialogue: GLOSTDialogue) {
+  const participants = getDialogueParticipants(dialogue);
+
+  return dialogue.children.map((sentence, index) => {
+    const speaker = getSentenceSpeaker(sentence, participants);
+    const info = hasSentenceDialogueInfo(sentence)
+      ? sentence.extras?.dialogue
+      : undefined;
+
+    return {
+      speaker,
+      turnIndex: info?.turnIndex ?? index,
+      emotion: info?.emotion,
+      role: info?.role,
+      sentence
+    };
+  });
+}
+```
+
+## Use Cases
+
+### Language Learning Dialogues
+
+- Restaurant ordering scenarios
+- Shopping conversations
+- Asking for directions
+- Formal/informal greetings
+
+### Conversation Practice
+
+- Role-play exercises
+- Listening comprehension
+- Speaking practice with speaker attribution
+
+### Interactive Fiction
+
+Combine with `glost-inkle` for interactive stories with dialogue.
+
+## See Also
+
+- [Dialogues Example](/docs/examples/dialogues)
+- [glost-react](/docs/packages/react) - For React rendering
+- [glost-inkle](/docs/packages/inkle) - Interactive fiction

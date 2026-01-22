@@ -1,0 +1,232 @@
+# glost-presets
+
+Pre-configured plugin combinations for common use cases.
+
+## Installation
+
+```bash
+npm install glost-presets glost-core glost-processor
+```
+
+Or use the main `glost` package which includes presets:
+
+```bash
+npm install glost
+```
+
+## Features
+
+- Ready-to-use plugin combinations
+- Optimized for specific use cases
+- Easy to extend and customize
+- TypeScript support
+
+## Quick Start
+
+```typescript
+import { glost } from 'glost';
+import { languageLearningPreset } from 'glost/presets';
+
+const processor = glost()
+  .use(languageLearningPreset)
+  .freeze();
+
+const result = await processor.process(document);
+```
+
+## Available Presets
+
+### languageLearningPreset
+
+Comprehensive preset for language learning applications.
+
+**Includes:**
+- Frequency analysis
+- Difficulty scoring
+- Part-of-speech tagging
+- Transcription support
+
+```typescript
+import { languageLearningPreset } from 'glost/presets';
+
+const processor = glost()
+  .use(languageLearningPreset)
+  .freeze();
+```
+
+**Best for:**
+- Vocabulary learning apps
+- Flashcard systems
+- Graded readers
+- Language courses
+
+### readingAppPreset
+
+Optimized for reading comprehension platforms.
+
+**Includes:**
+- Clause segmentation
+- Difficulty scoring
+- Translation support
+
+```typescript
+import { readingAppPreset } from 'glost/presets';
+
+const processor = glost()
+  .use(readingAppPreset)
+  .freeze();
+```
+
+**Best for:**
+- Digital reading platforms
+- News readers
+- Book apps
+- Article processors
+
+### vocabularyBuilderPreset
+
+Focused on vocabulary acquisition.
+
+**Includes:**
+- Frequency analysis
+- Difficulty scoring
+- Spaced repetition metadata
+
+```typescript
+import { vocabularyBuilderPreset } from 'glost/presets';
+
+const processor = glost()
+  .use(vocabularyBuilderPreset)
+  .freeze();
+```
+
+**Best for:**
+- Vocabulary trainers
+- Word lists
+- Study apps
+- SRS systems
+
+### grammarAnalyzerPreset
+
+For grammar analysis and teaching.
+
+**Includes:**
+- Part-of-speech tagging
+- Clause segmentation
+- Grammatical gender (where applicable)
+
+```typescript
+import { grammarAnalyzerPreset } from 'glost/presets';
+
+const processor = glost()
+  .use(grammarAnalyzerPreset)
+  .freeze();
+```
+
+**Best for:**
+- Grammar exercises
+- Sentence analysis
+- Writing tools
+- Language study
+
+### minimalPreset
+
+Lightweight preset with basic functionality.
+
+**Includes:**
+- Basic node processing
+- No external data dependencies
+
+```typescript
+import { minimalPreset } from 'glost/presets';
+
+const processor = glost()
+  .use(minimalPreset)
+  .freeze();
+```
+
+**Best for:**
+- Quick prototyping
+- Testing
+- Simple document processing
+
+## Preset Comparison
+
+| Preset | Frequency | Difficulty | POS | Transcription | Segmentation | Translation |
+|--------|-----------|------------|-----|---------------|--------------|-------------|
+| `languageLearningPreset` | ✓ | ✓ | ✓ | ✓ | - | - |
+| `readingAppPreset` | - | ✓ | - | - | ✓ | ✓ |
+| `vocabularyBuilderPreset` | ✓ | ✓ | - | - | - | - |
+| `grammarAnalyzerPreset` | - | - | ✓ | - | ✓ | - |
+| `minimalPreset` | - | - | - | - | - | - |
+
+## Extending Presets
+
+Add additional plugins to a preset:
+
+```typescript
+import { glost } from 'glost';
+import { languageLearningPreset } from 'glost/presets';
+import { myCustomPlugin } from './my-plugin';
+
+const processor = glost()
+  .use(languageLearningPreset)
+  .use(myCustomPlugin)  // Add custom plugin
+  .freeze();
+```
+
+## Creating Custom Presets
+
+Define your own preset:
+
+```typescript
+import type { Preset } from 'glost-presets';
+import { createFrequencyExtension } from 'glost-frequency';
+import { createPosExtension } from 'glost-pos';
+
+export const myCustomPreset: Preset = {
+  name: 'my-custom-preset',
+  description: 'Custom preset for my app',
+  plugins: [
+    ...createFrequencyExtension({ ... }),
+    ...createPosExtension({ ... })
+  ]
+};
+
+// Use it
+const processor = glost()
+  .use(myCustomPreset)
+  .freeze();
+```
+
+## Preset with Options
+
+Some presets accept configuration:
+
+```typescript
+import { createLanguageLearningPreset } from 'glost/presets';
+
+const customPreset = createLanguageLearningPreset({
+  targetLanguage: 'th',
+  includeFrequency: true,
+  includeDifficulty: true,
+  includePOS: false  // Disable POS tagging
+});
+
+const processor = glost()
+  .use(customPreset)
+  .freeze();
+```
+
+## TypeScript
+
+```typescript
+import type { Preset, PresetOptions } from 'glost-presets';
+```
+
+## See Also
+
+- [Processor API Guide](/docs/guides/processor-api)
+- [glost-processor](/docs/packages/processor)
+- [glost-registry](/docs/packages/registry)
+- [Using Plugins](/docs/guides/using-plugins)

@@ -71,6 +71,10 @@ export function createExampleVitestConfig(
       find: 'glost-pos',
       replacement: resolve(packagesDir, 'plugins/pos/src/index.ts'),
     },
+    {
+      find: 'glost-clause-segmenter',
+      replacement: resolve(packagesDir, 'plugins/clause-segmenter/src/index.ts'),
+    },
     // External dependencies (need exact paths in monorepo)
     {
       find: 'unist-util-visit',
@@ -84,10 +88,11 @@ export function createExampleVitestConfig(
 
   // Generate language-specific aliases
   const languageAliases = languagePackages.flatMap((lang) => [
-    // Support subpath imports like glost-th/constants
+    // Support subpath imports like glost-th/constants or glost-th/segmenter
+    // Handle both direct files (constants.ts) and directories (segmenter/index.ts)
     {
       find: new RegExp(`^glost-${lang}\/(.*)$`),
-      replacement: resolve(packagesDir, `languages/${lang}/src/$1.ts`),
+      replacement: resolve(packagesDir, `languages/${lang}/src/$1`),
     },
     // Main package import
     {

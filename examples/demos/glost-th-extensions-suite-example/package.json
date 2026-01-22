@@ -34,6 +34,7 @@
     "glost": "workspace:*",
     "glost-plugins": "workspace:*",
     "glost-th": "workspace:*",
+    "glost-clause-segmenter": "workspace:*",
     "glost-transcription": "workspace:*",
     "glost-translation": "workspace:*",
     "glost-common": "workspace:*",

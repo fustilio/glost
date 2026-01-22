@@ -6,21 +6,21 @@
 
 ## Quick Links
 
-### 🚀 Getting Started
+### Getting Started
 - [Installation & Quick Start](/docs/getting-started)
 - [Why GloST?](/docs/why)
 - [Release Notes v0.5.0](/docs/releases/v0.5.0)
 - [Migration Guide v0.4 → v0.5](/docs/migration/v0.4-to-v0.5)
 
-### 📚 Core Guides
+### Core Guides
 - [Processor API](/docs/guides/processor-api) - Unified-style processor with fluent `.use()` API
 - [Plugin Registry](/docs/guides/registry) - Discovery, validation, and conflict detection
 - [Creating Documents](/docs/guides/creating-documents) - Build GloST documents
 - [Using Plugins](/docs/guides/using-plugins) - Process with plugins
 - [Custom Plugins](/docs/guides/custom-plugins) - Create your own plugins
 
-### 🌍 Language Implementation
-- [Implementing Language Providers](/docs/guides/implementing-language-providers) ⭐ - Complete provider infrastructure guide
+### Language Implementation
+- [Implementing Language Providers](/docs/guides/implementing-language-providers) - Complete provider infrastructure guide
 - [Multi-Language Architecture](/docs/guides/multi-language-architecture) - Language support patterns
 - [Implementing Transcription Providers](/docs/guides/implementing-transcription-providers) - Provider patterns
 - [Creating Data Source Packages](/docs/guides/creating-data-source-packages) - Package creation
@@ -29,24 +29,32 @@
 
 ## Package Reference
 
-### Main Packages
+### Main Package
+
 | Package | Description |
 |---------|-------------|
-| [glost](https://github.com/fustilio/glost/tree/main/packages/glost) | Main facade package |
-| [glost-core](/docs/packages/core) | Core types and nodes |
-| [glost-processor](https://github.com/fustilio/glost/tree/main/packages/processor) | Processor API |
-| [glost-registry](https://github.com/fustilio/glost/tree/main/packages/registry) | Plugin registry |
-| [glost-presets](https://github.com/fustilio/glost/tree/main/packages/presets) | Preset configurations |
+| [glost](https://github.com/fustilio/glost/tree/main/packages/glost) | Main entry point combining all GLOST functionality |
+
+### Foundation Packages
+
+| Package | Description |
+|---------|-------------|
+| [glost-core](/docs/packages/core) | Core types, nodes, validators, and tree utilities |
+| [glost-common](https://github.com/fustilio/glost/tree/main/packages/common) | Language utilities and shared code |
+| [glost-plugins](/docs/packages/plugins) | Plugin architecture and extension system |
+| [glost-utils](/docs/packages/utils) | Text manipulation utilities |
+
+### Processing Infrastructure
+
+| Package | Description |
+|---------|-------------|
+| [glost-processor](/docs/packages/processor) | Unified-style processor API |
+| [glost-registry](/docs/packages/registry) | Plugin discovery and validation |
+| [glost-presets](/docs/packages/presets) | Pre-configured plugin combinations |
 | [glost-cli](https://github.com/fustilio/glost/tree/main/packages/cli) | CLI tools |
 
-### Supporting Packages
-| Package | Description |
-|---------|-------------|
-| [glost-common](https://github.com/fustilio/glost/tree/main/packages/common) | Language utilities |
-| [glost-plugins](/docs/packages/plugins) | Extension system |
-| [glost-utils](/docs/packages/utils) | Text utilities |
-
 ### Language Packages
+
 | Package | Description |
 |---------|-------------|
 | [glost-th](https://github.com/fustilio/glost/tree/main/packages/languages/th) | Thai language support |
@@ -54,21 +62,25 @@
 | [glost-ko](https://github.com/fustilio/glost/tree/main/packages/languages/ko) | Korean language support |
 | [glost-en](https://github.com/fustilio/glost/tree/main/packages/languages/en) | English language support |
 
-### Extensions
-| Extension | Description |
-|-----------|-------------|
-| [Transcription](/docs/packages/transcription) | Phonetic transcription |
-| [Translation](/docs/packages/translation) | Text translation |
-| [Frequency](https://github.com/fustilio/glost/tree/main/packages/plugins/frequency) | Word frequency |
-| [Difficulty](https://github.com/fustilio/glost/tree/main/packages/plugins/difficulty) | Difficulty scoring |
-| [POS](https://github.com/fustilio/glost/tree/main/packages/plugins/pos) | Part-of-speech tagging |
-| [Gender](https://github.com/fustilio/glost/tree/main/packages/plugins/gender) | Grammatical gender |
-| [Clause Segmenter](https://github.com/fustilio/glost/tree/main/packages/plugins/clause-segmenter) | Clause segmentation |
+### Plugin Packages
 
-### Plugins
-| Plugin | Description |
-|--------|-------------|
+| Package | Description |
+|---------|-------------|
+| [glost-transcription](/docs/packages/transcription) | Phonetic transcription |
+| [glost-translation](/docs/packages/translation) | Text translation |
+| [glost-frequency](https://github.com/fustilio/glost/tree/main/packages/plugins/frequency) | Word frequency |
+| [glost-difficulty](https://github.com/fustilio/glost/tree/main/packages/plugins/difficulty) | Difficulty scoring |
+| [glost-pos](https://github.com/fustilio/glost/tree/main/packages/plugins/pos) | Part-of-speech tagging |
+| [glost-gender](https://github.com/fustilio/glost/tree/main/packages/plugins/gender) | Grammatical gender |
+| [glost-clause-segmenter](https://github.com/fustilio/glost/tree/main/packages/plugins/clause-segmenter) | Clause segmentation |
 | [glost-inkle](/docs/packages/inkle) | Ink/Inkle integration |
+
+### Interface Packages
+
+| Package | Description |
+|---------|-------------|
+| [glost-react](/docs/packages/react) | React components for rendering |
+| [glost-dialogue](/docs/packages/dialogue) | Dialogue syntax and helpers |
 
 ## Core Concepts
 
@@ -86,15 +98,18 @@
 ## Architecture & Philosophy
 
 - [Architecture Summary](/docs/architecture-summary) - SRP/SSOT principles and composable design
+- [Ecosystem Overview](/docs/ecosystem) - Package ecosystem and relationships
 - [Package Refactoring](/docs/package-refactoring) - v0.5.0 package structure changes
 - [Unified Pipeline Implementation](/docs/unified-pipeline) - v0.5.0 technical details
 - [Provider Philosophy](/docs/provider-philosophy) - "No Data > Bad Data" principle
 
-## Ecosystem & Community
+## Examples
 
-- [Ecosystem Overview](/docs/ecosystem) - Core framework, standards, community packages
-- [Contributing Guide](https://github.com/fustilio/glost/blob/main/CONTRIBUTING) - How to contribute
-- [Examples](https://github.com/fustilio/glost/tree/main/examples) - Code examples and use cases
+- [Examples Index](/docs/guides/examples-index) - Browse all examples
+- [Ruby Annotations](/docs/examples/ruby-annotations) - Displaying with furigana
+- [Progressive Display](/docs/examples/progressive-display) - Reveal levels
+- [Multi-Language](/docs/examples/multi-language) - Multiple languages
+- [Dialogues](/docs/examples/dialogues) - Conversation structures
 
 ## Version History
 
@@ -131,6 +146,6 @@ const result = await processor.process(document);
 
 ## Support
 
-- 📖 [Documentation](https://github.com/fustilio/glost/tree/main/docs)
-- 💬 [GitHub Discussions](https://github.com/fustilio/glost/discussions)
-- 🐛 [Issue Tracker](https://github.com/fustilio/glost/issues)
+- [Documentation](https://github.com/fustilio/glost/tree/main/docs)
+- [GitHub Discussions](https://github.com/fustilio/glost/discussions)
+- [Issue Tracker](https://github.com/fustilio/glost/issues)

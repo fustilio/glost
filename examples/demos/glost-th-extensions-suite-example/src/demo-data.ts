@@ -74,6 +74,19 @@ export const DEMO_THAI_VOCABULARY: ThaiVocabularyEntry[] = [
     partOfSpeech: "particle",
   },
   {
+    word: "สวัสดีครับ",
+    transcriptions: {
+      rtgs: "sawatdi khrap",
+      ipa: "sà.wàt.diː.kʰráp",
+      "paiboon+": "sà-wàt-dii-kráp",
+      aua: "sawatdi khrap",
+    },
+    translation: {
+      en: "hello",
+    },
+    partOfSpeech: "phrase",
+  },
+  {
     word: "ค่ะ",
     transcriptions: {
       rtgs: "kha",
@@ -241,6 +254,958 @@ export const DEMO_THAI_VOCABULARY: ThaiVocabularyEntry[] = [
       en: "I (used by males)",
     },
     partOfSpeech: "pronoun",
+  },
+  // Words for Obama demo
+  {
+    word: "บารัก",
+    transcriptions: {
+      rtgs: "barak",
+      ipa: "baː.rák",
+      "paiboon+": "baa-rák",
+      aua: "barak",
+    },
+    translation: {
+      en: "Barack",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "ฮูเซน",
+    transcriptions: {
+      rtgs: "husen",
+      ipa: "huː.sen",
+      "paiboon+": "hoo-sen",
+      aua: "husen",
+    },
+    translation: {
+      en: "Hussein",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "โอบามา",
+    transcriptions: {
+      rtgs: "obama",
+      ipa: "ʔoː.baː.maː",
+      "paiboon+": "oh-baa-maa",
+      aua: "obama",
+    },
+    translation: {
+      en: "Obama",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "ที่",
+    transcriptions: {
+      rtgs: "thi",
+      ipa: "tʰîː",
+      "paiboon+": "tîi",
+      aua: "thi",
+    },
+    translation: {
+      en: "at, which, that",
+    },
+    partOfSpeech: "preposition/relative pronoun",
+  },
+  {
+    word: "2",
+    transcriptions: {
+      rtgs: "song",
+      ipa: "sɔ̌ːŋ",
+      "paiboon+": "sŏng",
+      aua: "song",
+    },
+    translation: {
+      en: "two",
+    },
+    partOfSpeech: "numeral",
+  },
+  {
+    word: "อังกฤษ",
+    transcriptions: {
+      rtgs: "angrit",
+      ipa: "ʔaŋ.krìt",
+      "paiboon+": "ang-grìt",
+      aua: "angrit",
+    },
+    translation: {
+      en: "English",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "เกิด",
+    transcriptions: {
+      rtgs: "koet",
+      ipa: "kɤ̀ːt",
+      "paiboon+": "gèrt",
+      aua: "koet",
+    },
+    translation: {
+      en: "to be born, to occur",
+    },
+    partOfSpeech: "verb",
+  },
+  {
+    word: "4",
+    transcriptions: {
+      rtgs: "si",
+      ipa: "sìː",
+      "paiboon+": "sìi",
+      aua: "si",
+    },
+    translation: {
+      en: "four",
+    },
+    partOfSpeech: "numeral",
+  },
+  {
+    word: "สิงหาคม",
+    transcriptions: {
+      rtgs: "singhakom",
+      ipa: "sǐŋ.hǎː.kʰom",
+      "paiboon+": "sĭng-hăa-kom",
+      aua: "singhakom",
+    },
+    translation: {
+      en: "August",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "คศ",
+    transcriptions: {
+      rtgs: "khoso",
+      ipa: "kʰoː.sǒː",
+      "paiboon+": "koh-sŏh",
+      aua: "khoso",
+    },
+    translation: {
+      en: "A.D., C.E. (Christian Era)",
+    },
+    partOfSpeech: "abbreviation",
+  },
+  {
+    word: "1961",
+    transcriptions: {
+      rtgs: "nung phan kao roi hok sip et",
+      ipa: "nɯ́ŋ.pʰan.kâw.rɔːj.hók.sìp.ʔèt",
+      "paiboon+": "néung-pan-găo-rói-hók-sìp-èt",
+      aua: "nung phan kao roi hok sip et",
+    },
+    translation: {
+      en: "1961",
+    },
+    partOfSpeech: "numeral",
+  },
+  {
+    word: "เป็น",
+    transcriptions: {
+      rtgs: "pen",
+      ipa: "pen",
+      "paiboon+": "pen",
+      aua: "pen",
+    },
+    translation: {
+      en: "to be, is, are",
+    },
+    partOfSpeech: "verb",
+  },
+  {
+    word: "นักการเมือง",
+    transcriptions: {
+      rtgs: "nak kan mueang",
+      ipa: "nák.kaːn.mɯaŋ",
+      "paiboon+": "nák-gaan-muueang",
+      aua: "nak kan mueang",
+    },
+    translation: {
+      en: "politician",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "ชาว",
+    transcriptions: {
+      rtgs: "chao",
+      ipa: "t͡ɕʰaːw",
+      "paiboon+": "chao",
+      aua: "chao",
+    },
+    translation: {
+      en: "people of, native of",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "อเมริกัน",
+    transcriptions: {
+      rtgs: "amerikan",
+      ipa: "ʔa.me.rí.kan",
+      "paiboon+": "a-me-rí-kan",
+      aua: "amerikan",
+    },
+    translation: {
+      en: "American",
+    },
+    partOfSpeech: "noun/adjective",
+  },
+  {
+    word: "ซึ่ง",
+    transcriptions: {
+      rtgs: "sueng",
+      ipa: "sɯ̂ŋ",
+      "paiboon+": "sûeng",
+      aua: "sueng",
+    },
+    translation: {
+      en: "which, that (relative pronoun)",
+    },
+    partOfSpeech: "relative pronoun",
+  },
+  {
+    word: "ดำรง",
+    transcriptions: {
+      rtgs: "damrong",
+      ipa: "dam.roŋ",
+      "paiboon+": "dam-rong",
+      aua: "damrong",
+    },
+    translation: {
+      en: "to hold, to maintain",
+    },
+    partOfSpeech: "verb",
+  },
+  {
+    word: "ตำแหน่ง",
+    transcriptions: {
+      rtgs: "tamnaeng",
+      ipa: "tam.nɛ̀ŋ",
+      "paiboon+": "dtam-nàeng",
+      aua: "tamnaeng",
+    },
+    translation: {
+      en: "position, post",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "ประธานาธิบดี",
+    transcriptions: {
+      rtgs: "prathanathibodi",
+      ipa: "pra.tʰaː.naː.tʰí.bɔː.diː",
+      "paiboon+": "bprà-taa-naa-tí-boh-dii",
+      aua: "prathanathibodi",
+    },
+    translation: {
+      en: "president",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "สหรัฐ",
+    transcriptions: {
+      rtgs: "saharat",
+      ipa: "sà.hà.rát",
+      "paiboon+": "sà-hà-rát",
+      aua: "saharat",
+    },
+    translation: {
+      en: "United States",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "คน",
+    transcriptions: {
+      rtgs: "khon",
+      ipa: "kʰon",
+      "paiboon+": "kon",
+      aua: "khon",
+    },
+    translation: {
+      en: "person, people",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "44",
+    transcriptions: {
+      rtgs: "si sip si",
+      ipa: "sìː.sìp.sìː",
+      "paiboon+": "sìi-sìp-sìi",
+      aua: "si sip si",
+    },
+    translation: {
+      en: "forty-four",
+    },
+    partOfSpeech: "numeral",
+  },
+  {
+    word: "ตั้งแต่",
+    transcriptions: {
+      rtgs: "tang tae",
+      ipa: "tâŋ.tɛ̀ː",
+      "paiboon+": "dtâng-dtàe",
+      aua: "tang tae",
+    },
+    translation: {
+      en: "from, since",
+    },
+    partOfSpeech: "preposition",
+  },
+  {
+    word: "2009",
+    transcriptions: {
+      rtgs: "song phan kao",
+      ipa: "sɔ̌ːŋ.pʰan.kâw",
+      "paiboon+": "sŏng-pan-găo",
+      aua: "song phan kao",
+    },
+    translation: {
+      en: "2009",
+    },
+    partOfSpeech: "numeral",
+  },
+  {
+    word: "2017",
+    transcriptions: {
+      rtgs: "song phan sip chet",
+      ipa: "sɔ̌ːŋ.pʰan.sìp.t͡ɕʰét",
+      "paiboon+": "sŏng-pan-sìp-chét",
+      aua: "song phan sip chet",
+    },
+    translation: {
+      en: "2017",
+    },
+    partOfSpeech: "numeral",
+  },
+  {
+    word: "แรก",
+    transcriptions: {
+      rtgs: "raek",
+      ipa: "rɛ́ːk",
+      "paiboon+": "ráek",
+      aua: "raek",
+    },
+    translation: {
+      en: "first",
+    },
+    partOfSpeech: "adjective",
+  },
+  {
+    word: "เชื้อสาย",
+    transcriptions: {
+      rtgs: "chuea sai",
+      ipa: "t͡ɕʰɯ́a.sǎːj",
+      "paiboon+": "chúea-săai",
+      aua: "chuea sai",
+    },
+    translation: {
+      en: "lineage, descent",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "แอฟริกา",
+    transcriptions: {
+      rtgs: "aefrika",
+      ipa: "ʔɛːp.frí.kaː",
+      "paiboon+": "àep-frí-gaa",
+      aua: "aefrika",
+    },
+    translation: {
+      en: "Africa",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "และ",
+    transcriptions: {
+      rtgs: "lae",
+      ipa: "lɛ́",
+      "paiboon+": "láe",
+      aua: "lae",
+    },
+    translation: {
+      en: "and",
+    },
+    partOfSpeech: "conjunction",
+  },
+  {
+    word: "นอก",
+    transcriptions: {
+      rtgs: "nok",
+      ipa: "nɔ̂ːk",
+      "paiboon+": "nôk",
+      aua: "nok",
+    },
+    translation: {
+      en: "outside, beyond",
+    },
+    partOfSpeech: "preposition",
+  },
+  {
+    word: "แผ่นดิน",
+    transcriptions: {
+      rtgs: "phaen din",
+      ipa: "pʰɛ̀n.din",
+      "paiboon+": "pàen-din",
+      aua: "phaen din",
+    },
+    translation: {
+      en: "land, country",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "ใหญ่",
+    transcriptions: {
+      rtgs: "yai",
+      ipa: "jàj",
+      "paiboon+": "yài",
+      aua: "yai",
+    },
+    translation: {
+      en: "big, large",
+    },
+    partOfSpeech: "adjective",
+  },
+  {
+    word: "ก่อน",
+    transcriptions: {
+      rtgs: "kon",
+      ipa: "kɔ̀ːn",
+      "paiboon+": "gòn",
+      aua: "kon",
+    },
+    translation: {
+      en: "before, prior to",
+    },
+    partOfSpeech: "preposition",
+  },
+  {
+    word: "หน้า",
+    transcriptions: {
+      rtgs: "na",
+      ipa: "nâː",
+      "paiboon+": "nâa",
+      aua: "na",
+    },
+    translation: {
+      en: "front, face",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "นั้น",
+    transcriptions: {
+      rtgs: "nan",
+      ipa: "nán",
+      "paiboon+": "nán",
+      aua: "nan",
+    },
+    translation: {
+      en: "that, those",
+    },
+    partOfSpeech: "pronoun",
+  },
+  {
+    word: "เขา",
+    transcriptions: {
+      rtgs: "khao",
+      ipa: "kʰǎw",
+      "paiboon+": "kăo",
+      aua: "khao",
+    },
+    translation: {
+      en: "he, she, they",
+    },
+    partOfSpeech: "pronoun",
+  },
+  {
+    word: "เคย",
+    transcriptions: {
+      rtgs: "khoei",
+      ipa: "kʰɤːj",
+      "paiboon+": "khoei",
+      aua: "khoei",
+    },
+    translation: {
+      en: "ever, once, used to",
+    },
+    partOfSpeech: "adverb",
+  },
+  {
+    word: "สมาชิก",
+    transcriptions: {
+      rtgs: "samachik",
+      ipa: "sa.maː.t͡ɕʰík",
+      "paiboon+": "sà-maa-chík",
+      aua: "samachik",
+    },
+    translation: {
+      en: "member",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "วุฒิสภา",
+    transcriptions: {
+      rtgs: "wutthisapha",
+      ipa: "wút.tʰí.sà.pʰaː",
+      "paiboon+": "wút-tí-sà-paa",
+      aua: "wutthisapha",
+    },
+    translation: {
+      en: "senate",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "จาก",
+    transcriptions: {
+      rtgs: "chak",
+      ipa: "t͡ɕàːk",
+      "paiboon+": "jàak",
+      aua: "chak",
+    },
+    translation: {
+      en: "from",
+    },
+    partOfSpeech: "preposition",
+  },
+  {
+    word: "รัฐ",
+    transcriptions: {
+      rtgs: "rat",
+      ipa: "rát",
+      "paiboon+": "rát",
+      aua: "rat",
+    },
+    translation: {
+      en: "state, country",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "อิลลินอย",
+    transcriptions: {
+      rtgs: "illinoy",
+      ipa: "ʔil.lí.nɔːj",
+      "paiboon+": "il-lí-noy",
+      aua: "illinoy",
+    },
+    translation: {
+      en: "Illinois",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "2005",
+    transcriptions: {
+      rtgs: "song phan ha",
+      ipa: "sɔ̌ːŋ.pʰan.hâː",
+      "paiboon+": "sŏng-pan-hâa",
+      aua: "song phan ha",
+    },
+    translation: {
+      en: "2005",
+    },
+    partOfSpeech: "numeral",
+  },
+  {
+    word: "2008",
+    transcriptions: {
+      rtgs: "song phan paet",
+      ipa: "sɔ̌ːŋ.pʰan.pɛ̀ːt",
+      "paiboon+": "sŏng-pan-bàet",
+      aua: "song phan paet",
+    },
+    translation: {
+      en: "2008",
+    },
+    partOfSpeech: "numeral",
+  },
+  {
+    word: "1997",
+    transcriptions: {
+      rtgs: "nung phan kao roi chet sip chet",
+      ipa: "nɯ́ŋ.pʰan.kâw.rɔːj.t͡ɕʰét.sìp.t͡ɕʰét",
+      "paiboon+": "néung-pan-găo-rói-chét-sìp-chét",
+      aua: "nung phan kao roi chet sip chet",
+    },
+    translation: {
+      en: "1997",
+    },
+    partOfSpeech: "numeral",
+  },
+  {
+    word: "2004",
+    transcriptions: {
+      rtgs: "song phan si",
+      ipa: "sɔ̌ːŋ.pʰan.sìː",
+      "paiboon+": "sŏng-pan-sìi",
+      aua: "song phan si",
+    },
+    translation: {
+      en: "2004",
+    },
+    partOfSpeech: "numeral",
+  },
+  // Additional words from segmented text
+  {
+    word: "บา",
+    transcriptions: {
+      rtgs: "ba",
+      ipa: "baː",
+      "paiboon+": "baa",
+      aua: "ba",
+    },
+    translation: {
+      en: "Bar (part of Barack)",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "รัก",
+    transcriptions: {
+      rtgs: "rak",
+      ipa: "rák",
+      "paiboon+": "rák",
+      aua: "rak",
+    },
+    translation: {
+      en: "to love, Barack (part of name)",
+    },
+    partOfSpeech: "verb/proper noun",
+  },
+  {
+    word: "ฮู",
+    transcriptions: {
+      rtgs: "hu",
+      ipa: "huː",
+      "paiboon+": "hoo",
+      aua: "hu",
+    },
+    translation: {
+      en: "Hus (part of Hussein)",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "เซน",
+    transcriptions: {
+      rtgs: "sen",
+      ipa: "seːn",
+      "paiboon+": "sen",
+      aua: "sen",
+    },
+    translation: {
+      en: "sein (part of Hussein)",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "โอ",
+    transcriptions: {
+      rtgs: "o",
+      ipa: "ʔoː",
+      "paiboon+": "oh",
+      aua: "o",
+    },
+    translation: {
+      en: "O (part of Obama)",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "นัก",
+    transcriptions: {
+      rtgs: "nak",
+      ipa: "nák",
+      "paiboon+": "nák",
+      aua: "nak",
+    },
+    translation: {
+      en: "person, expert",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "การ",
+    transcriptions: {
+      rtgs: "kan",
+      ipa: "kaːn",
+      "paiboon+": "gaan",
+      aua: "kan",
+    },
+    translation: {
+      en: "affair, matter, work",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "เมือง",
+    transcriptions: {
+      rtgs: "mueang",
+      ipa: "mɯaŋ",
+      "paiboon+": "muueang",
+      aua: "mueang",
+    },
+    translation: {
+      en: "city, town",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "สาย",
+    transcriptions: {
+      rtgs: "sai",
+      ipa: "sǎːj",
+      "paiboon+": "săai",
+      aua: "sai",
+    },
+    translation: {
+      en: "line, lineage",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "ดิน",
+    transcriptions: {
+      rtgs: "din",
+      ipa: "din",
+      "paiboon+": "din",
+      aua: "din",
+    },
+    translation: {
+      en: "earth, soil",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "อิล",
+    transcriptions: {
+      rtgs: "il",
+      ipa: "ʔil",
+      "paiboon+": "il",
+      aua: "il",
+    },
+    translation: {
+      en: "Ill (part of Illinois)",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "ลิ",
+    transcriptions: {
+      rtgs: "li",
+      ipa: "lí",
+      "paiboon+": "lí",
+      aua: "li",
+    },
+    translation: {
+      en: "li (part of Illinois)",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "นอย",
+    transcriptions: {
+      rtgs: "noy",
+      ipa: "nɔːj",
+      "paiboon+": "noy",
+      aua: "noy",
+    },
+    translation: {
+      en: "nois (part of Illinois)",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "วุฒิ",
+    transcriptions: {
+      rtgs: "wutthi",
+      ipa: "wút.tʰí",
+      "paiboon+": "wút-tí",
+      aua: "wutthi",
+    },
+    translation: {
+      en: "degree, qualification",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "สภา",
+    transcriptions: {
+      rtgs: "sapha",
+      ipa: "sà.pʰaː",
+      "paiboon+": "sà-paa",
+      aua: "sapha",
+    },
+    translation: {
+      en: "council, assembly",
+    },
+    partOfSpeech: "noun",
+  },
+  // Additional missing words from console log
+  {
+    word: "มา",
+    transcriptions: {
+      rtgs: "ma",
+      ipa: "maː",
+      "paiboon+": "maa",
+      aua: "ma",
+    },
+    translation: {
+      en: "to come",
+    },
+    partOfSpeech: "verb",
+  },
+  {
+    word: "Barack",
+    transcriptions: {
+      rtgs: "barak",
+      ipa: "baː.rák",
+      "paiboon+": "baa-rák",
+      aua: "barak",
+    },
+    translation: {
+      en: "Barack",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "Hussein",
+    transcriptions: {
+      rtgs: "husen",
+      ipa: "huː.sen",
+      "paiboon+": "hoo-sen",
+      aua: "husen",
+    },
+    translation: {
+      en: "Hussein",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "Obama",
+    transcriptions: {
+      rtgs: "obama",
+      ipa: "ʔoː.baː.maː",
+      "paiboon+": "oh-baa-maa",
+      aua: "obama",
+    },
+    translation: {
+      en: "Obama",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "II",
+    transcriptions: {
+      rtgs: "song",
+      ipa: "sɔ̌ːŋ",
+      "paiboon+": "sŏng",
+      aua: "song",
+    },
+    translation: {
+      en: "two, second",
+    },
+    partOfSpeech: "numeral",
+  },
+  {
+    word: "นักการ",
+    transcriptions: {
+      rtgs: "nak kan",
+      ipa: "nák.kaːn",
+      "paiboon+": "nák-gaan",
+      aua: "nak kan",
+    },
+    translation: {
+      en: "politician (part of นักการเมือง)",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "เชื้อ",
+    transcriptions: {
+      rtgs: "chuea",
+      ipa: "t͡ɕʰɯ́a",
+      "paiboon+": "chúea",
+      aua: "chuea",
+    },
+    translation: {
+      en: "lineage, descent (part of เชื้อสาย)",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "แผ่น",
+    transcriptions: {
+      rtgs: "phaen",
+      ipa: "pʰɛ̀n",
+      "paiboon+": "pàen",
+      aua: "phaen",
+    },
+    translation: {
+      en: "sheet, piece (part of แผ่นดิน)",
+    },
+    partOfSpeech: "noun",
+  },
+  {
+    word: "จา",
+    transcriptions: {
+      rtgs: "cha",
+      ipa: "t͡ɕaː",
+      "paiboon+": "jaa",
+      aua: "cha",
+    },
+    translation: {
+      en: "from (part of จาก)",
+    },
+    partOfSpeech: "preposition",
+  },
+  {
+    word: "กรัฐอิล",
+    transcriptions: {
+      rtgs: "krat il",
+      ipa: "krá.tʰíl",
+      "paiboon+": "grát-tíl",
+      aua: "krat il",
+    },
+    translation: {
+      en: "Illinois state (part of รัฐอิลลินอย)",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "นอ",
+    transcriptions: {
+      rtgs: "no",
+      ipa: "nɔː",
+      "paiboon+": "noh",
+      aua: "no",
+    },
+    translation: {
+      en: "nois (part of นอย/Illinois)",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "ย",
+    transcriptions: {
+      rtgs: "yo",
+      ipa: "j",
+      "paiboon+": "y",
+      aua: "yo",
+    },
+    translation: {
+      en: "y (letter/part of word)",
+    },
+    partOfSpeech: "letter",
   },
 ];
 

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GLOST Thai Extensions Demo - HTMX</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        background: #f5f5f5;
+        line-height: 1.6;
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+      .subtitle {
+        color: #666;
+        margin-bottom: 2rem;
+      }
+      .section {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+      textarea {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+        resize: vertical;
+        min-height: 100px;
+        font-family: inherit;
+      }
+      textarea:focus {
+        outline: none;
+        border-color: #4a90d9;
+      }
+      .controls {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+      }
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .control-group label {
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      select, button {
+        padding: 0.5rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: white;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      button {
+        background: #4a90d9;
+        color: white;
+        border-color: #4a90d9;
+        font-weight: 600;
+      }
+      button:hover {
+        background: #357abd;
+      }
+      button.htmx-request {
+        opacity: 0.6;
+        cursor: wait;
+      }
+      .demo-btn {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+        background: #f0f0f0;
+        color: #333;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .demo-btn:hover {
+        background: #e0e0e0;
+        border-color: #bbb;
+      }
+      .output {
+        min-height: 200px;
+        padding: 1.5rem;
+        background: #fafafa;
+        border-radius: 6px;
+        border: 1px solid #eee;
+        line-height: 2.5;
+        font-size: 1.1rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 0.25rem;
+      }
+      /* Ruby annotation styling - using flexbox for precise alignment */
+      .ruby-container {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 0;
+        vertical-align: top;
+        min-width: fit-content;
+      }
+      .ruby-annotation {
+        font-size: 0.6rem;
+        line-height: 1;
+        color: #4a90d9;
+        font-family: 'Courier New', monospace;
+        font-weight: 500;
+        white-space: nowrap;
+        text-align: center;
+        margin-bottom: 0.1rem;
+        width: 100%;
+        flex-shrink: 0;
+      }
+      .ruby-base {
+        font-size: 1.5rem;
+        line-height: 1.2;
+        color: #333;
+        text-align: center;
+        white-space: nowrap;
+        width: 100%;
+        flex-shrink: 0;
+      }
+      .translation {
+        font-size: 0.85rem;
+        color: #666;
+        font-style: italic;
+        margin-left: 0.25rem;
+        vertical-align: baseline;
+        display: inline;
+      }
+      .word {
+        display: inline-block;
+        margin: 0 0.5rem;
+        font-size: 1.5rem;
+        color: #333;
+      }
+      .translation {
+        font-size: 0.85rem;
+        color: #666;
+        font-style: italic;
+        margin-left: 0.25rem;
+        vertical-align: baseline;
+      }
+      .empty-state {
+        color: #999;
+        font-style: italic;
+        text-align: center;
+        padding: 2rem;
+      }
+      .error {
+        color: #d32f2f;
+        background: #ffebee;
+        padding: 1rem;
+        border-radius: 4px;
+        border-left: 4px solid #d32f2f;
+      }
+      .htmx-indicator {
+        opacity: 0;
+        transition: opacity 200ms ease-in;
+      }
+      .htmx-request .htmx-indicator {
+        opacity: 1;
+      }
+      .info {
+        background: #e3f2fd;
+        padding: 1rem;
+        border-radius: 4px;
+        border-left: 4px solid #2196f3;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        color: #1565c0;
+      }
+      .debug-section {
+        background: #fff3e0;
+        padding: 1rem;
+        border-radius: 4px;
+        border-left: 4px solid #ff9800;
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
+      }
+      .debug-section summary {
+        cursor: pointer;
+        font-weight: 600;
+        color: #e65100;
+        margin-bottom: 0.5rem;
+      }
+      .debug-section details[open] summary {
+        margin-bottom: 1rem;
+      }
+      .debug-word {
+        background: white;
+        padding: 0.75rem;
+        margin: 0.5rem 0;
+        border-radius: 4px;
+        border: 1px solid #ffcc80;
+        font-family: 'Courier New', monospace;
+        font-size: 0.8rem;
+      }
+      .debug-word code {
+        background: #f5f5f5;
+        padding: 0.25rem 0.5rem;
+        border-radius: 3px;
+        display: block;
+        margin: 0.25rem 0;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+      .debug-word em {
+        color: #999;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>GLOST Thai Extensions Demo</h1>
+    <p class="subtitle">Visual rendering of Thai text with transcriptions, translations, and clause segmentation (HTMX)</p>
+
+    <div class="section">
+      <form 
+        id="process-form"
+        hx-post="/process"
+        hx-target="#output"
+        hx-swap="innerHTML"
+        hx-indicator="#loading"
+        hx-trigger="submit, keyup from:textarea delay:500ms"
+      >
+        <label for="input">Enter Thai text:</label>
+        <textarea 
+          id="input" 
+          name="text"
+          placeholder="Try: สวัสดีครับ หรือ ฉันไปตลาดเพราะต้องการซื้อของ"
+        >สวัสดีครับ</textarea>
+        <small style="color: #666; font-size: 0.85rem; margin-top: 0.5rem; display: block;">
+          💡 Text is automatically segmented into words using Intl.Segmenter. Spaces are optional.
+        </small>
+        <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button type="button" class="demo-btn" onclick="loadDemo('สวัสดีครับ')">Demo: Hello</button>
+          <button type="button" class="demo-btn" onclick="loadDemo('บารัก ฮูเซน โอบามา ที่ 2 (อังกฤษ: Barack Hussein Obama II; เกิด 4 สิงหาคม ค.ศ. 1961) เป็นนักการเมืองชาวอเมริกัน ซึ่งดำรงตำแหน่งประธานาธิบดีสหรัฐคนที่ 44 ตั้งแต่ ค.ศ. 2009–2017 เป็นประธานาธิบดีสหรัฐคนแรกที่เป็นชาวอเมริกันเชื้อสายแอฟริกาและเกิดนอกสหรัฐแผ่นดินใหญ่ ก่อนหน้านั้น เขาเคยดำรงตำแหน่งสมาชิกวุฒิสภาสหรัฐจากรัฐอิลลินอย ตั้งแต่ ค.ศ. 2005–2008 และสมาชิกวุฒิสภาอิลลินอยตั้งแต่ ค.ศ. 1997–2004')">Demo: Obama</button>
+        </div>
+        
+        <div class="controls">
+          <div class="control-group">
+            <label for="transcription">Transcription Scheme:</label>
+            <select id="transcription" name="transcription">
+              <option value="rtgs" selected>RTGS</option>
+              <option value="ipa">IPA</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <button type="submit">Process Text</button>
+            <span id="loading" class="htmx-indicator">Processing...</span>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="section">
+      <h2>Rendered Output</h2>
+      <div id="output" class="output">
+        <div class="empty-state">Enter Thai text and click "Process Text" to see the rendered output...</div>
+      </div>
+    </div>
+
+    <script>
+      // Load demo text
+      function loadDemo(text) {
+        const input = document.getElementById('input');
+        input.value = text;
+        // Auto-submit after loading demo
+        setTimeout(() => {
+          document.getElementById('process-form').requestSubmit();
+        }, 100);
+      }
+
+      // Auto-submit on Enter (Ctrl/Cmd + Enter)
+      document.getElementById('input').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+          e.preventDefault();
+          document.getElementById('process-form').requestSubmit();
+        }
+      });
+
+      // Initial load
+      window.addEventListener('load', () => {
+        const form = document.getElementById('process-form');
+        if (document.getElementById('input').value.trim()) {
+          htmx.trigger(form, 'submit');
+        }
+      });
+    </script>
+  </body>
+</html>

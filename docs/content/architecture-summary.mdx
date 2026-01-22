@@ -2,95 +2,260 @@
 
 ## Overview
 
-GLOST follows a composable, principle-driven architecture based on SRP (Single Responsibility Principle) and SSOT (Single Source of Truth).
+GLOST follows a composable, principle-driven architecture based on SRP (Single Responsibility Principle) and SSOT (Single Source of Truth). The ecosystem is organized into distinct layers, each with clear responsibilities.
 
 ## Architecture Diagram
 
 ```
-┌────────────────────────────────────────────────────┐
-│  Layer 1: Core Foundation                          │
-│  glost, glost-common, glost-utils, glost-plugins│
-└────────────────────────────────────────────────────┘
-                         ↓
-┌────────────────────────────────────────────────────┐
-│  Layer 2: Extension APIs                           │
-│  glost-plugins-translation, transcription       │
-└────────────────────────────────────────────────────┘
-                         ↓
-┌────────────────────────────────────────────────────┐
-│  Layer 3: Composable Components (Mix & Match)      │
-│  Data Sources + Transcription Systems = Lookups    │
-└────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 7: MAIN EXPORT                                                        │
+│  ┌─────────────────────────────────────────────────────────────────────────┐ │
+│  │  glost                                                                  │ │
+│  │  Main entry point combining core, processor, registry, and presets     │ │
+│  └─────────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      ↑
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 6: CLI & TOOLS                                                        │
+│  ┌─────────────────────────────────────────────────────────────────────────┐ │
+│  │  glost-cli    Command-line interface for plugin management              │ │
+│  └─────────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      ↑
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 5: FRONTEND/INTERFACE                                                 │
+│  ┌──────────────────────────────┐  ┌──────────────────────────────────────┐ │
+│  │  glost-react                 │  │  glost-dialogue                      │ │
+│  │  React components            │  │  Dialogue syntax & helpers           │ │
+│  └──────────────────────────────┘  └──────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      ↑
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 4: PROCESSING INFRASTRUCTURE                                          │
+│  ┌──────────────────┐  ┌──────────────────┐  ┌────────────────────────────┐ │
+│  │  glost-processor │  │  glost-registry  │  │  glost-presets             │ │
+│  │  .use() API      │  │  Discovery       │  │  Pre-configured combos     │ │
+│  └──────────────────┘  └──────────────────┘  └────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      ↑
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 3: LANGUAGE PACKAGES                                                  │
+│  ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌────────────────────────┐ │
+│  │  glost-th  │  │  glost-ja  │  │  glost-ko  │  │  glost-en              │ │
+│  │  Thai      │  │  Japanese  │  │  Korean    │  │  English               │ │
+│  └────────────┘  └────────────┘  └────────────┘  └────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      ↑
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 2: PLUGIN PACKAGES                                                    │
+│  ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐ ┌────────────┐ │
+│  │ transcription   │ │ translation     │ │ frequency       │ │ difficulty │ │
+│  └─────────────────┘ └─────────────────┘ └─────────────────┘ └────────────┘ │
+│  ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐ ┌────────────┐ │
+│  │ pos             │ │ gender          │ │ clause-segmenter│ │ inkle      │ │
+│  └─────────────────┘ └─────────────────┘ └─────────────────┘ └────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      ↑
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LAYER 1: FOUNDATION                                                         │
+│  ┌──────────────────┐  ┌──────────────────┐  ┌────────────────────────────┐ │
+│  │  glost-core      │  │  glost-common    │  │  glost-utils               │ │
+│  │  Types & nodes   │  │  Language utils  │  │  Text manipulation         │ │
+│  └──────────────────┘  └──────────────────┘  └────────────────────────────┘ │
+│  ┌─────────────────────────────────────────────────────────────────────────┐ │
+│  │  glost-plugins    Core plugin system architecture                       │ │
+│  └─────────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
+
+## Layer Responsibilities
+
+### Layer 1: Foundation
+
+**Packages:** `glost-core`, `glost-common`, `glost-utils`, `glost-plugins`
+
+- Define GLOST node types and interfaces
+- Provide tree traversal and manipulation utilities
+- Implement plugin system architecture
+- Share common language utilities
+
+### Layer 2: Plugin Packages
+
+**Packages:** `glost-transcription`, `glost-translation`, `glost-frequency`, `glost-difficulty`, `glost-pos`, `glost-gender`, `glost-clause-segmenter`, `glost-inkle`
+
+- Implement specific extension functionality
+- Define provider interfaces for data sources
+- Return `[generator, enhancer]` extension tuples
+- Handle language-agnostic processing logic
+
+### Layer 3: Language Packages
+
+**Packages:** `glost-th`, `glost-ja`, `glost-ko`, `glost-en`
+
+- Compose multiple plugins for a language
+- Provide language-specific providers
+- Implement language-specific rules (segmentation, transcription)
+- Export ready-to-use extensions
+
+### Layer 4: Processing Infrastructure
+
+**Packages:** `glost-processor`, `glost-registry`, `glost-presets`
+
+- Provide unified-style processing API
+- Enable plugin discovery and validation
+- Detect conflicts between plugins
+- Offer pre-configured plugin combinations
+
+### Layer 5: Frontend/Interface
+
+**Packages:** `glost-react`, `glost-dialogue`
+
+- Render processed GLOST documents
+- Provide UI components for common patterns
+- Define dialogue/conversation structures
+- Handle display-level abstractions
+
+### Layer 6: CLI & Tools
+
+**Packages:** `glost-cli`
+
+- Provide command-line interface
+- Enable plugin management
+- Support discovery and inspection
+
+### Layer 7: Main Export
+
+**Packages:** `glost`
+
+- Unified entry point for the ecosystem
+- Re-exports core, processor, registry, presets
+- Simplifies installation and imports
 
 ## Key Principles
 
 ### Single Responsibility Principle (SRP)
 
-Each package or function does one thing:
-- Data sources only query data
-- Transcription systems only apply rules
-- Lookup factories only compose existing functions
+Each package does one thing well:
+
+| Package | Single Responsibility |
+|---------|----------------------|
+| `glost-core` | Define types and nodes |
+| `glost-plugins` | Provide extension architecture |
+| `glost-transcription` | Handle pronunciation data |
+| `glost-processor` | Execute plugin pipelines |
+| `glost-registry` | Discover and validate plugins |
 
 ### Single Source of Truth (SSOT)
 
-Logic lives in one place. Everyone imports and uses the same implementation, avoiding duplication.
+Logic lives in one place:
+
+```typescript
+// BAD: Duplicating transcription logic
+// in glost-th/transcription.ts
+function toPaiboon(word) { /* logic */ }
+
+// in glost-ja/transcription.ts
+function toPaiboon(word) { /* same logic */ }
+
+// GOOD: Import from single source
+import { createTranscriptionExtension } from 'glost-transcription';
+```
 
 ### Composition Over Duplication
 
-Build complex functionality by composing simple, focused components rather than duplicating logic.
+Build complex functionality by composing simple components:
+
+```typescript
+// Language package composes multiple extensions
+import { createFrequencyExtension } from 'glost-frequency';
+import { createTranscriptionExtension } from 'glost-transcription';
+import { createDifficultyExtension } from 'glost-difficulty';
+
+// Compose with language-specific providers
+export function createThaiExtensions(providers) {
+  return [
+    ...createFrequencyExtension({ provider: providers.frequency }),
+    ...createTranscriptionExtension({ provider: providers.transcription }),
+    ...createDifficultyExtension({ provider: providers.difficulty }),
+  ];
+}
+```
 
 ## Package Naming Patterns
 
 | Type | Pattern | Example |
 |------|---------|---------|
-| Core | `glost-[name]` | `glost-common` |
-| Extensions | `glost-plugins-[type]` | `glost-plugins-transcription` |
-| Data Source | `glost-[lang]-datasource-[source]` | `glost-th-datasource-lexitron` |
-| Transcription | `glost-[lang]-transcription-[system]` | `glost-th-transcription-paiboon` |
-| Lookup | `glost-[lang]-lookup-[type]-[system]-[source]` | `glost-th-lookup-transcription-paiboon-lexitron` |
-| Plugin | `glost-plugin-[framework]` | `glost-plugin-react` |
+| Core | `glost-{name}` | `glost-core`, `glost-plugins` |
+| Plugin | `glost-{feature}` | `glost-frequency`, `glost-pos` |
+| Language | `glost-{lang}` | `glost-th`, `glost-ja` |
+| Data Source | `glost-{lang}-datasource-{source}` | `glost-th-datasource-lexitron` |
+| Transcription | `glost-{lang}-transcription-{system}` | `glost-th-transcription-paiboon` |
+| Lookup | `glost-{lang}-lookup-{type}-{system}-{source}` | `glost-th-lookup-transcription-paiboon-lexitron` |
 
 ## Mix & Match Examples
 
 ### Same Data, Different Systems
+
 ```typescript
-// Use Lexitron with Paiboon+
-import { ThaiPaiboonLexitronExtension } from 
-  'glost-th-lookup-transcription-paiboon-lexitron';
+// Use Lexitron data with different transcription systems
+import { createThaiTranscription } from 'glost-th/transcription';
 
-// Use Lexitron with RTGS
-import { ThaiRTGSLexitronExtension } from 
-  'glost-th-lookup-transcription-rtgs-lexitron';
+// Paiboon+ system
+const paiboonExt = createThaiTranscription({ system: 'paiboon' });
 
-// Use Lexitron with IPA
-import { ThaiIPALexitronExtension } from 
-  'glost-th-lookup-transcription-ipa-lexitron';
+// RTGS system
+const rtgsExt = createThaiTranscription({ system: 'rtgs' });
+
+// IPA system
+const ipaExt = createThaiTranscription({ system: 'ipa' });
 ```
 
 ### Same System, Different Data
-```typescript
-// Paiboon+ with Lexitron
-import { ThaiPaiboonLexitronExtension } from 
-  'glost-th-lookup-transcription-paiboon-lexitron';
 
-// Paiboon+ with Google Translate
-import { ThaiPaiboonGoogleExtension } from 
-  'glost-th-lookup-transcription-paiboon-googletrans';
+```typescript
+// Use same transcription system with different data sources
+import { createTranscriptionExtension } from 'glost-transcription';
+
+// With Lexitron data
+import { lexitronProvider } from 'glost-th-datasource-lexitron';
+const ext1 = createTranscriptionExtension({ provider: lexitronProvider });
+
+// With custom dictionary
+import { customProvider } from './my-dictionary';
+const ext2 = createTranscriptionExtension({ provider: customProvider });
+```
+
+## Data Flow
+
+```
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│   Input     │───▶│  Processor  │───▶│  Extensions │───▶│   Output    │
+│  Document   │    │   .use()    │    │  Pipeline   │    │  Document   │
+└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
+                          │                  │
+                          ▼                  ▼
+                   ┌─────────────┐    ┌─────────────┐
+                   │   Presets   │    │  Providers  │
+                   │   (combos)  │    │   (data)    │
+                   └─────────────┘    └─────────────┘
 ```
 
 ## Benefits
 
-- **Maintainability**: Fix logic in one place, all packages benefit
-- **Testability**: Test each component in isolation
-- **Reusability**: Any system works with any data source
-- **Clarity**: Package names describe exactly what they do
-- **Flexibility**: Mix and match components freely
-- **No Duplication**: Logic is always imported, never copied
+| Benefit | Description |
+|---------|-------------|
+| **Maintainability** | Fix logic in one place, all packages benefit |
+| **Testability** | Test each component in isolation |
+| **Reusability** | Any system works with any data source |
+| **Clarity** | Package names describe exactly what they do |
+| **Flexibility** | Mix and match components freely |
+| **No Duplication** | Logic is always imported, never copied |
+| **Tree-shaking** | Only import what you need |
 
 ## Related Documentation
 
-- [Naming Conventions](conventions/naming)
-- [Creating Data Source Packages](guides/creating-data-source-packages)
-- [Package Templates Usage](../packages/plugins/templates/USAGE)
-- [Composition Pattern Examples](../examples/demos/glost-extensions-api-example/)
+- [Ecosystem Overview](/docs/ecosystem)
+- [Naming Conventions](/docs/conventions/naming)
+- [Creating Data Source Packages](/docs/guides/creating-data-source-packages)
+- [Plugin System](/docs/concepts/plugins)
+- [Provider Philosophy](/docs/provider-philosophy)

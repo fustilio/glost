@@ -1,0 +1,237 @@
+# glost-react
+
+React components for rendering GloST documents with ruby annotations and progressive display.
+
+## Installation
+
+```bash
+npm install glost-react glost react
+```
+
+## Features
+
+- Ruby annotation rendering for Asian languages (furigana, pinyin, etc.)
+- Progressive display levels (hide/show annotations)
+- Extensible metadata display
+- TypeScript support
+
+## Quick Start
+
+```tsx
+import { GloSTWord, GloSTSentence, GloSTDocument } from 'glost-react';
+
+function MyApp({ document }) {
+  return (
+    <GloSTDocument document={document}>
+      {document.children.map((paragraph, i) => (
+        <div key={i}>
+          {paragraph.children.map((sentence, j) => (
+            <GloSTSentence key={j} sentence={sentence} displayLevel={2}>
+              {sentence.children.map((word, k) => (
+                <GloSTWord key={k} word={word} />
+              ))}
+            </GloSTSentence>
+          ))}
+        </div>
+      ))}
+    </GloSTDocument>
+  );
+}
+```
+
+## Components
+
+### GloSTWord
+
+Renders a single word with optional ruby annotation.
+
+```tsx
+import { GloSTWord } from 'glost-react';
+
+<GloSTWord
+  word={word}
+  showRuby={true}
+  rubyKey="romaji"  // or "furigana", "ipa", etc.
+  onClick={(word) => console.log(word)}
+/>
+```
+
+**Props:**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `word` | `GLOSTWord` | required | The word node to render |
+| `showRuby` | `boolean` | `true` | Whether to show ruby annotation |
+| `rubyKey` | `string` | `"romaji"` | Which transcription to use for ruby |
+| `onClick` | `(word) => void` | - | Click handler |
+| `className` | `string` | - | Additional CSS class |
+
+### GloSTSentence
+
+Renders a sentence with its child words.
+
+```tsx
+import { GloSTSentence } from 'glost-react';
+
+<GloSTSentence
+  sentence={sentence}
+  displayLevel={2}
+  transcriptionSystem="paiboon"
+>
+  {children}
+</GloSTSentence>
+```
+
+**Props:**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `sentence` | `GLOSTSentence` | required | The sentence node |
+| `displayLevel` | `number` | `1` | Display detail level (1-3) |
+| `transcriptionSystem` | `string` | - | Transcription system to use |
+| `children` | `ReactNode` | - | Child word components |
+
+### GloSTDocument
+
+Context provider for document-level settings.
+
+```tsx
+import { GloSTDocument } from 'glost-react';
+
+<GloSTDocument
+  document={document}
+  defaultDisplayLevel={2}
+  defaultTranscriptionSystem="romaji"
+>
+  {children}
+</GloSTDocument>
+```
+
+## Display Levels
+
+Control how much information is shown:
+
+| Level | Description |
+|-------|-------------|
+| 1 | Text only (no annotations) |
+| 2 | Text with ruby annotations |
+| 3 | Full details (translations, metadata) |
+
+```tsx
+// Level 1: 今日
+// Level 2: 今日 (with きょう above)
+// Level 3: 今日 (with きょう above + translation + POS)
+```
+
+## Hooks
+
+### useGloSTContext
+
+Access document-level settings.
+
+```tsx
+import { useGloSTContext } from 'glost-react/hooks';
+
+function MyComponent() {
+  const { displayLevel, transcriptionSystem } = useGloSTContext();
+  // ...
+}
+```
+
+### useWordMetadata
+
+Extract metadata from a word.
+
+```tsx
+import { useWordMetadata } from 'glost-react/hooks';
+
+function WordDetails({ word }) {
+  const { frequency, difficulty, pos } = useWordMetadata(word);
+  // ...
+}
+```
+
+## Styling
+
+Components use CSS classes for styling:
+
+```css
+.glost-word {
+  /* Word container */
+}
+
+.glost-word-text {
+  /* Main word text */
+}
+
+.glost-word-ruby {
+  /* Ruby annotation */
+}
+
+.glost-sentence {
+  /* Sentence container */
+}
+```
+
+Or use the `className` prop for custom styling:
+
+```tsx
+<GloSTWord
+  word={word}
+  className="my-custom-word"
+/>
+```
+
+## TypeScript
+
+Full TypeScript support with exported types:
+
+```tsx
+import type {
+  GloSTWordProps,
+  GloSTSentenceProps,
+  GloSTDocumentProps
+} from 'glost-react/types';
+```
+
+## Example: Thai Learning App
+
+```tsx
+import { GloSTDocument, GloSTSentence, GloSTWord } from 'glost-react';
+
+function ThaiLesson({ document }) {
+  const [displayLevel, setDisplayLevel] = useState(2);
+
+  return (
+    <div>
+      <button onClick={() => setDisplayLevel(l => l === 3 ? 1 : l + 1)}>
+        Toggle Details
+      </button>
+
+      <GloSTDocument document={document} defaultDisplayLevel={displayLevel}>
+        {document.children[0].children.map((sentence, i) => (
+          <GloSTSentence
+            key={i}
+            sentence={sentence}
+            transcriptionSystem="paiboon"
+          >
+            {sentence.children.map((word, j) => (
+              <GloSTWord
+                key={j}
+                word={word}
+                onClick={(w) => showDefinition(w)}
+              />
+            ))}
+          </GloSTSentence>
+        ))}
+      </GloSTDocument>
+    </div>
+  );
+}
+```
+
+## See Also
+
+- [Ruby Annotations Example](/docs/examples/ruby-annotations)
+- [Progressive Display Example](/docs/examples/progressive-display)
+- [glost-dialogue](/docs/packages/dialogue) - For conversation rendering

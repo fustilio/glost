@@ -16,8 +16,8 @@
  */
 
 import type { GLOSTExtension } from "glost-plugins";
-import type { GLOSTNode, GLOSTRoot, GLOSTSentence, GLOSTWord } from "glost";
-
+import type { GLOSTNode, GLOSTRoot, GLOSTSentence, GLOSTWord, GLOSTClause, GLOSTPunctuation } from "glost";
+import { getWordText, NODE_TYPES } from "glost";
 import type { GlostLanguage } from "glost-common";
 
 // Export types
@@ -136,15 +136,11 @@ export function createClauseSegmenterExtension(
 
         // Extract words from sentence
         const sentenceNode = node as GLOSTSentence;
-        const words = sentenceNode.children
-          ?.filter((child) => child.type === "WordNode")
-          .map((child) => {
-            const word = child as GLOSTWord;
-            // Get text from word node - check different possible locations
-            const text = (word as any).text || "";
-            return text;
-          })
-          .filter(Boolean) || [];
+        const wordNodes = sentenceNode.children?.filter(
+          (child) => child.type === NODE_TYPES.WORD
+        ) as GLOSTWord[] || [];
+        
+        const words = wordNodes.map((word) => getWordText(word)).filter(Boolean);
 
         if (words.length === 0) {
           return node;
@@ -162,12 +158,141 @@ export function createClauseSegmenterExtension(
         }
 
         // Apply segmentation to create clause nodes
-        // This is where the actual transformation would happen
-        // For now, we'll return the sentence unchanged
+        const sentenceChildren = sentenceNode.children || [];
+        
+        // Build word index map: which child index corresponds to which word index
+        const wordIndexMap: number[] = [];
+        sentenceChildren.forEach((child, index) => {
+          if (child.type === NODE_TYPES.WORD) {
+            wordIndexMap.push(index);
+          }
+        });
+
+        // Sort boundaries by position
+        const sortedBoundaries = [...segmentation.boundaries].sort(
+          (a, b) => a.position - b.position
+        );
+
+        // Map clause types from boundary types to GLOST clause types
+        const mapClauseType = (
+          boundaryType: string
+        ): "main" | "subordinate" | "relative" | "adverbial" => {
+          switch (boundaryType) {
+            case "main":
+              return "main";
+            case "relative":
+              return "relative";
+            case "causal":
+            case "conditional":
+            case "temporal":
+              return "adverbial";
+            case "complement":
+            case "coordinate":
+            case "subordinate":
+            default:
+              return "subordinate";
+          }
+        };
+
+        // Create clauses from boundaries
+        const clauses: GLOSTClause[] = [];
+        let currentClauseStart = 0;
+
+        // Process each boundary to create clauses
+        for (const boundary of sortedBoundaries) {
+          // Get the child index for this boundary position
+          const boundaryChildIndex = wordIndexMap[boundary.position];
+          
+          if (boundaryChildIndex === undefined || boundaryChildIndex < currentClauseStart) {
+            // Skip invalid or out-of-order boundaries
+            continue;
+          }
+
+          // Determine where to split: include marker in new clause if includeMarker is true
+          const splitIndex = includeMarkers && boundary.includeMarker
+            ? boundaryChildIndex + 1
+            : boundaryChildIndex;
+
+          // Create clause from current start to split point
+          const clauseChildren = sentenceChildren.slice(
+            currentClauseStart,
+            splitIndex
+          );
+
+          // Filter to only include words and punctuation (exclude whitespace and symbols)
+          // Note: GLOSTClause children type only allows GLOSTPhrase | GLOSTWord | GLOSTPunctuation
+          const filteredChildren: (GLOSTWord | GLOSTPunctuation)[] = clauseChildren.filter(
+            (child): child is GLOSTWord | GLOSTPunctuation => {
+              return (
+                child.type === NODE_TYPES.WORD ||
+                child.type === NODE_TYPES.PUNCTUATION
+              );
+            }
+          );
+
+          // Only create clause if it has content
+          if (filteredChildren.length > 0) {
+            // Determine clause type: first clause is main, others based on boundary
+            const clauseType =
+              clauses.length === 0
+                ? "main"
+                : mapClauseType(boundary.clauseType);
+
+            const clause: GLOSTClause = {
+              type: NODE_TYPES.CLAUSE as "ClauseNode",
+              clauseType,
+              children: filteredChildren, // GLOSTWord | GLOSTPunctuation is compatible with GLOSTClause children
+              lang: sentenceNode.lang,
+              script: sentenceNode.script,
+              extras: segmentation.mood
+                ? {
+                    mood: segmentation.mood,
+                  }
+                : undefined,
+            };
+
+            clauses.push(clause);
+          }
+
+          // Update start position for next clause
+          currentClauseStart = splitIndex;
+        }
+
+        // Add remaining children as final clause (if any)
+        if (currentClauseStart < sentenceChildren.length) {
+          const remainingChildren = sentenceChildren.slice(currentClauseStart);
+          const filteredRemaining: (GLOSTWord | GLOSTPunctuation)[] = remainingChildren.filter(
+            (child): child is GLOSTWord | GLOSTPunctuation => {
+              return (
+                child.type === NODE_TYPES.WORD ||
+                child.type === NODE_TYPES.PUNCTUATION
+              );
+            }
+          );
+          
+          if (filteredRemaining.length > 0) {
+            const finalClause: GLOSTClause = {
+              type: NODE_TYPES.CLAUSE as "ClauseNode",
+              clauseType: clauses.length === 0 ? "main" : "subordinate",
+              children: filteredRemaining,
+              lang: sentenceNode.lang,
+              script: sentenceNode.script,
+            };
+            clauses.push(finalClause);
+          }
+        }
+
+        // If no clauses were created (shouldn't happen, but safety check)
+        if (clauses.length === 0) {
+          return node;
+        }
+
+        // Return sentence with clause children
+        // Note: GLOSTSentence children can include GLOSTClause nodes
         return {
           ...sentenceNode,
-          children: sentenceNode.children,
-        } as GLOSTNode;
+          children: clauses as GLOSTClause[],
+        } as GLOSTSentence;
       };
 
       const result = await processNode(tree);

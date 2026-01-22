@@ -16,9 +16,8 @@ import {
   type GLOSTExtension,
 } from "glost-plugins";
 
-// Note: createClauseSegmenterExtension has moved to glost-clause-segmenter package
-// and has a different API. Commenting out until we can properly implement it.
-// import { createClauseSegmenterExtension, type ClauseSegmenterOptions } from "glost-clause-segmenter";
+import { createClauseSegmenterExtension, type ClauseSegmenterOptions } from "glost-clause-segmenter";
+import { thaiSegmenterProvider } from "glost-th/segmenter";
 
 import {
   createThaiSyllableSegmenterExtension,
@@ -165,34 +164,43 @@ export const ThaiGenderTransformer = createThaiGenderTransformer();
  * // Clause(subordinate): ["ว่า", "คุณ", "ถูก"]
  * ```
  */
+/**
+ * Create Thai clause segmenter extension
+ * 
+ * Uses the Thai segmenter provider to segment sentences into clauses.
+ * 
+ * @param options - Options for clause segmentation
+ * @returns GLOST extension for Thai clause segmentation
+ * 
+ * @example
+ * ```typescript
+ * import { createThaiClauseSegmenter } from "glost-plugins-thai";
+ * 
+ * const segmenter = createThaiClauseSegmenter({
+ *   includeMarkers: true
+ * });
+ * 
+ * const result = await processGLOSTWithExtensionsAsync(document, [segmenter]);
+ * ```
+ */
 export function createThaiClauseSegmenter(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  options: Record<string, unknown> = {}
+  options: Partial<ClauseSegmenterOptions> = {}
 ): GLOSTExtension {
-  // TODO: Implement using glost-clause-segmenter provider API
-  // See: https://www.npmjs.com/package/glost-clause-segmenter
-  throw new Error(
-    "Thai clause segmenter is not yet implemented. " +
-      "The API has changed to require a provider-based implementation."
-  );
+  return createClauseSegmenterExtension({
+    targetLanguage: "th",
+    provider: thaiSegmenterProvider,
+    includeMarkers: options.includeMarkers ?? true,
+  });
 }
 
 /**
  * Pre-configured Thai clause segmenter
  *
- * **Note**: Currently throws an error. Will be implemented in a future version.
+ * Uses default settings with markers included.
  */
-export const ThaiClauseSegmenter: GLOSTExtension = {
-  id: "thai-clause-segmenter-placeholder",
-  name: "Thai Clause Segmenter (Not Implemented)",
-  description: "Placeholder for Thai clause segmenter",
-  transform: () => {
-    throw new Error(
-      "Thai clause segmenter is not yet implemented. " +
-        "The API has changed to require a provider-based implementation."
-    );
-  },
-};
+export const ThaiClauseSegmenter: GLOSTExtension = createThaiClauseSegmenter({
+  includeMarkers: true,
+});
 
 // ============================================================================
 // Thai Negation Transformer (pre-configured)

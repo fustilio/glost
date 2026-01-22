@@ -2,133 +2,274 @@
 
 ## Overview
 
-GLOST is designed as a core framework that enables an ecosystem of implementations, tools, and integrations.
+GLOST is a modular ecosystem of packages for processing multilingual text with language learning annotations. The architecture follows a layered design with clear separation of concerns.
 
-## Ecosystem Layers
+## Package Architecture
 
-### 1. Core Framework
+```
+LAYER 7: MAIN EXPORT
+└── glost                        Main entry point combining all functionality
 
-**Repository:** This repo  
-**Packages:**
-- `glost` - Core types and node factories
-- `glost-common` - Language utilities and shared code
-- `glost-plugins` - Extension system and built-in extensions
-- `glost-utils` - Text parsing and manipulation
+LAYER 6: CLI & TOOLS
+└── glost-cli                    Command-line interface for plugin management
 
-**Responsibility:** Define GLOST node types, provide extension architecture, maintain TypeScript types.
+LAYER 5: FRONTEND/INTERFACE
+├── glost-react                  React components for rendering GLOST documents
+└── glost-dialogue               Dialogue syntax and helper functions
 
-### 2. Standards & Specifications
+LAYER 4: PROCESSING INFRASTRUCTURE
+├── glost-processor              Unified-style processor API
+├── glost-registry               Plugin discovery and validation
+└── glost-presets                Pre-configured plugin combinations
 
-**Standards:**
+LAYER 3: LANGUAGE PACKAGES
+├── glost-en                     English support (segmentation)
+├── glost-ja                     Japanese support (furigana, romaji, etc.)
+├── glost-ko                     Korean support (romanization)
+└── glost-th                     Thai support (RTGS, segmentation)
+
+LAYER 2: PLUGIN PACKAGES
+├── glost-transcription          Pronunciation/transcription data
+├── glost-translation            Multilingual glosses
+├── glost-frequency              Word frequency metrics
+├── glost-difficulty             CEFR/difficulty levels
+├── glost-pos                    Part-of-speech tagging
+├── glost-gender                 Grammatical gender
+├── glost-clause-segmenter       Sentence segmentation
+└── glost-inkle                  Interactive fiction integration
+
+LAYER 1: FOUNDATION
+├── glost-plugins                Core plugin system architecture
+├── glost-core                   Types, nodes, validators, tree utilities
+├── glost-common                 Language utilities and shared code
+└── glost-utils                  Text parsing and manipulation
+```
+
+## Official Packages
+
+### Foundation Layer
+
+| Package | Version | Description |
+|---------|---------|-------------|
+| `glost-core` | 0.5.0 | Core types, nodes, validators, and tree traversal utilities |
+| `glost-common` | 0.2.0 | Common utilities and language configurations |
+| `glost-utils` | 0.2.0 | Framework-agnostic utilities for text manipulation |
+| `glost-plugins` | 0.5.0 | Plugin architecture and extension system |
+
+### Plugin Packages
+
+| Package | Version | Description |
+|---------|---------|-------------|
+| `glost-transcription` | 0.4.0 | Pronunciation and transcription data (IPA, romanization) |
+| `glost-translation` | 0.4.0 | Multilingual glosses and translations |
+| `glost-frequency` | 0.4.0 | Word frequency metrics and prioritization |
+| `glost-difficulty` | 0.4.0 | CEFR levels and difficulty scoring |
+| `glost-pos` | 0.4.0 | Part-of-speech tagging and formatting |
+| `glost-gender` | 0.2.1 | Grammatical gender metadata |
+| `glost-clause-segmenter` | 0.2.1 | Sentence segmentation into clauses |
+| `glost-inkle` | 0.2.0 | Inkle/Ink interactive fiction integration |
+
+### Language Packages
+
+| Package | Version | Description |
+|---------|---------|-------------|
+| `glost-th` | 0.4.1 | Thai language support (RTGS, Paiboon+, segmentation) |
+| `glost-ja` | 0.4.0 | Japanese language support (furigana, romaji, JLPT) |
+| `glost-ko` | 0.1.0 | Korean language support (romanization) |
+| `glost-en` | 0.4.0 | English language support (segmentation) |
+
+### Processing Infrastructure
+
+| Package | Version | Description |
+|---------|---------|-------------|
+| `glost-processor` | 0.5.0 | Unified-style processor with `.use()` API |
+| `glost-registry` | 0.5.0 | Plugin discovery, validation, conflict detection |
+| `glost-presets` | 0.5.0 | Pre-configured plugin combinations |
+
+### Interface Packages
+
+| Package | Version | Description |
+|---------|---------|-------------|
+| `glost-react` | 0.5.0 | React components for rendering with ruby annotations |
+| `glost-dialogue` | 0.5.0 | Dialogue syntax and helper functions |
+
+### Main Package & Tools
+
+| Package | Version | Description |
+|---------|---------|-------------|
+| `glost` | 0.5.0 | Main entry point combining all GLOST functionality |
+| `glost-cli` | 0.5.0 | CLI for plugin management and discovery |
+
+## Package Relationships
+
+### Dependency Graph
+
+```
+glost (main)
+├── glost-core
+├── glost-processor ────────────┐
+├── glost-registry ─────────────┼── glost-plugins
+└── glost-presets ──────────────┘        │
+                                         │
+glost-react ─────── glost ───────────────┘
+glost-dialogue ─────┘                    │
+                                         │
+glost-th ─────────── glost ──────────────┤
+  ├── glost-clause-segmenter             │
+  ├── glost-transcription ───────────────┤
+  ├── glost-translation ─────────────────┤
+  ├── glost-frequency ───────────────────┤
+  ├── glost-difficulty ──────────────────┤
+  └── glost-pos ─────────────────────────┘
+
+glost-ja ─────────── glost
+  ├── glost-transcription
+  ├── glost-translation
+  ├── glost-frequency
+  ├── glost-difficulty
+  └── glost-pos
+
+glost-ko ─────────── glost
+  ├── glost-transcription
+  ├── glost-translation
+  ├── glost-frequency
+  ├── glost-difficulty
+  └── glost-pos
+
+glost-en ─────────── glost
+  └── glost-clause-segmenter
+```
+
+## How Packages Work Together
+
+### 1. Foundation → Plugins
+
+The foundation layer provides core types and utilities. The plugin system (`glost-plugins`) builds on this to enable extensible processing.
+
+```typescript
+// Foundation provides types
+import { GLOSTWord, GLOSTSentence } from 'glost-core';
+
+// Plugin system provides extension architecture
+import { processGLOST, type GLOSTExtension } from 'glost-plugins';
+```
+
+### 2. Plugins → Language Packages
+
+Individual plugins (frequency, transcription, etc.) are composed into language-specific packages that provide a complete solution for each language.
+
+```typescript
+// Language package composes multiple plugins
+import { thaiFrequencyProvider } from 'glost-th/extensions';
+import { createFrequencyExtension } from 'glost-frequency';
+
+const [freqGen, freqEnh] = createFrequencyExtension({
+  targetLanguage: 'th',
+  provider: thaiFrequencyProvider
+});
+```
+
+### 3. Processing Infrastructure
+
+The processor, registry, and presets provide the runtime infrastructure for using plugins.
+
+```typescript
+import { glost } from 'glost';
+import { languageLearningPreset } from 'glost/presets';
+
+const processor = glost()
+  .use(languageLearningPreset)
+  .freeze();
+
+const result = await processor.process(document);
+```
+
+### 4. Interface Packages
+
+Frontend packages consume processed documents for rendering.
+
+```typescript
+// React rendering
+import { GloSTWord, GloSTSentence } from 'glost-react';
+
+// Dialogue structures
+import { createDialogueFromTurns } from 'glost-dialogue';
+```
+
+## Use Cases by Package Combination
+
+### Language Learning App
+
+```
+glost + glost-th + glost-react
+├── Core processing
+├── Thai transcription, frequency, difficulty
+└── React components for UI
+```
+
+### Reading Comprehension Platform
+
+```
+glost + glost-ja + glost-clause-segmenter
+├── Core processing
+├── Japanese furigana and difficulty
+└── Sentence breakdown for easier reading
+```
+
+### Interactive Fiction
+
+```
+glost + glost-inkle + glost-dialogue
+├── Core processing
+├── Ink story integration
+└── Dialogue conversation structures
+```
+
+### Grammar Analysis Tool
+
+```
+glost + glost-pos + glost-clause-segmenter
+├── Core processing
+├── Part-of-speech tagging
+└── Clause relationship analysis
+```
+
+## Community Packages
+
+### Naming Conventions
+
+| Type | Pattern | Example |
+|------|---------|---------|
+| Language | `glost-{lang}` | `glost-th`, `glost-ja` |
+| Data Source | `glost-{lang}-datasource-{source}` | `glost-th-datasource-lexitron` |
+| Transcription | `glost-{lang}-transcription-{system}` | `glost-th-transcription-paiboon` |
+| Lookup | `glost-{lang}-lookup-{type}-{system}-{source}` | `glost-th-lookup-transcription-paiboon-lexitron` |
+
+### Creating Community Packages
+
+1. Follow [naming conventions](/docs/conventions/naming)
+2. Implement provider interfaces from plugin packages
+3. Export typed providers
+4. Document usage examples
+5. Submit PR to add to ecosystem list
+
+## Standards & Specifications
+
 - [Metadata Schema](/docs/standards/metadata-schema) - Standard metadata structure
-- [Transcription Providers](/docs/guides/implementing-transcription-providers) - Provider implementation patterns
+- [Provider Philosophy](/docs/provider-philosophy) - "No Data > Bad Data" principle
 - [Naming Conventions](/docs/conventions/naming) - Package naming patterns
-
-### 3. Production Implementations
-
-GLOST is used in applications including multi-language learning platforms, interactive reading apps, and transcription tools.
-
-### 4. Community Packages
-
-**Categories:**
-- **Language Packages:** `glost-{lang}` - Language-specific helpers
-- **Data Sources:** `glost-{lang}-datasource-{source}` - Dictionary and corpus data
-- **Transcription Systems:** `glost-{lang}-transcription-{system}` - Specific transcription implementations
-- **Lookup Factories:** `glost-{lang}-lookup-{type}-{system}-{source}` - Combined lookup solutions
-- **Plugins:** `glost-plugin-{framework}` - Framework integrations
-
-### 5. Developer Tools
-
-Testing utilities, validation tools, documentation generators, and migration scripts.
-
-## Core and Implementations
-
-| Aspect | GLOST Core | Production Implementations |
-|--------|------------|---------------------------|
-| **Scope** | Foundation types | Complete applications |
-| **Dependencies** | Minimal | As needed |
-| **Features** | Essential | Comprehensive |
-| **React Components** | Basic (optional) | Production-ready |
-
-GLOST Core provides the type system, extension architecture, and standard patterns. Implementations provide real-world validation, practical patterns, and additional features.
-
-## Production Use
-
-GLOST has been used in real-world applications with multiple languages across different writing systems, various transcription systems (IPA, romanization, phonetic), and hundreds of words with metadata.
-
-**Applications:**
-- Interactive stories with progressive disclosure
-- Transcription and pronunciation tools
-- Vocabulary builders
-- Graded readers
-- Content management for language learning
-
-## Contributing
-
-### As a User
-
-Build applications, share feedback, report issues, and write examples.
-
-### As a Package Author
-
-Follow naming conventions, adopt metadata schema, publish to npm, document your work, and submit PRs to add packages to the ecosystem list.
-
-### As an Implementation Team
-
-Build on GLOST core, share patterns, participate in standards, showcase your work, and provide feedback.
-
-## Standards Development
-
-For proposing new standards or changes:
-1. Draft proposal and document your idea
-2. Open discussion via GitHub issue
-3. Gather and incorporate feedback
-4. Iterate and refine
-5. Adopt by merging into standards docs
-
-**Adopted Standards:**
-- [Metadata Schema v1](/docs/standards/metadata-schema)
-- [Transcription Provider Patterns](/docs/guides/implementing-transcription-providers)
-- [Naming Conventions](/docs/conventions/naming)
-- [SRP/SSOT Architecture](/docs/architecture-summary)
-
-## Ecosystem Packages
-
-### Official Packages
-
-| Package | Description | Status |
-|---------|-------------|--------|
-| `glost` | Core types and nodes | Active |
-| `glost-common` | Language utilities | Active |
-| `glost-plugins` | Extension system | Active |
-| `glost-utils` | Text utilities | Active |
-| `glost-plugin-inkle` | Inkle integration | Active |
-| `glost-th` | Thai language support | Active |
-| `glost-ja` | Japanese language support | Active |
-
-### Community Packages
-
-Submit a PR to add your package to this list.
+- [Transcription Providers](/docs/guides/implementing-transcription-providers) - Provider patterns
 
 ## Getting Help
 
-- **Documentation:** [Getting Started](/docs/getting-started), [Core Concepts](/docs/concepts/nodes), [Plugin System](/docs/concepts/plugins)
-- **Community:** GitHub Issues for bugs and features, GitHub Discussions for questions
-- **Examples:** See [examples](https://github.com/fustilio/glost/tree/main/examples) on GitHub
-
-For implementers, review case studies, check implementation guides, follow naming conventions, and study example code.
-
-## Ecosystem Principles
-
-1. **Core Stays Focused** - GLOST core provides foundation (types, extension architecture, basic utilities), not features (UI components, data sources, complete language implementations)
-2. **Standards Enable Ecosystem** - Shared standards help everyone
-3. **Implementations Validate Standards** - Real production use proves patterns work
-4. **Clear Attribution** - Acknowledge contributions and link to source implementations
-5. **Complementary, Not Competitive** - Different layers serve different needs
+- **Documentation:** [Getting Started](/docs/getting-started), [Core Concepts](/docs/concepts/nodes)
+- **Examples:** See [examples](https://github.com/fustilio/glost/tree/main/examples)
+- **Issues:** [GitHub Issues](https://github.com/fustilio/glost/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/fustilio/glost/discussions)
 
 ## See Also
 
 - [Why GLOST?](/docs/why)
 - [Architecture Summary](/docs/architecture-summary)
+- [Getting Started](/docs/getting-started)
 - [Contributing](https://github.com/fustilio/glost/blob/main/CONTRIBUTING.md)
-- [Examples](https://github.com/fustilio/glost/tree/main/examples)

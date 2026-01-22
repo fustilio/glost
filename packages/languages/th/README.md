@@ -317,6 +317,48 @@ console.log(analyzeTone("ก่า"));  // "Low"
 console.log(analyzeTone("ก้า"));  // "Falling"
 ```
 
+## Presets
+
+Pre-configured extension combinations for common use cases:
+
+```typescript
+import { thaiQuickStartPreset } from "glost-th/presets";
+import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+
+const result = await processGLOSTWithExtensionsAsync(
+  document,
+  thaiQuickStartPreset
+);
+```
+
+**Available Presets:**
+- `thaiMinimalPreset` - Just transcription (fastest)
+- `thaiQuickStartPreset` - Transcription + Translation (recommended for beginners)
+- `thaiPronunciationPreset` - For pronunciation practice
+- `thaiGrammarPreset` - With clause segmentation for grammar analysis
+- `thaiLearningPreset` - Comprehensive (all features for language learning)
+
+**Customizing Presets:**
+
+```typescript
+import { createThaiLearningPreset } from "glost-th/presets";
+
+const preset = createThaiLearningPreset({
+  nativeLanguage: "es-ES",  // Spanish translations
+  includeGrammar: true,
+});
+```
+
+**Preset Comparison:**
+
+| Preset | Transcription | Translation | Grammar | Syllables |
+|--------|--------------|-------------|---------|-----------|
+| `thaiMinimalPreset` | ✓ | - | - | - |
+| `thaiQuickStartPreset` | ✓ | ✓ | - | - |
+| `thaiPronunciationPreset` | ✓ | ✓ | - | ✓ |
+| `thaiGrammarPreset` | ✓ | ✓ | ✓ | - |
+| `thaiLearningPreset` | ✓ | ✓ | ✓ | ✓ |
+
 ## Related Packages
 
 - **`glost`** - Core GLOST types and utilities

@@ -1,0 +1,254 @@
+# glost-registry
+
+Plugin discovery, validation, and conflict detection for GLOST.
+
+## Installation
+
+```bash
+npm install glost-registry glost-core glost-plugins
+```
+
+Or use the main `glost` package which includes the registry:
+
+```bash
+npm install glost
+```
+
+## Features
+
+- Plugin registration with metadata
+- Search and filtering
+- Conflict detection
+- Version validation
+- Capability checking
+
+## Quick Start
+
+```typescript
+import { pluginRegistry } from 'glost';
+
+// Register a plugin
+pluginRegistry.register({
+  id: 'my-plugin',
+  name: 'My Plugin',
+  version: '1.0.0',
+  description: 'Does something useful',
+  plugin: myPluginImplementation
+});
+
+// Find plugins
+const frequencyPlugins = pluginRegistry.search({ category: 'frequency' });
+
+// Get a specific plugin
+const plugin = pluginRegistry.get('my-plugin');
+```
+
+## API
+
+### pluginRegistry
+
+Singleton registry instance.
+
+```typescript
+import { pluginRegistry } from 'glost';
+```
+
+### register(metadata)
+
+Register a plugin with metadata.
+
+```typescript
+pluginRegistry.register({
+  id: 'frequency-thai',
+  name: 'Thai Frequency Plugin',
+  version: '1.0.0',
+  description: 'Word frequency data for Thai',
+  category: 'frequency',
+  languages: ['th'],
+  plugin: thaiFrequencyPlugin,
+  dependencies: [],
+  conflicts: ['frequency-generic']
+});
+```
+
+### registerAll(plugins)
+
+Register multiple plugins at once.
+
+```typescript
+pluginRegistry.registerAll([
+  { id: 'plugin1', ... },
+  { id: 'plugin2', ... }
+]);
+```
+
+### get(id)
+
+Get a plugin by ID.
+
+```typescript
+const plugin = pluginRegistry.get('frequency-thai');
+if (plugin) {
+  console.log(plugin.name);  // 'Thai Frequency Plugin'
+}
+```
+
+### search(criteria)
+
+Search for plugins matching criteria.
+
+```typescript
+// By category
+const freqPlugins = pluginRegistry.search({ category: 'frequency' });
+
+// By language
+const thaiPlugins = pluginRegistry.search({ language: 'th' });
+
+// By name pattern
+const posPlugins = pluginRegistry.search({ name: /pos/i });
+
+// Combined
+const results = pluginRegistry.search({
+  category: 'transcription',
+  language: 'ja'
+});
+```
+
+### has(id)
+
+Check if a plugin exists.
+
+```typescript
+if (pluginRegistry.has('frequency-thai')) {
+  // Plugin is registered
+}
+```
+
+### remove(id)
+
+Remove a plugin from the registry.
+
+```typescript
+pluginRegistry.remove('my-plugin');
+```
+
+### list()
+
+List all registered plugins.
+
+```typescript
+const allPlugins = pluginRegistry.list();
+console.log(`${allPlugins.length} plugins registered`);
+```
+
+## Plugin Metadata
+
+### Required Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `string` | Unique identifier |
+| `name` | `string` | Human-readable name |
+| `version` | `string` | Semver version |
+| `plugin` | `Plugin` | Plugin implementation |
+
+### Optional Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `description` | `string` | What the plugin does |
+| `category` | `string` | Plugin category |
+| `languages` | `string[]` | Supported languages |
+| `dependencies` | `string[]` | Required plugins |
+| `conflicts` | `string[]` | Incompatible plugins |
+| `author` | `string` | Plugin author |
+| `homepage` | `string` | Documentation URL |
+
+## Conflict Detection
+
+The registry detects conflicts between plugins.
+
+```typescript
+// Register conflicting plugins
+pluginRegistry.register({
+  id: 'frequency-v1',
+  conflicts: ['frequency-v2']
+});
+
+pluginRegistry.register({
+  id: 'frequency-v2',
+  conflicts: ['frequency-v1']
+});
+
+// Check for conflicts
+const conflicts = pluginRegistry.checkConflicts(['frequency-v1', 'frequency-v2']);
+// Returns: [{ plugins: ['frequency-v1', 'frequency-v2'], reason: '...' }]
+```
+
+## Dependency Resolution
+
+Validate that all dependencies are met.
+
+```typescript
+pluginRegistry.register({
+  id: 'advanced-analysis',
+  dependencies: ['frequency', 'pos']
+});
+
+// Check dependencies
+const missing = pluginRegistry.checkDependencies('advanced-analysis');
+// Returns array of missing plugin IDs
+```
+
+## Version Validation
+
+```typescript
+// Check if a specific version is available
+const plugin = pluginRegistry.get('frequency', '^1.0.0');
+
+// List all versions
+const versions = pluginRegistry.getVersions('frequency');
+```
+
+## Categories
+
+Common plugin categories:
+
+| Category | Description |
+|----------|-------------|
+| `transcription` | Pronunciation data |
+| `translation` | Glosses and translations |
+| `frequency` | Word frequency metrics |
+| `difficulty` | Difficulty/CEFR levels |
+| `pos` | Part-of-speech tagging |
+| `gender` | Grammatical gender |
+| `segmentation` | Text segmentation |
+
+## Example: Plugin Discovery UI
+
+```typescript
+import { pluginRegistry } from 'glost';
+
+function PluginBrowser({ language }) {
+  const plugins = pluginRegistry.search({ language });
+
+  return (
+    <div>
+      <h2>Plugins for {language}</h2>
+      {plugins.map(p => (
+        <div key={p.id}>
+          <h3>{p.name}</h3>
+          <p>{p.description}</p>
+          <span>v{p.version}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+## See Also
+
+- [Plugin Registry Guide](/docs/guides/registry)
+- [glost-processor](/docs/packages/processor) - Using plugins
+- [glost-presets](/docs/packages/presets) - Pre-configured combinations

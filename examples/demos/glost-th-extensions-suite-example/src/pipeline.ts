@@ -224,8 +224,7 @@ export function createThaiGrammarPipeline(
   pipeline.push(ThaiWordJoinerExtension);
 
   // 2. Clause segmentation
-  // TODO: Re-enable when clause segmenter is properly implemented
-  // pipeline.push(ThaiClauseSegmenter);
+  pipeline.push(ThaiClauseSegmenter);
 
   // 3. Syllable segmentation (operates on composite words)
   if (includeSyllables) {
@@ -299,10 +298,9 @@ export function createThaiComprehensivePipeline(
   pipeline.push(ThaiWordJoinerExtension);
 
   // Clause segmentation (if grammar analysis needed)
-  // TODO: Re-enable when clause segmenter is properly implemented
-  // if (includeGrammar) {
-  //   pipeline.push(ThaiClauseSegmenter);
-  // }
+  if (includeGrammar) {
+    pipeline.push(ThaiClauseSegmenter);
+  }
 
   // Syllable segmentation last among transformers (operates on composite words)
   if (includeSyllables) {

@@ -1,0 +1,265 @@
+# glost-processor
+
+Unified-style processor for GLOST documents with a fluent plugin API.
+
+## Installation
+
+```bash
+npm install glost-processor glost-core glost-plugins
+```
+
+Or use the main `glost` package which includes the processor:
+
+```bash
+npm install glost
+```
+
+## Features
+
+- Unified/remark-style `.use()` API
+- Plugin chaining and composition
+- Lifecycle hooks (before, after, error)
+- Async/await support
+- TypeScript types
+
+## Quick Start
+
+```typescript
+import { glost } from 'glost';
+import { languageLearningPreset } from 'glost/presets';
+
+// Create processor
+const processor = glost()
+  .use(languageLearningPreset)
+  .freeze();
+
+// Process document
+const result = await processor.process(document);
+```
+
+## API
+
+### glost()
+
+Create a new processor instance.
+
+```typescript
+import { glost } from 'glost';
+
+const processor = glost();
+```
+
+### .use(plugin)
+
+Register a plugin or preset.
+
+```typescript
+processor
+  .use(frequencyPlugin)
+  .use(difficultyPlugin)
+  .use(posPlugin);
+```
+
+Plugins can be:
+- Single extensions
+- Arrays of extensions
+- Presets (named plugin collections)
+- Factory functions
+
+### .freeze()
+
+Finalize the processor. After freezing, no more plugins can be added.
+
+```typescript
+const frozenProcessor = processor.freeze();
+```
+
+### .process(document)
+
+Process a GLOST document through the plugin pipeline.
+
+```typescript
+const result = await processor.process(document);
+```
+
+Returns a `ProcessingResult`:
+
+```typescript
+interface ProcessingResult {
+  document: GLOSTRoot;      // Processed document
+  metadata: {
+    duration: number;       // Processing time (ms)
+    pluginCount: number;    // Number of plugins run
+    warnings: string[];     // Any warnings
+  };
+}
+```
+
+## Lifecycle Hooks
+
+### before
+
+Run before processing starts.
+
+```typescript
+const processor = glost()
+  .use(myPlugin)
+  .before((doc) => {
+    console.log('Starting processing...');
+    return doc;  // Can modify document
+  })
+  .freeze();
+```
+
+### after
+
+Run after processing completes.
+
+```typescript
+const processor = glost()
+  .use(myPlugin)
+  .after((result) => {
+    console.log(`Processed in ${result.metadata.duration}ms`);
+    return result;
+  })
+  .freeze();
+```
+
+### error
+
+Handle processing errors.
+
+```typescript
+const processor = glost()
+  .use(myPlugin)
+  .error((err, doc) => {
+    console.error('Processing failed:', err);
+    // Return fallback or rethrow
+    return { document: doc, metadata: { ... } };
+  })
+  .freeze();
+```
+
+### skip
+
+Conditionally skip processing.
+
+```typescript
+const processor = glost()
+  .use(myPlugin)
+  .skip((doc) => {
+    // Skip if document is empty
+    return doc.children.length === 0;
+  })
+  .freeze();
+```
+
+### progress
+
+Track processing progress.
+
+```typescript
+const processor = glost()
+  .use(myPlugin)
+  .progress((current, total, pluginName) => {
+    console.log(`${current}/${total}: ${pluginName}`);
+  })
+  .freeze();
+```
+
+## Using with Extensions
+
+### Single Extension
+
+```typescript
+import { processGLOST } from 'glost-plugins';
+import { createFrequencyExtension } from 'glost-frequency';
+
+const [freqGen, freqEnh] = createFrequencyExtension({
+  targetLanguage: 'th',
+  provider: myProvider
+});
+
+const result = await processGLOST(document, [freqGen, freqEnh]);
+```
+
+### Multiple Extensions
+
+```typescript
+import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
+
+const extensions = [
+  ...createFrequencyExtension({ ... }),
+  ...createDifficultyExtension({ ... }),
+  ...createPosExtension({ ... })
+];
+
+const result = await processGLOSTWithExtensionsAsync(document, extensions);
+```
+
+## Processor Options
+
+```typescript
+import { glost } from 'glost';
+
+const processor = glost({
+  // Throw on first error (default: true)
+  throwOnError: true,
+
+  // Enable debug logging
+  debug: false,
+
+  // Maximum processing time (ms)
+  timeout: 30000
+});
+```
+
+## TypeScript
+
+```typescript
+import type {
+  Plugin,
+  Preset,
+  ProcessorOptions,
+  ProcessingResult
+} from 'glost-processor';
+```
+
+## Example: Custom Processing Pipeline
+
+```typescript
+import { glost } from 'glost';
+
+const processor = glost()
+  // Add plugins
+  .use(transcriptionPlugin)
+  .use(frequencyPlugin)
+  .use(difficultyPlugin)
+
+  // Add hooks
+  .before((doc) => {
+    console.log(`Processing ${doc.children.length} paragraphs`);
+    return doc;
+  })
+  .after((result) => {
+    console.log(`Done in ${result.metadata.duration}ms`);
+    return result;
+  })
+  .error((err) => {
+    console.error('Failed:', err);
+    throw err;
+  })
+
+  // Finalize
+  .freeze();
+
+// Use processor
+const result = await processor.process(myDocument);
+```
+
+## See Also
+
+- [Processor API Guide](/docs/guides/processor-api)
+- [glost-registry](/docs/packages/registry) - Plugin discovery
+- [glost-presets](/docs/packages/presets) - Pre-configured combinations
+- [Using Plugins](/docs/guides/using-plugins)

@@ -275,7 +275,8 @@ export function createPluginTemplate(name: string): void {
   const template = `/**
  * ${name}
  * 
- * TODO: Add description
+ * Describe what this extension does and how it enhances GLOST documents.
+ * Include examples of use cases and what data it adds or transforms.
  */
 
 import type { GLOSTExtension } from "glost-plugins";
@@ -283,32 +284,40 @@ import type { GLOSTExtension } from "glost-plugins";
 export const ${name}Extension: GLOSTExtension = {
   id: "${name.toLowerCase()}",
   name: "${name}",
-  description: "TODO: Add description",
+  description: "A brief description of what this extension does",
   
-  // TODO: Implement transform, visit, or enhanceMetadata
+  // Choose one or more of these methods based on your extension's needs:
+  // - transform: Modify the document tree structure (e.g., add nodes, reorganize)
+  // - visit: Visit specific node types and modify them in place
+  // - enhanceMetadata: Add metadata to word nodes (translations, difficulty, etc.)
   transform: (tree) => {
-    // Transform the document tree
+    // Implement your transformation logic here
+    // Return the modified tree
     return tree;
   },
   
-  // Optional: Declare dependencies
+  // Optional: Declare dependencies on other extensions
   // dependencies: ["other-plugin"],
   
-  // Optional: Declare requirements
+  // Optional: Declare what this extension requires from the document
   // requires: {
-  //   extras: ["field-name"],
-  //   metadata: ["metadata-field"],
+  //   extras: ["field-name"],      // Requires specific extras fields
+  //   metadata: ["metadata-field"], // Requires specific metadata fields
   // },
   
-  // Optional: Declare what this extension provides
+  // Optional: Declare what this extension provides to the document
   // provides: {
-  //   extras: ["my-field"],
+  //   extras: ["my-field"],         // Adds extras fields
+  //   metadata: ["my-metadata"],    // Adds metadata fields
+  //   nodes: ["MyNodeType"],        // Adds new node types
   // },
 };
 
-// Export as a plugin function
+// Export as a plugin function with configurable options
 export function ${name.toLowerCase()}(options?: {
-  // TODO: Add options
+  // Define your extension's configuration options here
+  // Example: enabled?: boolean;
+  // Example: provider?: MyProvider;
 }) {
   return (pluginOptions?: any): GLOSTExtension => {
     return {

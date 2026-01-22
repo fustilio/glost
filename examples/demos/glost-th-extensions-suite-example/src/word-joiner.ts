@@ -136,10 +136,24 @@ function mergeWordsIntoComposite(
     }
   }
 
+  // Store individual word transcriptions for rendering
+  const individualTranscriptions: Array<Record<string, string>> = words.map((w) => {
+    const trans: Record<string, string> = {};
+    if (w.transcription) {
+      for (const [scheme, data] of Object.entries(w.transcription)) {
+        if (data && typeof data === 'object' && 'text' in data) {
+          trans[scheme] = (data as any).text;
+        }
+      }
+    }
+    return trans;
+  });
+
   // Merge metadata from individual words
   const mergedExtras: any = {
     ...words[0]?.extras,
     originalChunks: words.map((w) => getWordTextContent(w)),
+    originalTranscriptions: individualTranscriptions, // Preserve individual word transcriptions
     isComposite: true,
   };
 
