@@ -18,6 +18,12 @@
 import type { GLOSTExtension } from "glost-plugins";
 import type { GLOSTWord } from "glost";
 import { getWordText } from "glost";
+import type { GlostLanguage } from "glost-common";
+import { Logger, type LogVerbosity } from "glost-utils/logger";
+
+// Re-export logger types for external use
+export type { LogVerbosity } from "glost-utils/logger";
+export { Logger } from "glost-utils/logger";
 
 /**
  * Provider interface for transcription data
@@ -50,8 +56,6 @@ export interface TranscriptionProvider {
   ): Promise<Record<string, string> | undefined>;
 }
 
-import type { GlostLanguage } from "glost-common";
-
 /**
  * Transcription extension options
  */
@@ -69,6 +73,12 @@ export interface TranscriptionExtensionOptions {
    * - import { japaneseTranscriptionProvider } from "glost-ja/extensions"
    */
   provider: TranscriptionProvider;
+
+  /**
+   * Log verbosity level
+   * @default "info"
+   */
+  verbosity?: LogVerbosity;
 }
 
 
@@ -106,11 +116,21 @@ export interface TranscriptionExtensionOptions {
  *   provider: japaneseTranscriptionProvider
  * });
  * ```
+ *
+ * @example
+ * ```typescript
+ * // With custom verbosity
+ * const extension = createTranscriptionExtension({
+ *   targetLanguage: "th",
+ *   provider: thaiTranscriptionProvider,
+ *   verbosity: "silent" // Options: "silent" | "error" | "warn" | "info" | "debug"
+ * });
+ * ```
  */
 export function createTranscriptionExtension(
   options: TranscriptionExtensionOptions,
 ): GLOSTExtension {
-  const { targetLanguage, provider } = options;
+  const { targetLanguage, provider, verbosity = "info" } = options;
 
   if (!provider) {
     throw new Error(
@@ -119,6 +139,9 @@ export function createTranscriptionExtension(
       "import { thaiTranscriptionProvider } from 'glost-th/extensions'"
     );
   }
+
+  // Create a logger instance for this extension
+  const logger = new Logger(verbosity, "[Transcription Extension]");
 
   return {
     id: "transcription",
@@ -129,7 +152,7 @@ export function createTranscriptionExtension(
       word: async (node: GLOSTWord) => {
         // Skip if transcription already exists
         if (node.transcription && Object.keys(node.transcription).length > 0) {
-          console.log(`[Transcription Extension] Skipping "${getWordText(node)}" - already has transcription`);
+          logger.info(`Skipping "${getWordText(node)}" - already has transcription`);
           return;
         }
 
@@ -143,7 +166,9 @@ export function createTranscriptionExtension(
 
         // Get language from node or use target language
         const nodeLanguage = node.lang || targetLanguage;
-        console.log(`[Transcription Extension] Looking up transcription for: "${cleanWordText}" (lang: ${nodeLanguage}, target: ${targetLanguage})`);
+        logger.debug(
+          `Looking up transcription for: "${cleanWordText}" (lang: ${nodeLanguage}, target: ${targetLanguage})`
+        );
 
         try {
           const transcriptions = await provider.getTranscriptions(
@@ -164,16 +189,13 @@ export function createTranscriptionExtension(
               };
             }
             node.transcription = glostTranscription;
-            console.log(`[Transcription Extension] ✓ Added transcription for "${cleanWordText}"`);
+            logger.info(`✓ Added transcription for "${cleanWordText}"`);
           } else {
-            console.log(`[Transcription Extension] ✗ No transcription found for "${cleanWordText}"`);
+            logger.info(`✗ No transcription found for "${cleanWordText}"`);
           }
         } catch (error) {
           // Silently fail - transcription lookup is optional
-          console.debug(
-            `[Transcription] Lookup failed for "${cleanWordText}":`,
-            error,
-          );
+          logger.debug(`Lookup failed for "${cleanWordText}":`, error);
         }
       },
     },

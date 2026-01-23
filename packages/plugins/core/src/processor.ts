@@ -23,6 +23,7 @@ import type {
 import { extensionRegistry } from "./registry.js";
 import { deepMerge } from "./utils/deep-merge.js";
 import { MissingNodeTypeError } from "./errors.js";
+import { Logger, type LogVerbosity } from "glost-utils/logger";
 
 /**
  * Check if a document contains a specific node type
@@ -78,7 +79,7 @@ function validateNodeRequirements(
       );
 
       if (options.lenient) {
-        console.warn(`[glost-plugins] ${error.message}`);
+        logger.warn(error.message);
       } else {
         errors.push(error);
       }
@@ -156,6 +157,15 @@ export function processGLOSTWithExtensions(
   extensions: GLOSTExtension[],
   options: ProcessorOptions = {},
 ): ExtensionResult {
+  // Determine verbosity from options
+  let verbosity: LogVerbosity = options.verbosity ?? "info";
+  if (options.debug) {
+    verbosity = "debug";
+  }
+  
+  // Create logger instance
+  const logger = new Logger(verbosity, "[glost-plugins]");
+
   // Register extensions temporarily if not already registered
   const tempExtensions: string[] = [];
   for (const ext of extensions) {

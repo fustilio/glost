@@ -26,7 +26,8 @@
   "dependencies": {
     "glost": "workspace:*",
     "glost-common": "workspace:*",
-    "glost-plugins": "workspace:*"
+    "glost-plugins": "workspace:*",
+    "glost-utils": "workspace:*"
   },
   "devDependencies": {
     "typescript": "catalog:",

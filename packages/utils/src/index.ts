@@ -77,6 +77,13 @@ export {
   type TranscriptionMigrationResult,
 } from "./migrate-transcription-schema.js";
 
+// Export logger utilities
+export {
+  Logger,
+  createLogger,
+  type LogVerbosity,
+} from "./logger.js";
+
 // Re-export commonly used utilities from glost for convenience
 export {
   // Tree traversal

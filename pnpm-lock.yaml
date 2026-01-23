@@ -671,6 +671,9 @@ importers:
       glost-core:
         specifier: workspace:*
         version: link:../../core
+      glost-utils:
+        specifier: workspace:*
+        version: link:../../utils
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
@@ -791,6 +794,9 @@ importers:
       glost-plugins:
         specifier: workspace:*
         version: link:../core
+      glost-utils:
+        specifier: workspace:*
+        version: link:../../utils
     devDependencies:
       typescript:
         specifier: 'catalog:'

@@ -36,6 +36,10 @@
     "./interfaces": {
       "types": "./src/interfaces.ts",
       "default": "./src/interfaces.ts"
+    },
+    "./logger": {
+      "types": "./src/logger.ts",
+      "default": "./src/logger.ts"
     }
   },
   "scripts": {

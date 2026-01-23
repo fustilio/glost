@@ -331,12 +331,35 @@ export interface ProcessorOptions {
    * 
    * Default: false
    * 
+   * @deprecated Use `verbosity` instead for more granular control
+   * 
    * @example
    * ```typescript
    * processGLOST(doc, extensions, { debug: true });
    * ```
    */
   debug?: boolean;
+
+  /**
+   * Log verbosity level
+   * 
+   * Controls the verbosity of logging throughout the processor:
+   * - "silent": No logs
+   * - "error": Only error logs
+   * - "warn": Warning and error logs
+   * - "info": Info, warning, and error logs (default)
+   * - "debug": All logs including debug information
+   * 
+   * If `debug: true` is set, verbosity is automatically set to "debug".
+   * 
+   * @default "info"
+   * 
+   * @example
+   * ```typescript
+   * processGLOST(doc, extensions, { verbosity: "debug" });
+   * ```
+   */
+  verbosity?: "silent" | "error" | "warn" | "info" | "debug";
 
   /**
    * Callback invoked when an extension skips a node

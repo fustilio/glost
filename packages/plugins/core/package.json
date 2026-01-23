@@ -46,6 +46,7 @@
   "dependencies": {
     "glost-core": "workspace:*",
     "glost-common": "workspace:*",
+    "glost-utils": "workspace:*",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
