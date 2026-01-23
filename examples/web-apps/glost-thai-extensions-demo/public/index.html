@@ -145,6 +145,10 @@
         width: 100%;
         flex-shrink: 0;
       }
+      /* Ensure consistent styling for all text elements */
+      .output > span {
+        vertical-align: baseline;
+      }
       .translation {
         font-size: 0.85rem;
         color: #666;
@@ -259,8 +263,8 @@
           💡 Text is automatically segmented into words using Intl.Segmenter. Spaces are optional.
         </small>
         <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-          <button type="button" class="demo-btn" onclick="loadDemo('สวัสดีครับ')">Demo: Hello</button>
-          <button type="button" class="demo-btn" onclick="loadDemo('บารัก ฮูเซน โอบามา ที่ 2 (อังกฤษ: Barack Hussein Obama II; เกิด 4 สิงหาคม ค.ศ. 1961) เป็นนักการเมืองชาวอเมริกัน ซึ่งดำรงตำแหน่งประธานาธิบดีสหรัฐคนที่ 44 ตั้งแต่ ค.ศ. 2009–2017 เป็นประธานาธิบดีสหรัฐคนแรกที่เป็นชาวอเมริกันเชื้อสายแอฟริกาและเกิดนอกสหรัฐแผ่นดินใหญ่ ก่อนหน้านั้น เขาเคยดำรงตำแหน่งสมาชิกวุฒิสภาสหรัฐจากรัฐอิลลินอย ตั้งแต่ ค.ศ. 2005–2008 และสมาชิกวุฒิสภาอิลลินอยตั้งแต่ ค.ศ. 1997–2004')">Demo: Obama</button>
+          <button type="button" class="demo-btn" onclick="loadDemoByIndex(0)">Demo: Hello</button>
+          <button type="button" class="demo-btn" onclick="loadDemoByIndex(1)">Demo: Obama</button>
         </div>
         
         <div class="controls">
@@ -270,6 +274,18 @@
               <option value="rtgs" selected>RTGS</option>
               <option value="ipa">IPA</option>
             </select>
+          </div>
+          <div class="control-group">
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" id="showTranscription" name="showTranscription" checked style="cursor: pointer;">
+              <span>Show Transcription</span>
+            </label>
+          </div>
+          <div class="control-group">
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" id="showTranslation" name="showTranslation" checked style="cursor: pointer;">
+              <span>Show Translation</span>
+            </label>
           </div>
           <div class="control-group">
             <button type="submit">Process Text</button>
@@ -287,6 +303,12 @@
     </div>
 
     <script>
+      // Demo texts array
+      const demos = [
+        'สวัสดีครับ',
+        'บารัก ฮูเซน โอบามา ที่ 2 (อังกฤษ: Barack Hussein Obama II; เกิด 4 สิงหาคม ค.ศ. 1961) เป็นนักการเมืองชาวอเมริกัน ซึ่งดำรงตำแหน่งประธานาธิบดีสหรัฐคนที่ 44 ตั้งแต่ ค.ศ. 2009–2017 เป็นประธานาธิบดีสหรัฐคนแรกที่เป็นชาวอเมริกันเชื้อสายแอฟริกาและเกิดนอกสหรัฐแผ่นดินใหญ่ ก่อนหน้านั้น เขาเคยดำรงตำแหน่งสมาชิกวุฒิสภาสหรัฐจากรัฐอิลลินอย ตั้งแต่ ค.ศ. 2005–2008 และสมาชิกวุฒิสภาอิลลินอยตั้งแต่ ค.ศ. 1997–2004'
+      ];
+
       // Load demo text
       function loadDemo(text) {
         const input = document.getElementById('input');
@@ -297,6 +319,13 @@
         }, 100);
       }
 
+      // Load demo by index
+      function loadDemoByIndex(index) {
+        if (index >= 0 && index < demos.length) {
+          loadDemo(demos[index]);
+        }
+      }
+
       // Auto-submit on Enter (Ctrl/Cmd + Enter)
       document.getElementById('input').addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
@@ -305,8 +334,34 @@
         }
       });
 
-      // Initial load
+      // Auto-submit when checkboxes change
+      document.getElementById('showTranscription').addEventListener('change', () => {
+        const form = document.getElementById('process-form');
+        if (document.getElementById('input').value.trim()) {
+          htmx.trigger(form, 'submit');
+        }
+      });
+
+      document.getElementById('showTranslation').addEventListener('change', () => {
+        const form = document.getElementById('process-form');
+        if (document.getElementById('input').value.trim()) {
+          htmx.trigger(form, 'submit');
+        }
+      });
+
+      // Initial load - check for demo query parameter
       window.addEventListener('load', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const demoIndex = urlParams.get('demo');
+        
+        if (demoIndex !== null) {
+          const index = parseInt(demoIndex, 10);
+          if (!isNaN(index) && index >= 0 && index < demos.length) {
+            loadDemoByIndex(index);
+            return; // Don't auto-submit default text
+          }
+        }
+        
         const form = document.getElementById('process-form');
         if (document.getElementById('input').value.trim()) {
           htmx.trigger(form, 'submit');

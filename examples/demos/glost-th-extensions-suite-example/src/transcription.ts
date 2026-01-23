@@ -36,15 +36,23 @@ const thaiTranscriptionProviderAdapter: TranscriptionProvider = {
       return undefined;
     }
 
-    // Use demo Thai transcription provider from glost-th
-    // In a real implementation, this would use comprehensive dictionary data
-    const transcriptions = getDemoThaiTranscriptions(word);
-
-    // Return undefined if no transcriptions found
-    if (!transcriptions || Object.keys(transcriptions).length === 0) {
+    // Normalize word (trim whitespace) before lookup
+    const normalizedWord = word.trim();
+    if (!normalizedWord) {
       return undefined;
     }
 
+    // Use demo Thai transcription provider from glost-th
+    // In a real implementation, this would use comprehensive dictionary data
+    const transcriptions = getDemoThaiTranscriptions(normalizedWord);
+
+    // Debug logging
+    if (!transcriptions || Object.keys(transcriptions).length === 0) {
+      console.log(`[Transcription] No transcription found for: "${normalizedWord}"`);
+      return undefined;
+    }
+
+    console.log(`[Transcription] Found transcription for: "${normalizedWord}" -> ${transcriptions.rtgs || 'N/A'}`);
     return transcriptions;
   },
 };

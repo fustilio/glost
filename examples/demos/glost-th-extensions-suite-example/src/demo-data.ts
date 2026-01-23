@@ -87,6 +87,45 @@ export const DEMO_THAI_VOCABULARY: ThaiVocabularyEntry[] = [
     partOfSpeech: "phrase",
   },
   {
+    word: "จากรัฐอิลลินอย",
+    transcriptions: {
+      rtgs: "chak rat illinoy",
+      ipa: "t͡ɕàːk.rát.ʔil.lí.nɔːj",
+      "paiboon+": "jàak-rát-il-lí-noi",
+      aua: "chak rat illinoy",
+    },
+    translation: {
+      en: "from Illinois state",
+    },
+    partOfSpeech: "phrase",
+  },
+  {
+    word: "สมาชิกวุฒิสภาสหรัฐ",
+    transcriptions: {
+      rtgs: "samachik wutthisapha saharat",
+      ipa: "sa.maː.t͡ɕʰík.wút.tʰí.sà.pʰaː.sà.hà.rát",
+      "paiboon+": "sà-maa-chík-wút-tí-sà-paa-sà-hà-rát",
+      aua: "samachik wutthisapha saharat",
+    },
+    translation: {
+      en: "US Senate member",
+    },
+    partOfSpeech: "phrase",
+  },
+  {
+    word: "สมาชิกวุฒิสภาอิลลินอย",
+    transcriptions: {
+      rtgs: "samachik wutthisapha illinoy",
+      ipa: "sa.maː.t͡ɕʰík.wút.tʰí.sà.pʰaː.ʔil.lí.nɔːj",
+      "paiboon+": "sà-maa-chík-wút-tí-sà-paa-il-lí-noi",
+      aua: "samachik wutthisapha illinoy",
+    },
+    translation: {
+      en: "Illinois Senate member",
+    },
+    partOfSpeech: "phrase",
+  },
+  {
     word: "ค่ะ",
     transcriptions: {
       rtgs: "kha",
@@ -512,9 +551,22 @@ export const DEMO_THAI_VOCABULARY: ThaiVocabularyEntry[] = [
       aua: "saharat",
     },
     translation: {
-      en: "United States",
+      en: "United States, USA",
     },
-    partOfSpeech: "noun",
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "สหรัฐอเมริกา",
+    transcriptions: {
+      rtgs: "saharat amerika",
+      ipa: "sà.hà.rát.ʔa.me.rí.kaː",
+      "paiboon+": "sà-hà-rát-a-me-rí-kaa",
+      aua: "saharat amerika",
+    },
+    translation: {
+      en: "United States of America, USA",
+    },
+    partOfSpeech: "proper noun",
   },
   {
     word: "คน",
@@ -686,6 +738,19 @@ export const DEMO_THAI_VOCABULARY: ThaiVocabularyEntry[] = [
     partOfSpeech: "preposition",
   },
   {
+    word: "ก่อนหน้า",
+    transcriptions: {
+      rtgs: "kon na",
+      ipa: "kɔ̀ːn.nâː",
+      "paiboon+": "gòn-nâa",
+      aua: "kon na",
+    },
+    translation: {
+      en: "before, previously, earlier",
+    },
+    partOfSpeech: "adverb",
+  },
+  {
     word: "หน้า",
     transcriptions: {
       rtgs: "na",
@@ -721,6 +786,58 @@ export const DEMO_THAI_VOCABULARY: ThaiVocabularyEntry[] = [
     },
     translation: {
       en: "he, she, they",
+    },
+    partOfSpeech: "pronoun",
+  },
+  {
+    word: "เธอ",
+    transcriptions: {
+      rtgs: "thoe",
+      ipa: "tʰɤː",
+      "paiboon+": "thoe",
+      aua: "thoe",
+    },
+    translation: {
+      en: "she, you (informal)",
+    },
+    partOfSpeech: "pronoun",
+  },
+  {
+    word: "เรา",
+    transcriptions: {
+      rtgs: "rao",
+      ipa: "raw",
+      "paiboon+": "rao",
+      aua: "rao",
+    },
+    translation: {
+      en: "we, us, I (informal)",
+    },
+    partOfSpeech: "pronoun",
+  },
+  {
+    word: "พวกเขา",
+    transcriptions: {
+      rtgs: "phuak khao",
+      ipa: "pʰûak.kʰǎw",
+      "paiboon+": "pûak-kăo",
+      aua: "phuak khao",
+    },
+    translation: {
+      en: "they, them",
+    },
+    partOfSpeech: "pronoun",
+  },
+  {
+    word: "นี้",
+    transcriptions: {
+      rtgs: "ni",
+      ipa: "níː",
+      "paiboon+": "níi",
+      aua: "ni",
+    },
+    translation: {
+      en: "this, these",
     },
     partOfSpeech: "pronoun",
   },
@@ -790,6 +907,19 @@ export const DEMO_THAI_VOCABULARY: ThaiVocabularyEntry[] = [
     partOfSpeech: "noun",
   },
   {
+    word: "รัฐอิลลินอย",
+    transcriptions: {
+      rtgs: "rat illinoy",
+      ipa: "rát.ʔil.lí.nɔːj",
+      "paiboon+": "rát-il-lí-noi",
+      aua: "rat illinoy",
+    },
+    translation: {
+      en: "Illinois (state)",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
     word: "อิลลินอย",
     transcriptions: {
       rtgs: "illinoy",
@@ -799,6 +929,19 @@ export const DEMO_THAI_VOCABULARY: ThaiVocabularyEntry[] = [
     },
     translation: {
       en: "Illinois",
+    },
+    partOfSpeech: "proper noun",
+  },
+  {
+    word: "สมาชิกวุฒิสภาอิลลินอย",
+    transcriptions: {
+      rtgs: "samachik wutthisapha illinoy",
+      ipa: "sà.maː.t͡ɕʰík.wút.tʰí.sà.pʰaː.ʔil.lí.nɔːj",
+      "paiboon+": "sà-maa-chík-wút-tí-sà-paa-il-lí-noi",
+      aua: "samachik wutthisapha illinoy",
+    },
+    translation: {
+      en: "Illinois State Senator",
     },
     partOfSpeech: "proper noun",
   },
@@ -855,19 +998,8 @@ export const DEMO_THAI_VOCABULARY: ThaiVocabularyEntry[] = [
     partOfSpeech: "numeral",
   },
   // Additional words from segmented text
-  {
-    word: "บา",
-    transcriptions: {
-      rtgs: "ba",
-      ipa: "baː",
-      "paiboon+": "baa",
-      aua: "ba",
-    },
-    translation: {
-      en: "Bar (part of Barack)",
-    },
-    partOfSpeech: "proper noun",
-  },
+  // Note: Fragment entries (like "บา", "ฮู", "เซน", "โอ") have been removed
+  // as they cause incorrect word combinations. Only complete words are kept.
   {
     word: "รัก",
     transcriptions: {
@@ -877,48 +1009,9 @@ export const DEMO_THAI_VOCABULARY: ThaiVocabularyEntry[] = [
       aua: "rak",
     },
     translation: {
-      en: "to love, Barack (part of name)",
+      en: "to love",
     },
-    partOfSpeech: "verb/proper noun",
-  },
-  {
-    word: "ฮู",
-    transcriptions: {
-      rtgs: "hu",
-      ipa: "huː",
-      "paiboon+": "hoo",
-      aua: "hu",
-    },
-    translation: {
-      en: "Hus (part of Hussein)",
-    },
-    partOfSpeech: "proper noun",
-  },
-  {
-    word: "เซน",
-    transcriptions: {
-      rtgs: "sen",
-      ipa: "seːn",
-      "paiboon+": "sen",
-      aua: "sen",
-    },
-    translation: {
-      en: "sein (part of Hussein)",
-    },
-    partOfSpeech: "proper noun",
-  },
-  {
-    word: "โอ",
-    transcriptions: {
-      rtgs: "o",
-      ipa: "ʔoː",
-      "paiboon+": "oh",
-      aua: "o",
-    },
-    translation: {
-      en: "O (part of Obama)",
-    },
-    partOfSpeech: "proper noun",
+    partOfSpeech: "verb",
   },
   {
     word: "นัก",
@@ -984,45 +1077,6 @@ export const DEMO_THAI_VOCABULARY: ThaiVocabularyEntry[] = [
       en: "earth, soil",
     },
     partOfSpeech: "noun",
-  },
-  {
-    word: "อิล",
-    transcriptions: {
-      rtgs: "il",
-      ipa: "ʔil",
-      "paiboon+": "il",
-      aua: "il",
-    },
-    translation: {
-      en: "Ill (part of Illinois)",
-    },
-    partOfSpeech: "proper noun",
-  },
-  {
-    word: "ลิ",
-    transcriptions: {
-      rtgs: "li",
-      ipa: "lí",
-      "paiboon+": "lí",
-      aua: "li",
-    },
-    translation: {
-      en: "li (part of Illinois)",
-    },
-    partOfSpeech: "proper noun",
-  },
-  {
-    word: "นอย",
-    transcriptions: {
-      rtgs: "noy",
-      ipa: "nɔːj",
-      "paiboon+": "noy",
-      aua: "noy",
-    },
-    translation: {
-      en: "nois (part of Illinois)",
-    },
-    partOfSpeech: "proper noun",
   },
   {
     word: "วุฒิ",
@@ -1117,84 +1171,6 @@ export const DEMO_THAI_VOCABULARY: ThaiVocabularyEntry[] = [
     partOfSpeech: "numeral",
   },
   {
-    word: "นักการ",
-    transcriptions: {
-      rtgs: "nak kan",
-      ipa: "nák.kaːn",
-      "paiboon+": "nák-gaan",
-      aua: "nak kan",
-    },
-    translation: {
-      en: "politician (part of นักการเมือง)",
-    },
-    partOfSpeech: "noun",
-  },
-  {
-    word: "เชื้อ",
-    transcriptions: {
-      rtgs: "chuea",
-      ipa: "t͡ɕʰɯ́a",
-      "paiboon+": "chúea",
-      aua: "chuea",
-    },
-    translation: {
-      en: "lineage, descent (part of เชื้อสาย)",
-    },
-    partOfSpeech: "noun",
-  },
-  {
-    word: "แผ่น",
-    transcriptions: {
-      rtgs: "phaen",
-      ipa: "pʰɛ̀n",
-      "paiboon+": "pàen",
-      aua: "phaen",
-    },
-    translation: {
-      en: "sheet, piece (part of แผ่นดิน)",
-    },
-    partOfSpeech: "noun",
-  },
-  {
-    word: "จา",
-    transcriptions: {
-      rtgs: "cha",
-      ipa: "t͡ɕaː",
-      "paiboon+": "jaa",
-      aua: "cha",
-    },
-    translation: {
-      en: "from (part of จาก)",
-    },
-    partOfSpeech: "preposition",
-  },
-  {
-    word: "กรัฐอิล",
-    transcriptions: {
-      rtgs: "krat il",
-      ipa: "krá.tʰíl",
-      "paiboon+": "grát-tíl",
-      aua: "krat il",
-    },
-    translation: {
-      en: "Illinois state (part of รัฐอิลลินอย)",
-    },
-    partOfSpeech: "proper noun",
-  },
-  {
-    word: "นอ",
-    transcriptions: {
-      rtgs: "no",
-      ipa: "nɔː",
-      "paiboon+": "noh",
-      aua: "no",
-    },
-    translation: {
-      en: "nois (part of นอย/Illinois)",
-    },
-    partOfSpeech: "proper noun",
-  },
-  {
     word: "ย",
     transcriptions: {
       rtgs: "yo",
@@ -1206,6 +1182,28 @@ export const DEMO_THAI_VOCABULARY: ThaiVocabularyEntry[] = [
       en: "y (letter/part of word)",
     },
     partOfSpeech: "letter",
+  },
+  // Fragments for Thai transliterations of foreign names
+  // These are needed because Intl.Segmenter splits names incorrectly
+  {
+    word: "บา",
+    transcriptions: {
+      rtgs: "ba",
+      ipa: "baː",
+      "paiboon+": "baa",
+      aua: "ba",
+    },
+    partOfSpeech: "fragment",
+  },
+  {
+    word: "โอ",
+    transcriptions: {
+      rtgs: "o",
+      ipa: "ʔoː",
+      "paiboon+": "oh",
+      aua: "o",
+    },
+    partOfSpeech: "fragment",
   },
 ];
 
@@ -1224,7 +1222,9 @@ export const DEMO_THAI_VOCABULARY: ThaiVocabularyEntry[] = [
  * ```
  */
 export function findDemoThaiWord(word: string): ThaiVocabularyEntry | undefined {
-  return DEMO_THAI_VOCABULARY.find((entry) => entry.word === word);
+  // Normalize the word (trim whitespace) for lookup
+  const normalizedWord = word.trim();
+  return DEMO_THAI_VOCABULARY.find((entry) => entry.word === normalizedWord);
 }
 
 /**

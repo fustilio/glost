@@ -129,6 +129,7 @@ export function createTranscriptionExtension(
       word: async (node: GLOSTWord) => {
         // Skip if transcription already exists
         if (node.transcription && Object.keys(node.transcription).length > 0) {
+          console.log(`[Transcription Extension] Skipping "${getWordText(node)}" - already has transcription`);
           return;
         }
 
@@ -140,10 +141,14 @@ export function createTranscriptionExtension(
         // Clean word text (remove punctuation)
         const cleanWordText = wordText.trim().replace(/[!?.,:;]$/, "");
 
+        // Get language from node or use target language
+        const nodeLanguage = node.lang || targetLanguage;
+        console.log(`[Transcription Extension] Looking up transcription for: "${cleanWordText}" (lang: ${nodeLanguage}, target: ${targetLanguage})`);
+
         try {
           const transcriptions = await provider.getTranscriptions(
             cleanWordText,
-            targetLanguage
+            nodeLanguage
           );
 
           if (transcriptions && Object.keys(transcriptions).length > 0) {
@@ -159,6 +164,9 @@ export function createTranscriptionExtension(
               };
             }
             node.transcription = glostTranscription;
+            console.log(`[Transcription Extension] ✓ Added transcription for "${cleanWordText}"`);
+          } else {
+            console.log(`[Transcription Extension] ✗ No transcription found for "${cleanWordText}"`);
           }
         } catch (error) {
           // Silently fail - transcription lookup is optional

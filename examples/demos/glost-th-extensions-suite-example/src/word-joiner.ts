@@ -9,7 +9,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTASTExtension } from "glost-plugins";
+import type { GLOSTExtension } from "glost-plugins";
 import type {
   GLOSTRoot,
   GLOSTSentence,
@@ -41,6 +41,64 @@ export interface ThaiWordJoinerOptions {
    * @default true
    */
   processAllThai?: boolean;
+}
+
+/**
+ * BLACKLIST EXPLANATION:
+ * 
+ * The blacklist prevents the word joiner from creating INCORRECT combinations.
+ * 
+ * PROBLEM: Intl.Segmenter sometimes incorrectly splits Thai text, especially
+ * transliterated foreign words. For example:
+ * 
+ *   "จากรัฐอิลลินอย" gets split into: ["จา", "กรัฐอิล", "ลิ", "นอย"]
+ *   "รัฐอิลลินอย" gets split into: ["รัฐ", "อิล", "ลิ", "นอย"]
+ * 
+ * These fragments like "อิล", "ลิ", "นอย" are NOT real Thai words - they're
+ * just parts of the transliterated word "อิลลินอย" (Illinois).
+ * 
+ * WITHOUT BLACKLIST: The joiner might try to combine these fragments with
+ * other words, creating nonsense like:
+ *   - "อิล" + "ลิ" = "อิลลิ" (not a real word)
+ *   - "กรัฐอิล" (fragment) + something else = incorrect combination
+ * 
+ * WITH BLACKLIST: We prevent these fragments from being combined with OTHER words.
+ * However, if the FULL PHRASE exists in the dictionary (like "รัฐอิลลินอย"),
+ * we still allow combining all the fragments together to form the correct phrase.
+ * 
+ * So the blacklist prevents:
+ *   ❌ "อิล" + "ลิ" (partial combinations)
+ *   ❌ "กรัฐอิล" + anything (fragment combinations)
+ * 
+ * But allows:
+ *   ✅ "รัฐ" + "อิล" + "ลิ" + "นอย" → "รัฐอิลลินอย" (full phrase in dictionary)
+ *   ✅ "จา" + "กรัฐอิล" + "ลิ" + "นอย" → "จากรัฐอิลลินอย" (full phrase in dictionary)
+ */
+const WORD_JOINER_BLACKLIST = new Set([
+  // Illinois transliteration fragments - these are NOT real Thai words
+  // They're just broken pieces from Intl.Segmenter's incorrect segmentation
+  'กรัฐอิล', // fragment from "รัฐอิลลินอย" - should not combine with other words
+  'อิล',     // part of "อิลลินอย" (Illinois) - should not combine with other words
+  'ลิ',      // part of "อิลลินอย" (Illinois) - should not combine with other words
+  'นอย',     // part of "อิลลินอย" (Illinois) - should not combine with other words
+  // Other known problematic fragments
+  'จา',      // fragment from "จาก" - should not combine with other words
+  // 
+  // IMPORTANT: The FULL phrases are NOT blacklisted:
+  // - "รัฐอิลลินอย" is NOT blacklisted (it's a valid phrase in dictionary)
+  // - "จากรัฐอิลลินอย" is NOT blacklisted (it's a valid phrase in dictionary)
+  // 
+  // The blacklist only prevents the FRAGMENTS from combining incorrectly.
+]);
+
+/**
+ * Check if a word should be excluded from word joining
+ *
+ * @param word - The word to check
+ * @returns true if the word should be excluded from joining
+ */
+function isWordBlacklisted(word: string): boolean {
+  return WORD_JOINER_BLACKLIST.has(word);
 }
 
 /**
@@ -76,67 +134,8 @@ function mergeWordsIntoComposite(
   words: GLOSTWord[],
   combinedText: string
 ): GLOSTWord {
-  // Get transcription for the combined word using demo data from glost-th
-  // In a real implementation, this would use comprehensive dictionary lookups
-  const combinedTranscriptions = getDemoThaiTranscriptions(combinedText);
-
-  // Build transcription data
-  const transcription: TransliterationData = {};
-  if (combinedTranscriptions) {
-    if (combinedTranscriptions["paiboon+"]) {
-      transcription["paiboon+"] = {
-        text: combinedTranscriptions["paiboon+"],
-        system: "paiboon+",
-      };
-    }
-    if (combinedTranscriptions.aua) {
-      transcription.aua = {
-        text: combinedTranscriptions.aua,
-        system: "aua",
-      };
-    }
-    if (combinedTranscriptions.rtgs) {
-      transcription.rtgs = {
-        text: combinedTranscriptions.rtgs,
-        system: "rtgs",
-      };
-    }
-    if (combinedTranscriptions.ipa) {
-      transcription.ipa = {
-        text: combinedTranscriptions.ipa,
-        system: "ipa",
-      };
-    }
-  }
-
-  // If no transcription found, try to combine transcriptions from individual words
-  if (Object.keys(transcription).length === 0) {
-    // Combine transcriptions from individual words (space-separated)
-    const schemes: Array<"paiboon+" | "aua" | "rtgs" | "ipa"> = [
-      "paiboon+",
-      "aua",
-      "rtgs",
-      "ipa",
-    ];
-
-    for (const scheme of schemes) {
-      const parts: string[] = [];
-      for (const word of words) {
-        const wordTranscription = word.transcription[scheme];
-        if (wordTranscription?.text) {
-          parts.push(wordTranscription.text);
-        }
-      }
-      if (parts.length > 0) {
-        transcription[scheme] = {
-          text: parts.join(" "),
-          system: scheme,
-        };
-      }
-    }
-  }
-
   // Store individual word transcriptions for rendering
+  // We want to keep transcriptions separate on individual words, not combine them
   const individualTranscriptions: Array<Record<string, string>> = words.map((w) => {
     const trans: Record<string, string> = {};
     if (w.transcription) {
@@ -148,6 +147,19 @@ function mergeWordsIntoComposite(
     }
     return trans;
   });
+
+  // Try to get transcription for the combined phrase if it exists in dictionary
+  // This handles cases where the full phrase has a transcription (like "จากรัฐอิลลินอย")
+  // We still preserve individual word transcriptions in originalTranscriptions
+  const combinedTranscriptions = getDemoThaiTranscriptions(combinedText);
+  const transcription: TransliterationData = {};
+  
+  if (combinedTranscriptions) {
+    // Convert demo transcription format to GLOST format
+    for (const [scheme, text] of Object.entries(combinedTranscriptions)) {
+      transcription[scheme] = { text };
+    }
+  }
 
   // Merge metadata from individual words
   const mergedExtras: any = {
@@ -210,9 +222,59 @@ function tryCombineWords(
       .map((w) => getWordTextContent(w))
       .join("");
 
-    // Check if combined word exists in dictionary
+    // STEP 1: Skip if the combined result itself is blacklisted
+    // (e.g., don't create "กรัฐอิล" as a combined word)
+    if (isWordBlacklisted(combinedText)) {
+      continue;
+    }
+
+    // STEP 2: Check if the combined phrase exists in the dictionary
+    // (e.g., "รัฐอิลลินอย" or "จากรัฐอิลลินอย")
     if (isWordInDictionary(combinedText)) {
+      console.log(`[Word Joiner] Found dictionary entry for combined phrase: "${combinedText}"`);
+      console.log(`[Word Joiner]   Parts: [${wordsToCombine.map(w => `"${getWordTextContent(w)}"`).join(", ")}]`);
+      
+      // The combined phrase exists in dictionary - we want to combine it!
+      // 
+      // However, we need to be careful: we only want to combine if at least
+      // one of the individual words is a valid Thai word (not a blacklisted fragment).
+      // This prevents combining pure transliteration fragments that happen to
+      // form a valid phrase by accident.
+      // 
+      // Example: ["รัฐ", "อิล", "ลิ", "นอย"] → "รัฐอิลลินอย"
+      //   - "รัฐ" is a valid Thai word ✓
+      //   - "อิล", "ลิ", "นอย" are blacklisted fragments
+      //   - But "รัฐอิลลินอย" exists in dictionary ✓
+      //   → We combine because "รัฐ" is valid
+      
+      const hasValidIndividualWord = wordsToCombine.some(w => {
+        const wordText = getWordTextContent(w);
+        const isBlacklisted = isWordBlacklisted(wordText);
+        const isInDict = isWordInDictionary(wordText);
+        console.log(`[Word Joiner]   Checking "${wordText}": blacklisted=${isBlacklisted}, inDict=${isInDict}`);
+        // Check if this word is both:
+        // 1. NOT blacklisted (not a fragment)
+        // 2. In the dictionary (a real Thai word)
+        return !isBlacklisted && isInDict;
+      });
+      
+      if (hasValidIndividualWord) {
+        // At least one word is valid - safe to combine!
+        console.log(`[Word Joiner] ✓ Combining "${combinedText}" (has valid individual word)`);
+        return mergeWordsIntoComposite(wordsToCombine, combinedText);
+      }
+      
+      // Fallback: Even if no individual words are valid (non-blacklisted),
+      // if the combined phrase exists in dictionary, we still combine it.
+      // This handles edge cases where the phrase is valid but all parts are fragments.
+      // (This should be rare, but it's a safety net)
+      console.log(`[Word Joiner] ✓ Combining "${combinedText}" (fallback - phrase exists in dict)`);
       return mergeWordsIntoComposite(wordsToCombine, combinedText);
+    } else {
+      // Debug: Log when we try to combine but phrase doesn't exist
+      if (length >= 2) {
+        console.log(`[Word Joiner] ✗ Combined phrase "${combinedText}" not in dictionary`);
+      }
     }
   }
 
@@ -405,7 +467,7 @@ function processSentence(
  */
 export function createThaiWordJoinerExtension(
   options: ThaiWordJoinerOptions = {}
-): GLOSTASTExtension {
+): GLOSTExtension {
   const {
     maxCombinationLength = 4,
     minCombinationLength = 2,

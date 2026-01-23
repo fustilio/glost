@@ -29,113 +29,232 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(join(__dirname, 'public')));
 
 /**
- * Simple text segmentation using Intl.Segmenter
+ * Segment info including whether it's a word or punctuation/whitespace
  */
-function segmentThaiText(text: string): string[] {
+interface SegmentInfo {
+  text: string;
+  isWord: boolean;
+}
+
+/**
+ * Simple text segmentation using Intl.Segmenter
+ * Preserves all segments including punctuation and whitespace
+ */
+function segmentThaiText(text: string): SegmentInfo[] {
   const trimmed = text.trim();
   if (typeof Intl === 'undefined' || !('Segmenter' in Intl)) {
-    return trimmed.split(/\s+/).filter(w => w.length > 0);
+    // Fallback: split by whitespace, treat all as words
+    return trimmed.split(/\s+/).filter(w => w.length > 0).map(t => ({ text: t, isWord: true }));
   }
   try {
     // @ts-ignore - Intl.Segmenter may not be in TypeScript types yet
     const segmenter = new Intl.Segmenter('th', { granularity: 'word' });
     const segments = segmenter.segment(trimmed);
-    const words: string[] = [];
+    const result: SegmentInfo[] = [];
     for (const segment of segments) {
-      if (segment.isWordLike) {
-        const word = segment.segment.trim();
-        if (word.length > 0) words.push(word);
+      const segText = segment.segment;
+      if (segText.length > 0) {
+        // Preserve whitespace as non-word, but skip pure whitespace between words
+        if (/^\s+$/.test(segText)) {
+          // Add space as separator (will be rendered as space)
+          result.push({ text: ' ', isWord: false });
+        } else {
+          result.push({ text: segText, isWord: segment.isWordLike });
+        }
       }
     }
-    return words.length > 0 ? words : [trimmed];
+    return result.length > 0 ? result : [{ text: trimmed, isWord: true }];
   } catch {
-    return trimmed.split(/\s+/).filter(w => w.length > 0);
+    return trimmed.split(/\s+/).filter(w => w.length > 0).map(t => ({ text: t, isWord: true }));
+  }
+}
+
+/**
+ * Render a single word with transcription and translation
+ */
+function renderWord(
+  word: any,
+  transcriptionScheme: string,
+  showTranscription: boolean,
+  showTranslation: boolean
+): string {
+  const text = getWordText(word);
+  const isComposite = word.extras?.isComposite === true;
+  const originalChunks = word.extras?.originalChunks as string[] | undefined;
+  const originalTranscriptions = word.extras?.originalTranscriptions as Array<Record<string, string>> | undefined;
+  const translation = word.extras?.translations?.["en"] || word.extras?.translations?.["en-US"];
+  const shouldShowTranslation = translation && isThaiText(text, true);
+
+  if (isComposite && originalChunks && originalChunks.length > 1) {
+    const hasThaiChunk = originalChunks.some(chunk => isThaiText(chunk, true));
+    const shouldShowPhraseTranslation = translation && hasThaiChunk;
+    const phraseTranscription = transcriptionScheme === 'ipa'
+      ? word.transcription?.ipa?.text
+      : word.transcription?.rtgs?.text;
+    const hasIndividualTranscriptions = originalTranscriptions && originalTranscriptions.some(t => t && Object.keys(t).length > 0);
+    const titleAttr = translation ? ` title="${translation}"` : '';
+
+    let html = `<span class="ruby-container"${titleAttr}>`;
+    if (phraseTranscription && showTranscription && hasThaiChunk) {
+      html += `<span class="ruby-annotation">${phraseTranscription}</span>`;
+      html += `<span class="ruby-base">${text}</span>`;
+    } else if (hasIndividualTranscriptions && showTranscription) {
+      const annotations = originalChunks.map((chunk, idx) => {
+        const t = originalTranscriptions?.[idx]?.[transcriptionScheme];
+        return t || '';
+      }).join(' ');
+      html += `<span class="ruby-annotation">${annotations}</span>`;
+      html += `<span class="ruby-base">${text}</span>`;
+    } else {
+      html += `<span class="ruby-annotation" style="visibility: hidden;">&nbsp;</span>`;
+      html += `<span class="ruby-base">${text}</span>`;
+    }
+    if (shouldShowPhraseTranslation && showTranslation) {
+      html += `<span class="translation">${translation}</span>`;
+    }
+    html += `</span>`;
+    return html;
+  } else {
+    const transcription = transcriptionScheme === 'ipa'
+      ? word.transcription?.ipa?.text
+      : word.transcription?.rtgs?.text;
+    const isNumber = /^[\d\u0E50-\u0E59]+$/.test(text);
+    const isThai = isThaiText(text, true);
+    const titleAttr = (shouldShowTranslation && translation) ? ` title="${translation}"` : '';
+
+    let html = `<span class="ruby-container"${titleAttr}>`;
+    if (transcription && (isThai || isNumber) && showTranscription) {
+      html += `<span class="ruby-annotation">${transcription}</span>`;
+    } else {
+      html += `<span class="ruby-annotation" style="visibility: hidden;">&nbsp;</span>`;
+    }
+    html += `<span class="ruby-base">${text}</span>`;
+    if (shouldShowTranslation && showTranslation && isThai) {
+      html += `<span class="translation">${translation}</span>`;
+    }
+    html += `</span>`;
+    return html;
   }
 }
 
 /**
  * Render GLOST document with proper ruby annotations
- * For composite words (phrases), shows transcriptions on individual words but translation on the phrase
- * Only shows translations for Thai text, not English
+ * Preserves original segments (punctuation, whitespace) while rendering words with transcription/translation
  */
-function renderDocument(document: any, transcriptionScheme: string = 'rtgs'): string {
+function renderDocumentWithSegments(
+  document: any,
+  originalSegments: SegmentInfo[],
+  transcriptionScheme: string = 'rtgs',
+  showTranscription: boolean = true,
+  showTranslation: boolean = true
+): string {
+  const processedWords = getAllWords(document);
+
+  if (processedWords.length === 0 && originalSegments.every(s => !s.isWord)) {
+    return '<div class="empty-state">No words found</div>';
+  }
+
+  // Get only word segments (for matching with processed words)
+  const wordSegments = originalSegments
+    .map((seg, idx) => ({ ...seg, originalIndex: idx }))
+    .filter(seg => seg.isWord && seg.text.trim().length > 0);
+
+  // Build a map: for each word segment index, which processed word does it belong to?
+  // Also track which processed word starts at which segment index
+  const segmentToWord = new Map<number, { word: any; isStart: boolean; segmentCount: number }>();
+
+  let wordSegIdx = 0;
+  for (const processedWord of processedWords) {
+    const wordText = getWordText(processedWord);
+    const isComposite = processedWord.extras?.isComposite === true;
+    const originalChunks = processedWord.extras?.originalChunks as string[] | undefined;
+
+    if (isComposite && originalChunks && originalChunks.length > 1) {
+      // Composite word - spans multiple segments
+      const segmentCount = originalChunks.length;
+      for (let i = 0; i < segmentCount && wordSegIdx + i < wordSegments.length; i++) {
+        const segIdx = wordSegments[wordSegIdx + i].originalIndex;
+        segmentToWord.set(segIdx, {
+          word: processedWord,
+          isStart: i === 0,
+          segmentCount
+        });
+      }
+      wordSegIdx += segmentCount;
+    } else {
+      // Single word - one segment
+      if (wordSegIdx < wordSegments.length) {
+        const segIdx = wordSegments[wordSegIdx].originalIndex;
+        segmentToWord.set(segIdx, {
+          word: processedWord,
+          isStart: true,
+          segmentCount: 1
+        });
+      }
+      wordSegIdx++;
+    }
+  }
+
+  // Now render segments in order
+  const result: string[] = [];
+
+  for (let i = 0; i < originalSegments.length; i++) {
+    const segment = originalSegments[i];
+
+    if (!segment.isWord) {
+      // Punctuation/whitespace - render as-is
+      result.push(`<span class="punctuation">${escapeHtml(segment.text)}</span>`);
+    } else {
+      // Word segment - check if it's mapped to a processed word
+      const mapping = segmentToWord.get(i);
+
+      if (mapping) {
+        if (mapping.isStart) {
+          // This is the start of a word (or composite) - render it
+          result.push(renderWord(mapping.word, transcriptionScheme, showTranscription, showTranslation));
+        }
+        // If not isStart, this segment was consumed by a composite word - skip it
+      } else {
+        // No mapping - render as plain text
+        const wordText = segment.text.trim();
+        if (wordText.length > 0) {
+          result.push(`<span class="ruby-container"><span class="ruby-annotation" style="visibility: hidden;">&nbsp;</span><span class="ruby-base">${escapeHtml(wordText)}</span></span>`);
+        }
+      }
+    }
+  }
+
+  return result.join('');
+}
+
+/**
+ * Escape HTML special characters
+ */
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+/**
+ * Render GLOST document with proper ruby annotations (legacy - without segments)
+ */
+function renderDocument(
+  document: any,
+  transcriptionScheme: string = 'rtgs',
+  showTranscription: boolean = true,
+  showTranslation: boolean = true
+): string {
   const words = getAllWords(document);
-  
+
   if (words.length === 0) {
     return '<div class="empty-state">No words found</div>';
   }
 
-  return words.map((word: any) => {
-    const text = getWordText(word);
-    const isComposite = word.extras?.isComposite === true;
-    const originalChunks = word.extras?.originalChunks as string[] | undefined;
-    const originalTranscriptions = word.extras?.originalTranscriptions as Array<Record<string, string>> | undefined;
-    // Try both "en-US" and "en" for translation lookup (translation extension uses "en")
-    const translation = word.extras?.translations?.["en"] 
-      || word.extras?.translations?.["en-US"];
-    
-    // Only show translations for Thai text, not English
-    const shouldShowTranslation = translation && isThaiText(text, true);
-    
-    // For composite words (phrases), we want to show:
-    // - Individual word transcriptions (from original chunks)
-    // - Phrase-level translation (only if phrase contains Thai)
-    if (isComposite && originalChunks && originalChunks.length > 1 && originalTranscriptions) {
-      // Check if any chunk is Thai to determine if we should show translation
-      const hasThaiChunk = originalChunks.some(chunk => isThaiText(chunk, true));
-      const shouldShowPhraseTranslation = translation && hasThaiChunk;
-      
-      // Render individual words with their transcriptions
-      const wordParts = originalChunks.map((chunk, idx) => {
-        const chunkTranscription = originalTranscriptions[idx]?.[transcriptionScheme];
-        const isThai = isThaiText(chunk, true);
-        
-        // Only show transcription for Thai chunks
-        if (chunkTranscription && isThai) {
-          return `<span class="ruby-container">
-            <span class="ruby-annotation">${chunkTranscription}</span>
-            <span class="ruby-base">${chunk}</span>
-          </span>`;
-        } else {
-          return `<span class="ruby-base">${chunk}</span>`;
-        }
-      }).join('');
-      
-      // Wrap phrase in a container that groups all words together
-      // Translation should appear below all words in the phrase, centered
-      let html = `<span style="display: inline-flex; flex-direction: column; align-items: center; vertical-align: baseline; gap: 0.1rem;">`;
-      // First, render all word parts in a flex container (horizontal)
-      html += `<span style="display: inline-flex; align-items: baseline; gap: 0.25rem; flex-wrap: wrap; justify-content: center;">${wordParts}</span>`;
-      if (shouldShowPhraseTranslation) {
-        // Show translation below all word parts - it applies to the entire phrase
-        // Center it under the words
-        html += `<span class="translation" style="display: block; margin-left: 0; margin-top: 0.1rem; text-align: center; width: 100%;">${translation}</span>`;
-      }
-      html += `</span>`;
-      return html;
-    } else {
-      // Regular word - show transcription and translation (only for Thai)
-      const transcription = transcriptionScheme === 'ipa' 
-        ? word.transcription?.ipa?.text 
-        : word.transcription?.rtgs?.text;
-      
-      // Only show transcription for Thai text
-      if (transcription && isThaiText(text, true)) {
-        let html = `<span class="ruby-container">`;
-        html += `<span class="ruby-annotation">${transcription}</span>`;
-        html += `<span class="ruby-base">${text}</span>`;
-        if (shouldShowTranslation) {
-          // No brackets - translation is already differentiated by italics
-          html += `<span class="translation">${translation}</span>`;
-        }
-        html += `</span>`;
-        return html;
-      } else {
-        // No transcription or not Thai - just show word (no translation for English)
-        return `<span class="word">${text}</span>`;
-      }
-    }
-  }).join(' ');
+  return words.map((word: any) => renderWord(word, transcriptionScheme, showTranscription, showTranslation)).join(' ');
 }
 
 /**
@@ -143,37 +262,91 @@ function renderDocument(document: any, transcriptionScheme: string = 'rtgs'): st
  */
 app.post('/process', async (req, res) => {
   try {
-    const { text, transcription: transcriptionScheme = 'rtgs' } = req.body;
+    const { 
+      text, 
+      transcription: transcriptionScheme = 'rtgs',
+      showTranscription,
+      showTranslation
+    } = req.body;
+    
+    // Checkboxes only send 'on' when checked, undefined when unchecked
+    const shouldShowTranscription = showTranscription === 'on' || showTranscription === true;
+    const shouldShowTranslation = showTranslation === 'on' || showTranslation === true;
 
     if (!text || !text.trim()) {
       return res.send('<div class="empty-state">Please enter some Thai text...</div>');
     }
 
     // Convert text to GLOST document (minimal - just for testing)
-    const wordTexts = segmentThaiText(text);
-    const words = wordTexts
-      .map(wordText => {
-        const cleanText = wordText.replace(/[.,!?;:]/g, "");
-        return cleanText.length > 0 ? createThaiWord({ text: cleanText }) : null;
-      })
-      .filter((w): w is ReturnType<typeof createThaiWord> => w !== null);
+    // Preserves punctuation and special characters
+    const segments = segmentThaiText(text);
+    const words: any[] = [];
 
-    const document = createSimpleDocument(words, "th", "thai");
+    for (const segment of segments) {
+      if (segment.isWord) {
+        // It's a word - create a word node (don't strip punctuation from word text)
+        const wordText = segment.text.trim();
+        if (wordText.length > 0) {
+          words.push(createThaiWord({ text: wordText }));
+        }
+      } else {
+        // It's punctuation/whitespace - create a simple marker that will be rendered as-is
+        // We store it in a special structure that the renderer will recognize
+        words.push({
+          type: 'PunctuationNode',
+          text: segment.text,
+          isPunctuation: true
+        });
+      }
+    }
+
+    // Create document from word nodes only (filtering out punctuation markers)
+    const wordNodes = words.filter(w => !w.isPunctuation);
+    const document = createSimpleDocument(wordNodes, "th", "thai");
 
     // Use demo extensions with actual data (presets use skeleton providers without data)
-    // Order matters: transcription first, then word joiner (to combine phrases), then translation (on phrases)
-    const extensions = [
-      createThaiTranscriptionExtension(),
-      createThaiWordJoinerExtension(), // Combine words into phrases before translation
-      createThaiTranslationExtension("en-US"),
-    ];
+    // Order matters: 
+    // 1. Transcription first (for individual words)
+    // 2. Word joiner (to combine phrases)
+    // 3. Transcription again (for composite words created by word joiner)
+    // 4. Translation (on phrases)
+    const extensions = [];
+    const appliedExtensions: string[] = [];
+    
+    if (shouldShowTranscription) {
+      extensions.push(createThaiTranscriptionExtension());
+      appliedExtensions.push('transcription');
+    }
+    
+    // Word joiner is only needed when translation is enabled (for phrase-level translations)
+    if (shouldShowTranslation) {
+      extensions.push(createThaiWordJoinerExtension());
+      appliedExtensions.push('thai-word-joiner');
+      
+      // Run transcription extension again after word joiner to get transcriptions
+      // for composite words that were just created
+      if (shouldShowTranscription) {
+        extensions.push(createThaiTranscriptionExtension());
+        appliedExtensions.push('transcription-post-joiner');
+      }
+    }
+    
+    if (shouldShowTranslation) {
+      extensions.push(createThaiTranslationExtension("en-US"));
+      appliedExtensions.push('translation');
+    }
 
-    // Process with demo extensions
+    // Process with demo extensions (even if empty array, this will just return the document as-is)
     const result = await processGLOSTWithExtensionsAsync(document, extensions);
 
-    // Simple rendering - just to verify data flow
-    const html = renderDocument(result.document, transcriptionScheme);
-    const appliedExts = result.metadata.appliedExtensions || [];
+    // Debug logging
+    console.log('[Process] showTranscription:', shouldShowTranscription, 'showTranslation:', shouldShowTranslation);
+    console.log('[Process] Applied extensions:', appliedExtensions);
+
+    // Render with original segments preserved (punctuation, whitespace)
+    const html = renderDocumentWithSegments(result.document, segments, transcriptionScheme, shouldShowTranscription, shouldShowTranslation);
+    // Use our tracked extensions instead of result.metadata (which might include all extensions)
+    const appliedExts = appliedExtensions.length > 0 ? appliedExtensions : result.metadata.appliedExtensions || [];
     
     // Debug: Log words without transcriptions to console
     const allWords = getAllWords(result.document);

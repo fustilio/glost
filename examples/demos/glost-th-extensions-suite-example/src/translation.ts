@@ -37,9 +37,36 @@ const thaiTranslationProviderAdapter: TranslationProvider = {
       return undefined;
     }
 
+    // Skip very short words (1-2 characters) that are likely parts of transliterations
+    // unless they're known common words (like particles: ครับ, ค่ะ, etc.)
+    // This prevents translating fragments like "จา" from "จาก" or "ลิ" from "อิลลินอย"
+    const cleanWord = word.trim();
+    if (cleanWord.length <= 2) {
+      // Allow common short words/particles
+      const commonShortWords = ['ครับ', 'ค่ะ', 'คะ', 'นะ', 'นะครับ', 'นะค่ะ', 'จ้ะ', 'จ้า'];
+      if (!commonShortWords.includes(cleanWord)) {
+        // Skip translation for very short words that aren't common
+        return undefined;
+      }
+    }
+
+    // Normalize word (trim whitespace) before lookup
+    const normalizedWord = word.trim();
+    if (!normalizedWord) {
+      return undefined;
+    }
+
     // Use demo vocabulary lookup from glost-th
     // In a real implementation, this would use comprehensive dictionary data
-    return getDemoThaiTranslation(word);
+    const translation = getDemoThaiTranslation(normalizedWord);
+    
+    // Skip translations that indicate partial words (e.g., "from (part of จาก)")
+    // These are fragments that shouldn't be translated separately
+    if (translation && (translation.includes('(part of') || translation.includes('part of'))) {
+      return undefined;
+    }
+    
+    return translation;
   },
 };
 
