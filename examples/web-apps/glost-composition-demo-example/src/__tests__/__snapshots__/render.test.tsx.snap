@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Composition Demo Render Tests > should match snapshot for composed extensions output 1`] = `"<div class="word"><span class="word-text">hello</span><span class="word-ipa">həˈloʊ</span><span class="word-respelling">huhloʊ</span></div><div class="word"><span class="word-text">world</span><span class="word-ipa">wɜːrld</span><span class="word-respelling">wɜːrld</span></div>"`;

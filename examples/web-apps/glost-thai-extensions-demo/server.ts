@@ -99,7 +99,7 @@ function renderWord(
       html += `<span class="ruby-annotation">${phraseTranscription}</span>`;
       html += `<span class="ruby-base">${text}</span>`;
     } else if (hasIndividualTranscriptions && showTranscription) {
-      const annotations = originalChunks.map((chunk, idx) => {
+      const annotations = originalChunks.map((_chunk, idx) => {
         const t = originalTranscriptions?.[idx]?.[transcriptionScheme];
         return t || '';
       }).join(' ');
@@ -165,7 +165,6 @@ function renderDocumentWithSegments(
 
   let wordSegIdx = 0;
   for (const processedWord of processedWords) {
-    const wordText = getWordText(processedWord);
     const isComposite = processedWord.extras?.isComposite === true;
     const originalChunks = processedWord.extras?.originalChunks as string[] | undefined;
 
@@ -237,24 +236,6 @@ function escapeHtml(text: string): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
-}
-
-/**
- * Render GLOST document with proper ruby annotations (legacy - without segments)
- */
-function renderDocument(
-  document: any,
-  transcriptionScheme: string = 'rtgs',
-  showTranscription: boolean = true,
-  showTranslation: boolean = true
-): string {
-  const words = getAllWords(document);
-
-  if (words.length === 0) {
-    return '<div class="empty-state">No words found</div>';
-  }
-
-  return words.map((word: any) => renderWord(word, transcriptionScheme, showTranscription, showTranslation)).join(' ');
 }
 
 /**

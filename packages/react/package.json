@@ -32,7 +32,9 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "clean": "rm -rf dist",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "glost": "workspace:*"
@@ -41,9 +43,15 @@
     "react": ">=18.0.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/user-event": "^14.5.1",
     "@types/react": "^19.0.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "jsdom": "^23.0.1",
     "react": "^19.0.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.0.5"
   },
   "keywords": [
     "glost",

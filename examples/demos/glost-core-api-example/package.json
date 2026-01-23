@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "glost": "workspace:*",
-    "glost-plugins": "workspace:*"
+    "glost-plugins": "workspace:*",
+    "glost-th": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

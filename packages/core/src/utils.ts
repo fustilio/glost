@@ -606,8 +606,20 @@ export function getSentenceTranslation(
   sentence: GLOSTSentence,
   language = "en",
 ): string | null {
+  // Check exact language match first
   if (sentence.extras?.translations?.[language]) {
     return sentence.extras.translations[language];
+  }
+
+  // Fallback: try short language code (e.g., "en" for "en-US")
+  const shortLang = language.split("-")[0];
+  if (shortLang && sentence.extras?.translations?.[shortLang]) {
+    return sentence.extras.translations[shortLang];
+  }
+
+  // Fallback: try common variants (e.g., "en-US" for "en")
+  if (language === "en" && sentence.extras?.translations?.["en-US"]) {
+    return sentence.extras.translations["en-US"];
   }
 
   // Fallback: build from word meanings

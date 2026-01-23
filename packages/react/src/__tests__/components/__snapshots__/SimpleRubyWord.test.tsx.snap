@@ -1,0 +1,60 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SimpleRubyWord > Snapshots > should match snapshot for basic word 1`] = `
+<span
+  style="display: inline-block; text-align: center;"
+>
+  <ruby
+    style="ruby-align: center; ruby-position: over;"
+  >
+    <span
+      style="font-size: 1.5rem; line-height: 1.2;"
+    >
+      hello
+    </span>
+  </ruby>
+</span>
+`;
+
+exports[`SimpleRubyWord > Snapshots > should match snapshot with transcription 1`] = `
+<span
+  style="display: inline-block; text-align: center;"
+>
+  <ruby
+    style="ruby-align: center; ruby-position: over;"
+  >
+    <span
+      style="font-size: 1.5rem; line-height: 1.2;"
+    >
+      hello
+    </span>
+    <rt
+      style="font-size: 0.75rem; color: rgb(102, 102, 102); font-family: monospace;"
+    >
+      həˈloʊ
+    </rt>
+  </ruby>
+</span>
+`;
+
+exports[`SimpleRubyWord > Snapshots > should match snapshot with translation 1`] = `
+<span
+  style="display: inline-block; text-align: center;"
+  title="greeting"
+>
+  <ruby
+    style="ruby-align: center; ruby-position: over;"
+  >
+    <span
+      style="font-size: 1.5rem; line-height: 1.2;"
+    >
+      hello
+    </span>
+  </ruby>
+  <div
+    style="font-size: 0.75rem; color: rgb(68, 68, 68); margin-top: 0.25rem;"
+  >
+    greeting
+  </div>
+</span>
+`;

@@ -1,0 +1,17 @@
+import { defineConfig } from 'vitest/config';
+import path from 'path';
+
+export default defineConfig({
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    include: ['**/__tests__/**/*.test.ts', '**/__tests__/**/*.test.tsx'],
+    setupFiles: ['../../__tests__/setup.ts'],
+  },
+  resolve: {
+    alias: {
+      'glost': path.resolve(__dirname, '../../../packages/core/src/index.ts'),
+      'glost-plugins': path.resolve(__dirname, '../../../packages/plugins/core/src/index.ts'),
+    }
+  }
+});

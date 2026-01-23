@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Thai Extensions Demo Render Tests > should match snapshot for rendered Thai output 1`] = `"<span class="ruby-container" title="hello, hi, goodbye"><span class="ruby-annotation">sawatdi</span><span class="ruby-base">สวัสดี</span><span class="translation">hello, hi, goodbye</span></span>"`;

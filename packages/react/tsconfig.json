@@ -6,8 +6,9 @@
     "jsx": "react-jsx",
     "declaration": true,
     "declarationMap": true,
-    "types": ["node", "react"]
+    "types": ["node", "react", "@testing-library/jest-dom"],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts"]
+  "exclude": ["node_modules", "dist"]
 }

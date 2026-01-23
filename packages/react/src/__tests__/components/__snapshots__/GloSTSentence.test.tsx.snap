@@ -1,0 +1,50 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`GloSTSentence > Snapshots > should match snapshot for basic sentence 1`] = `
+<div>
+  <div
+    style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem;"
+  >
+    <span
+      class=""
+    >
+      <span>
+        hello
+      </span>
+    </span>
+    <span
+      class=""
+    >
+      <span>
+        world
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`GloSTSentence > Snapshots > should match snapshot with transcription 1`] = `
+<div>
+  <div
+    style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem;"
+  >
+    <span
+      class=""
+      title=""
+    >
+      <ruby
+        style="ruby-align: center; ruby-position: over;"
+      >
+        <span
+          class=""
+        >
+          hello
+        </span>
+        <rt>
+          həˈloʊ
+        </rt>
+      </ruby>
+    </span>
+  </div>
+</div>
+`;

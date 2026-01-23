@@ -48,6 +48,7 @@ export {
   hasWordTranscription,
   getWordTranslation,
   getWordMeaning,
+  getWordAtPath,
   getWordPartOfSpeech,
   getWordDifficulty,
 

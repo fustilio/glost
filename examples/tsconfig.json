@@ -1,0 +1,18 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "glost": ["../packages/core/src/index.ts"],
+      "glost-plugins": ["../packages/plugins/core/src/index.ts"],
+      "glost-th": ["../packages/languages/th/src/index.ts"],
+      "glost-ja": ["../packages/languages/ja/src/index.ts"],
+      "glost-ko": ["../packages/languages/ko/src/index.ts"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "dist"]
+}
