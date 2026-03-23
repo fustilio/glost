@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-plugins";
+import type { GLOSTExtension } from "glost-extensions";
 import type {
   PluginMetadata,
   PluginQuery,

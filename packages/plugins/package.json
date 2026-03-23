@@ -1,0 +1,61 @@
+{
+  "name": "glost-plugins",
+  "version": "0.6.3",
+  "description": "Core plugin system and built-in plugins for GLOST",
+  "author": "fustilio",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fustilio/glost.git",
+    "directory": "packages/plugins/core"
+  },
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./processor": {
+      "types": "./dist/processor.d.ts",
+      "default": "./dist/processor.js"
+    },
+    "./registry": {
+      "types": "./dist/registry.d.ts",
+      "default": "./dist/registry.js"
+    },
+    "./extensions": {
+      "types": "./dist/extensions/index.d.ts",
+      "default": "./dist/extensions/index.js"
+    },
+    "./example-data": {
+      "types": "./dist/example-data/index.d.ts",
+      "default": "./dist/example-data/index.js"
+    }
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "unist-util-visit": "^5.0.0",
+    "glost-core": "0.6.2",
+    "glost-common": "0.4.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vitest": "^3.0.5"
+  },
+  "keywords": [
+    "glost",
+    "plugins",
+    "transformation",
+    "metadata"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "build:example-data": "tsc -p tsconfig.example-data.json",
+    "build:all": "pnpm run build && pnpm run build:example-data",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest --run",
+    "lint": "echo 'No linting configured'"
+  }
+}

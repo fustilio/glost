@@ -7,14 +7,14 @@
  * and adds additional utilities that are specific to document manipulation.
  */
 
-import type { GLOSTWord, GLOSTSentence, GLOSTRoot } from "glost-core";
+import type { GLOSTWord, GLOSTSentence, GLOSTRoot } from "glost";
 import {
   getAllWords,
   getWordsFromDocument,
   getFirstSentence as getFirstSentenceFromGLOST,
   getWordsFromSentence,
   getSentenceTranslation as getSentenceTranslationFromGLOST,
-} from "glost-core";
+} from "glost";
 
 /**
  * Extract all words from an GLOST document

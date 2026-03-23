@@ -1,5 +1,35 @@
 # glost-utils
 
+## 0.3.2
+
+### Patch Changes
+
+- Patch version bump for republishing
+- Updated dependencies
+  - glost-common@0.4.2
+  - glost@0.8.2
+
+## 0.3.1
+
+### Patch Changes
+
+- Patch version bump for republishing
+- Updated dependencies
+  - glost-common@0.4.1
+  - glost@0.8.1
+
+## 0.3.0
+
+### Minor Changes
+
+- Minor version bump for npm deployment
+
+### Patch Changes
+
+- Updated dependencies
+  - glost-common@0.4.0
+  - glost@0.8.0
+
 ## 0.2.0
 
 ### Minor Changes

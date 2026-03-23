@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTRoot, GLOSTNode } from 'glost-core';
+import type { GLOSTRoot, GLOSTNode } from 'glost';
 import { normalizeLanguageCode } from 'glost-common';
 
 /**

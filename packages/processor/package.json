@@ -1,6 +1,6 @@
 {
   "name": "glost-processor",
-  "version": "0.5.0",
+  "version": "1.0.2",
   "description": "Unified-style processor API for GLOST documents",
   "type": "module",
   "main": "./dist/index.js",
@@ -16,11 +16,6 @@
     "src",
     "README.md"
   ],
-  "scripts": {
-    "build": "tsc",
-    "test": "vitest run --passWithNoTests",
-    "test:watch": "vitest"
-  },
   "keywords": [
     "glost",
     "processor",
@@ -31,15 +26,20 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "glost-core": "workspace:*",
-    "glost-plugins": "workspace:*"
+    "glost-core": "0.6.2",
+    "glost-extensions": "0.6.2"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "typescript": "^5.3.3",
-    "vitest": "catalog:"
+    "vitest": "^1.6.0"
   },
   "peerDependencies": {
-    "glost-core": "^0.5.0"
+    "glost-core": "^0.6.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest"
   }
 }

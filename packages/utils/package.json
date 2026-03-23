@@ -1,6 +1,6 @@
 {
   "name": "glost-utils",
-  "version": "0.2.0",
+  "version": "0.3.2",
   "description": "Framework-agnostic utilities for GLOST manipulation, conversion, and merging",
   "author": "fustilio",
   "license": "MIT",
@@ -36,25 +36,15 @@
     "./interfaces": {
       "types": "./src/interfaces.ts",
       "default": "./src/interfaces.ts"
-    },
-    "./logger": {
-      "types": "./src/logger.ts",
-      "default": "./src/logger.ts"
     }
   },
-  "scripts": {
-    "build": "tsc",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest --passWithNoTests",
-    "lint": "echo 'No linting configured'"
-  },
   "dependencies": {
-    "glost-core": "workspace:*",
-    "glost-common": "workspace:*"
+    "glost": "0.8.2",
+    "glost-common": "0.4.2"
   },
   "devDependencies": {
-    "typescript": "catalog:",
-    "vitest": "catalog:"
+    "typescript": "^5.8.3",
+    "vitest": "^3.0.5"
   },
   "keywords": [
     "glost",
@@ -62,5 +52,11 @@
     "utilities",
     "text-conversion",
     "document-manipulation"
-  ]
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest --passWithNoTests",
+    "lint": "echo 'No linting configured'"
+  }
 }

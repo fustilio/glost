@@ -1,6 +1,6 @@
 {
   "name": "glost-react",
-  "version": "0.5.0",
+  "version": "0.6.2",
   "description": "React utilities for rendering GloST documents with ruby annotations and progressive display",
   "type": "module",
   "main": "./dist/index.js",
@@ -28,14 +28,8 @@
     "dist",
     "README.md"
   ],
-  "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch",
-    "clean": "rm -rf dist",
-    "prepublishOnly": "npm run build"
-  },
   "dependencies": {
-    "glost": "workspace:*"
+    "glost": "0.8.2"
   },
   "peerDependencies": {
     "react": ">=18.0.0"
@@ -61,5 +55,10 @@
     "type": "git",
     "url": "https://github.com/fustilio/glost.git",
     "directory": "packages/react"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
   }
 }

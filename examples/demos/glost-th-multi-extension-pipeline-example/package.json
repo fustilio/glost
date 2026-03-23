@@ -1,6 +1,6 @@
 {
   "name": "glost-th-multi-extension-pipeline-example",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "private": true,
   "type": "module",
   "description": "Example: Multi-extension pipeline combining transcription + translation + frequency for Thai",

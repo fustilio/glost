@@ -5,8 +5,8 @@
  * and hydrating GLOST documents with additional data from various sources.
  */
 
-import type { GLOSTWord, GLOSTRoot, GLOSTNode, GLOSTParagraph, GLOSTSentence, TransliterationData } from "glost-core";
-import { getAllWords, isGLOSTWord, isGLOSTParagraph, isGLOSTSentence } from "glost-core";
+import type { GLOSTWord, GLOSTRoot, GLOSTNode, GLOSTParagraph, GLOSTSentence, TransliterationData } from "glost";
+import { getAllWords, isGLOSTWord, isGLOSTParagraph, isGLOSTSentence } from "glost";
 import type { ITranscriptionProvider } from "./interfaces.js";
 
 /**
@@ -62,7 +62,7 @@ export function mergeTranscriptionData(
   transcriptionScheme: string,
 ): GLOSTWord {
   // If word already has transcription for this scheme, don't overwrite
-  if (word.transcription?.[transcriptionScheme]) {
+  if (word.transcription[transcriptionScheme]) {
     return word;
   }
 

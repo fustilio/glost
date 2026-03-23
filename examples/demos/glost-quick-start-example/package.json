@@ -1,6 +1,6 @@
 {
   "name": "glost-quick-start-example",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "private": true,
   "type": "module",
   "description": "Quick start guide demonstrating basic GLOST usage",

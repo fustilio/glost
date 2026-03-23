@@ -1,0 +1,164 @@
+/**
+ * Thai GLOST Processing Pipelines
+ *
+ * Pre-configured extension pipelines for different Thai language learning
+ * use cases. These pipelines combine transformers and enrichers in the
+ * correct order for optimal processing.
+ *
+ * @packageDocumentation
+ */
+import type { GLOSTExtension } from "glost-plugins";
+import type { GlostLanguage } from "glost-common";
+/**
+ * Thai pipeline options
+ */
+export interface ThaiPipelineOptions {
+    /**
+     * Target gender for gender variants
+     * @default "both"
+     */
+    gender?: "male" | "female" | "both";
+    /**
+     * Native language for translations
+     * @default "en-US"
+     */
+    nativeLanguage?: GlostLanguage;
+    /**
+     * Whether to include syllable segmentation
+     * @default true
+     */
+    includeSyllables?: boolean;
+    /**
+     * Whether to include grammar analysis (clauses)
+     * @default false
+     */
+    includeGrammar?: boolean;
+    /**
+     * Whether to include transcription enrichment
+     * @default true
+     */
+    includeTranscription?: boolean;
+    /**
+     * Whether to include translation enrichment
+     * @default true
+     */
+    includeTranslation?: boolean;
+}
+/**
+ * Create Thai pronunciation learning pipeline
+ *
+ * Optimized for pronunciation practice:
+ * 1. Syllable segmentation (see syllable structure)
+ * 2. Transcription enrichment (see romanization)
+ * 3. Translation enrichment (understand meaning)
+ *
+ * @param options - Pipeline options
+ * @returns Array of extensions in correct order
+ *
+ * @example
+ * ```typescript
+ * import { createThaiPronunciationPipeline } from "glost-plugins-thai";
+ * import { processGLOSTWithExtensions } from "glost-plugins";
+ *
+ * const extensions = createThaiPronunciationPipeline();
+ * const result = processGLOSTWithExtensions(document, extensions);
+ *
+ * // Words will have:
+ * // - Syllable nodes with tone information
+ * // - Romanized transcriptions
+ * // - English translations
+ * ```
+ */
+export declare function createThaiPronunciationPipeline(options?: ThaiPipelineOptions): GLOSTExtension[];
+/**
+ * Create Thai dialogue/conversation pipeline
+ *
+ * Optimized for dialogue practice:
+ * 1. Gender transformation (apply speaker gender)
+ * 2. Syllable segmentation (pronunciation help)
+ * 3. Transcription/translation enrichment
+ *
+ * @param options - Pipeline options
+ * @returns Array of extensions in correct order
+ *
+ * @example
+ * ```typescript
+ * import { createThaiDialoguePipeline } from "glost-plugins-thai";
+ *
+ * // For male speaker practice
+ * const extensions = createThaiDialoguePipeline({ gender: "male" });
+ *
+ * // "{ผม|ดิฉัน}ชอบกาแฟ{ครับ|ค่ะ}" → "ผมชอบกาแฟครับ"
+ * ```
+ */
+export declare function createThaiDialoguePipeline(options?: ThaiPipelineOptions): GLOSTExtension[];
+/**
+ * Create Thai grammar analysis pipeline
+ *
+ * Optimized for grammar study:
+ * 1. Clause segmentation (identify sentence structure)
+ * 2. Syllable segmentation (word analysis)
+ * 3. Transcription/translation enrichment
+ *
+ * @param options - Pipeline options
+ * @returns Array of extensions in correct order
+ *
+ * @example
+ * ```typescript
+ * import { createThaiGrammarPipeline } from "glost-plugins-thai";
+ *
+ * const extensions = createThaiGrammarPipeline();
+ *
+ * // Sentences will be segmented into clauses:
+ * // "ผมคิดว่าคุณถูก" → Clause(main) + Clause(subordinate)
+ * ```
+ */
+export declare function createThaiGrammarPipeline(options?: ThaiPipelineOptions): GLOSTExtension[];
+/**
+ * Create Thai comprehensive learning pipeline
+ *
+ * Full pipeline with all transformers and enrichers:
+ * 1. Gender transformation
+ * 2. Clause segmentation
+ * 3. Syllable segmentation
+ * 4. Transcription enrichment
+ * 5. Translation enrichment
+ *
+ * Use this for complete GLOST processing when you need all features.
+ *
+ * @param options - Pipeline options
+ * @returns Array of extensions in correct order
+ *
+ * @example
+ * ```typescript
+ * import { createThaiComprehensivePipeline } from "glost-plugins-thai";
+ *
+ * const extensions = createThaiComprehensivePipeline({
+ *   gender: "female",
+ *   nativeLanguage: "en-US",
+ * });
+ *
+ * const result = processGLOSTWithExtensions(document, extensions);
+ *
+ * // Document will have:
+ * // - Gender variants applied
+ * // - Sentences segmented into clauses
+ * // - Words segmented into syllables with tones
+ * // - Romanized transcriptions
+ * // - English translations
+ * ```
+ */
+export declare function createThaiComprehensivePipeline(options?: ThaiPipelineOptions): GLOSTExtension[];
+/**
+ * Default Thai learning pipeline (pronunciation-focused)
+ */
+export declare const ThaiLearningPipeline: GLOSTExtension[];
+/**
+ * Default Thai conversation pipeline (male perspective)
+ */
+export declare const ThaiConversationPipelineMale: GLOSTExtension[];
+/**
+ * Default Thai conversation pipeline (female perspective)
+ */
+export declare const ThaiConversationPipelineFemale: GLOSTExtension[];
+//# sourceMappingURL=pipeline.d.ts.map

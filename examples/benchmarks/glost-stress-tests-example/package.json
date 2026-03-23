@@ -1,6 +1,6 @@
 {
   "name": "glost-stress-tests-example",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "private": true,
   "type": "module",
   "description": "Stress tests and performance benchmarks for GLOST",

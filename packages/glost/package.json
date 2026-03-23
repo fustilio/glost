@@ -1,6 +1,6 @@
 {
   "name": "glost",
-  "version": "0.5.0",
+  "version": "0.8.2",
   "description": "GLOST - Glossed Syntax Tree for language learning and multilingual text processing",
   "author": "fustilio",
   "license": "MIT",
@@ -30,15 +30,11 @@
       "default": "./dist/presets.js"
     }
   },
-  "scripts": {
-    "build": "tsc",
-    "typecheck": "tsc --noEmit"
-  },
   "dependencies": {
-    "glost-core": "workspace:*",
-    "glost-processor": "workspace:*",
-    "glost-registry": "workspace:*",
-    "glost-presets": "workspace:*"
+    "glost-core": "0.6.2",
+    "glost-processor": "1.0.2",
+    "glost-presets": "0.6.2",
+    "glost-registry": "1.0.2"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
@@ -56,5 +52,9 @@
     "processor",
     "pipeline",
     "unified"
-  ]
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  }
 }

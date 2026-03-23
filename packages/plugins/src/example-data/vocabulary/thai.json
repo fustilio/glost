@@ -1,0 +1,397 @@
+{
+  "language": "th",
+  "languageName": "Thai",
+  "nativeName": "ไทย",
+  "vocabulary": [
+    {
+      "word": "สวัสดี",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "interjection",
+      "culturalNotes": "Traditional Thai greeting used for hello and goodbye. Shows respect and politeness. Often accompanied by a wai gesture.",
+      "transcription": {
+        "ipa": "sà.wàt.diː",
+        "rtgs": "sawatdi",
+        "paiboon": "sà-wàt-dii"
+      },
+      "translations": {
+        "en": "hello, hi, goodbye",
+        "ja": "こんにちは",
+        "fr": "bonjour",
+        "es": "hola"
+      },
+      "examples": [
+        "สวัสดีครับ (male speaker)",
+        "สวัสดีค่ะ (female speaker)"
+      ],
+      "tone": {
+        "syllables": ["L", "L", "M"],
+        "description": "Low-Low-Mid"
+      }
+    },
+    {
+      "word": "ขอบคุณ",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "verb",
+      "culturalNotes": "Expressing gratitude. Essential polite phrase in Thai culture.",
+      "transcription": {
+        "ipa": "kʰɔ̀ːp.kʰun",
+        "rtgs": "khop khun",
+        "paiboon": "kòrp-kun"
+      },
+      "translations": {
+        "en": "thank you",
+        "ja": "ありがとうございます",
+        "fr": "merci",
+        "es": "gracias"
+      },
+      "examples": [
+        "ขอบคุณครับ (male)",
+        "ขอบคุณค่ะ (female)"
+      ],
+      "tone": {
+        "syllables": ["L", "M"],
+        "description": "Low-Mid"
+      }
+    },
+    {
+      "word": "ภาษา",
+      "frequency": "common",
+      "difficulty": "beginner",
+      "partOfSpeech": "noun",
+      "culturalNotes": "Language. Important concept in Thailand's multilingual society.",
+      "transcription": {
+        "ipa": "pʰaː.sǎː",
+        "rtgs": "phasa",
+        "paiboon": "paa-săa"
+      },
+      "translations": {
+        "en": "language",
+        "ja": "言語",
+        "fr": "langue",
+        "es": "idioma"
+      },
+      "examples": [
+        "ภาษาไทย (Thai language)",
+        "ภาษาอังกฤษ (English language)"
+      ],
+      "tone": {
+        "syllables": ["M", "R"],
+        "description": "Mid-Rising"
+      }
+    },
+    {
+      "word": "เรียน",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "verb",
+      "culturalNotes": "To study or learn. Education is highly valued in Thai culture.",
+      "transcription": {
+        "ipa": "riːan",
+        "rtgs": "rian",
+        "paiboon": "riian"
+      },
+      "translations": {
+        "en": "to study, to learn",
+        "ja": "勉強する",
+        "fr": "étudier",
+        "es": "estudiar"
+      },
+      "examples": [
+        "เรียนภาษาไทย (study Thai language)",
+        "เรียนหนังสือ (study books)"
+      ],
+      "tone": {
+        "syllables": ["M"],
+        "description": "Mid"
+      }
+    },
+    {
+      "word": "เข้าใจ",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "verb",
+      "culturalNotes": "To understand. Literally means 'enter heart'.",
+      "transcription": {
+        "ipa": "kʰâw.t͡ɕaj",
+        "rtgs": "khao chai",
+        "paiboon": "kâo-jai"
+      },
+      "translations": {
+        "en": "to understand",
+        "ja": "理解する",
+        "fr": "comprendre",
+        "es": "entender"
+      },
+      "examples": [
+        "ผม/ฉันเข้าใจ (I understand)",
+        "คุณเข้าใจไหม (Do you understand?)"
+      ],
+      "tone": {
+        "syllables": ["F", "M"],
+        "description": "Falling-Mid"
+      }
+    },
+    {
+      "word": "พูด",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "verb",
+      "culturalNotes": "To speak or talk.",
+      "transcription": {
+        "ipa": "pʰûːt",
+        "rtgs": "phut",
+        "paiboon": "pôot"
+      },
+      "translations": {
+        "en": "to speak, to talk",
+        "ja": "話す",
+        "fr": "parler",
+        "es": "hablar"
+      },
+      "examples": [
+        "พูดภาษาไทย (speak Thai)",
+        "พูดช้าๆ (speak slowly)"
+      ],
+      "tone": {
+        "syllables": ["F"],
+        "description": "Falling"
+      }
+    },
+    {
+      "word": "คำ",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "noun",
+      "culturalNotes": "Word or speech. Also used as a classifier for words.",
+      "transcription": {
+        "ipa": "kʰam",
+        "rtgs": "kham",
+        "paiboon": "kam"
+      },
+      "translations": {
+        "en": "word",
+        "ja": "言葉",
+        "fr": "mot",
+        "es": "palabra"
+      },
+      "examples": [
+        "คำศัพท์ (vocabulary)",
+        "หนึ่งคำ (one word)"
+      ],
+      "tone": {
+        "syllables": ["M"],
+        "description": "Mid"
+      }
+    },
+    {
+      "word": "ไทย",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "noun",
+      "culturalNotes": "Thai or Thailand. National identity is important in Thai culture.",
+      "transcription": {
+        "ipa": "tʰaj",
+        "rtgs": "thai",
+        "paiboon": "tai"
+      },
+      "translations": {
+        "en": "Thai, Thailand",
+        "ja": "タイ",
+        "fr": "Thaïlande",
+        "es": "Tailandia"
+      },
+      "examples": [
+        "ประเทศไทย (Thailand - country Thai)",
+        "คนไทย (Thai person)"
+      ],
+      "tone": {
+        "syllables": ["M"],
+        "description": "Mid"
+      }
+    },
+    {
+      "word": "ครับ",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "particle",
+      "culturalNotes": "Polite particle used by male speakers at end of sentences. Essential for politeness.",
+      "transcription": {
+        "ipa": "kʰráp",
+        "rtgs": "khrap",
+        "paiboon": "kráp"
+      },
+      "translations": {
+        "en": "(polite particle for males)",
+        "ja": "です（男性用）",
+        "fr": "(particule polie masculine)",
+        "es": "(partícula educada masculina)"
+      },
+      "examples": [
+        "สวัสดีครับ (hello - male)",
+        "ขอบคุณครับ (thank you - male)"
+      ],
+      "tone": {
+        "syllables": ["H"],
+        "description": "High"
+      }
+    },
+    {
+      "word": "ค่ะ",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "particle",
+      "culturalNotes": "Polite particle used by female speakers at end of sentences. Shows respect and femininity.",
+      "transcription": {
+        "ipa": "kʰâ",
+        "rtgs": "kha",
+        "paiboon": "kâ"
+      },
+      "translations": {
+        "en": "(polite particle for females)",
+        "ja": "です（女性用）",
+        "fr": "(particule polie féminine)",
+        "es": "(partícula educada femenina)"
+      },
+      "examples": [
+        "สวัสดีค่ะ (hello - female)",
+        "ขอบคุณค่ะ (thank you - female)"
+      ],
+      "tone": {
+        "syllables": ["F"],
+        "description": "Falling"
+      }
+    },
+    {
+      "word": "ไวยากรณ์",
+      "frequency": "common",
+      "difficulty": "intermediate",
+      "partOfSpeech": "noun",
+      "culturalNotes": "Grammar. Borrowed from Sanskrit, reflecting Thai's rich linguistic history.",
+      "transcription": {
+        "ipa": "waj.jaː.kɔːn",
+        "rtgs": "waiyakon",
+        "paiboon": "wai-yaa-gorn"
+      },
+      "translations": {
+        "en": "grammar",
+        "ja": "文法",
+        "fr": "grammaire",
+        "es": "gramática"
+      },
+      "examples": [
+        "ไวยากรณ์ภาษาไทย (Thai grammar)",
+        "เรียนไวยากรณ์ (study grammar)"
+      ],
+      "tone": {
+        "syllables": ["M", "M", "M"],
+        "description": "Mid-Mid-Mid"
+      }
+    },
+    {
+      "word": "คำศัพท์",
+      "frequency": "common",
+      "difficulty": "intermediate",
+      "partOfSpeech": "noun",
+      "culturalNotes": "Vocabulary. Compound word combining คำ (word) and ศัพท์ (terminology).",
+      "transcription": {
+        "ipa": "kʰam.sàp",
+        "rtgs": "kham sap",
+        "paiboon": "kam-sàp"
+      },
+      "translations": {
+        "en": "vocabulary",
+        "ja": "語彙",
+        "fr": "vocabulaire",
+        "es": "vocabulario"
+      },
+      "examples": [
+        "ท่องคำศัพท์ (memorize vocabulary)",
+        "คำศัพท์ใหม่ (new vocabulary)"
+      ],
+      "tone": {
+        "syllables": ["M", "L"],
+        "description": "Mid-Low"
+      }
+    },
+    {
+      "word": "การออกเสียง",
+      "frequency": "common",
+      "difficulty": "intermediate",
+      "partOfSpeech": "noun",
+      "culturalNotes": "Pronunciation. Important for tonal language learning.",
+      "transcription": {
+        "ipa": "kaːn.ʔɔ̀ːk.sǐaŋ",
+        "rtgs": "kan ok siang",
+        "paiboon": "gaan-òrk-sĭang"
+      },
+      "translations": {
+        "en": "pronunciation",
+        "ja": "発音",
+        "fr": "prononciation",
+        "es": "pronunciación"
+      },
+      "examples": [
+        "ฝึกการออกเสียง (practice pronunciation)",
+        "การออกเสียงถูกต้อง (correct pronunciation)"
+      ],
+      "tone": {
+        "syllables": ["M", "L", "R"],
+        "description": "Mid-Low-Rising"
+      }
+    },
+    {
+      "word": "ภาษาศาสตร์",
+      "frequency": "uncommon",
+      "difficulty": "advanced",
+      "partOfSpeech": "noun",
+      "culturalNotes": "Linguistics. Academic field studying language scientifically.",
+      "transcription": {
+        "ipa": "pʰaː.sǎː.sàːt",
+        "rtgs": "phasa sat",
+        "paiboon": "paa-săa-sàat"
+      },
+      "translations": {
+        "en": "linguistics",
+        "ja": "言語学",
+        "fr": "linguistique",
+        "es": "lingüística"
+      },
+      "examples": [
+        "ศึกษาภาษาศาสตร์ (study linguistics)",
+        "นักภาษาศาสตร์ (linguist)"
+      ],
+      "tone": {
+        "syllables": ["M", "R", "L"],
+        "description": "Mid-Rising-Low"
+      }
+    },
+    {
+      "word": "เสียง",
+      "frequency": "very-common",
+      "difficulty": "beginner",
+      "partOfSpeech": "noun",
+      "culturalNotes": "Sound, voice, or tone. Critical concept in tonal languages.",
+      "transcription": {
+        "ipa": "sǐaŋ",
+        "rtgs": "siang",
+        "paiboon": "sĭang"
+      },
+      "translations": {
+        "en": "sound, voice, tone",
+        "ja": "音",
+        "fr": "son, voix",
+        "es": "sonido, voz"
+      },
+      "examples": [
+        "เสียงสูง (high tone)",
+        "เสียงต่ำ (low tone)"
+      ],
+      "tone": {
+        "syllables": ["R"],
+        "description": "Rising"
+      }
+    }
+  ]
+}

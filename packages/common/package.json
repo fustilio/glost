@@ -1,6 +1,6 @@
 {
   "name": "glost-common",
-  "version": "0.2.0",
+  "version": "0.4.2",
   "description": "Common utilities and language configs for GLOST",
   "author": "fustilio",
   "license": "MIT",
@@ -38,18 +38,12 @@
       "default": "./src/utils/zod.ts"
     }
   },
-  "scripts": {
-    "build": "tsc",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest",
-    "lint": "echo 'No linting configured'"
-  },
   "dependencies": {
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "typescript": "catalog:",
-    "vitest": "catalog:"
+    "typescript": "^5.8.3",
+    "vitest": "^3.0.5"
   },
   "keywords": [
     "glost",
@@ -57,5 +51,11 @@
     "utilities",
     "i18n",
     "multilingual"
-  ]
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "lint": "echo 'No linting configured'"
+  }
 }

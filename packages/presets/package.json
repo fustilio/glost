@@ -1,6 +1,6 @@
 {
   "name": "glost-presets",
-  "version": "0.5.0",
+  "version": "0.6.2",
   "description": "Preset configurations for common GLOST use cases",
   "type": "module",
   "main": "./dist/index.js",
@@ -16,11 +16,6 @@
     "src",
     "README.md"
   ],
-  "scripts": {
-    "build": "tsc",
-    "test": "vitest run --passWithNoTests",
-    "test:watch": "vitest"
-  },
   "keywords": [
     "glost",
     "presets",
@@ -29,12 +24,17 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "glost-core": "workspace:*",
-    "glost-processor": "workspace:*"
+    "glost-core": "0.6.2",
+    "glost-processor": "1.0.2"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "typescript": "^5.3.3",
-    "vitest": "catalog:"
+    "vitest": "^1.6.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest"
   }
 }

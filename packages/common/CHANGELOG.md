@@ -1,5 +1,23 @@
 # glost-common
 
+## 0.4.2
+
+### Patch Changes
+
+- Patch version bump for republishing
+
+## 0.4.1
+
+### Patch Changes
+
+- Patch version bump for republishing
+
+## 0.4.0
+
+### Minor Changes
+
+- Minor version bump for npm deployment
+
 ## 0.2.0
 
 ### Minor Changes

@@ -38,6 +38,12 @@ export type {
   ProgressHook,
   ProgressStats,
 } from "./types.js";
+export { GLOSTStreamProcessor } from "./stream-processor.js";
+export type {
+  FrozenStreamProcessor,
+  StreamOptions,
+  ProcessedChunk,
+} from "./stream-processor.js";
 
 import { GLOSTProcessor } from "./processor.js";
 import type { ProcessorOptions } from "./types.js";

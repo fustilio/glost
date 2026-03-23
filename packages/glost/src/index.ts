@@ -86,9 +86,6 @@ export {
   getWordText,
   getWordTranscription,
   getWordTranslation,
-  getWordPartOfSpeech,
-  getWordDifficulty,
-  getWordMeaning,
   getSentenceTranslation,
   getGLOSTWordCount,
 } from "glost-core";
@@ -96,9 +93,10 @@ export {
 // ============================================================================
 // Processor API
 // ============================================================================
-export { glost, GLOSTProcessor } from "glost-processor";
+export { glost, GLOSTProcessor, GLOSTStreamProcessor } from "glost-processor";
 export type {
   FrozenProcessor,
+  FrozenStreamProcessor,
   Plugin,
   PluginSpec,
   Preset,
@@ -113,6 +111,8 @@ export type {
   SkipHook,
   ProgressHook,
   ProgressStats,
+  StreamOptions,
+  ProcessedChunk,
 } from "glost-processor";
 
 // ============================================================================

@@ -1,6 +1,6 @@
 {
   "name": "glost-core",
-  "version": "0.5.0",
+  "version": "0.6.2",
   "description": "Core types, nodes, and utilities for GLOST (Glossed Syntax Tree)",
   "author": "fustilio",
   "license": "MIT",
@@ -37,13 +37,7 @@
       "default": "./src/guards.ts"
     }
   },
-  "scripts": {
-    "build": "tsc",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest --passWithNoTests"
-  },
   "dependencies": {
-    "glost-common": "workspace:*",
     "unist-util-filter": "^5.0.1",
     "unist-util-find": "^3.0.0",
     "unist-util-flatmap": "^1.0.0",
@@ -53,12 +47,13 @@
     "unist-util-remove": "^4.0.0",
     "unist-util-select": "^5.1.0",
     "unist-util-visit": "^5.0.0",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "glost-common": "0.4.2"
   },
   "devDependencies": {
     "@types/nlcst": "^2.0.3",
-    "typescript": "catalog:",
-    "vitest": "catalog:"
+    "typescript": "^5.8.3",
+    "vitest": "^3.0.5"
   },
   "keywords": [
     "glost",
@@ -69,5 +64,10 @@
     "linguistics",
     "syntax-tree",
     "unist"
-  ]
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest --passWithNoTests"
+  }
 }

@@ -1,0 +1,1 @@
+{"version":3,"file":"minimal.d.ts","sourceRoot":"","sources":["minimal.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAEH,OAAO,KAAK,EAAE,MAAM,EAAE,MAAM,iBAAiB,CAAC;AAE9C;;;;;;;;;;;;;;;;;;;GAmBG;AACH,eAAO,MAAM,aAAa,EAAE,MAQ3B,CAAC;AAEF;;;;;GAKG;AACH,wBAAgB,mBAAmB,CAAC,OAAO,CAAC,EAAE;IAC5C,mBAAmB,CAAC,EAAE,MAAM,CAAC;IAC7B,iBAAiB,CAAC,EAAE,MAAM,CAAC;CAC5B,GAAG,MAAM,CAeT"}

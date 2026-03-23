@@ -1,5 +1,39 @@
 # glost-clause-segmenter
 
+## 0.2.5
+
+### Patch Changes
+
+- Updated dependencies
+  - glost-plugins@0.6.3
+
+## 0.2.4
+
+### Patch Changes
+
+- Updated dependencies
+  - glost-common@0.4.2
+  - glost@0.8.2
+  - glost-plugins@0.6.2
+
+## 0.2.3
+
+### Patch Changes
+
+- Updated dependencies
+  - glost-common@0.4.1
+  - glost@0.8.1
+  - glost-plugins@0.6.1
+
+## 0.2.2
+
+### Patch Changes
+
+- Updated dependencies
+  - glost-common@0.4.0
+  - glost@0.8.0
+  - glost-plugins@0.6.0
+
 ## 0.2.1
 
 ### Patch Changes

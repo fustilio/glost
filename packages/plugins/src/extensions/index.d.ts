@@ -1,0 +1,21 @@
+/**
+ * Built-in GLOST Extensions
+ *
+ * Exports core extensions that don't require external data sources.
+ *
+ * Moved to separate packages (install separately):
+ * - Frequency → glost-frequency
+ * - Difficulty → glost-difficulty
+ * - POS → glost-pos
+ * - Gender → glost-gender
+ * - Clause Segmenter → glost-clause-segmenter
+ * - Transcription → glost-transcription
+ * - Translation → glost-translation
+ */
+export { CulturalNotesExtension, createCulturalNotesExtension, type CulturalNotesMetadata, type CulturalNotesExtensionOptions, } from "./cultural-notes.js";
+export { GenderTransformerExtension, createGenderTransformerExtension, type TargetGender, type GenderDisplayFormat, type GenderVariantData, type GenderTransformerOptions, } from "./gender-transformer.js";
+export { NegationTransformerExtension, createNegationTransformerExtension, type NegationType, type NegationData, type NegationTransformerOptions, } from "./negation-transformer.js";
+export { ReadingScoreExtension, createReadingScoreExtension, type ReadingScoreMetadata, type ReadingScoreOptions, } from "./reading-score.js";
+export { LearnerHintsExtension, createLearnerHintsExtension, type LearnerHintsMetadata, type LearnerHintsOptions, } from "./learner-hints.js";
+export { ClauseAnalysisExtension, createClauseAnalysisExtension, type ClauseAnalysisMetadata, type ClauseAnalysisOptions, } from "./clause-analysis.js";
+//# sourceMappingURL=index.d.ts.map
