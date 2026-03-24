@@ -1,7 +1,7 @@
 {
   "name": "glost-thai-extensions-demo",
   "private": true,
-  "version": "0.0.5",
+  "version": "0.0.7",
   "type": "module",
   "description": "Visual demo of Thai GLOST extensions with rendering using HTMX",
   "scripts": {

@@ -1,5 +1,19 @@
 # glost-plugins-api-example
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies
+  - glost-transcription@0.4.6
+
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies
+  - glost-transcription@0.4.5
+
 ## 0.0.5
 
 ### Patch Changes

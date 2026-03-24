@@ -1,6 +1,6 @@
 {
   "name": "glost-dialogue",
-  "version": "0.6.2",
+  "version": "0.8.0",
   "description": "Dialogue syntax and helper functions for GloST documents",
   "type": "module",
   "main": "./dist/index.js",

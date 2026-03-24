@@ -1,5 +1,21 @@
 # glost-th-transcription-example
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies
+  - glost-transcription@0.4.6
+  - glost-th@0.4.7
+
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies
+  - glost-transcription@0.4.5
+  - glost-th@0.4.6
+
 ## 0.0.5
 
 ### Patch Changes

@@ -1,5 +1,17 @@
 # glost-dialogue
 
+## 0.8.0
+
+### Minor Changes
+
+- Add backwards compatibility layer for 0.6.0 API. Re-exports old names (GLOSTDialogueRoot, createDialogueRoot, etc.) as aliases to new API to avoid breaking changes for downstream users.
+
+## 0.7.0
+
+### Minor Changes
+
+- Add backwards compatibility layer for 0.6.0 API. Re-exports old names (GLOSTDialogueRoot, createDialogueRoot, etc.) as aliases to new API to avoid breaking changes for downstream users.
+
 ## 0.6.2
 
 ### Patch Changes

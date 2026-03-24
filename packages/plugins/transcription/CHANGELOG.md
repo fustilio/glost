@@ -1,5 +1,17 @@
 # glost-transcription
 
+## 0.4.6
+
+### Patch Changes
+
+- Fix: Include dist files in npm package. The package was missing the compiled dist/ directory which caused build failures in downstream projects.
+
+## 0.4.5
+
+### Patch Changes
+
+- Fix: Include dist files in npm package. The package was missing the compiled dist/ directory which caused build failures in downstream projects.
+
 ## 0.4.4
 
 ### Patch Changes

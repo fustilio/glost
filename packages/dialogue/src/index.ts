@@ -13,3 +13,9 @@ export * from "./types/index.js";
 
 // Utilities - Helper functions for creating dialogues
 export * from "./utils/index.js";
+
+// Backwards Compatibility - DEPRECATED exports for 0.6.0 API
+export * from "./backwards-compat.js";
+
+// Backwards compatibility - deprecated exports for 0.6.0 migration
+export * from "./backwards-compat.js";

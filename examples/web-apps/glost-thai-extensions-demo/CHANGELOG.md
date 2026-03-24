@@ -1,5 +1,17 @@
 # glost-thai-extensions-demo
 
+## 0.0.7
+
+### Patch Changes
+
+- glost-th@0.4.7
+
+## 0.0.6
+
+### Patch Changes
+
+- glost-th@0.4.6
+
 ## 0.0.5
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "glost-plugins-api-example",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "private": true,
   "type": "module",
   "description": "Examples demonstrating GLOST extension system usage",
