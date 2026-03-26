@@ -1,6 +1,6 @@
 {
   "name": "glost-ja-transcription-example",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "private": true,
   "type": "module",
   "description": "Example: Japanese transcription extension combining glost-ja + glost-transcription",

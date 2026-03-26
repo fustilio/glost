@@ -1,6 +1,6 @@
 {
   "name": "glost-th-extensions-suite-example",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Example Thai language-specific GLOST extensions demonstrating how to build extensions with glost-th (uses limited demo data)",
   "private": true,
   "type": "module",

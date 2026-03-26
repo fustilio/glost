@@ -1,6 +1,6 @@
 {
   "name": "glost-translation",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Translation extension for GLOST - adds multilingual glosses",
   "author": "fustilio",
   "license": "MIT",

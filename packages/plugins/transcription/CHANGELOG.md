@@ -1,5 +1,14 @@
 # glost-transcription
 
+## 0.4.7
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.3
+  - glost-utils@0.3.3
+  - glost-plugins@0.6.4
+
 ## 0.4.6
 
 ### Patch Changes

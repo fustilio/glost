@@ -1,5 +1,15 @@
 # glost-ja-transcription-example
 
+## 0.0.8
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.3
+  - glost-ja@0.4.7
+  - glost-transcription@0.4.7
+  - glost-plugins@0.6.4
+
 ## 0.0.7
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "glost-frequency",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Word frequency extension for GLOST - generates and formats frequency data",
   "author": "GLOST Contributors",
   "license": "MIT",

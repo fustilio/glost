@@ -1,5 +1,19 @@
 # glost-th
 
+## 0.4.8
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.3
+  - glost-clause-segmenter@0.2.6
+  - glost-difficulty@0.4.5
+  - glost-frequency@0.4.5
+  - glost-pos@0.4.5
+  - glost-transcription@0.4.7
+  - glost-translation@0.4.5
+  - glost-plugins@0.6.4
+
 ## 0.4.7
 
 ### Patch Changes

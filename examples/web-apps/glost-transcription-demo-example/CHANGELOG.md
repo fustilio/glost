@@ -1,5 +1,13 @@
 # glost-transcription-demo-example
 
+## 0.0.9
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.3
+  - glost-plugins@0.6.4
+
 ## 0.0.8
 
 ### Patch Changes

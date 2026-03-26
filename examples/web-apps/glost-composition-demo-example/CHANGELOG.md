@@ -1,5 +1,13 @@
 # glost-composition-demo-example
 
+## 1.0.7
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.3
+  - glost-plugins@0.6.4
+
 ## 1.0.6
 
 ### Patch Changes

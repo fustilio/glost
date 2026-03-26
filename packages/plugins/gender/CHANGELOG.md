@@ -1,5 +1,13 @@
 # glost-gender
 
+## 0.2.6
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.3
+  - glost-plugins@0.6.4
+
 ## 0.2.5
 
 ### Patch Changes

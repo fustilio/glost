@@ -1,5 +1,13 @@
 # glost-core-api-example
 
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.3
+  - glost-plugins@0.6.4
+
 ## 0.0.5
 
 ### Patch Changes

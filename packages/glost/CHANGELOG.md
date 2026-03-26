@@ -1,5 +1,11 @@
 # glost
 
+## 0.8.3
+
+### Patch Changes
+
+- Add ./nodes export to glost package to fix module not found errors
+
 ## 0.8.2
 
 ### Patch Changes

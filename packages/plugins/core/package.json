@@ -1,6 +1,6 @@
 {
   "name": "glost-plugins",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "Core plugin system and built-in plugins for GLOST",
   "author": "fustilio",
   "license": "MIT",

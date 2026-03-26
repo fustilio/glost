@@ -1,5 +1,13 @@
 # glost-en
 
+## 0.4.5
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.3
+  - glost-clause-segmenter@0.2.6
+
 ## 0.4.4
 
 ### Patch Changes

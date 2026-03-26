@@ -1,6 +1,6 @@
 {
   "name": "glost-composition-demo-example",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Demo showcasing GLOST extension composition",
   "type": "module",
   "private": true,

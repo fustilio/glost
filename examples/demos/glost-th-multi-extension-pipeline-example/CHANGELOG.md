@@ -1,5 +1,17 @@
 # glost-th-multi-extension-pipeline-example
 
+## 0.0.8
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.3
+  - glost-th@0.4.8
+  - glost-frequency@0.4.5
+  - glost-transcription@0.4.7
+  - glost-translation@0.4.5
+  - glost-plugins@0.6.4
+
 ## 0.0.7
 
 ### Patch Changes

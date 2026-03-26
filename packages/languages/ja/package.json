@@ -1,6 +1,6 @@
 {
   "name": "glost-ja",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "type": "module",
   "description": "Japanese language support for GLOST - helper functions and transcription providers",
   "keywords": [

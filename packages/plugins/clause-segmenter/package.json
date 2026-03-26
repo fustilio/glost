@@ -1,6 +1,6 @@
 {
   "name": "glost-clause-segmenter",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Clause segmentation extension for GLOST - segments sentences into clauses",
   "author": "GLOST Contributors",
   "license": "MIT",
