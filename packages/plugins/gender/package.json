@@ -1,6 +1,6 @@
 {
   "name": "glost-gender",
-  "version": "0.2.6",
+  "version": "0.2.8",
   "description": "Grammatical gender extension for GLOST - generates and formats gender data",
   "author": "GLOST Contributors",
   "license": "MIT",

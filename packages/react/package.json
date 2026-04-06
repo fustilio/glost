@@ -1,6 +1,6 @@
 {
   "name": "glost-react",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "React utilities for rendering GloST documents with ruby annotations and progressive display",
   "type": "module",
   "main": "./dist/index.js",
@@ -29,7 +29,7 @@
     "README.md"
   ],
   "dependencies": {
-    "glost": "0.8.3"
+    "glost": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18.0.0"

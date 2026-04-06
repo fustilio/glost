@@ -1,5 +1,28 @@
 # glost-th-extensions-suite-example
 
+## 0.0.10
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.4
+  - glost-th@0.4.10
+  - glost-clause-segmenter@0.2.8
+  - glost-transcription@0.4.9
+  - glost-translation@0.4.7
+  - glost-plugins@0.6.6
+
+## 0.0.9
+
+### Patch Changes
+
+- Updated dependencies
+  - glost-th@0.4.9
+  - glost-plugins@0.6.5
+  - glost-clause-segmenter@0.2.7
+  - glost-transcription@0.4.8
+  - glost-translation@0.4.6
+
 ## 0.0.8
 
 ### Patch Changes

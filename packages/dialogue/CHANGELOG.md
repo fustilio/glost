@@ -1,5 +1,12 @@
 # glost-dialogue
 
+## 0.8.2
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.4
+
 ## 0.8.1
 
 ### Patch Changes

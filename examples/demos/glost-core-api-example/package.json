@@ -1,6 +1,6 @@
 {
   "name": "glost-core-api-example",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "private": true,
   "type": "module",
   "description": "Examples demonstrating GLOST core API for working with large documents",

@@ -1,5 +1,33 @@
 # glost-th
 
+## 0.4.10
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.4
+  - glost-clause-segmenter@0.2.8
+  - glost-difficulty@0.4.7
+  - glost-frequency@0.4.7
+  - glost-pos@0.4.7
+  - glost-transcription@0.4.9
+  - glost-translation@0.4.7
+  - glost-plugins@0.6.6
+
+## 0.4.9
+
+### Patch Changes
+
+- Fix glost-th missing dist folder on npm. Added missing ./logger export to glost-utils package.json. Fixed undefined logger variable in glost-plugins processor.
+- Updated dependencies
+  - glost-plugins@0.6.5
+  - glost-clause-segmenter@0.2.7
+  - glost-difficulty@0.4.6
+  - glost-frequency@0.4.6
+  - glost-pos@0.4.6
+  - glost-transcription@0.4.8
+  - glost-translation@0.4.6
+
 ## 0.4.8
 
 ### Patch Changes

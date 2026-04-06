@@ -1,5 +1,28 @@
 # glost-plugins-api-example
 
+## 0.0.10
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.4
+  - glost-difficulty@0.4.7
+  - glost-frequency@0.4.7
+  - glost-pos@0.4.7
+  - glost-transcription@0.4.9
+  - glost-plugins@0.6.6
+
+## 0.0.9
+
+### Patch Changes
+
+- Updated dependencies
+  - glost-plugins@0.6.5
+  - glost-difficulty@0.4.6
+  - glost-frequency@0.4.6
+  - glost-pos@0.4.6
+  - glost-transcription@0.4.8
+
 ## 0.0.8
 
 ### Patch Changes

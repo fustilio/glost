@@ -909,8 +909,8 @@ importers:
   packages/react:
     dependencies:
       glost:
-        specifier: 0.8.2
-        version: 0.8.2
+        specifier: workspace:*
+        version: link:../glost
     devDependencies:
       '@types/react':
         specifier: ^19.0.0
@@ -944,8 +944,8 @@ importers:
   packages/utils:
     dependencies:
       glost:
-        specifier: 0.8.2
-        version: 0.8.2
+        specifier: 0.8.3
+        version: 0.8.3
       glost-common:
         specifier: 0.4.2
         version: 0.4.2
@@ -2888,8 +2888,8 @@ packages:
     peerDependencies:
       glost-core: ^0.6.2
 
-  glost@0.8.2:
-    resolution: {integrity: sha512-DQdNxwAVwJTjGxijBj2HqFp7yXUlNy0130Ry8KQ1JQ7OTneU48MyNn9npDocKOaRl9DDdUfHBZn8IN0FRlLkXQ==}
+  glost@0.8.3:
+    resolution: {integrity: sha512-04t9t++2Y2qfYX01FqXG7a/z0vyry9Fp3/Ytq2roRjhatawBZoRf+gFtKHYh7wpcwwIZvUaD76typ7Q3c/SOEg==}
 
   gopd@1.2.0:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
@@ -6290,7 +6290,7 @@ snapshots:
       glost-core: 0.6.2
       glost-extensions: 0.6.2
 
-  glost@0.8.2:
+  glost@0.8.3:
     dependencies:
       glost-core: 0.6.2
       glost-presets: 0.6.2

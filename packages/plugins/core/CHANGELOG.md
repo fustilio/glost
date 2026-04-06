@@ -1,5 +1,19 @@
 # glost-plugins
 
+## 0.6.6
+
+### Patch Changes
+
+- glost-utils@0.3.5
+
+## 0.6.5
+
+### Patch Changes
+
+- Fix glost-th missing dist folder on npm. Added missing ./logger export to glost-utils package.json. Fixed undefined logger variable in glost-plugins processor.
+- Updated dependencies
+  - glost-utils@0.3.4
+
 ## 0.6.4
 
 ### Patch Changes

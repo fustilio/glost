@@ -25,6 +25,8 @@ import { deepMerge } from "./utils/deep-merge.js";
 import { MissingNodeTypeError } from "./errors.js";
 import { Logger, type LogVerbosity } from "glost-utils/logger";
 
+const logger = new Logger("warn", "[glost-plugins]");
+
 /**
  * Check if a document contains a specific node type
  *

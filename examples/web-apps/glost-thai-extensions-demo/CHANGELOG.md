@@ -1,5 +1,22 @@
 # glost-thai-extensions-demo
 
+## 0.0.10
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.4
+  - glost-th@0.4.10
+  - glost-plugins@0.6.6
+
+## 0.0.9
+
+### Patch Changes
+
+- Updated dependencies
+  - glost-th@0.4.9
+  - glost-plugins@0.6.5
+
 ## 0.0.8
 
 ### Patch Changes

@@ -1,5 +1,27 @@
 # glost-ko
 
+## 0.1.9
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.4
+  - glost-difficulty@0.4.7
+  - glost-frequency@0.4.7
+  - glost-pos@0.4.7
+  - glost-transcription@0.4.9
+  - glost-translation@0.4.7
+
+## 0.1.8
+
+### Patch Changes
+
+- glost-difficulty@0.4.6
+- glost-frequency@0.4.6
+- glost-pos@0.4.6
+- glost-transcription@0.4.8
+- glost-translation@0.4.6
+
 ## 0.1.7
 
 ### Patch Changes

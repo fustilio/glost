@@ -1,5 +1,18 @@
 # glost-utils
 
+## 0.3.5
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.4
+
+## 0.3.4
+
+### Patch Changes
+
+- Fix glost-th missing dist folder on npm. Added missing ./logger export to glost-utils package.json. Fixed undefined logger variable in glost-plugins processor.
+
 ## 0.3.3
 
 ### Patch Changes

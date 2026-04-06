@@ -88,6 +88,8 @@ export {
   getWordTranslation,
   getSentenceTranslation,
   getGLOSTWordCount,
+  getWordPartOfSpeech,
+  getWordDifficulty,
 } from "glost-core";
 
 // ============================================================================

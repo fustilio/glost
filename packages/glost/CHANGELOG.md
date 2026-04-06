@@ -1,5 +1,11 @@
 # glost
 
+## 0.8.4
+
+### Patch Changes
+
+- chore: update glost re-exports
+
 ## 0.8.3
 
 ### Patch Changes

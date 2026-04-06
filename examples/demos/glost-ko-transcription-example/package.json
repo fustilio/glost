@@ -1,6 +1,6 @@
 {
   "name": "glost-ko-transcription-example",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "private": true,
   "type": "module",
   "description": "Example: Korean transcription extension combining glost-ko + glost-transcription",

@@ -1,5 +1,12 @@
 # glost-inkle
 
+## 0.2.5
+
+### Patch Changes
+
+- Updated dependencies
+  - glost@0.8.4
+
 ## 0.2.4
 
 ### Patch Changes
