@@ -8,7 +8,7 @@ import {
 import type { GLOSTRoot } from "glost";
 
 import { composeParallelDocument } from "./compose.js";
-import { idStamp } from "./id-stamp.js";
+import { idStamp, idStampPlugin } from "./id-stamp.js";
 import { assertStamped } from "./assert.js";
 import { flattenAlignedPair } from "./flatten.js";
 import {
@@ -64,6 +64,23 @@ describe("id-stamp", () => {
     expect(sent.extras.id).toBe("custom-sentence-id");
     expect(tree.children[0]!.extras?.id).toBe("p1");
     expect(sent.children[0]!.extras?.id).toBe("p1-s1-w1");
+  });
+
+  it("idStampPlugin produces a transform that stamps the same ids as the standalone fn", () => {
+    const treeA = buildTree("en", [["hello", "world"]]);
+    const treeB = buildTree("en", [["hello", "world"]]);
+    const plugin = idStampPlugin();
+    expect(plugin.id).toBe("id-stamp");
+    const standalone = idStamp(treeA);
+    const viaPlugin = plugin.transform(treeB);
+    expect(JSON.stringify(viaPlugin)).toBe(JSON.stringify(standalone));
+  });
+
+  it("idStampPlugin honors the preserve strategy option", () => {
+    const tree = buildTree("en", [["a"]]);
+    tree.children[0]!.children[0]!.extras = { id: "custom" };
+    idStampPlugin({ strategy: "preserve" }).transform(tree);
+    expect(tree.children[0]!.children[0]!.extras.id).toBe("custom");
   });
 
   it("throws on duplicate preserved ids", () => {

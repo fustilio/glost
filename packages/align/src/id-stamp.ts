@@ -67,6 +67,35 @@ export function idStamp(
   return tree;
 }
 
+/**
+ * Processor-plugin wrapper around `idStamp`.
+ *
+ * Lets `id-stamp` compose into a `glost().use(...)` pipeline alongside other
+ * extensions instead of being invoked imperatively. Other glost-align
+ * extensions can declare `requires: ["id-stamp"]` to enforce ordering.
+ *
+ * @example
+ * ```ts
+ * import { glost } from "glost";
+ * import { idStampPlugin } from "glost-align/id-stamp";
+ *
+ * const processor = glost()
+ *   .use(idStampPlugin, { strategy: "preserve" })
+ *   .freeze();
+ *
+ * const result = await processor.process(document);
+ * ```
+ */
+export function idStampPlugin(options: IdStampOptions = {}) {
+  return {
+    id: "id-stamp",
+    name: "ID Stamp",
+    description:
+      "Writes deterministic ids onto Paragraph/Sentence/Word nodes. Hard prerequisite of glost-align.",
+    transform: (tree: GLOSTRoot) => idStamp(tree, options),
+  };
+}
+
 function stampNode(
   node: GLOSTParagraph | GLOSTSentence | GLOSTWord,
   positionalId: string,
