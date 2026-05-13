@@ -4,6 +4,8 @@ import type {
   GLOSTSentence,
   GLOSTWord,
 } from "glost";
+import { visit } from "unist-util-visit";
+
 import type {
   AlignmentEdge,
   AlignmentLevel,
@@ -13,6 +15,36 @@ import type {
 } from "./types.js";
 
 type AlignableNode = GLOSTParagraph | GLOSTSentence | GLOSTWord;
+const ALIGNABLE_TYPES = new Set([
+  "ParagraphNode",
+  "SentenceNode",
+  "WordNode",
+]);
+
+/**
+ * Visit every alignable node (Paragraph, Sentence, Word) in a tree.
+ *
+ * Wraps `unist-util-visit` with a type filter — Text/Punctuation/WhiteSpace
+ * leaves under Word are skipped per Q13.1.
+ */
+export function walkAlignable(
+  root: GLOSTRoot,
+  visitor: (node: AlignableNode) => void,
+): void {
+  visit(root as never, (node: { type: string }) => {
+    if (ALIGNABLE_TYPES.has(node.type)) {
+      visitor(node as unknown as AlignableNode);
+    }
+  });
+}
+
+/**
+ * Read the stamped id from a node, if present.
+ */
+export function nodeId(node: AlignableNode): string | undefined {
+  const id = node.extras?.id;
+  return typeof id === "string" ? id : undefined;
+}
 
 /**
  * Build a `lang -> id -> node` lookup table for fast `NodeRef` resolution.
@@ -34,39 +66,6 @@ export function buildNodeIndex(
     out.set(lang, inner);
   }
   return out;
-}
-
-/**
- * Visit every alignable node (Paragraph, Sentence, Word) in a tree.
- *
- * Skips Text/Punctuation/WhiteSpace/Symbol — leaves under Word with no
- * independent identity (per Q13.1).
- */
-export function walkAlignable(
-  root: GLOSTRoot,
-  visit: (node: AlignableNode) => void,
-): void {
-  for (const child of root.children ?? []) {
-    if (child.type !== "ParagraphNode") continue;
-    const para = child as GLOSTParagraph;
-    visit(para);
-    for (const sent of para.children ?? []) {
-      if (sent.type !== "SentenceNode") continue;
-      const sentence = sent as GLOSTSentence;
-      visit(sentence);
-      for (const c of sentence.children ?? []) {
-        if (c.type === "WordNode") visit(c);
-      }
-    }
-  }
-}
-
-/**
- * Read the stamped id from a node, if present.
- */
-export function nodeId(node: AlignableNode): string | undefined {
-  const id = node.extras?.id;
-  return typeof id === "string" ? id : undefined;
 }
 
 /**

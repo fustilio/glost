@@ -1,3 +1,5 @@
+import { toString as nlcstToString } from "nlcst-to-string";
+
 import type { LangCode, ParallelDocument } from "./types.js";
 import { buildNodeIndex, getEdgeById } from "./walk.js";
 
@@ -9,18 +11,21 @@ export interface FlattenedPair {
 export interface FlattenOptions {
   sourceLang: LangCode;
   targetLang: LangCode;
-  /** Joiner between multiple words/sentences in the same edge ref. Defaults to " ". */
+  /** Joiner between multiple node refs in the same edge. Defaults to " ". */
   joiner?: string;
 }
 
 /**
  * Reduce a single edge to the flat `{ source, target }` shape that legacy
- * consumers expect (see ADR-0006).
+ * consumers expect (see ADR-0006 in glost).
  *
- * Concatenates the textual content of every node referenced by the edge in the
- * given source/target languages, joined by `joiner`.
+ * For each side, joins the textual content of every referenced node using
+ * `nlcst-to-string` (which correctly handles Word/Punctuation/WhiteSpace/Symbol
+ * leaves). Falls back to a node's `originalText` for leaf-shaped Sentence
+ * nodes that have no Word children (sentence-level alignment without
+ * tokenization).
  *
- * Throws if the edge or its refs can't be resolved.
+ * Throws if the edge can't be found. Missing tree refs collapse to "".
  */
 export function flattenAlignedPair(
   doc: ParallelDocument,
@@ -59,28 +64,22 @@ function collect(
   return parts.join(joiner);
 }
 
-function textOf(node: {
-  children?: unknown[];
-  originalText?: string;
-}): string {
-  const children = node.children;
-  if (Array.isArray(children) && children.length > 0) {
-    let out = "";
-    for (const child of children as Array<{
-      type?: string;
-      value?: string;
-      children?: unknown[];
-    }>) {
-      if (typeof child.value === "string") {
-        out += child.value;
-      } else if (Array.isArray(child.children)) {
-        out += textOf(child);
-      }
-    }
+/**
+ * Extract text from a GLOST/NLCST node.
+ *
+ * Delegates to `nlcst-to-string` for word/punctuation/whitespace/symbol
+ * leaves. Falls back to a Sentence's `originalText` when the node has no
+ * children (leaf-shaped sentence used for sentence-level alignment).
+ */
+function textOf(node: unknown): string {
+  const n = node as {
+    children?: unknown[];
+    originalText?: string;
+  };
+  if (Array.isArray(n.children) && n.children.length > 0) {
+    const out = nlcstToString(n as never);
     if (out.length > 0) return out;
   }
-  // Fallback: leaf-shaped sentences carry their text in `originalText`
-  // when not word-tokenized (sentence-level alignment without word breakdown).
-  if (typeof node.originalText === "string") return node.originalText;
+  if (typeof n.originalText === "string") return n.originalText;
   return "";
 }
