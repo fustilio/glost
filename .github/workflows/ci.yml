@@ -44,16 +44,9 @@ jobs:
           --filter "!./docs"
           -r build
 
-      # Additional test exclusions:
-      # - glost-processor: pre-existing flaky perf-timing test in glost-core
-      # - glost-inkle: vitest can't strip types from glost-core's published
-      #   .ts source; needs server.deps.inline config (or for glost-core to
-      #   stop shipping .ts as main).
       - name: Test packages
         run: >-
           pnpm
           --filter "!./examples/**"
           --filter "!./docs"
-          --filter "!glost-processor"
-          --filter "!glost-inkle"
           -r test
