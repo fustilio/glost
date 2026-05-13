@@ -401,6 +401,22 @@ importers:
         specifier: ^5.2.0
         version: 5.4.21(@types/node@25.5.0)
 
+  packages/align:
+    dependencies:
+      glost:
+        specifier: workspace:*
+        version: link:../glost
+    devDependencies:
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.27
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      vitest:
+        specifier: 'catalog:'
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@20.19.27)(@vitest/ui@3.2.4)
+
   packages/cli:
     dependencies:
       glost-core:
@@ -944,8 +960,8 @@ importers:
   packages/utils:
     dependencies:
       glost:
-        specifier: 0.8.3
-        version: 0.8.3
+        specifier: 0.8.4
+        version: 0.8.4
       glost-common:
         specifier: 0.4.2
         version: 0.4.2
@@ -2888,8 +2904,8 @@ packages:
     peerDependencies:
       glost-core: ^0.6.2
 
-  glost@0.8.3:
-    resolution: {integrity: sha512-04t9t++2Y2qfYX01FqXG7a/z0vyry9Fp3/Ytq2roRjhatawBZoRf+gFtKHYh7wpcwwIZvUaD76typ7Q3c/SOEg==}
+  glost@0.8.4:
+    resolution: {integrity: sha512-kcrneCbLW62y7XiiWzXluK/0fIrmuJTMGb0cRQ6Ef0RKJ19LlMbdHBuHJwGRW433BjubHIJLhh48hCDsX+9LfA==}
 
   gopd@1.2.0:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
@@ -5177,7 +5193,7 @@ snapshots:
   '@types/body-parser@1.19.6':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 22.19.6
+      '@types/node': 25.5.0
 
   '@types/chai@5.2.3':
     dependencies:
@@ -5186,7 +5202,7 @@ snapshots:
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 22.19.6
+      '@types/node': 25.5.0
 
   '@types/d3-array@3.2.2': {}
 
@@ -5319,7 +5335,7 @@ snapshots:
 
   '@types/express-serve-static-core@4.19.8':
     dependencies:
-      '@types/node': 22.19.6
+      '@types/node': 25.5.0
       '@types/qs': 6.14.0
       '@types/range-parser': 1.2.7
       '@types/send': 1.2.1
@@ -5384,16 +5400,16 @@ snapshots:
   '@types/send@0.17.6':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 22.19.6
+      '@types/node': 25.5.0
 
   '@types/send@1.2.1':
     dependencies:
-      '@types/node': 22.19.6
+      '@types/node': 25.5.0
 
   '@types/serve-static@1.15.10':
     dependencies:
       '@types/http-errors': 2.0.5
-      '@types/node': 22.19.6
+      '@types/node': 25.5.0
       '@types/send': 0.17.6
 
   '@types/trusted-types@2.0.7':
@@ -6290,7 +6306,7 @@ snapshots:
       glost-core: 0.6.2
       glost-extensions: 0.6.2
 
-  glost@0.8.3:
+  glost@0.8.4:
     dependencies:
       glost-core: 0.6.2
       glost-presets: 0.6.2

@@ -1,0 +1,51 @@
+{
+  "name": "glost-align",
+  "version": "0.1.0",
+  "description": "Cross-language alignment for GloST: ParallelDocument + AlignmentEdge graph + id-stamp plugin",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./id-stamp": {
+      "types": "./dist/id-stamp.d.ts",
+      "import": "./dist/id-stamp.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "glost": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "keywords": [
+    "glost",
+    "alignment",
+    "parallel-text",
+    "multilingual",
+    "translation"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fustilio/glost.git",
+    "directory": "packages/align"
+  }
+}
