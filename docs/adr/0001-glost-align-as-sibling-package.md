@@ -1,0 +1,3 @@
+# Cross-language alignment lives in `glost-align`, a sibling package
+
+Multi-language alignment (parallel trees + correspondence edges) is being added to the GloST ecosystem to absorb use cases currently reinvented in pharos's akha-re feature and constrained to a flat shape in polyglot-bundles' `parallel-text-base`. We chose to ship it as a new sibling package — same pattern as `glost-dialogue` — rather than extend `glost-core` types, because GloST's depth comes from a stable core plus pluggable siblings; growing core to absorb every cross-cutting concern would invert that. Existing single-language plugins keep working unchanged because alignment sits *above* `GLOSTRoot`, not inside it.
