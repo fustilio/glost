@@ -35,10 +35,10 @@
     }
   },
   "dependencies": {
-    "glost-core": "0.6.2",
-    "glost-processor": "1.0.2",
-    "glost-presets": "0.6.2",
-    "glost-registry": "1.0.2"
+    "glost-core": "workspace:*",
+    "glost-processor": "workspace:*",
+    "glost-presets": "workspace:*",
+    "glost-registry": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

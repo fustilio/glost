@@ -37,8 +37,8 @@
   "sideEffects": false,
   "dependencies": {
     "unist-util-visit": "^5.0.0",
-    "glost-core": "0.6.2",
-    "glost-common": "0.4.2"
+    "glost-core": "workspace:*",
+    "glost-common": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.8.3",

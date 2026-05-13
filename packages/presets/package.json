@@ -24,8 +24,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "glost-core": "0.6.2",
-    "glost-processor": "1.0.2"
+    "glost-core": "workspace:*",
+    "glost-processor": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

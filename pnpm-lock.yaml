@@ -426,14 +426,14 @@ importers:
   packages/cli:
     dependencies:
       glost-core:
-        specifier: 0.6.2
-        version: 0.6.2
+        specifier: workspace:*
+        version: link:../core
       glost-extensions:
-        specifier: 0.6.2
-        version: 0.6.2
+        specifier: workspace:*
+        version: link:../extensions
       glost-registry:
-        specifier: 1.0.2
-        version: 1.0.2(glost-core@0.6.2)
+        specifier: workspace:*
+        version: link:../registry
     devDependencies:
       '@types/node':
         specifier: ^20.0.0
@@ -461,8 +461,8 @@ importers:
   packages/core:
     dependencies:
       glost-common:
-        specifier: 0.4.2
-        version: 0.4.2
+        specifier: workspace:*
+        version: link:../common
       unist-util-filter:
         specifier: ^5.0.1
         version: 5.0.1
@@ -523,11 +523,11 @@ importers:
   packages/extensions:
     dependencies:
       glost-common:
-        specifier: 0.4.2
-        version: 0.4.2
+        specifier: workspace:*
+        version: link:../common
       glost-core:
-        specifier: 0.6.2
-        version: 0.6.2
+        specifier: workspace:*
+        version: link:../core
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
@@ -542,17 +542,17 @@ importers:
   packages/glost:
     dependencies:
       glost-core:
-        specifier: 0.6.2
-        version: 0.6.2
+        specifier: workspace:*
+        version: link:../core
       glost-presets:
-        specifier: 0.6.2
-        version: 0.6.2
+        specifier: workspace:*
+        version: link:../presets
       glost-processor:
-        specifier: 1.0.2
-        version: 1.0.2(glost-core@0.6.2)
+        specifier: workspace:*
+        version: link:../processor
       glost-registry:
-        specifier: 1.0.2
-        version: 1.0.2(glost-core@0.6.2)
+        specifier: workspace:*
+        version: link:../registry
     devDependencies:
       '@types/node':
         specifier: ^20.0.0
@@ -691,11 +691,11 @@ importers:
   packages/plugins:
     dependencies:
       glost-common:
-        specifier: 0.4.2
-        version: 0.4.2
+        specifier: workspace:*
+        version: link:../common
       glost-core:
-        specifier: 0.6.2
-        version: 0.6.2
+        specifier: workspace:*
+        version: link:../core
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
@@ -893,11 +893,11 @@ importers:
   packages/presets:
     dependencies:
       glost-core:
-        specifier: 0.6.2
-        version: 0.6.2
+        specifier: workspace:*
+        version: link:../core
       glost-processor:
-        specifier: 1.0.2
-        version: 1.0.2(glost-core@0.6.2)
+        specifier: workspace:*
+        version: link:../processor
     devDependencies:
       '@types/node':
         specifier: ^20.0.0
@@ -912,11 +912,11 @@ importers:
   packages/processor:
     dependencies:
       glost-core:
-        specifier: 0.6.2
-        version: 0.6.2
+        specifier: workspace:*
+        version: link:../core
       glost-extensions:
-        specifier: 0.6.2
-        version: 0.6.2
+        specifier: workspace:*
+        version: link:../extensions
     devDependencies:
       '@types/node':
         specifier: ^20.0.0
@@ -947,11 +947,11 @@ importers:
   packages/registry:
     dependencies:
       glost-core:
-        specifier: 0.6.2
-        version: 0.6.2
+        specifier: workspace:*
+        version: link:../core
       glost-extensions:
-        specifier: 0.6.2
-        version: 0.6.2
+        specifier: workspace:*
+        version: link:../extensions
     devDependencies:
       '@types/node':
         specifier: ^20.0.0
@@ -2886,29 +2886,6 @@ packages:
 
   globrex@0.1.2:
     resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
-
-  glost-common@0.4.2:
-    resolution: {integrity: sha512-Y2h+kXWq374MjNbb2A/hOL/t02C10JN8QwfWKjf3Q0vClcSS0jvbqVmU8T0KQlbmMb7sr2/HO7WMXl7h63Y6BQ==}
-
-  glost-core@0.6.2:
-    resolution: {integrity: sha512-UfOcEVdCCzNtzN9/HqRYtaQ5CT97YEgtiFGHb5Ee0RtEImb3nrkju7WVs1Tvh8q0LuvLG0v+9h/333u1YdsBBg==}
-    hasBin: true
-
-  glost-extensions@0.6.2:
-    resolution: {integrity: sha512-Q20pULc4Dr62kmfCeUxVJMeVtrd3lVQ3cEzvyOJmgzC5cDIphYH4nIvLzCTh4ZZiG7LQYActzdG05kkzqLEnYQ==}
-
-  glost-presets@0.6.2:
-    resolution: {integrity: sha512-5C/DmZQjrBr/JBTCI6S3Jn5UWr684EHYBF2KpIA/nxPBivGcRSqjTUFV1HmsV0jNQdwti4VXJmd433hs9S48BQ==}
-
-  glost-processor@1.0.2:
-    resolution: {integrity: sha512-cEOIM4lUbUP1Qh5Dhs3bSOBs3adOmd28n06jq7qBDa/S6e46whRz7CnnSH+/75/Vk29HK6MgcF9GZzzmAdjcLA==}
-    peerDependencies:
-      glost-core: ^0.6.2
-
-  glost-registry@1.0.2:
-    resolution: {integrity: sha512-VEwtJz0ppnQkVIJBlUUIKP40D4gl8fozcb0aW0dfO6ghRl9iIXYtW62IOCWuM62S7T7GdSeWS0Opo2st1CS4SQ==}
-    peerDependencies:
-      glost-core: ^0.6.2
 
   gopd@1.2.0:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
@@ -6272,45 +6249,6 @@ snapshots:
       slash: 3.0.0
 
   globrex@0.1.2: {}
-
-  glost-common@0.4.2:
-    dependencies:
-      zod: 3.25.76
-
-  glost-core@0.6.2:
-    dependencies:
-      glost-common: 0.4.2
-      unist-util-filter: 5.0.1
-      unist-util-find: 3.0.0
-      unist-util-flatmap: 1.0.0
-      unist-util-is: 6.0.1
-      unist-util-map: 4.0.0
-      unist-util-modify-children: 4.0.0
-      unist-util-remove: 4.0.0
-      unist-util-select: 5.1.0
-      unist-util-visit: 5.1.0
-      zod: 3.25.76
-
-  glost-extensions@0.6.2:
-    dependencies:
-      glost-common: 0.4.2
-      glost-core: 0.6.2
-      unist-util-visit: 5.1.0
-
-  glost-presets@0.6.2:
-    dependencies:
-      glost-core: 0.6.2
-      glost-processor: 1.0.2(glost-core@0.6.2)
-
-  glost-processor@1.0.2(glost-core@0.6.2):
-    dependencies:
-      glost-core: 0.6.2
-      glost-extensions: 0.6.2
-
-  glost-registry@1.0.2(glost-core@0.6.2):
-    dependencies:
-      glost-core: 0.6.2
-      glost-extensions: 0.6.2
 
   gopd@1.2.0: {}
 

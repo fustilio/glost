@@ -27,9 +27,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "glost-registry": "1.0.2",
-    "glost-extensions": "0.6.2",
-    "glost-core": "0.6.2"
+    "glost-registry": "workspace:*",
+    "glost-extensions": "workspace:*",
+    "glost-core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
