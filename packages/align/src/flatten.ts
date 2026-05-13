@@ -59,20 +59,28 @@ function collect(
   return parts.join(joiner);
 }
 
-function textOf(node: { children?: unknown[] }): string {
+function textOf(node: {
+  children?: unknown[];
+  originalText?: string;
+}): string {
   const children = node.children;
-  if (!Array.isArray(children)) return "";
-  let out = "";
-  for (const child of children as Array<{
-    type?: string;
-    value?: string;
-    children?: unknown[];
-  }>) {
-    if (typeof child.value === "string") {
-      out += child.value;
-    } else if (Array.isArray(child.children)) {
-      out += textOf(child);
+  if (Array.isArray(children) && children.length > 0) {
+    let out = "";
+    for (const child of children as Array<{
+      type?: string;
+      value?: string;
+      children?: unknown[];
+    }>) {
+      if (typeof child.value === "string") {
+        out += child.value;
+      } else if (Array.isArray(child.children)) {
+        out += textOf(child);
+      }
     }
+    if (out.length > 0) return out;
   }
-  return out;
+  // Fallback: leaf-shaped sentences carry their text in `originalText`
+  // when not word-tokenized (sentence-level alignment without word breakdown).
+  if (typeof node.originalText === "string") return node.originalText;
+  return "";
 }

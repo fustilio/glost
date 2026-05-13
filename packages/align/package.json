@@ -1,6 +1,6 @@
 {
   "name": "glost-align",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Cross-language alignment for GloST: ParallelDocument + AlignmentEdge graph + id-stamp plugin",
   "type": "module",
   "main": "./dist/index.js",
