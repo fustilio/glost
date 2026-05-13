@@ -966,11 +966,11 @@ importers:
   packages/utils:
     dependencies:
       glost:
-        specifier: 0.8.4
-        version: 0.8.4
+        specifier: workspace:*
+        version: link:../glost
       glost-common:
-        specifier: 0.4.2
-        version: 0.4.2
+        specifier: workspace:*
+        version: link:../common
     devDependencies:
       typescript:
         specifier: ^5.8.3
@@ -2909,9 +2909,6 @@ packages:
     resolution: {integrity: sha512-VEwtJz0ppnQkVIJBlUUIKP40D4gl8fozcb0aW0dfO6ghRl9iIXYtW62IOCWuM62S7T7GdSeWS0Opo2st1CS4SQ==}
     peerDependencies:
       glost-core: ^0.6.2
-
-  glost@0.8.4:
-    resolution: {integrity: sha512-kcrneCbLW62y7XiiWzXluK/0fIrmuJTMGb0cRQ6Ef0RKJ19LlMbdHBuHJwGRW433BjubHIJLhh48hCDsX+9LfA==}
 
   gopd@1.2.0:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
@@ -6314,13 +6311,6 @@ snapshots:
     dependencies:
       glost-core: 0.6.2
       glost-extensions: 0.6.2
-
-  glost@0.8.4:
-    dependencies:
-      glost-core: 0.6.2
-      glost-presets: 0.6.2
-      glost-processor: 1.0.2(glost-core@0.6.2)
-      glost-registry: 1.0.2(glost-core@0.6.2)
 
   gopd@1.2.0: {}
 

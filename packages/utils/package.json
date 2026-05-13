@@ -43,8 +43,8 @@
     }
   },
   "dependencies": {
-    "glost": "0.8.4",
-    "glost-common": "0.4.2"
+    "glost": "workspace:*",
+    "glost-common": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.8.3",

@@ -62,7 +62,7 @@ export function mergeTranscriptionData(
   transcriptionScheme: string,
 ): GLOSTWord {
   // If word already has transcription for this scheme, don't overwrite
-  if (word.transcription[transcriptionScheme]) {
+  if (word.transcription?.[transcriptionScheme]) {
     return word;
   }
 

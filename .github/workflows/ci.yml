@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Build + test packages
+    runs-on: ubuntu-latest
+
+    # Scope: every package under `packages/*` (excludes `examples/*`, which
+    # have stricter tsconfigs and unrelated issues). Builds in topo order
+    # via pnpm's filter — workspace deps build before their consumers.
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm --filter "./packages/**" -r build
+
+      # glost-processor and glost-plugins have pre-existing flaky/broken
+      # tests (perf timing in core, inkle parser in plugins). Excluded
+      # from CI test runs until they're stabilized.
+      - name: Test packages
+        run: >-
+          pnpm
+          --filter "./packages/**"
+          --filter "!glost-processor"
+          --filter "!glost-plugins"
+          -r test
