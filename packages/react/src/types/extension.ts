@@ -1,4 +1,4 @@
-import type { GLOSTWord } from "glost";
+import type { GLOSTWord } from "@glotblocks/glost";
 import type { DisplayLevel } from "./display-level.js";
 import type { LanguageRenderingStrategy } from "./rendering-strategy.js";
 

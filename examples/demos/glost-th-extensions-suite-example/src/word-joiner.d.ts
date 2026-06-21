@@ -8,7 +8,7 @@
  *
  * @packageDocumentation
  */
-import type { GLOSTExtension } from "glost-plugins";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
 /**
  * Options for Thai word joiner extension
  */

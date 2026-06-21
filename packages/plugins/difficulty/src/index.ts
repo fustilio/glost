@@ -16,7 +16,7 @@ export { createDifficultyEnhancerExtension } from "./enhancer.js";
 // Import for local use
 import { createDifficultyGeneratorExtension } from "./generator.js";
 import { createDifficultyEnhancerExtension } from "./enhancer.js";
-import type { GlostLanguage } from "glost-common";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 
 /**
  * Difficulty extension options

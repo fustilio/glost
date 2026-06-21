@@ -28,7 +28,7 @@ import {
   type GLOSTWord,
   type TransliterationData,
   type LinguisticMetadata,
-} from "glost";
+} from "@glotblocks/glost";
 
 describe("Basic Usage", () => {
   describe("Simplified Document Creation", () => {

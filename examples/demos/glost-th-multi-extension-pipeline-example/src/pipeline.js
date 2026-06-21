@@ -4,8 +4,8 @@
  * Utilities for composing and analyzing multi-extension pipelines.
  * These help test composition patterns and discover ergonomic issues.
  */
-import { getAllWords } from "glost";
-import { processGLOST } from "glost-plugins";
+import { getAllWords } from "@glotblocks/glost";
+import { processGLOST } from "@glotblocks/glost-plugins";
 /**
  * Execute pipeline with timing and analysis
  *

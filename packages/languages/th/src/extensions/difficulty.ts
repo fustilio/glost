@@ -10,9 +10,9 @@
  * @packageDocumentation
  */
 
-import { BaseDataProvider, type BaseProviderOptions } from "glost-common";
-import type { DataLoader, GlostLanguage } from "glost-common";
-import type { DifficultyProvider, DifficultyLevel } from "glost-difficulty";
+import { BaseDataProvider, type BaseProviderOptions } from "@glotblocks/glost-common";
+import type { DataLoader, GlostLanguage } from "@glotblocks/glost-common";
+import type { DifficultyProvider, DifficultyLevel } from "@glotblocks/glost-difficulty";
 
 /**
  * Thai difficulty data structure
@@ -35,7 +35,7 @@ export interface ThaiDifficultyProviderOptions extends BaseProviderOptions {
    * 
    * @example
    * ```typescript
-   * import { createJsonLoader } from "glost-common";
+   * import { createJsonLoader } from "@glotblocks/glost-common";
    * 
    * const provider = createThaiDifficultyProvider({
    *   dataLoader: createJsonLoader({
@@ -52,8 +52,8 @@ export interface ThaiDifficultyProviderOptions extends BaseProviderOptions {
  * 
  * @example
  * ```typescript
- * import { createThaiDifficultyProvider } from "glost-th/extensions";
- * import { createJsonLoader } from "glost-common";
+ * import { createThaiDifficultyProvider } from "@glotblocks/glost-th/extensions";
+ * import { createJsonLoader } from "@glotblocks/glost-common";
  * 
  * const provider = createThaiDifficultyProvider({
  *   dataLoader: createJsonLoader({
@@ -63,7 +63,7 @@ export interface ThaiDifficultyProviderOptions extends BaseProviderOptions {
  * });
  * 
  * // Use with extension
- * import { createDifficultyExtension } from "glost-difficulty";
+ * import { createDifficultyExtension } from "@glotblocks/glost-difficulty";
  * 
  * const extension = createDifficultyExtension({
  *   targetLanguage: "th",

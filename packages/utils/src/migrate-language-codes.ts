@@ -6,8 +6,8 @@
  * @packageDocumentation
  */
 
-import type { GLOSTRoot, GLOSTNode } from 'glost';
-import { normalizeLanguageCode } from 'glost-common';
+import type { GLOSTRoot, GLOSTNode } from '@glotblocks/glost';
+import { normalizeLanguageCode } from '@glotblocks/glost-common';
 
 /**
  * Options for language code migration
@@ -46,7 +46,7 @@ export interface MigrationResult {
  * 
  * @example
  * ```typescript
- * import { migrateLanguageCodes } from 'glost-utils';
+ * import { migrateLanguageCodes } from '@glotblocks/glost-utils';
  * 
  * const result = migrateLanguageCodes(document, {
  *   addDefaultRegions: true,

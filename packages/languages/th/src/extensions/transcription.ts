@@ -9,10 +9,10 @@
  * @packageDocumentation
  */
 
-import { BaseDataProvider, type BaseProviderOptions } from "glost-common";
-import type { DataLoader } from "glost-common";
-import type { GlostLanguage } from "glost-common";
-import type { TranscriptionProvider } from "glost-transcription";
+import { BaseDataProvider, type BaseProviderOptions } from "@glotblocks/glost-common";
+import type { DataLoader } from "@glotblocks/glost-common";
+import type { GlostLanguage } from "@glotblocks/glost-common";
+import type { TranscriptionProvider } from "@glotblocks/glost-transcription";
 
 /**
  * Thai transcription data structure
@@ -35,7 +35,7 @@ export interface ThaiTranscriptionProviderOptions extends BaseProviderOptions {
    * 
    * @example
    * ```typescript
-   * import { createJsonLoader } from "glost-common";
+   * import { createJsonLoader } from "@glotblocks/glost-common";
    * 
    * const provider = createThaiTranscriptionProvider({
    *   dataLoader: createJsonLoader({
@@ -54,8 +54,8 @@ export interface ThaiTranscriptionProviderOptions extends BaseProviderOptions {
  * 
  * @example
  * ```typescript
- * import { createThaiTranscriptionProvider } from "glost-th/extensions";
- * import { createJsonLoader } from "glost-common";
+ * import { createThaiTranscriptionProvider } from "@glotblocks/glost-th/extensions";
+ * import { createJsonLoader } from "@glotblocks/glost-common";
  * 
  * const provider = createThaiTranscriptionProvider({
  *   dataLoader: createJsonLoader({
@@ -65,7 +65,7 @@ export interface ThaiTranscriptionProviderOptions extends BaseProviderOptions {
  * });
  * 
  * // Use with extension
- * import { createTranscriptionExtension } from "glost-transcription";
+ * import { createTranscriptionExtension } from "@glotblocks/glost-transcription";
  * 
  * const extension = createTranscriptionExtension({
  *   targetLanguage: "th",
@@ -179,8 +179,8 @@ export function createThaiTranscriptionProvider(
  * 
  * @example
  * ```typescript
- * import { createTranscriptionExtension } from "glost-transcription";
- * import { thaiTranscriptionProvider } from "glost-th/extensions";
+ * import { createTranscriptionExtension } from "@glotblocks/glost-transcription";
+ * import { thaiTranscriptionProvider } from "@glotblocks/glost-th/extensions";
  * 
  * // This will work but return no data
  * const ext = createTranscriptionExtension({

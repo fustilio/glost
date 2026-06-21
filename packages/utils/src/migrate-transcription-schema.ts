@@ -7,7 +7,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTRoot, GLOSTNode } from 'glost';
+import type { GLOSTRoot, GLOSTNode } from '@glotblocks/glost';
 
 /**
  * Options for transcription schema migration
@@ -68,7 +68,7 @@ export interface TranscriptionMigrationResult {
  * 
  * @example
  * ```typescript
- * import { migrateTranscriptionSchema } from 'glost-utils';
+ * import { migrateTranscriptionSchema } from '@glotblocks/glost-utils';
  * 
  * const result = migrateTranscriptionSchema(document);
  * 

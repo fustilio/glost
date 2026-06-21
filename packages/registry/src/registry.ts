@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-extensions";
+import type { GLOSTExtension } from "@glotblocks/glost-extensions";
 import type {
   PluginMetadata,
   PluginQuery,
@@ -26,7 +26,7 @@ import type {
  * 
  * @example
  * ```typescript
- * import { PluginRegistry } from "glost-registry";
+ * import { PluginRegistry } from "@glotblocks/glost-registry";
  * 
  * const registry = new PluginRegistry();
  * 

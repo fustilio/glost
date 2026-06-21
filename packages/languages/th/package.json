@@ -1,5 +1,5 @@
 {
-  "name": "glost-th",
+  "name": "@glotblocks/glost-th",
   "version": "0.4.10",
   "type": "module",
   "description": "Thai language support for GLOST - helper functions and transcription providers",
@@ -61,15 +61,15 @@
     "test": "vitest --passWithNoTests"
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-common": "workspace:*",
-    "glost-plugins": "workspace:*",
-    "glost-clause-segmenter": "workspace:*",
-    "glost-transcription": "workspace:*",
-    "glost-translation": "workspace:*",
-    "glost-frequency": "workspace:*",
-    "glost-difficulty": "workspace:*",
-    "glost-pos": "workspace:*"
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-common": "workspace:*",
+    "@glotblocks/glost-plugins": "workspace:*",
+    "@glotblocks/glost-clause-segmenter": "workspace:*",
+    "@glotblocks/glost-transcription": "workspace:*",
+    "@glotblocks/glost-translation": "workspace:*",
+    "@glotblocks/glost-frequency": "workspace:*",
+    "@glotblocks/glost-difficulty": "workspace:*",
+    "@glotblocks/glost-pos": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

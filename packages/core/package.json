@@ -1,5 +1,5 @@
 {
-  "name": "glost-core",
+  "name": "@glotblocks/glost-core",
   "version": "0.6.2",
   "description": "Core types, nodes, and utilities for GLOST (Glossed Syntax Tree)",
   "author": "fustilio",
@@ -51,7 +51,7 @@
     "unist-util-select": "^5.1.0",
     "unist-util-visit": "^5.0.0",
     "zod": "^3.23.8",
-    "glost-common": "workspace:*"
+    "@glotblocks/glost-common": "workspace:*"
   },
   "devDependencies": {
     "@types/nlcst": "^2.0.3",
@@ -72,5 +72,8 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "test": "vitest --passWithNoTests"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

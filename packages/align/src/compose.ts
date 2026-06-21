@@ -1,4 +1,4 @@
-import type { GLOSTRoot } from "glost";
+import type { GLOSTRoot } from "@glotblocks/glost";
 import type {
   AlignmentEdge,
   LangCode,

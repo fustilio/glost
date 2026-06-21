@@ -4,8 +4,8 @@
  * Convenience functions for creating Japanese GLOST nodes with romaji and furigana.
  */
 
-import type { GLOSTWord, TransliterationData, LinguisticMetadata } from 'glost';
-import { createGLOSTWordNode } from 'glost';
+import type { GLOSTWord, TransliterationData, LinguisticMetadata } from '@glotblocks/glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 /**
  * Options for creating a Japanese word node

@@ -1,5 +1,5 @@
 {
-  "name": "glost-difficulty",
+  "name": "@glotblocks/glost-difficulty",
   "version": "0.4.7",
   "description": "Word difficulty extension for GLOST - generates and formats difficulty data",
   "author": "GLOST Contributors",
@@ -24,9 +24,9 @@
     "test": "vitest --passWithNoTests"
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-common": "workspace:*",
-    "glost-plugins": "workspace:*"
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-common": "workspace:*",
+    "@glotblocks/glost-plugins": "workspace:*"
   },
   "devDependencies": {
     "typescript": "catalog:",
@@ -39,5 +39,8 @@
     "learning",
     "cefr",
     "linguistics"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

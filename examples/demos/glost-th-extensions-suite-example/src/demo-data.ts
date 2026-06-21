@@ -1215,7 +1215,7 @@ export const DEMO_THAI_VOCABULARY: ThaiVocabularyEntry[] = [
  *
  * @example
  * ```typescript
- * import { findDemoThaiWord } from 'glost-th/demo-data';
+ * import { findDemoThaiWord } from '@glotblocks/glost-th/demo-data';
  * 
  * const entry = findDemoThaiWord("สวัสดี");
  * console.log(entry?.translation.en); // "hello, hi, goodbye"
@@ -1235,7 +1235,7 @@ export function findDemoThaiWord(word: string): ThaiVocabularyEntry | undefined 
  *
  * @example
  * ```typescript
- * import { isWordInDemoVocabulary } from 'glost-th/demo-data';
+ * import { isWordInDemoVocabulary } from '@glotblocks/glost-th/demo-data';
  * 
  * if (isWordInDemoVocabulary("สวัสดี")) {
  *   console.log("Word found in demo data");
@@ -1255,7 +1255,7 @@ export function isWordInDemoVocabulary(word: string): boolean {
  *
  * @example
  * ```typescript
- * import { getDemoThaiTranscriptions } from 'glost-th/demo-data';
+ * import { getDemoThaiTranscriptions } from '@glotblocks/glost-th/demo-data';
  * 
  * const trans = getDemoThaiTranscriptions("สวัสดี");
  * console.log(trans?.rtgs); // "sawatdi"
@@ -1297,7 +1297,7 @@ export function getDemoThaiTranscriptions(
  *
  * @example
  * ```typescript
- * import { getDemoThaiTranslation } from 'glost-th/demo-data';
+ * import { getDemoThaiTranslation } from '@glotblocks/glost-th/demo-data';
  * 
  * const translation = getDemoThaiTranslation("สวัสดี");
  * console.log(translation); // "hello, hi, goodbye"

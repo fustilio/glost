@@ -31,13 +31,13 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-plugins": "workspace:*",
-    "glost-th": "workspace:*",
-    "glost-clause-segmenter": "workspace:*",
-    "glost-transcription": "workspace:*",
-    "glost-translation": "workspace:*",
-    "glost-common": "workspace:*",
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-plugins": "workspace:*",
+    "@glotblocks/glost-th": "workspace:*",
+    "@glotblocks/glost-clause-segmenter": "workspace:*",
+    "@glotblocks/glost-transcription": "workspace:*",
+    "@glotblocks/glost-translation": "workspace:*",
+    "@glotblocks/glost-common": "workspace:*",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {

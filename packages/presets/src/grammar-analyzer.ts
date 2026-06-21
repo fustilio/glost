@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 
-import type { Preset } from "glost-processor";
+import type { Preset } from "@glotblocks/glost-processor";
 
 /**
  * Grammar Analyzer Preset
@@ -20,8 +20,8 @@ import type { Preset } from "glost-processor";
  * 
  * @example
  * ```typescript
- * import { glost } from "glost-processor";
- * import { grammarAnalyzerPreset } from "glost-presets";
+ * import { glost } from "@glotblocks/glost-processor";
+ * import { grammarAnalyzerPreset } from "@glotblocks/glost-presets";
  * 
  * const processor = glost()
  *   .use(grammarAnalyzerPreset);

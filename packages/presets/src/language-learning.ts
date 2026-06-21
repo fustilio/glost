@@ -7,7 +7,7 @@
  * @packageDocumentation
  */
 
-import type { Preset } from "glost-processor";
+import type { Preset } from "@glotblocks/glost-processor";
 
 /**
  * Language Learning Preset
@@ -23,8 +23,8 @@ import type { Preset } from "glost-processor";
  * 
  * @example
  * ```typescript
- * import { glost } from "glost-processor";
- * import { languageLearningPreset } from "glost-presets";
+ * import { glost } from "@glotblocks/glost-processor";
+ * import { languageLearningPreset } from "@glotblocks/glost-presets";
  * 
  * const processor = glost()
  *   .use(languageLearningPreset);
@@ -53,7 +53,7 @@ export const languageLearningPreset: Preset = {
  * 
  * @example
  * ```typescript
- * import { createLanguageLearningPreset } from "glost-presets";
+ * import { createLanguageLearningPreset } from "@glotblocks/glost-presets";
  * 
  * const preset = createLanguageLearningPreset({
  *   transcriptionScheme: "ipa",

@@ -14,10 +14,10 @@ import {
   type GenderTransformerOptions,
   type NegationTransformerOptions,
   type GLOSTExtension,
-} from "glost-plugins";
+} from "@glotblocks/glost-plugins";
 
-import { createClauseSegmenterExtension, type ClauseSegmenterOptions } from "glost-clause-segmenter";
-import { thaiSegmenterProvider } from "glost-th/segmenter";
+import { createClauseSegmenterExtension, type ClauseSegmenterOptions } from "@glotblocks/glost-clause-segmenter";
+import { thaiSegmenterProvider } from "@glotblocks/glost-th/segmenter";
 
 import {
   createThaiSyllableSegmenterExtension,

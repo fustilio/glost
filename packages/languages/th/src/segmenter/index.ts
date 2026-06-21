@@ -9,7 +9,7 @@ import type {
   SegmentationResult,
   ClauseBoundary,
   GrammaticalMood,
-} from "glost-clause-segmenter";
+} from "@glotblocks/glost-clause-segmenter";
 
 /**
  * Thai clause markers (particles and conjunctions)

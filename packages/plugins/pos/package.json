@@ -1,5 +1,5 @@
 {
-  "name": "glost-pos",
+  "name": "@glotblocks/glost-pos",
   "version": "0.4.7",
   "description": "Part-of-speech extension for GLOST - generates and formats POS data",
   "author": "GLOST Contributors",
@@ -24,9 +24,9 @@
     "test": "vitest --passWithNoTests"
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-common": "workspace:*",
-    "glost-plugins": "workspace:*"
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-common": "workspace:*",
+    "@glotblocks/glost-plugins": "workspace:*"
   },
   "devDependencies": {
     "typescript": "catalog:",
@@ -39,5 +39,8 @@
     "tagging",
     "nlp",
     "linguistics"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

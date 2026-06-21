@@ -6,8 +6,8 @@
  * @packageDocumentation
  */
 
-import { pluginRegistry } from "glost-registry";
-import type { PluginCategory } from "glost-registry";
+import { pluginRegistry } from "@glotblocks/glost-registry";
+import type { PluginCategory } from "@glotblocks/glost-registry";
 
 /**
  * List all available plugins
@@ -279,7 +279,7 @@ export function createPluginTemplate(name: string): void {
  * Include examples of use cases and what data it adds or transforms.
  */
 
-import type { GLOSTExtension } from "glost-plugins";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
 
 export const ${name}Extension: GLOSTExtension = {
   id: "${name.toLowerCase()}",

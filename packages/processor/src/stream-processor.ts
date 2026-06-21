@@ -13,7 +13,7 @@
  *
  * @example
  * ```typescript
- * import { GLOSTStreamProcessor } from "glost-processor";
+ * import { GLOSTStreamProcessor } from "@glotblocks/glost-processor";
  *
  * const processor = new GLOSTStreamProcessor()
  *   .use(transcription)
@@ -27,13 +27,13 @@
  * @since 0.7.0
  */
 
-import type { GLOSTRoot, GLOSTSentence } from "glost-core";
-import type { GLOSTExtension } from "glost-extensions";
+import type { GLOSTRoot, GLOSTSentence } from "@glotblocks/glost-core";
+import type { GLOSTExtension } from "@glotblocks/glost-extensions";
 import {
   processGLOSTWithExtensionsAsync,
   processGLOSTChunkAsync,
   extensionRegistry,
-} from "glost-extensions";
+} from "@glotblocks/glost-extensions";
 import type { PluginSpec, Preset, ProcessorOptions } from "./types.js";
 
 // ============================================================================

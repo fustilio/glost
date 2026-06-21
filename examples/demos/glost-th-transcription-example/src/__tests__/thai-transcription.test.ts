@@ -4,9 +4,9 @@
 
 import { describe, it, expect } from "vitest";
 import { createThaiTranscriptionExtension, THAI_TRANSCRIPTION_SCHEMES } from "../index.js";
-import { processGLOSTWithExtensionsAsync } from "glost-plugins";
-import { createGLOSTRootNode, createGLOSTSentenceNode, createGLOSTWordNode } from "glost";
-import type { GLOSTRoot } from "glost";
+import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
+import { createGLOSTRootNode, createGLOSTSentenceNode, createGLOSTWordNode } from "@glotblocks/glost";
+import type { GLOSTRoot } from "@glotblocks/glost";
 
 describe("Thai Transcription Extension", () => {
   it("should add transcriptions to Thai words", async () => {

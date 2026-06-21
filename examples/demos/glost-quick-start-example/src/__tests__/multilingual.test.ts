@@ -21,10 +21,10 @@ import {
   type GLOSTWord,
   type TransliterationData,
   type LinguisticMetadata,
-} from "glost";
+} from "@glotblocks/glost";
 
-import { createThaiWord } from "glost-th";
-import { createJapaneseWord } from "glost-ja";
+import { createThaiWord } from "@glotblocks/glost-th";
+import { createJapaneseWord } from "@glotblocks/glost-ja";
 
 describe("Multilingual Support", () => {
   describe("Thai Language", () => {

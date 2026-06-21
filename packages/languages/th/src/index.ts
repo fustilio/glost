@@ -12,4 +12,4 @@ export * from './transcription.js';
 export * from './constants.js';
 
 // Presets are exported via ./presets subpath
-// import { thaiQuickStartPreset } from 'glost-th/presets';
+// import { thaiQuickStartPreset } from '@glotblocks/glost-th/presets';

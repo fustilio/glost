@@ -1,8 +1,8 @@
 /**
  * Korean Difficulty Provider - TOPIK level mapping
  */
-import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "glost-common";
-import type { DifficultyProvider, DifficultyLevel } from "glost-difficulty";
+import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "@glotblocks/glost-common";
+import type { DifficultyProvider, DifficultyLevel } from "@glotblocks/glost-difficulty";
 
 export interface KoreanDifficultyData {
   [word: string]: DifficultyLevel | string;

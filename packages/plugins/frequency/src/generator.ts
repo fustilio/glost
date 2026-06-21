@@ -6,12 +6,12 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-plugins";
-import type { GLOSTWord } from "glost";
-import { getWordText } from "glost";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
+import type { GLOSTWord } from "@glotblocks/glost";
+import { getWordText } from "@glotblocks/glost";
 import type { FrequencyProvider, FrequencyLevel } from "./types.js";
 
-import type { GlostLanguage } from "glost-common";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 
 /**
  * Frequency generator extension options
@@ -51,8 +51,8 @@ export interface FrequencyGeneratorOptions {
  * 
  * @example
  * ```typescript
- * import { createFrequencyGeneratorExtension } from "glost-frequency";
- * import { createThaiFrequencyProvider } from "glost-th/extensions";
+ * import { createFrequencyGeneratorExtension } from "@glotblocks/glost-frequency";
+ * import { createThaiFrequencyProvider } from "@glotblocks/glost-th/extensions";
  * 
  * const provider = createThaiFrequencyProvider(datasource);
  * const extension = createFrequencyGeneratorExtension({

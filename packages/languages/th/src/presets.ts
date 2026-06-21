@@ -9,8 +9,8 @@
  * 
  * @example
  * ```typescript
- * import { thaiQuickStartPreset } from "glost-th/presets";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { thaiQuickStartPreset } from "@glotblocks/glost-th/presets";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  * 
  * const result = await processGLOSTWithExtensionsAsync(
  *   document,
@@ -19,11 +19,11 @@
  * ```
  */
 
-import type { GLOSTExtension } from "glost-plugins";
-import type { GlostLanguage } from "glost-common";
-import { createTranscriptionExtension } from "glost-transcription";
-import { createTranslationExtension } from "glost-translation";
-import { createClauseSegmenterExtension } from "glost-clause-segmenter";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
+import type { GlostLanguage } from "@glotblocks/glost-common";
+import { createTranscriptionExtension } from "@glotblocks/glost-transcription";
+import { createTranslationExtension } from "@glotblocks/glost-translation";
+import { createClauseSegmenterExtension } from "@glotblocks/glost-clause-segmenter";
 import { 
   thaiTranscriptionProvider,
   thaiTranslationProvider,
@@ -31,8 +31,8 @@ import {
 import { thaiSegmenterProvider } from "./segmenter/index.js";
 
 // Re-export types for convenience
-export type { GLOSTExtension } from "glost-plugins";
-export type { GlostLanguage } from "glost-common";
+export type { GLOSTExtension } from "@glotblocks/glost-plugins";
+export type { GlostLanguage } from "@glotblocks/glost-common";
 
 /**
  * Options for Thai presets
@@ -62,7 +62,7 @@ export interface ThaiPresetOptions {
  * 
  * @example
  * ```typescript
- * import { thaiQuickStartPreset } from "glost-th/presets";
+ * import { thaiQuickStartPreset } from "@glotblocks/glost-th/presets";
  * 
  * const result = await processGLOSTWithExtensionsAsync(
  *   document,
@@ -121,7 +121,7 @@ export function createThaiQuickStartPreset(
  * 
  * @example
  * ```typescript
- * import { thaiPronunciationPreset } from "glost-th/presets";
+ * import { thaiPronunciationPreset } from "@glotblocks/glost-th/presets";
  * 
  * const result = await processGLOSTWithExtensionsAsync(
  *   document,
@@ -182,7 +182,7 @@ export function createThaiPronunciationPreset(
  * 
  * @example
  * ```typescript
- * import { thaiGrammarPreset } from "glost-th/presets";
+ * import { thaiGrammarPreset } from "@glotblocks/glost-th/presets";
  * 
  * const result = await processGLOSTWithExtensionsAsync(
  *   document,
@@ -259,7 +259,7 @@ export function createThaiGrammarPreset(
  * 
  * @example
  * ```typescript
- * import { thaiLearningPreset } from "glost-th/presets";
+ * import { thaiLearningPreset } from "@glotblocks/glost-th/presets";
  * 
  * const result = await processGLOSTWithExtensionsAsync(
  *   document,
@@ -333,7 +333,7 @@ export function createThaiLearningPreset(
  * 
  * @example
  * ```typescript
- * import { thaiMinimalPreset } from "glost-th/presets";
+ * import { thaiMinimalPreset } from "@glotblocks/glost-th/presets";
  * 
  * const result = await processGLOSTWithExtensionsAsync(
  *   document,

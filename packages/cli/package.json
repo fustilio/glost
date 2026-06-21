@@ -1,5 +1,5 @@
 {
-  "name": "glost-cli",
+  "name": "@glotblocks/glost-cli",
   "version": "0.6.2",
   "description": "Command-line tools for GLOST plugin management and discovery",
   "type": "module",
@@ -27,9 +27,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "glost-registry": "workspace:*",
-    "glost-extensions": "workspace:*",
-    "glost-core": "workspace:*"
+    "@glotblocks/glost-registry": "workspace:*",
+    "@glotblocks/glost-extensions": "workspace:*",
+    "@glotblocks/glost-core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
@@ -39,5 +39,8 @@
   "scripts": {
     "build": "tsc",
     "test": "vitest run --passWithNoTests"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

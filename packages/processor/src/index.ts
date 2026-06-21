@@ -7,9 +7,9 @@
  * 
  * @example
  * ```typescript
- * import { glost } from "glost-processor";
- * import { transcription } from "glost-transcription";
- * import { translation } from "glost-translation";
+ * import { glost } from "@glotblocks/glost-processor";
+ * import { transcription } from "@glotblocks/glost-transcription";
+ * import { translation } from "@glotblocks/glost-translation";
  * 
  * const processor = glost()
  *   .use(transcription, { scheme: "ipa" })
@@ -59,7 +59,7 @@ import type { ProcessorOptions } from "./types.js";
  * 
  * @example
  * ```typescript
- * import { glost } from "glost-processor";
+ * import { glost } from "@glotblocks/glost-processor";
  * 
  * const processor = glost()
  *   .use(plugin1)

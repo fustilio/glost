@@ -15,10 +15,10 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-plugins";
-import type { GLOSTWord } from "glost";
-import { getWordText } from "glost";
-import type { GlostLanguage } from "glost-common";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
+import type { GLOSTWord } from "@glotblocks/glost";
+import { getWordText } from "@glotblocks/glost";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 
 /**
  * Provider interface for translation data
@@ -71,8 +71,8 @@ export interface TranslationExtensionOptions {
    * Provider for language-specific translation data
    *
    * Should be implemented by language packages:
-   * - import { thaiTranslationProvider } from "glost-th/extensions"
-   * - import { japaneseTranslationProvider } from "glost-ja/extensions"
+   * - import { thaiTranslationProvider } from "@glotblocks/glost-th/extensions"
+   * - import { japaneseTranslationProvider } from "@glotblocks/glost-ja/extensions"
    */
   provider: TranslationProvider;
 }
@@ -89,9 +89,9 @@ export interface TranslationExtensionOptions {
  *
  * @example
  * ```typescript
- * import { createTranslationExtension } from "glost-translation";
- * import { thaiTranslationProvider } from "glost-th/extensions";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { createTranslationExtension } from "@glotblocks/glost-translation";
+ * import { thaiTranslationProvider } from "@glotblocks/glost-th/extensions";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  *
  * const extension = createTranslationExtension({
  *   from: "th",
@@ -105,8 +105,8 @@ export interface TranslationExtensionOptions {
  * @example
  * ```typescript
  * // Japanese-English translation
- * import { createTranslationExtension } from "glost-translation";
- * import { japaneseTranslationProvider } from "glost-ja/extensions";
+ * import { createTranslationExtension } from "@glotblocks/glost-translation";
+ * import { japaneseTranslationProvider } from "@glotblocks/glost-ja/extensions";
  *
  * const extension = createTranslationExtension({
  *   from: "ja",
@@ -124,7 +124,7 @@ export function createTranslationExtension(
     throw new Error(
       "[Translation] Provider is required. " +
       "Import from language package: " +
-      "import { thaiTranslationProvider } from 'glost-th/extensions'"
+      "import { thaiTranslationProvider } from '@glotblocks/glost-th/extensions'"
     );
   }
 

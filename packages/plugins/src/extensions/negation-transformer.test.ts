@@ -9,8 +9,8 @@ import {
 } from "./negation-transformer";
 import { processGLOSTWithExtensions } from "../processor.js";
 import { createMockGLOSTDocument } from "../test-utils.js";
-import type { GLOSTSentence, GLOSTWord } from "glost-core";
-import { getAllSentences, getAllWords, getWordText } from "glost-core";
+import type { GLOSTSentence, GLOSTWord } from "@glotblocks/glost-core";
+import { getAllSentences, getAllWords, getWordText } from "@glotblocks/glost-core";
 
 describe("NegationTransformerExtension", () => {
   it("should have correct metadata", () => {

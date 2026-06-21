@@ -1,6 +1,6 @@
 import React from "react";
-import type { GLOSTWord } from "glost";
-import { getWordText, getWordTranscription } from "glost";
+import type { GLOSTWord } from "@glotblocks/glost";
+import { getWordText, getWordTranscription } from "@glotblocks/glost";
 import type { DisplayLevel } from "../types/display-level.js";
 import type { LanguageRenderingStrategy, RubyPosition } from "../types/rendering-strategy.js";
 import type { GloSTRenderExtension } from "../types/extension.js";

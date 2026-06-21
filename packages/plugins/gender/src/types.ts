@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-import type { GlostLanguage } from "glost-common";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 
 /**
  * Gender type

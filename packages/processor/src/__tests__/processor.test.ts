@@ -17,7 +17,7 @@ import type {
   SkipHook,
   ProgressHook,
 } from "../types.js";
-import type { GLOSTRoot, GLOSTExtension } from "glost-extensions";
+import type { GLOSTRoot, GLOSTExtension } from "@glotblocks/glost-extensions";
 
 // Mock GLOST document for testing
 const createMockDocument = (): GLOSTRoot => ({

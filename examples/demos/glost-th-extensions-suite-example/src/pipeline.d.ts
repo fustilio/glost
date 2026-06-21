@@ -7,8 +7,8 @@
  *
  * @packageDocumentation
  */
-import type { GLOSTExtension } from "glost-plugins";
-import type { GlostLanguage } from "glost-common";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 /**
  * Thai pipeline options
  */
@@ -58,7 +58,7 @@ export interface ThaiPipelineOptions {
  * @example
  * ```typescript
  * import { createThaiPronunciationPipeline } from "glost-plugins-thai";
- * import { processGLOSTWithExtensions } from "glost-plugins";
+ * import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
  *
  * const extensions = createThaiPronunciationPipeline();
  * const result = processGLOSTWithExtensions(document, extensions);

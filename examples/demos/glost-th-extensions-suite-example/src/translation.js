@@ -10,7 +10,7 @@
  * @packageDocumentation
  */
 import { getDemoThaiTranslation } from "./demo-data.js";
-import { createTranslationExtension, } from "glost-translation";
+import { createTranslationExtension, } from "@glotblocks/glost-translation";
 /**
  * Adapter that provides Thai-English translation using demo vocabulary data,
  * matching the glost-translation TranslationProvider interface.
@@ -65,7 +65,7 @@ const thaiTranslationProviderAdapter = {
  * @example
  * ```typescript
  * import { createThaiTranslationExtension } from "glost-plugins-thai";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  *
  * const extension = createThaiTranslationExtension("en-US");
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);

@@ -28,7 +28,7 @@ import { createThaiTranslationExtension } from "./translation";
  * @example
  * ```typescript
  * import { createThaiPronunciationPipeline } from "glost-plugins-thai";
- * import { processGLOSTWithExtensions } from "glost-plugins";
+ * import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
  *
  * const extensions = createThaiPronunciationPipeline();
  * const result = processGLOSTWithExtensions(document, extensions);

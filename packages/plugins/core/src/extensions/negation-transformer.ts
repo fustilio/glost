@@ -18,9 +18,9 @@ import type {
   GLOSTSentence,
   GLOSTWord,
   LanguageCode,
-} from "glost-core";
+} from "@glotblocks/glost-core";
 import { visit } from "unist-util-visit";
-import { getWordText, getAllClauses } from "glost-core";
+import { getWordText, getAllClauses } from "@glotblocks/glost-core";
 
 /**
  * Negation type
@@ -315,9 +315,9 @@ function negateClause(
  *
  * @example
  * ```typescript
- * import { createNegationTransformerExtension } from "glost-plugins/extensions";
- * import { createClauseSegmenterExtension } from "glost-clause-segmenter";
- * import { englishSegmenterProvider } from "glost-en/segmenter";
+ * import { createNegationTransformerExtension } from "@glotblocks/glost-plugins/extensions";
+ * import { createClauseSegmenterExtension } from "@glotblocks/glost-clause-segmenter";
+ * import { englishSegmenterProvider } from "@glotblocks/glost-en/segmenter";
  *
  * const segmenter = createClauseSegmenterExtension({
  *   targetLanguage: "en",
@@ -477,10 +477,10 @@ export function createNegationTransformerExtension(
  *
  * @example
  * ```typescript
- * import { NegationTransformerExtension } from "glost-plugins/extensions";
- * import { processGLOSTWithExtensions } from "glost-plugins/processor";
- * import { createClauseSegmenterExtension } from "glost-clause-segmenter";
- * import { englishSegmenterProvider } from "glost-en/segmenter";
+ * import { NegationTransformerExtension } from "@glotblocks/glost-plugins/extensions";
+ * import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins/processor";
+ * import { createClauseSegmenterExtension } from "@glotblocks/glost-clause-segmenter";
+ * import { englishSegmenterProvider } from "@glotblocks/glost-en/segmenter";
  *
  * const segmenter = createClauseSegmenterExtension({
  *   targetLanguage: "en",

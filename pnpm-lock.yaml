@@ -75,10 +75,10 @@ importers:
 
   examples/benchmarks/glost-stress-tests-example:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../../packages/glost
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../../../packages/plugins/core
     devDependencies:
@@ -94,10 +94,10 @@ importers:
 
   examples/demos/glost-core-api-example:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../../packages/glost
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../../../packages/plugins/core
     devDependencies:
@@ -113,25 +113,25 @@ importers:
 
   examples/demos/glost-extensions-api-example:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../../packages/glost
-      glost-core:
+      '@glotblocks/glost-core':
         specifier: workspace:*
         version: link:../../../packages/core
-      glost-difficulty:
+      '@glotblocks/glost-difficulty':
         specifier: workspace:*
         version: link:../../../packages/plugins/difficulty
-      glost-frequency:
+      '@glotblocks/glost-frequency':
         specifier: workspace:*
         version: link:../../../packages/plugins/frequency
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../../../packages/plugins/core
-      glost-pos:
+      '@glotblocks/glost-pos':
         specifier: workspace:*
         version: link:../../../packages/plugins/pos
-      glost-transcription:
+      '@glotblocks/glost-transcription':
         specifier: workspace:*
         version: link:../../../packages/plugins/transcription
     devDependencies:
@@ -147,19 +147,19 @@ importers:
 
   examples/demos/glost-ja-transcription-example:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../../packages/glost
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../../packages/common
-      glost-ja:
+      '@glotblocks/glost-ja':
         specifier: workspace:*
         version: link:../../../packages/languages/ja
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../../../packages/plugins/core
-      glost-transcription:
+      '@glotblocks/glost-transcription':
         specifier: workspace:*
         version: link:../../../packages/plugins/transcription
     devDependencies:
@@ -175,19 +175,19 @@ importers:
 
   examples/demos/glost-ko-transcription-example:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../../packages/glost
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../../packages/common
-      glost-ko:
+      '@glotblocks/glost-ko':
         specifier: workspace:*
         version: link:../../../packages/languages/ko
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../../../packages/plugins/core
-      glost-transcription:
+      '@glotblocks/glost-transcription':
         specifier: workspace:*
         version: link:../../../packages/plugins/transcription
     devDependencies:
@@ -203,16 +203,16 @@ importers:
 
   examples/demos/glost-processor-api-example:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../../packages/glost
-      glost-presets:
+      '@glotblocks/glost-presets':
         specifier: workspace:*
         version: link:../../../packages/presets
-      glost-processor:
+      '@glotblocks/glost-processor':
         specifier: workspace:*
         version: link:../../../packages/processor
-      glost-registry:
+      '@glotblocks/glost-registry':
         specifier: workspace:*
         version: link:../../../packages/registry
     devDependencies:
@@ -228,7 +228,7 @@ importers:
 
   examples/demos/glost-quick-start-example:
     dependencies:
-      glost-core:
+      '@glotblocks/glost-core':
         specifier: workspace:*
         version: link:../../../packages/core
     devDependencies:
@@ -244,25 +244,25 @@ importers:
 
   examples/demos/glost-th-extensions-suite-example:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../../packages/glost
-      glost-clause-segmenter:
+      '@glotblocks/glost-clause-segmenter':
         specifier: workspace:*
         version: link:../../../packages/plugins/clause-segmenter
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../../packages/common
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../../../packages/plugins/core
-      glost-th:
+      '@glotblocks/glost-th':
         specifier: workspace:*
         version: link:../../../packages/languages/th
-      glost-transcription:
+      '@glotblocks/glost-transcription':
         specifier: workspace:*
         version: link:../../../packages/plugins/transcription
-      glost-translation:
+      '@glotblocks/glost-translation':
         specifier: workspace:*
         version: link:../../../packages/plugins/translation
       unist-util-visit:
@@ -281,25 +281,25 @@ importers:
 
   examples/demos/glost-th-multi-extension-pipeline-example:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../../packages/glost
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../../packages/common
-      glost-frequency:
+      '@glotblocks/glost-frequency':
         specifier: workspace:*
         version: link:../../../packages/plugins/frequency
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../../../packages/plugins/core
-      glost-th:
+      '@glotblocks/glost-th':
         specifier: workspace:*
         version: link:../../../packages/languages/th
-      glost-transcription:
+      '@glotblocks/glost-transcription':
         specifier: workspace:*
         version: link:../../../packages/plugins/transcription
-      glost-translation:
+      '@glotblocks/glost-translation':
         specifier: workspace:*
         version: link:../../../packages/plugins/translation
     devDependencies:
@@ -315,19 +315,19 @@ importers:
 
   examples/demos/glost-th-transcription-example:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../../packages/glost
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../../packages/common
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../../../packages/plugins/core
-      glost-th:
+      '@glotblocks/glost-th':
         specifier: workspace:*
         version: link:../../../packages/languages/th
-      glost-transcription:
+      '@glotblocks/glost-transcription':
         specifier: workspace:*
         version: link:../../../packages/plugins/transcription
     devDependencies:
@@ -343,10 +343,10 @@ importers:
 
   examples/web-apps/glost-composition-demo-example:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../../packages/glost
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../../../packages/plugins/core
     devDependencies:
@@ -359,18 +359,18 @@ importers:
 
   examples/web-apps/glost-thai-extensions-demo:
     dependencies:
+      '@glotblocks/glost':
+        specifier: workspace:*
+        version: link:../../../packages/glost
+      '@glotblocks/glost-plugins':
+        specifier: workspace:*
+        version: link:../../../packages/plugins/core
+      '@glotblocks/glost-th':
+        specifier: workspace:*
+        version: link:../../../packages/languages/th
       express:
         specifier: ^4.18.2
         version: 4.22.1
-      glost:
-        specifier: workspace:*
-        version: link:../../../packages/glost
-      glost-plugins:
-        specifier: workspace:*
-        version: link:../../../packages/plugins/core
-      glost-th:
-        specifier: workspace:*
-        version: link:../../../packages/languages/th
     devDependencies:
       '@types/express':
         specifier: ^4.17.21
@@ -387,10 +387,10 @@ importers:
 
   examples/web-apps/glost-transcription-demo-example:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../../packages/glost
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../../../packages/plugins/core
     devDependencies:
@@ -403,7 +403,7 @@ importers:
 
   packages/align:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../glost
       nlcst-to-string:
@@ -425,13 +425,13 @@ importers:
 
   packages/cli:
     dependencies:
-      glost-core:
+      '@glotblocks/glost-core':
         specifier: workspace:*
         version: link:../core
-      glost-extensions:
+      '@glotblocks/glost-extensions':
         specifier: workspace:*
         version: link:../extensions
-      glost-registry:
+      '@glotblocks/glost-registry':
         specifier: workspace:*
         version: link:../registry
     devDependencies:
@@ -460,7 +460,7 @@ importers:
 
   packages/core:
     dependencies:
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../common
       unist-util-filter:
@@ -506,7 +506,7 @@ importers:
 
   packages/dialogue:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../glost
     devDependencies:
@@ -522,10 +522,10 @@ importers:
 
   packages/extensions:
     dependencies:
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../common
-      glost-core:
+      '@glotblocks/glost-core':
         specifier: workspace:*
         version: link:../core
       unist-util-visit:
@@ -541,16 +541,16 @@ importers:
 
   packages/glost:
     dependencies:
-      glost-core:
+      '@glotblocks/glost-core':
         specifier: workspace:*
         version: link:../core
-      glost-presets:
+      '@glotblocks/glost-presets':
         specifier: workspace:*
         version: link:../presets
-      glost-processor:
+      '@glotblocks/glost-processor':
         specifier: workspace:*
         version: link:../processor
-      glost-registry:
+      '@glotblocks/glost-registry':
         specifier: workspace:*
         version: link:../registry
     devDependencies:
@@ -563,10 +563,10 @@ importers:
 
   packages/languages/en:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../glost
-      glost-clause-segmenter:
+      '@glotblocks/glost-clause-segmenter':
         specifier: workspace:*
         version: link:../../plugins/clause-segmenter
     devDependencies:
@@ -582,25 +582,25 @@ importers:
 
   packages/languages/ja:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../glost
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../common
-      glost-difficulty:
+      '@glotblocks/glost-difficulty':
         specifier: workspace:*
         version: link:../../plugins/difficulty
-      glost-frequency:
+      '@glotblocks/glost-frequency':
         specifier: workspace:*
         version: link:../../plugins/frequency
-      glost-pos:
+      '@glotblocks/glost-pos':
         specifier: workspace:*
         version: link:../../plugins/pos
-      glost-transcription:
+      '@glotblocks/glost-transcription':
         specifier: workspace:*
         version: link:../../plugins/transcription
-      glost-translation:
+      '@glotblocks/glost-translation':
         specifier: workspace:*
         version: link:../../plugins/translation
     devDependencies:
@@ -616,25 +616,25 @@ importers:
 
   packages/languages/ko:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../glost
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../common
-      glost-difficulty:
+      '@glotblocks/glost-difficulty':
         specifier: workspace:*
         version: link:../../plugins/difficulty
-      glost-frequency:
+      '@glotblocks/glost-frequency':
         specifier: workspace:*
         version: link:../../plugins/frequency
-      glost-pos:
+      '@glotblocks/glost-pos':
         specifier: workspace:*
         version: link:../../plugins/pos
-      glost-transcription:
+      '@glotblocks/glost-transcription':
         specifier: workspace:*
         version: link:../../plugins/transcription
-      glost-translation:
+      '@glotblocks/glost-translation':
         specifier: workspace:*
         version: link:../../plugins/translation
     devDependencies:
@@ -650,31 +650,31 @@ importers:
 
   packages/languages/th:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../glost
-      glost-clause-segmenter:
+      '@glotblocks/glost-clause-segmenter':
         specifier: workspace:*
         version: link:../../plugins/clause-segmenter
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../common
-      glost-difficulty:
+      '@glotblocks/glost-difficulty':
         specifier: workspace:*
         version: link:../../plugins/difficulty
-      glost-frequency:
+      '@glotblocks/glost-frequency':
         specifier: workspace:*
         version: link:../../plugins/frequency
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../../plugins/core
-      glost-pos:
+      '@glotblocks/glost-pos':
         specifier: workspace:*
         version: link:../../plugins/pos
-      glost-transcription:
+      '@glotblocks/glost-transcription':
         specifier: workspace:*
         version: link:../../plugins/transcription
-      glost-translation:
+      '@glotblocks/glost-translation':
         specifier: workspace:*
         version: link:../../plugins/translation
     devDependencies:
@@ -690,10 +690,10 @@ importers:
 
   packages/plugins:
     dependencies:
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../common
-      glost-core:
+      '@glotblocks/glost-core':
         specifier: workspace:*
         version: link:../core
       unist-util-visit:
@@ -709,13 +709,13 @@ importers:
 
   packages/plugins/clause-segmenter:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../glost
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../common
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../core
       unist-util-visit:
@@ -731,13 +731,13 @@ importers:
 
   packages/plugins/core:
     dependencies:
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../common
-      glost-core:
+      '@glotblocks/glost-core':
         specifier: workspace:*
         version: link:../../core
-      glost-utils:
+      '@glotblocks/glost-utils':
         specifier: workspace:*
         version: link:../../utils
       unist-util-visit:
@@ -753,13 +753,13 @@ importers:
 
   packages/plugins/difficulty:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../glost
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../common
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -772,13 +772,13 @@ importers:
 
   packages/plugins/frequency:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../glost
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../common
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -791,13 +791,13 @@ importers:
 
   packages/plugins/gender:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../glost
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../common
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -810,7 +810,7 @@ importers:
 
   packages/plugins/inkle:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../glost
       unified:
@@ -832,13 +832,13 @@ importers:
 
   packages/plugins/pos:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../glost
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../common
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -851,16 +851,16 @@ importers:
 
   packages/plugins/transcription:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../glost
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../common
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../core
-      glost-utils:
+      '@glotblocks/glost-utils':
         specifier: workspace:*
         version: link:../../utils
     devDependencies:
@@ -873,13 +873,13 @@ importers:
 
   packages/plugins/translation:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../../glost
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../../common
-      glost-plugins:
+      '@glotblocks/glost-plugins':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -892,10 +892,10 @@ importers:
 
   packages/presets:
     dependencies:
-      glost-core:
+      '@glotblocks/glost-core':
         specifier: workspace:*
         version: link:../core
-      glost-processor:
+      '@glotblocks/glost-processor':
         specifier: workspace:*
         version: link:../processor
     devDependencies:
@@ -911,10 +911,10 @@ importers:
 
   packages/processor:
     dependencies:
-      glost-core:
+      '@glotblocks/glost-core':
         specifier: workspace:*
         version: link:../core
-      glost-extensions:
+      '@glotblocks/glost-extensions':
         specifier: workspace:*
         version: link:../extensions
     devDependencies:
@@ -930,7 +930,7 @@ importers:
 
   packages/react:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../glost
     devDependencies:
@@ -946,10 +946,10 @@ importers:
 
   packages/registry:
     dependencies:
-      glost-core:
+      '@glotblocks/glost-core':
         specifier: workspace:*
         version: link:../core
-      glost-extensions:
+      '@glotblocks/glost-extensions':
         specifier: workspace:*
         version: link:../extensions
     devDependencies:
@@ -965,10 +965,10 @@ importers:
 
   packages/utils:
     dependencies:
-      glost:
+      '@glotblocks/glost':
         specifier: workspace:*
         version: link:../glost
-      glost-common:
+      '@glotblocks/glost-common':
         specifier: workspace:*
         version: link:../common
     devDependencies:

@@ -17,10 +17,10 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-processor": "workspace:*",
-    "glost-registry": "workspace:*",
-    "glost-presets": "workspace:*"
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-processor": "workspace:*",
+    "@glotblocks/glost-registry": "workspace:*",
+    "@glotblocks/glost-presets": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

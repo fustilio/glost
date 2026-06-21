@@ -7,8 +7,8 @@
  *
  * @packageDocumentation
  */
-import { type GenderTransformerOptions, type NegationTransformerOptions, type GLOSTExtension } from "glost-plugins";
-import { type ClauseSegmenterOptions } from "glost-clause-segmenter";
+import { type GenderTransformerOptions, type NegationTransformerOptions, type GLOSTExtension } from "@glotblocks/glost-plugins";
+import { type ClauseSegmenterOptions } from "@glotblocks/glost-clause-segmenter";
 import { type ThaiSyllableSegmenterOptions } from "./syllable-segmenter";
 /**
  * Options for Thai syllable segmentation

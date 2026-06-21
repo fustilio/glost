@@ -4,8 +4,8 @@
  * Convenience functions for creating Thai GLOST nodes with RTGS transcription.
  */
 
-import type { GLOSTWord, TransliterationData, LinguisticMetadata } from 'glost';
-import { createGLOSTWordNode } from 'glost';
+import type { GLOSTWord, TransliterationData, LinguisticMetadata } from '@glotblocks/glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 /**
  * Options for creating a Thai word node

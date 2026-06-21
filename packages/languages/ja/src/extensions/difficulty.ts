@@ -1,8 +1,8 @@
 /**
  * Japanese Difficulty Provider - JLPT level mapping
  */
-import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "glost-common";
-import type { DifficultyProvider, DifficultyLevel } from "glost-difficulty";
+import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "@glotblocks/glost-common";
+import type { DifficultyProvider, DifficultyLevel } from "@glotblocks/glost-difficulty";
 
 export interface JapaneseDifficultyData {
   [word: string]: DifficultyLevel | string;

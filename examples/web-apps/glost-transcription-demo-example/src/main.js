@@ -7,8 +7,8 @@
  *
  * NOTE: For a more comprehensive demo, see examples/composition-demo
  */
-import { processGLOSTWithExtensions } from "glost-plugins";
-import { createSimpleWord, createSentenceFromWords, createParagraphFromSentences, createDocumentFromParagraphs, } from "glost";
+import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
+import { createSimpleWord, createSentenceFromWords, createParagraphFromSentences, createDocumentFromParagraphs, } from "@glotblocks/glost";
 // Simple IPA dictionary for demo
 const ipaDict = {
     hello: "həˈloʊ",

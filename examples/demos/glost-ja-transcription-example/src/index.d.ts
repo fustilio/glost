@@ -20,7 +20,7 @@
  * @example
  * ```typescript
  * import { createJapaneseTranscriptionExtension } from "./japanese-transcription.js";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  *
  * const extension = createJapaneseTranscriptionExtension();
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);

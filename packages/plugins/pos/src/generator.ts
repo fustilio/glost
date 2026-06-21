@@ -6,12 +6,12 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-plugins";
-import type { GLOSTWord } from "glost";
-import { getWordText } from "glost";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
+import type { GLOSTWord } from "@glotblocks/glost";
+import { getWordText } from "@glotblocks/glost";
 import type { POSProvider } from "./types.js";
 
-import type { GlostLanguage } from "glost-common";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 
 /**
  * POS generator extension options
@@ -49,8 +49,8 @@ export interface POSGeneratorOptions {
  * 
  * @example
  * ```typescript
- * import { createPOSGeneratorExtension } from "glost-pos";
- * import { createThaiPOSProvider } from "glost-th/extensions";
+ * import { createPOSGeneratorExtension } from "@glotblocks/glost-pos";
+ * import { createThaiPOSProvider } from "@glotblocks/glost-th/extensions";
  * 
  * const provider = createThaiPOSProvider(datasource);
  * const extension = createPOSGeneratorExtension({

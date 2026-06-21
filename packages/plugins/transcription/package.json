@@ -1,5 +1,5 @@
 {
-  "name": "glost-transcription",
+  "name": "@glotblocks/glost-transcription",
   "version": "0.4.9",
   "description": "Transcription extension for GLOST - adds pronunciation data",
   "author": "fustilio",
@@ -24,10 +24,10 @@
     "test": "vitest --passWithNoTests"
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-common": "workspace:*",
-    "glost-plugins": "workspace:*",
-    "glost-utils": "workspace:*"
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-common": "workspace:*",
+    "@glotblocks/glost-plugins": "workspace:*",
+    "@glotblocks/glost-utils": "workspace:*"
   },
   "devDependencies": {
     "typescript": "catalog:",
@@ -39,5 +39,8 @@
     "pronunciation",
     "ipa",
     "romanization"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

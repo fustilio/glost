@@ -6,7 +6,7 @@
  * See ADRs 0001-0007 in glost/docs/adr/.
  */
 
-import type { GLOSTRoot } from "glost";
+import type { GLOSTRoot } from "@glotblocks/glost";
 
 /** BCP-47 language tag, narrowed to a string for shape clarity. */
 export type LangCode = string;

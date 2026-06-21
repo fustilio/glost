@@ -18,8 +18,8 @@
  * - Modular, composable architecture
  * - Toggle extensions on/off to see composition
  */
-import { processGLOSTWithExtensions } from "glost-plugins";
-import { createSimpleWord, createSentenceFromWords, createParagraphFromSentences, createDocumentFromParagraphs, } from "glost";
+import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
+import { createSimpleWord, createSentenceFromWords, createParagraphFromSentences, createDocumentFromParagraphs, } from "@glotblocks/glost";
 // =============================================================================
 // Inline Extensions
 // =============================================================================

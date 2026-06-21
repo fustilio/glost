@@ -35,8 +35,8 @@ export { createThaiTranslationExtension } from "./translation";
 export { createThaiWordJoinerExtension, ThaiWordJoinerExtension, type ThaiWordJoinerOptions, } from "./word-joiner";
 export { createThaiSyllableSegmenter, ThaiSyllableSegmenter, type ThaiSyllableOptions, createThaiGenderTransformer, ThaiGenderTransformer, type ThaiGenderOptions, createThaiClauseSegmenter, ThaiClauseSegmenter, createThaiNegationTransformer, ThaiNegationTransformer, type ThaiNegationOptions, } from "./transformers";
 export { createThaiPronunciationPipeline, createThaiDialoguePipeline, createThaiGrammarPipeline, createThaiComprehensivePipeline, ThaiLearningPipeline, ThaiConversationPipelineMale, ThaiConversationPipelineFemale, type ThaiPipelineOptions, } from "./pipeline";
-import type { GLOSTASTExtension } from "glost-plugins";
-import type { GlostLanguage } from "glost-common";
+import type { GLOSTASTExtension } from "@glotblocks/glost-plugins";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 /**
  * Create basic Thai transcription and translation extensions
  *
@@ -50,7 +50,7 @@ import type { GlostLanguage } from "glost-common";
  * @example
  * ```typescript
  * import { createThaiExtensions } from "glost-plugins-thai";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  *
  * const extensions = createThaiExtensions("en-US");
  * const result = await processGLOSTWithExtensionsAsync(document, extensions);

@@ -1,5 +1,5 @@
 {
-  "name": "glost-inkle",
+  "name": "@glotblocks/glost-inkle",
   "version": "0.2.5",
   "description": "Inkle integration for GLOST",
   "author": "fustilio",
@@ -25,7 +25,7 @@
     "lint": "echo 'No linting configured'"
   },
   "dependencies": {
-    "glost": "workspace:*",
+    "@glotblocks/glost": "workspace:*",
     "unified": "^11.0.0",
     "vfile": "^6.0.0"
   },
@@ -39,5 +39,8 @@
     "inkle",
     "ink",
     "interactive-fiction"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

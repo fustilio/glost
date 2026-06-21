@@ -36,43 +36,43 @@ export function createExampleVitestConfig(
   // Common aliases shared by all examples
   const commonAliases = [
     {
-      find: 'glost/nodes',
+      find: '@glotblocks/glost/nodes',
       replacement: resolve(packagesDir, 'core/src/index.ts'),
     },
     {
-      find: 'glost',
+      find: '@glotblocks/glost',
       replacement: resolve(packagesDir, 'core/src/index.ts'),
     },
     {
-      find: 'glost-common',
+      find: '@glotblocks/glost-common',
       replacement: resolve(packagesDir, 'common/src/index.ts'),
     },
     {
-      find: 'glost-plugins',
+      find: '@glotblocks/glost-plugins',
       replacement: resolve(packagesDir, 'plugins/core/src/index.ts'),
     },
     {
-      find: 'glost-transcription',
+      find: '@glotblocks/glost-transcription',
       replacement: resolve(packagesDir, 'plugins/transcription/src/index.ts'),
     },
     {
-      find: 'glost-translation',
+      find: '@glotblocks/glost-translation',
       replacement: resolve(packagesDir, 'plugins/translation/src/index.ts'),
     },
     {
-      find: 'glost-frequency',
+      find: '@glotblocks/glost-frequency',
       replacement: resolve(packagesDir, 'plugins/frequency/src/index.ts'),
     },
     {
-      find: 'glost-difficulty',
+      find: '@glotblocks/glost-difficulty',
       replacement: resolve(packagesDir, 'plugins/difficulty/src/index.ts'),
     },
     {
-      find: 'glost-pos',
+      find: '@glotblocks/glost-pos',
       replacement: resolve(packagesDir, 'plugins/pos/src/index.ts'),
     },
     {
-      find: 'glost-clause-segmenter',
+      find: '@glotblocks/glost-clause-segmenter',
       replacement: resolve(packagesDir, 'plugins/clause-segmenter/src/index.ts'),
     },
     // External dependencies (need exact paths in monorepo)

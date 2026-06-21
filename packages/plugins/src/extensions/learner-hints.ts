@@ -7,7 +7,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTWord } from "glost-core";
+import type { GLOSTWord } from "@glotblocks/glost-core";
 import type { GLOSTExtension } from "../types.js";
 import { ExtensionDependencyError } from "../errors.js";
 // Types moved to separate packages
@@ -142,11 +142,11 @@ function getPriority(difficulty: DifficultyLevel): "low" | "medium" | "high" {
  *
  * @example
  * ```typescript
- * import { processGLOSTWithExtensions } from "glost-plugins/processor";
- * import { createLearnerHintsExtension } from "glost-plugins/extensions/learner-hints";
- * import { createPOSExtension } from "glost-pos";
- * import { createDifficultyExtension } from "glost-difficulty";
- * import { createGenderExtension } from "glost-gender";
+ * import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins/processor";
+ * import { createLearnerHintsExtension } from "@glotblocks/glost-plugins/extensions/learner-hints";
+ * import { createPOSExtension } from "@glotblocks/glost-pos";
+ * import { createDifficultyExtension } from "@glotblocks/glost-difficulty";
+ * import { createGenderExtension } from "@glotblocks/glost-gender";
  *
  * // These extensions are now in separate packages
  * const [posGen, posEnh] = createPOSExtension({ targetLanguage: "en", provider });
@@ -277,10 +277,10 @@ export function createLearnerHintsExtension(
  *
  * @example
  * ```typescript
- * import { processGLOSTWithExtensions } from "glost-plugins/processor";
- * import { LearnerHintsExtension } from "glost-plugins/extensions";
- * import { createPOSExtension } from "glost-pos";
- * import { createDifficultyExtension } from "glost-difficulty";
+ * import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins/processor";
+ * import { LearnerHintsExtension } from "@glotblocks/glost-plugins/extensions";
+ * import { createPOSExtension } from "@glotblocks/glost-pos";
+ * import { createDifficultyExtension } from "@glotblocks/glost-difficulty";
  *
  * // These extensions are now in separate packages
  * const [posGen, posEnh] = createPOSExtension({ targetLanguage: "en", provider });

@@ -10,8 +10,8 @@
  * 
  * @example
  * ```typescript
- * import { processGLOSTWithExtensions } from "glost-extensions";
- * import { ReadingScoreExtension, LearnerHintsExtension } from "glost-extensions/extensions";
+ * import { processGLOSTWithExtensions } from "@glotblocks/glost-extensions";
+ * import { ReadingScoreExtension, LearnerHintsExtension } from "@glotblocks/glost-extensions/extensions";
  * 
  * const result = processGLOSTWithExtensions(document, [
  *   ReadingScoreExtension,

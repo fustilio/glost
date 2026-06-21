@@ -1,5 +1,5 @@
 ---
-"glost-core": minor
+"@glotblocks/glost-core": minor
 ---
 
 Point `main`/`types`/all `exports` subpaths at compiled `dist/*.js` and `dist/*.d.ts` instead of `src/*.ts`. The previous shape forced every downstream test runner to either pre-bundle glost-core's source (via `vitest.config.ts` inline-deps shims) or fail with "Stripping types is currently unsupported for files under node_modules."

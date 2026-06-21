@@ -6,7 +6,7 @@
  * attribution and context.
  */
 
-import type { GLOSTExtras, GLOSTSentence } from "glost";
+import type { GLOSTExtras, GLOSTSentence } from "@glotblocks/glost";
 
 /**
  * Participant in a dialogue/conversation

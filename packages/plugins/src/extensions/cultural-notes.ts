@@ -7,7 +7,7 @@
  */
 
 import type { GLOSTExtension } from "../types.js";
-import type { GLOSTWord } from "glost-core";
+import type { GLOSTWord } from "@glotblocks/glost-core";
 
 /**
  * Cultural notes metadata structure

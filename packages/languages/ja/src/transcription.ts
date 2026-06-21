@@ -5,7 +5,7 @@
  * Implementations should be provided separately based on your data source.
  */
 
-import type { TranscriptionProvider } from 'glost-common';
+import type { TranscriptionProvider } from '@glotblocks/glost-common';
 import type { JapaneseTranscriptionScheme } from './constants.js';
 
 /**

@@ -1,5 +1,5 @@
 {
-  "name": "glost-translation",
+  "name": "@glotblocks/glost-translation",
   "version": "0.4.7",
   "description": "Translation extension for GLOST - adds multilingual glosses",
   "author": "fustilio",
@@ -24,9 +24,9 @@
     "test": "vitest --passWithNoTests"
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-common": "workspace:*",
-    "glost-plugins": "workspace:*"
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-common": "workspace:*",
+    "@glotblocks/glost-plugins": "workspace:*"
   },
   "devDependencies": {
     "typescript": "catalog:",
@@ -38,5 +38,8 @@
     "glosses",
     "dictionary",
     "bilingual"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

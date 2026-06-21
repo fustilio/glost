@@ -1,5 +1,5 @@
 {
-  "name": "glost-ja",
+  "name": "@glotblocks/glost-ja",
   "version": "0.4.9",
   "type": "module",
   "description": "Japanese language support for GLOST - helper functions and transcription providers",
@@ -54,13 +54,13 @@
     "test": "vitest --passWithNoTests"
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-common": "workspace:*",
-    "glost-transcription": "workspace:*",
-    "glost-translation": "workspace:*",
-    "glost-frequency": "workspace:*",
-    "glost-difficulty": "workspace:*",
-    "glost-pos": "workspace:*"
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-common": "workspace:*",
+    "@glotblocks/glost-transcription": "workspace:*",
+    "@glotblocks/glost-translation": "workspace:*",
+    "@glotblocks/glost-frequency": "workspace:*",
+    "@glotblocks/glost-difficulty": "workspace:*",
+    "@glotblocks/glost-pos": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

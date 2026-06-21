@@ -1,8 +1,8 @@
 /**
  * Korean Transcription Provider - Revised Romanization + IPA
  */
-import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "glost-common";
-import type { TranscriptionProvider } from "glost-transcription";
+import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "@glotblocks/glost-common";
+import type { TranscriptionProvider } from "@glotblocks/glost-transcription";
 
 export interface KoreanTranscriptionData {
   [word: string]: { rr?: string; ipa?: string; [scheme: string]: string | undefined };

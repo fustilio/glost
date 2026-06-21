@@ -11,6 +11,7 @@ concurrency:
 permissions:
   contents: write
   pull-requests: write
+  id-token: write # OIDC trusted publishing to npm
 
 jobs:
   release:
@@ -31,26 +32,26 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
-          registry-url: "https://registry.npmjs.org"
+          node-version: "22" # >=22.14 required for npm OIDC
           cache: pnpm
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Build
-        run: pnpm build
+        run: pnpm --filter "!./examples/**" --filter "!./docs" -r build
 
       - name: Version or publish
         uses: changesets/action@v1
         with:
           # When changesets are present on main: opens/updates a "Version Packages" PR.
           # When the Version PR is merged (no pending changesets): runs the publish command.
-          # Requires NPM_TOKEN secret to be set in repository settings.
+          # Publishes via OIDC trusted publishing (pnpm >=10.16) — no NPM_TOKEN needed.
+          # Each package must have a trusted publisher configured on npmjs.com
+          # (repo: fustilio/glost, workflow: release.yml).
           version: pnpm changeset:version
           publish: pnpm changeset:release
           commit: "chore: version packages"
           title: "chore: version packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,5 +1,5 @@
 {
-  "name": "glost-presets",
+  "name": "@glotblocks/glost-presets",
   "version": "0.6.2",
   "description": "Preset configurations for common GLOST use cases",
   "type": "module",
@@ -24,8 +24,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "glost-core": "workspace:*",
-    "glost-processor": "workspace:*"
+    "@glotblocks/glost-core": "workspace:*",
+    "@glotblocks/glost-processor": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
@@ -36,5 +36,8 @@
     "build": "tsc",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

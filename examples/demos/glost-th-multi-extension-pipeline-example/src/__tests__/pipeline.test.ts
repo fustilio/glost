@@ -17,9 +17,9 @@ import {
   NODE_TYPES,
   getAllWords,
   getFirstWord,
-} from "glost";
-import { createThaiWord } from "glost-th";
-import { processGLOST } from "glost-plugins";
+} from "@glotblocks/glost";
+import { createThaiWord } from "@glotblocks/glost-th";
+import { processGLOST } from "@glotblocks/glost-plugins";
 import {
   createThaiTranscriptionExtension,
   createThaiTranslationExtension,

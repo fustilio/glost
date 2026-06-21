@@ -1,8 +1,8 @@
 /**
  * Korean Translation Provider
  */
-import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "glost-common";
-import type { TranslationProvider } from "glost-translation";
+import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "@glotblocks/glost-common";
+import type { TranslationProvider } from "@glotblocks/glost-translation";
 
 export interface KoreanTranslationData {
   [word: string]: string | string[];

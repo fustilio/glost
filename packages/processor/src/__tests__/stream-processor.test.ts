@@ -11,13 +11,13 @@ import {
   type ProcessedChunk,
   type StreamOptions,
 } from "../stream-processor.js";
-import type { GLOSTExtension } from "glost-extensions";
+import type { GLOSTExtension } from "@glotblocks/glost-extensions";
 import type {
   GLOSTRoot,
   GLOSTSentence,
   GLOSTParagraph,
   GLOSTWord,
-} from "glost-core";
+} from "@glotblocks/glost-core";
 
 // ============================================================================
 // Helpers

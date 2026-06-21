@@ -1,4 +1,4 @@
-import type { GLOSTWord } from "glost";
+import type { GLOSTWord } from "@glotblocks/glost";
 
 /**
  * Ruby position for transcription annotations

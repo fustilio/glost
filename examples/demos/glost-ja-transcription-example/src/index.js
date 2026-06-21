@@ -9,7 +9,7 @@
  * X = glost-ja (language-specific)
  * Y = glost-transcription (feature-specific)
  */
-import { createTranscriptionExtension } from "glost-transcription";
+import { createTranscriptionExtension } from "@glotblocks/glost-transcription";
 import { getJapaneseTranscriptions } from "./demo-data.js";
 /**
  * Japanese transcription provider implementation
@@ -39,7 +39,7 @@ const japaneseTranscriptionProvider = {
  * @example
  * ```typescript
  * import { createJapaneseTranscriptionExtension } from "./japanese-transcription.js";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  *
  * const extension = createJapaneseTranscriptionExtension();
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);

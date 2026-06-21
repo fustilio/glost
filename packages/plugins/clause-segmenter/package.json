@@ -1,5 +1,5 @@
 {
-  "name": "glost-clause-segmenter",
+  "name": "@glotblocks/glost-clause-segmenter",
   "version": "0.2.8",
   "description": "Clause segmentation extension for GLOST - segments sentences into clauses",
   "author": "GLOST Contributors",
@@ -36,9 +36,9 @@
     "test": "vitest --passWithNoTests"
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-common": "workspace:*",
-    "glost-plugins": "workspace:*",
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-common": "workspace:*",
+    "@glotblocks/glost-plugins": "workspace:*",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
@@ -51,5 +51,8 @@
     "segmentation",
     "syntax",
     "linguistics"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

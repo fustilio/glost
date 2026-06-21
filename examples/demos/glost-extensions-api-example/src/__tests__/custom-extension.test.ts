@@ -12,14 +12,14 @@
 
 import { describe, it, expect } from "vitest";
 
-import type { GLOSTExtension } from "glost-plugins";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
 import type {
   GLOSTWord,
   GLOSTSentence,
   GLOSTRoot,
   GLOSTExtras,
   GLOSTParagraph,
-} from "glost";
+} from "@glotblocks/glost";
 
 import {
   createSimpleWord,
@@ -31,13 +31,13 @@ import {
   isGLOSTParagraph,
   isGLOSTSentence,
   isGLOSTWord,
-} from "glost";
+} from "@glotblocks/glost";
 
 import {
   processGLOSTWithExtensions,
-} from "glost-plugins";
+} from "@glotblocks/glost-plugins";
 
-import { createFrequencyExtension } from "glost-frequency";
+import { createFrequencyExtension } from "@glotblocks/glost-frequency";
 
 // Create mock provider and extension for testing
 const mockFrequencyProvider = {

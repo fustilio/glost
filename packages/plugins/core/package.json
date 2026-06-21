@@ -1,5 +1,5 @@
 {
-  "name": "glost-plugins",
+  "name": "@glotblocks/glost-plugins",
   "version": "0.6.6",
   "description": "Core plugin system and built-in plugins for GLOST",
   "author": "fustilio",
@@ -44,9 +44,9 @@
     "lint": "echo 'No linting configured'"
   },
   "dependencies": {
-    "glost-core": "workspace:*",
-    "glost-common": "workspace:*",
-    "glost-utils": "workspace:*",
+    "@glotblocks/glost-core": "workspace:*",
+    "@glotblocks/glost-common": "workspace:*",
+    "@glotblocks/glost-utils": "workspace:*",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
@@ -58,5 +58,8 @@
     "plugins",
     "transformation",
     "metadata"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

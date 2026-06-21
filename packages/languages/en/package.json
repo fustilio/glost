@@ -1,5 +1,5 @@
 {
-  "name": "glost-en",
+  "name": "@glotblocks/glost-en",
   "version": "0.4.7",
   "type": "module",
   "description": "English language support for GLOST - segmentation providers and helpers",
@@ -40,8 +40,8 @@
     "test": "vitest --passWithNoTests"
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-clause-segmenter": "workspace:*"
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-clause-segmenter": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

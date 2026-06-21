@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 
-import type { Preset } from "glost-processor";
+import type { Preset } from "@glotblocks/glost-processor";
 
 /**
  * Vocabulary Builder Preset
@@ -20,8 +20,8 @@ import type { Preset } from "glost-processor";
  * 
  * @example
  * ```typescript
- * import { glost } from "glost-processor";
- * import { vocabularyBuilderPreset } from "glost-presets";
+ * import { glost } from "@glotblocks/glost-processor";
+ * import { vocabularyBuilderPreset } from "@glotblocks/glost-presets";
  * 
  * const processor = glost()
  *   .use(vocabularyBuilderPreset);

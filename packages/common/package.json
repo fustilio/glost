@@ -1,5 +1,5 @@
 {
-  "name": "glost-common",
+  "name": "@glotblocks/glost-common",
   "version": "0.4.2",
   "description": "Common utilities and language configs for GLOST",
   "author": "fustilio",
@@ -57,5 +57,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest",
     "lint": "echo 'No linting configured'"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

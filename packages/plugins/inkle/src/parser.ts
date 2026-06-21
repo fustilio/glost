@@ -4,7 +4,7 @@ import {
   createGLOSTSentenceNode,
   createGLOSTWordNode,
   createGLOSTTextNode,
-} from "glost";
+} from "@glotblocks/glost";
 import type {
   GLOSTRoot,
   GLOSTParagraph,
@@ -12,7 +12,7 @@ import type {
   GLOSTWord,
   LanguageCode,
   ScriptSystem,
-} from "glost";
+} from "@glotblocks/glost";
 
 type InkJSON = Record<string, unknown>;
 

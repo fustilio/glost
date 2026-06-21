@@ -8,7 +8,7 @@
 import {
   createTranscriptionExtension,
   type TranscriptionProvider,
-} from "glost-transcription";
+} from "@glotblocks/glost-transcription";
 import { getThaiTranscriptions } from "../demo-data/transcription-data.js";
 
 /**
@@ -42,7 +42,7 @@ export const thaiTranscriptionProvider: TranscriptionProvider = {
  * @example
  * ```typescript
  * import { createThaiTranscriptionExtension } from "./extensions/thai-transcription";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  * 
  * const extension = createThaiTranscriptionExtension();
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);

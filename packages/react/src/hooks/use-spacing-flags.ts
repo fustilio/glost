@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import type { GLOSTWord } from "glost";
+import type { GLOSTWord } from "@glotblocks/glost";
 import type { DisplayLevel } from "../types/display-level.js";
 import type { LanguageRenderingStrategy } from "../types/rendering-strategy.js";
 

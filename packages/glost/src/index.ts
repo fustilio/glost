@@ -8,8 +8,8 @@
  * @example
  * ```typescript
  * // Import everything from one place
- * import { glost, createSimpleDocument, getAllWords } from "glost";
- * import { languageLearningPreset } from "glost/presets";
+ * import { glost, createSimpleDocument, getAllWords } from "@glotblocks/glost";
+ * import { languageLearningPreset } from "@glotblocks/glost/presets";
  * 
  * // Create a document
  * const document = createSimpleDocument(words, "th", "thai");
@@ -44,7 +44,7 @@ export type {
   LinguisticMetadata,
   LanguageCode,
   ScriptSystem,
-} from "glost-core";
+} from "@glotblocks/glost-core";
 
 // ============================================================================
 // Node Factories
@@ -65,7 +65,7 @@ export {
   createParagraphFromSentences,
   createSimpleWord,
   NODE_TYPES,
-} from "glost-core";
+} from "@glotblocks/glost-core";
 
 // ============================================================================
 // Tree Utilities
@@ -103,12 +103,12 @@ export {
   getLanguageFallback,
   normalizeLanguageTag,
   isValidLanguageTag,
-} from "glost-core";
+} from "@glotblocks/glost-core";
 
 // ============================================================================
 // Processor API
 // ============================================================================
-export { glost, GLOSTProcessor, GLOSTStreamProcessor } from "glost-processor";
+export { glost, GLOSTProcessor, GLOSTStreamProcessor } from "@glotblocks/glost-processor";
 export type {
   FrozenProcessor,
   FrozenStreamProcessor,
@@ -128,12 +128,12 @@ export type {
   ProgressStats,
   StreamOptions,
   ProcessedChunk,
-} from "glost-processor";
+} from "@glotblocks/glost-processor";
 
 // ============================================================================
 // Plugin Registry
 // ============================================================================
-export { pluginRegistry, PluginRegistry } from "glost-registry";
+export { pluginRegistry, PluginRegistry } from "@glotblocks/glost-registry";
 export type {
   PluginMetadata,
   PluginCategory,
@@ -141,4 +141,4 @@ export type {
   PluginQuery,
   ConflictReport,
   ValidationResult,
-} from "glost-registry";
+} from "@glotblocks/glost-registry";

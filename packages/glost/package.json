@@ -1,5 +1,5 @@
 {
-  "name": "glost",
+  "name": "@glotblocks/glost",
   "version": "0.8.4",
   "description": "GLOST - Glossed Syntax Tree for language learning and multilingual text processing",
   "author": "fustilio",
@@ -35,10 +35,10 @@
     }
   },
   "dependencies": {
-    "glost-core": "workspace:*",
-    "glost-processor": "workspace:*",
-    "glost-presets": "workspace:*",
-    "glost-registry": "workspace:*"
+    "@glotblocks/glost-core": "workspace:*",
+    "@glotblocks/glost-processor": "workspace:*",
+    "@glotblocks/glost-presets": "workspace:*",
+    "@glotblocks/glost-registry": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
@@ -60,5 +60,8 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
