@@ -10,32 +10,33 @@
     "directory": "packages/common"
   },
   "type": "module",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     },
     "./languages": {
-      "types": "./src/languages/index.ts",
-      "default": "./src/languages/index.ts"
+      "types": "./dist/languages/index.d.ts",
+      "default": "./dist/languages/index.js"
     },
     "./utils/array": {
-      "types": "./src/utils/array.ts",
-      "default": "./src/utils/array.ts"
+      "types": "./dist/utils/array.d.ts",
+      "default": "./dist/utils/array.js"
     },
     "./utils/groupBy": {
-      "types": "./src/utils/groupBy.ts",
-      "default": "./src/utils/groupBy.ts"
+      "types": "./dist/utils/groupBy.d.ts",
+      "default": "./dist/utils/groupBy.js"
     },
     "./utils/string": {
-      "types": "./src/utils/string-utils.ts",
-      "default": "./src/utils/string-utils.ts"
+      "types": "./dist/utils/string-utils.d.ts",
+      "default": "./dist/utils/string-utils.js"
     },
     "./utils/zod": {
-      "types": "./src/utils/zod.ts",
-      "default": "./src/utils/zod.ts"
+      "types": "./dist/utils/zod.d.ts",
+      "default": "./dist/utils/zod.js"
     }
   },
   "dependencies": {
@@ -56,7 +57,8 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
-    "lint": "echo 'No linting configured'"
+    "lint": "echo 'No linting configured'",
+    "prepublishOnly": "npm run build && publint"
   },
   "publishConfig": {
     "access": "public"
