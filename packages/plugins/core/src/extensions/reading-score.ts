@@ -7,7 +7,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTWord } from "glost-core";
+import type { GLOSTWord } from "@glotblocks/glost-core";
 import type { GLOSTExtension } from "../types.js";
 import { ExtensionDependencyError } from "../errors.js";
 // Types moved to separate packages
@@ -102,10 +102,10 @@ function getReadingColor(score: number): string {
  *
  * @example
  * ```typescript
- * import { processGLOSTWithExtensions } from "glost-plugins/processor";
- * import { createReadingScoreExtension } from "glost-plugins/extensions/reading-score";
- * import { createFrequencyExtension } from "glost-frequency";
- * import { createDifficultyExtension } from "glost-difficulty";
+ * import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins/processor";
+ * import { createReadingScoreExtension } from "@glotblocks/glost-plugins/extensions/reading-score";
+ * import { createFrequencyExtension } from "@glotblocks/glost-frequency";
+ * import { createDifficultyExtension } from "@glotblocks/glost-difficulty";
  *
  * // These extensions are now in separate packages
  * const [freqGen, freqEnh] = createFrequencyExtension({ targetLanguage: "en", provider });
@@ -215,10 +215,10 @@ export function createReadingScoreExtension(
  *
  * @example
  * ```typescript
- * import { processGLOSTWithExtensions } from "glost-plugins/processor";
- * import { ReadingScoreExtension } from "glost-plugins/extensions";
- * import { createFrequencyExtension } from "glost-frequency";
- * import { createDifficultyExtension } from "glost-difficulty";
+ * import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins/processor";
+ * import { ReadingScoreExtension } from "@glotblocks/glost-plugins/extensions";
+ * import { createFrequencyExtension } from "@glotblocks/glost-frequency";
+ * import { createDifficultyExtension } from "@glotblocks/glost-difficulty";
  *
  * // These extensions are now in separate packages
  * const [freqGen, freqEnh] = createFrequencyExtension({ targetLanguage: "en", provider });

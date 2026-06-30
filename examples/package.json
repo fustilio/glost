@@ -12,16 +12,16 @@
     "bench": "vitest bench"
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-core": "workspace:*",
-    "glost-plugins": "workspace:*",
-    "glost-processor": "workspace:*",
-    "glost-registry": "workspace:*",
-    "glost-presets": "workspace:*",
-    "glost-transcription": "workspace:*",
-    "glost-th": "workspace:*",
-    "glost-ja": "workspace:*",
-    "glost-ko": "workspace:*"
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-core": "workspace:*",
+    "@glotblocks/glost-plugins": "workspace:*",
+    "@glotblocks/glost-processor": "workspace:*",
+    "@glotblocks/glost-registry": "workspace:*",
+    "@glotblocks/glost-presets": "workspace:*",
+    "@glotblocks/glost-transcription": "workspace:*",
+    "@glotblocks/glost-th": "workspace:*",
+    "@glotblocks/glost-ja": "workspace:*",
+    "@glotblocks/glost-ko": "workspace:*"
   },
   "devDependencies": {
     "tsx": "^4.7.0",

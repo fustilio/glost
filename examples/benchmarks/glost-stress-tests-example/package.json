@@ -18,8 +18,8 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-plugins": "workspace:*"
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-plugins": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

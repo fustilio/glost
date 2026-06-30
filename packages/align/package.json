@@ -1,5 +1,5 @@
 {
-  "name": "glost-align",
+  "name": "@glotblocks/glost-align",
   "version": "0.2.0",
   "description": "Cross-language alignment for GloST: ParallelDocument + AlignmentEdge graph + id-stamp plugin",
   "type": "module",
@@ -28,7 +28,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "glost": "workspace:*",
+    "@glotblocks/glost": "workspace:*",
     "nlcst-to-string": "^4.0.0",
     "unist-util-visit": "^5.1.0"
   },
@@ -49,5 +49,8 @@
     "type": "git",
     "url": "https://github.com/fustilio/glost.git",
     "directory": "packages/align"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

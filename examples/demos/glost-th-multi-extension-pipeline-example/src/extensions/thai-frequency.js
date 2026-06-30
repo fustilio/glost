@@ -4,7 +4,7 @@
  * Combines glost-frequency framework with Thai frequency data.
  * This demonstrates the X * Y pattern: glost-th + glost-frequency.
  */
-import { createFrequencyExtension, } from "glost-frequency";
+import { createFrequencyExtension, } from "@glotblocks/glost-frequency";
 import { getThaiFrequency } from "../demo-data/frequency-data.js";
 /**
  * Thai frequency provider implementation
@@ -36,7 +36,7 @@ export const thaiFrequencyProvider = {
  * @example
  * ```typescript
  * import { createThaiFrequencyExtension } from "./extensions/thai-frequency";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  *
  * const [generator, enhancer] = createThaiFrequencyExtension();
  * const result = await processGLOSTWithExtensionsAsync(document, [generator, enhancer]);

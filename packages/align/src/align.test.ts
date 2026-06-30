@@ -4,8 +4,8 @@ import {
   createGLOSTRootNode,
   createGLOSTSentenceNode,
   createGLOSTWordNode,
-} from "glost";
-import type { GLOSTRoot } from "glost";
+} from "@glotblocks/glost";
+import type { GLOSTRoot } from "@glotblocks/glost";
 
 import { composeParallelDocument } from "./compose.js";
 import { idStamp, idStampPlugin } from "./id-stamp.js";

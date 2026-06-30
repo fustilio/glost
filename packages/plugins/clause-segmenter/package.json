@@ -1,5 +1,5 @@
 {
-  "name": "glost-clause-segmenter",
+  "name": "@glotblocks/glost-clause-segmenter",
   "version": "0.2.8",
   "description": "Clause segmentation extension for GLOST - segments sentences into clauses",
   "author": "GLOST Contributors",
@@ -10,24 +10,13 @@
     "directory": "packages/plugins/clause-segmenter"
   },
   "type": "module",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
-    },
-    "./rules/english": {
-      "types": "./src/rules/english.ts",
-      "default": "./src/rules/english.ts"
-    },
-    "./rules/thai": {
-      "types": "./src/rules/thai.ts",
-      "default": "./src/rules/thai.ts"
-    },
-    "./rules/universal": {
-      "types": "./src/rules/universal.ts",
-      "default": "./src/rules/universal.ts"
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     }
   },
   "scripts": {
@@ -36,9 +25,9 @@
     "test": "vitest --passWithNoTests"
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-common": "workspace:*",
-    "glost-plugins": "workspace:*",
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-common": "workspace:*",
+    "@glotblocks/glost-plugins": "workspace:*",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
@@ -51,5 +40,8 @@
     "segmentation",
     "syntax",
     "linguistics"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

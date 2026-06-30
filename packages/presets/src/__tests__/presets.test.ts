@@ -15,7 +15,7 @@ import {
   grammarAnalyzerPreset,
   createGrammarAnalyzerPreset,
 } from "../index.js";
-import type { Preset } from "glost-processor";
+import type { Preset } from "@glotblocks/glost-processor";
 
 describe("GLOST Presets", () => {
   describe("minimalPreset", () => {

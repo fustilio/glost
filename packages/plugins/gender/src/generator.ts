@@ -6,12 +6,12 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-plugins";
-import type { GLOSTWord } from "glost";
-import { getWordText } from "glost";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
+import type { GLOSTWord } from "@glotblocks/glost";
+import { getWordText } from "@glotblocks/glost";
 import type { GenderProvider } from "./types.js";
 
-import type { GlostLanguage } from "glost-common";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 
 /**
  * Gender generator extension options

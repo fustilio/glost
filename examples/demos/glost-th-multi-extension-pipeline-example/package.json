@@ -20,13 +20,13 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-common": "workspace:*",
-    "glost-plugins": "workspace:*",
-    "glost-th": "workspace:*",
-    "glost-transcription": "workspace:*",
-    "glost-translation": "workspace:*",
-    "glost-frequency": "workspace:*"
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-common": "workspace:*",
+    "@glotblocks/glost-plugins": "workspace:*",
+    "@glotblocks/glost-th": "workspace:*",
+    "@glotblocks/glost-transcription": "workspace:*",
+    "@glotblocks/glost-translation": "workspace:*",
+    "@glotblocks/glost-frequency": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

@@ -9,7 +9,7 @@
  *
  * @packageDocumentation
  */
-import type { GLOSTExtension } from "glost-plugins";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
 /**
  * Thai Syllable Segmenter options
  */
@@ -75,7 +75,7 @@ export declare function createThaiSyllableSegmenterExtension(options?: ThaiSylla
  * @example
  * ```typescript
  * import { ThaiSyllableSegmenterExtension } from "glost-plugins-thai";
- * import { processGLOSTWithExtensions } from "glost-plugins";
+ * import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
  *
  * const result = processGLOSTWithExtensions(document, [
  *   ThaiSyllableSegmenterExtension,

@@ -1,12 +1,12 @@
 import { useMemo } from "react";
-import type { GLOSTWord } from "glost";
+import type { GLOSTWord } from "@glotblocks/glost";
 import {
   getWordText,
   getWordTranscription,
   getWordTranslation,
   getWordPartOfSpeech,
   getWordDifficulty,
-} from "glost";
+} from "@glotblocks/glost";
 
 /**
  * Extracted data from a GloST word node for rendering

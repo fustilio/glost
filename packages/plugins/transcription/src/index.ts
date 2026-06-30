@@ -15,15 +15,15 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-plugins";
-import type { GLOSTWord } from "glost";
-import { getWordText } from "glost";
-import type { GlostLanguage } from "glost-common";
-import { Logger, type LogVerbosity } from "glost-utils/logger";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
+import type { GLOSTWord } from "@glotblocks/glost";
+import { getWordText } from "@glotblocks/glost";
+import type { GlostLanguage } from "@glotblocks/glost-common";
+import { Logger, type LogVerbosity } from "@glotblocks/glost-utils/logger";
 
 // Re-export logger types for external use
-export type { LogVerbosity } from "glost-utils/logger";
-export { Logger } from "glost-utils/logger";
+export type { LogVerbosity } from "@glotblocks/glost-utils/logger";
+export { Logger } from "@glotblocks/glost-utils/logger";
 
 /**
  * Provider interface for transcription data
@@ -69,8 +69,8 @@ export interface TranscriptionExtensionOptions {
    * Provider for language-specific transcription data
    *
    * Should be implemented by language packages:
-   * - import { thaiTranscriptionProvider } from "glost-th/extensions"
-   * - import { japaneseTranscriptionProvider } from "glost-ja/extensions"
+   * - import { thaiTranscriptionProvider } from "@glotblocks/glost-th/extensions"
+   * - import { japaneseTranscriptionProvider } from "@glotblocks/glost-ja/extensions"
    */
   provider: TranscriptionProvider;
 
@@ -93,9 +93,9 @@ export interface TranscriptionExtensionOptions {
  *
  * @example
  * ```typescript
- * import { createTranscriptionExtension } from "glost-transcription";
- * import { thaiTranscriptionProvider } from "glost-th/extensions";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { createTranscriptionExtension } from "@glotblocks/glost-transcription";
+ * import { thaiTranscriptionProvider } from "@glotblocks/glost-th/extensions";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  *
  * const extension = createTranscriptionExtension({
  *   targetLanguage: "th",
@@ -108,8 +108,8 @@ export interface TranscriptionExtensionOptions {
  * @example
  * ```typescript
  * // Japanese example
- * import { createTranscriptionExtension } from "glost-transcription";
- * import { japaneseTranscriptionProvider } from "glost-ja/extensions";
+ * import { createTranscriptionExtension } from "@glotblocks/glost-transcription";
+ * import { japaneseTranscriptionProvider } from "@glotblocks/glost-ja/extensions";
  *
  * const extension = createTranscriptionExtension({
  *   targetLanguage: "ja",
@@ -136,7 +136,7 @@ export function createTranscriptionExtension(
     throw new Error(
       "[Transcription] Provider is required. " +
       "Import from language package: " +
-      "import { thaiTranscriptionProvider } from 'glost-th/extensions'"
+      "import { thaiTranscriptionProvider } from '@glotblocks/glost-th/extensions'"
     );
   }
 

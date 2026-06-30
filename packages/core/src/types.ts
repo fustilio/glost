@@ -12,7 +12,7 @@ import type { Literal as NlcstLiteral, Paragraph as NlcstParagraph, Punctuation 
  * 
  * @example
  * ```typescript
- * import { NODE_TYPES } from "glost";
+ * import { NODE_TYPES } from "@glotblocks/glost";
  * 
  * if (node.type === NODE_TYPES.WORD) {
  *   // Handle word node with autocomplete and type safety
@@ -261,7 +261,7 @@ export type ExtendedMetadata = {
  * @example
  * ```typescript
  * // In an extension package
- * declare module "glost" {
+ * declare module "@glotblocks/glost" {
  *   interface GLOSTExtras {
  *     frequency?: {
  *       rank: number;

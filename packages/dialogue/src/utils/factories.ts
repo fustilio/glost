@@ -2,7 +2,7 @@
  * Factory functions for creating dialogue nodes and sentences
  */
 
-import type { GLOSTSentence } from "glost";
+import type { GLOSTSentence } from "@glotblocks/glost";
 import type {
   GLOSTDialogue,
   DialogueParticipant,

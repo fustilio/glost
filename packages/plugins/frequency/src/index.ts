@@ -18,8 +18,8 @@
  * import {
  *   createFrequencyGeneratorExtension,
  *   createFrequencyEnhancerExtension
- * } from "glost-frequency";
- * import { createThaiFrequencyProvider } from "glost-th/extensions";
+ * } from "@glotblocks/glost-frequency";
+ * import { createThaiFrequencyProvider } from "@glotblocks/glost-th/extensions";
  * 
  * // Create provider from language package (with real corpus data)
  * const provider = createThaiFrequencyProvider({
@@ -64,7 +64,7 @@ export {
 import { createFrequencyGeneratorExtension } from "./generator.js";
 import { createFrequencyEnhancerExtension } from "./enhancer.js";
 
-import type { GlostLanguage } from "glost-common";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 
 /**
  * Create a complete frequency extension pipeline
@@ -80,8 +80,8 @@ import type { GlostLanguage } from "glost-common";
  * 
  * @example
  * ```typescript
- * import { createFrequencyExtension } from "glost-frequency";
- * import { createThaiFrequencyProvider } from "glost-th/extensions";
+ * import { createFrequencyExtension } from "@glotblocks/glost-frequency";
+ * import { createThaiFrequencyProvider } from "@glotblocks/glost-th/extensions";
  * 
  * const provider = createThaiFrequencyProvider(datasource);
  * const [generator, enhancer] = createFrequencyExtension({

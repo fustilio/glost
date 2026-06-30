@@ -5,10 +5,10 @@
 import express from 'express';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
-import { createSimpleDocument, getAllWords, getWordText } from 'glost';
-import { createThaiWord } from 'glost-th';
-import { isThaiText } from 'glost-th/constants';
+import { processGLOSTWithExtensionsAsync } from '@glotblocks/glost-plugins';
+import { createSimpleDocument, getAllWords, getWordText } from '@glotblocks/glost';
+import { createThaiWord } from '@glotblocks/glost-th';
+import { isThaiText } from '@glotblocks/glost-th/constants';
 // Import demo extensions that have actual data (presets use skeleton providers without data)
 import { createThaiTranscriptionExtension, createThaiTranslationExtension, createThaiWordJoinerExtension } from '../../demos/glost-th-extensions-suite-example/src/index.js';
 const __filename = fileURLToPath(import.meta.url);

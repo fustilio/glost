@@ -2,8 +2,8 @@
  * Japanese Transcription Provider - Romaji and IPA
  * See packages/extensions/templates/PROVIDER_TEMPLATE.md for usage guide
  */
-import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "glost-common";
-import type { TranscriptionProvider } from "glost-transcription";
+import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "@glotblocks/glost-common";
+import type { TranscriptionProvider } from "@glotblocks/glost-transcription";
 
 export interface JapaneseTranscriptionData {
   [word: string]: { romaji?: string; hepburn?: string; kunrei?: string; ipa?: string; [scheme: string]: string | undefined };

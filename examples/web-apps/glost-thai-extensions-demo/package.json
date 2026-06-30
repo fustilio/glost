@@ -11,9 +11,9 @@
     "serve": "tsx server.ts"
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-plugins": "workspace:*",
-    "glost-th": "workspace:*",
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-plugins": "workspace:*",
+    "@glotblocks/glost-th": "workspace:*",
     "express": "^4.18.2"
   },
   "devDependencies": {

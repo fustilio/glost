@@ -1,8 +1,8 @@
 /**
  * Korean Frequency Provider
  */
-import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "glost-common";
-import type { FrequencyProvider, FrequencyLevel } from "glost-frequency";
+import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "@glotblocks/glost-common";
+import type { FrequencyProvider, FrequencyLevel } from "@glotblocks/glost-frequency";
 
 export interface KoreanFrequencyData {
   [word: string]: FrequencyLevel;

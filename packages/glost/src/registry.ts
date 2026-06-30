@@ -4,7 +4,7 @@
  * Re-exports the registry API for convenient access via glost/registry.
  */
 
-export { pluginRegistry, PluginRegistry, PluginFilter, PluginSorter, PluginDiscovery, PluginValidator } from "glost-registry";
+export { pluginRegistry, PluginRegistry, PluginFilter, PluginSorter, PluginDiscovery, PluginValidator } from "@glotblocks/glost-registry";
 export type {
   PluginMetadata,
   PluginCategory,
@@ -20,4 +20,4 @@ export type {
   ValidationError,
   ValidationWarning,
   RegistryStatistics,
-} from "glost-registry";
+} from "@glotblocks/glost-registry";

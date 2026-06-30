@@ -9,14 +9,14 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-plugins";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
 import type {
   GLOSTRoot,
   GLOSTSentence,
   GLOSTWord,
   TransliterationData,
-} from "glost";
-import { getWordText, getAllWords, isGLOSTWord, createGLOSTWordNode } from "glost";
+} from "@glotblocks/glost";
+import { getWordText, getAllWords, isGLOSTWord, createGLOSTWordNode } from "@glotblocks/glost";
 import { visit } from "unist-util-visit";
 import { getDemoThaiTranscriptions, isWordInDemoVocabulary } from "./demo-data.js";
 

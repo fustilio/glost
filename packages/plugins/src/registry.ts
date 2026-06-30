@@ -249,7 +249,7 @@ class ExtensionRegistry {
  * 
  * @example
  * ```typescript
- * import { extensionRegistry } from "glost-plugins/registry";
+ * import { extensionRegistry } from "@glotblocks/glost-plugins/registry";
  * 
  * extensionRegistry.register(MyExtension);
  * const ext = extensionRegistry.get("my-extension");
@@ -268,7 +268,7 @@ export const extensionRegistry = new ExtensionRegistry();
  * 
  * @example
  * ```typescript
- * import { registerExtension } from "glost-plugins/registry";
+ * import { registerExtension } from "@glotblocks/glost-plugins/registry";
  * 
  * registerExtension({
  *   id: "my-extension",
@@ -294,7 +294,7 @@ export function registerExtension(extension: GLOSTExtension): void {
  * 
  * @example
  * ```typescript
- * import { registerExtensions } from "glost-plugins/registry";
+ * import { registerExtensions } from "@glotblocks/glost-plugins/registry";
  * 
  * registerExtensions([
  *   ReadingScoreExtension,
@@ -321,7 +321,7 @@ export function registerExtensions(extensions: GLOSTExtension[]): void {
  * 
  * @example
  * ```typescript
- * import { getExtension } from "glost-plugins/registry";
+ * import { getExtension } from "@glotblocks/glost-plugins/registry";
  * 
  * const ext = getExtension("frequency");
  * if (ext) {
@@ -346,7 +346,7 @@ export function getExtension(id: string): GLOSTExtension | undefined {
  * 
  * @example
  * ```typescript
- * import { getAllExtensions } from "glost-plugins/registry";
+ * import { getAllExtensions } from "@glotblocks/glost-plugins/registry";
  * 
  * const all = getAllExtensions();
  * console.log(`Registered ${all.length} extensions`);

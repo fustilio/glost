@@ -6,8 +6,8 @@
  * @packageDocumentation
  */
 
-import type { GLOSTRoot } from "glost-core";
-import type { GLOSTExtension, ProcessorOptions as ExtensionProcessorOptions } from "glost-extensions";
+import type { GLOSTRoot } from "@glotblocks/glost-core";
+import type { GLOSTExtension, ProcessorOptions as ExtensionProcessorOptions } from "@glotblocks/glost-extensions";
 
 /**
  * Plugin function signature

@@ -16,9 +16,9 @@ import {
   getWordText,
   NODE_TYPES,
   isGLOSTClause,
-} from "glost";
-import { createThaiWord } from "glost-th";
-import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+} from "@glotblocks/glost";
+import { createThaiWord } from "@glotblocks/glost-th";
+import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
 
 import { createThaiTranscriptionExtension } from "../transcription.js";
 import { createThaiTranslationExtension } from "../translation.js";

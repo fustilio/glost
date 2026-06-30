@@ -6,10 +6,10 @@
  * @packageDocumentation
  */
 
-import { BaseDataProvider, type BaseProviderOptions } from "glost-common";
-import type { DataLoader } from "glost-common";
-import type { GlostLanguage } from "glost-common";
-import type { TranslationProvider } from "glost-translation";
+import { BaseDataProvider, type BaseProviderOptions } from "@glotblocks/glost-common";
+import type { DataLoader } from "@glotblocks/glost-common";
+import type { GlostLanguage } from "@glotblocks/glost-common";
+import type { TranslationProvider } from "@glotblocks/glost-translation";
 
 /**
  * Thai translation data structure
@@ -38,8 +38,8 @@ export interface ThaiTranslationProviderOptions extends BaseProviderOptions {
  * 
  * @example
  * ```typescript
- * import { createThaiTranslationProvider } from "glost-th/extensions";
- * import { createJsonLoader } from "glost-common";
+ * import { createThaiTranslationProvider } from "@glotblocks/glost-th/extensions";
+ * import { createJsonLoader } from "@glotblocks/glost-common";
  * 
  * const provider = createThaiTranslationProvider({
  *   dataLoader: createJsonLoader({

@@ -15,4 +15,4 @@ export {
   createGrammarAnalyzerPreset,
   minimalPreset,
   createMinimalPreset,
-} from "glost-presets";
+} from "@glotblocks/glost-presets";

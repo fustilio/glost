@@ -1,5 +1,5 @@
 {
-  "name": "glost-dialogue",
+  "name": "@glotblocks/glost-dialogue",
   "version": "0.8.2",
   "description": "Dialogue syntax and helper functions for GloST documents",
   "type": "module",
@@ -27,7 +27,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "glost": "workspace:*"
+    "@glotblocks/glost": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^25.5.0",
@@ -47,5 +47,8 @@
     "type": "git",
     "url": "https://github.com/fustilio/glost.git",
     "directory": "packages/dialogue"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

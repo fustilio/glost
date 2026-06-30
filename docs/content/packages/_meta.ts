@@ -1,8 +1,8 @@
 export default {
-  core: 'glost-core',
-  plugins: 'glost-plugins',
-  utils: 'glost-utils',
+  core: '@glotblocks/glost-core',
+  plugins: '@glotblocks/glost-plugins',
+  utils: '@glotblocks/glost-utils',
   transcription: 'Transcription',
   translation: 'Translation',
-  inkle: 'glost-inkle'
+  inkle: '@glotblocks/glost-inkle'
 }

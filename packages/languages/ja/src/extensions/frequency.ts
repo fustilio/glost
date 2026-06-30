@@ -6,9 +6,9 @@
  * @packageDocumentation
  */
 
-import { BaseDataProvider, type BaseProviderOptions } from "glost-common";
-import type { DataLoader, GlostLanguage } from "glost-common";
-import type { FrequencyProvider, FrequencyLevel } from "glost-frequency";
+import { BaseDataProvider, type BaseProviderOptions } from "@glotblocks/glost-common";
+import type { DataLoader, GlostLanguage } from "@glotblocks/glost-common";
+import type { FrequencyProvider, FrequencyLevel } from "@glotblocks/glost-frequency";
 
 /**
  * Japanese frequency data structure

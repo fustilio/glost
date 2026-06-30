@@ -1,7 +1,7 @@
 /**
  * `id-stamp` — write deterministic ids onto alignable nodes (Paragraph, Sentence, Word).
  *
- * Hard prerequisite of `glost-align`. See ADR-0005 for strategy rationale.
+ * Hard prerequisite of `@glotblocks/glost-align`. See ADR-0005 for strategy rationale.
  *
  * Two strategies ship today:
  *   - `positional`: overwrite unconditionally with `p{N}-s{N}-w{N}` from tree position.
@@ -19,7 +19,7 @@ import type {
   GLOSTRoot,
   GLOSTSentence,
   GLOSTWord,
-} from "glost";
+} from "@glotblocks/glost";
 
 export type IdStampStrategy = "positional" | "preserve";
 
@@ -76,8 +76,8 @@ export function idStamp(
  *
  * @example
  * ```ts
- * import { glost } from "glost";
- * import { idStampPlugin } from "glost-align/id-stamp";
+ * import { glost } from "@glotblocks/glost";
+ * import { idStampPlugin } from "@glotblocks/glost-align/id-stamp";
  *
  * const processor = glost()
  *   .use(idStampPlugin, { strategy: "preserve" })

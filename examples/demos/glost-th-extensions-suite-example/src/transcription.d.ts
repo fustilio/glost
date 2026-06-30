@@ -20,7 +20,7 @@
  * @example
  * ```typescript
  * import { createThaiTranscriptionExtension } from "glost-plugins-thai";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  *
  * const extension = createThaiTranscriptionExtension();
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);

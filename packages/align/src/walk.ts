@@ -3,7 +3,7 @@ import type {
   GLOSTRoot,
   GLOSTSentence,
   GLOSTWord,
-} from "glost";
+} from "@glotblocks/glost";
 import { visit } from "unist-util-visit";
 
 import type {

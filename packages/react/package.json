@@ -1,5 +1,5 @@
 {
-  "name": "glost-react",
+  "name": "@glotblocks/glost-react",
   "version": "0.6.4",
   "description": "React utilities for rendering GloST documents with ruby annotations and progressive display",
   "type": "module",
@@ -29,7 +29,7 @@
     "README.md"
   ],
   "dependencies": {
-    "glost": "workspace:*"
+    "@glotblocks/glost": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18.0.0"
@@ -60,5 +60,8 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "clean": "rm -rf dist"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

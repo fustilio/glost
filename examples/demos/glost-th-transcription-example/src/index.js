@@ -9,8 +9,8 @@
  * X = glost-th (language-specific)
  * Y = glost-transcription (feature-specific)
  */
-import { createTranscriptionExtension } from "glost-transcription";
-import { THAI_TRANSCRIPTION_SCHEMES, isValidThaiTranscriptionScheme } from "glost-th/constants";
+import { createTranscriptionExtension } from "@glotblocks/glost-transcription";
+import { THAI_TRANSCRIPTION_SCHEMES, isValidThaiTranscriptionScheme } from "@glotblocks/glost-th/constants";
 import { getThaiTranscriptions } from "./demo-data.js";
 /**
  * Thai transcription provider implementation
@@ -45,7 +45,7 @@ const thaiTranscriptionProvider = {
  * @example
  * ```typescript
  * import { createThaiTranscriptionExtension } from "./thai-transcription.js";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  *
  * const extension = createThaiTranscriptionExtension();
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);

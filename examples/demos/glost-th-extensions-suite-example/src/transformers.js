@@ -7,9 +7,9 @@
  *
  * @packageDocumentation
  */
-import { createGenderTransformerExtension, createNegationTransformerExtension, } from "glost-plugins";
-import { createClauseSegmenterExtension } from "glost-clause-segmenter";
-import { thaiSegmenterProvider } from "glost-th/segmenter";
+import { createGenderTransformerExtension, createNegationTransformerExtension, } from "@glotblocks/glost-plugins";
+import { createClauseSegmenterExtension } from "@glotblocks/glost-clause-segmenter";
+import { thaiSegmenterProvider } from "@glotblocks/glost-th/segmenter";
 import { createThaiSyllableSegmenterExtension, } from "./syllable-segmenter";
 /**
  * Create Thai syllable segmenter optimized for learning

@@ -15,11 +15,11 @@ import {
   isGLOSTWord,
   type GLOSTWord,
   type GLOSTRoot,
-} from "glost";
+} from "@glotblocks/glost";
 
-import { createThaiWord } from "glost-th";
+import { createThaiWord } from "@glotblocks/glost-th";
 
-import { processGLOSTWithExtensions } from "glost-plugins";
+import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
 
 // A sample Thai lesson - greeting and basic conversation
 function createThaiLessonDocument(): GLOSTRoot {

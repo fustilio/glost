@@ -33,43 +33,43 @@ function createExampleVitestConfig(exampleDir, languagePackages = []) {
     // Common aliases shared by all examples
     const commonAliases = [
         {
-            find: 'glost/nodes',
+            find: '@glotblocks/glost/nodes',
             replacement: (0, path_1.resolve)(packagesDir, 'core/src/index.ts'),
         },
         {
-            find: 'glost',
+            find: '@glotblocks/glost',
             replacement: (0, path_1.resolve)(packagesDir, 'core/src/index.ts'),
         },
         {
-            find: 'glost-common',
+            find: '@glotblocks/glost-common',
             replacement: (0, path_1.resolve)(packagesDir, 'common/src/index.ts'),
         },
         {
-            find: 'glost-plugins',
+            find: '@glotblocks/glost-plugins',
             replacement: (0, path_1.resolve)(packagesDir, 'plugins/core/src/index.ts'),
         },
         {
-            find: 'glost-transcription',
+            find: '@glotblocks/glost-transcription',
             replacement: (0, path_1.resolve)(packagesDir, 'plugins/transcription/src/index.ts'),
         },
         {
-            find: 'glost-translation',
+            find: '@glotblocks/glost-translation',
             replacement: (0, path_1.resolve)(packagesDir, 'plugins/translation/src/index.ts'),
         },
         {
-            find: 'glost-frequency',
+            find: '@glotblocks/glost-frequency',
             replacement: (0, path_1.resolve)(packagesDir, 'plugins/frequency/src/index.ts'),
         },
         {
-            find: 'glost-difficulty',
+            find: '@glotblocks/glost-difficulty',
             replacement: (0, path_1.resolve)(packagesDir, 'plugins/difficulty/src/index.ts'),
         },
         {
-            find: 'glost-pos',
+            find: '@glotblocks/glost-pos',
             replacement: (0, path_1.resolve)(packagesDir, 'plugins/pos/src/index.ts'),
         },
         {
-            find: 'glost-clause-segmenter',
+            find: '@glotblocks/glost-clause-segmenter',
             replacement: (0, path_1.resolve)(packagesDir, 'plugins/clause-segmenter/src/index.ts'),
         },
         // External dependencies (need exact paths in monorepo)

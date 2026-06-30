@@ -10,7 +10,7 @@
  * @packageDocumentation
  */
 import { visit } from "unist-util-visit";
-import { getWordText } from "glost";
+import { getWordText } from "@glotblocks/glost";
 /**
  * Compute Thai tone number from tone mark
  *
@@ -319,7 +319,7 @@ export function createThaiSyllableSegmenterExtension(options = {}) {
  * @example
  * ```typescript
  * import { ThaiSyllableSegmenterExtension } from "glost-plugins-thai";
- * import { processGLOSTWithExtensions } from "glost-plugins";
+ * import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
  *
  * const result = processGLOSTWithExtensions(document, [
  *   ThaiSyllableSegmenterExtension,

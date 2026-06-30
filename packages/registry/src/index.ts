@@ -7,7 +7,7 @@
  * 
  * @example
  * ```typescript
- * import { pluginRegistry } from "glost-registry";
+ * import { pluginRegistry } from "@glotblocks/glost-registry";
  * 
  * // Register a plugin
  * pluginRegistry.register(myExtension, {

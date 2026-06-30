@@ -8,8 +8,8 @@
 import {
   createTranslationExtension,
   type TranslationProvider,
-} from "glost-translation";
-import type { GlostLanguage } from "glost-common";
+} from "@glotblocks/glost-translation";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 import { getThaiTranslation } from "../demo-data/translation-data.js";
 
 /**
@@ -43,7 +43,7 @@ export const thaiTranslationProvider: TranslationProvider = {
  * @example
  * ```typescript
  * import { createThaiTranslationExtension } from "./extensions/thai-translation";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  * 
  * const extension = createThaiTranslationExtension();
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);

@@ -4,7 +4,7 @@
  * Re-exports the processor API for convenient access via glost/processor.
  */
 
-export { glost, GLOSTProcessor } from "glost-processor";
+export { glost, GLOSTProcessor } from "@glotblocks/glost-processor";
 export type {
   FrozenProcessor,
   Plugin,
@@ -21,4 +21,4 @@ export type {
   SkipHook,
   ProgressHook,
   ProgressStats,
-} from "glost-processor";
+} from "@glotblocks/glost-processor";

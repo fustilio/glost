@@ -20,4 +20,4 @@ export {
   createParagraphFromSentences,
   createSimpleWord,
   NODE_TYPES,
-} from "glost-core";
+} from "@glotblocks/glost-core";

@@ -7,7 +7,7 @@
  * @packageDocumentation
  */
 
-import type { GlostLanguage } from "glost-common";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 import {
   findWord,
   getTranscription,
@@ -27,7 +27,7 @@ import {
  *
  * @example
  * ```typescript
- * import { createTranslationLookup } from "glost-plugins/example-data";
+ * import { createTranslationLookup } from "@glotblocks/glost-plugins/example-data";
  * import { createTranslationGeneratorExtension } from "glost-plugins-translation";
  *
  * // Create lookup function (pure composition)
@@ -66,7 +66,7 @@ export function createTranslationLookup(
  *
  * @example
  * ```typescript
- * import { createTranscriptionLookup } from "glost-plugins/example-data";
+ * import { createTranscriptionLookup } from "@glotblocks/glost-plugins/example-data";
  * import { createTranscriptionGeneratorExtension } from "glost-plugins-transcription";
  *
  * // Create lookup for Thai Paiboon+ system
@@ -109,7 +109,7 @@ export function createTranscriptionLookup(
  *
  * @example
  * ```typescript
- * import { createMultiSystemTranscriptionLookup } from "glost-plugins/example-data";
+ * import { createMultiSystemTranscriptionLookup } from "@glotblocks/glost-plugins/example-data";
  * import { createTranscriptionGeneratorExtension } from "glost-plugins-transcription";
  *
  * // Get ALL transcription systems for Thai
@@ -146,7 +146,7 @@ export function createMultiSystemTranscriptionLookup(language: GlostLanguage) {
  *
  * @example
  * ```typescript
- * import { createCombinedLookup } from "glost-plugins/example-data";
+ * import { createCombinedLookup } from "@glotblocks/glost-plugins/example-data";
  * import { createTranslationGeneratorExtension } from "glost-plugins-translation";
  * import { createTranscriptionGeneratorExtension } from "glost-plugins-transcription";
  *
@@ -189,7 +189,7 @@ export function createCombinedLookup(
  *
  * @example
  * ```typescript
- * import { createFallbackLookup, createTranscriptionLookup } from "glost-plugins/example-data";
+ * import { createFallbackLookup, createTranscriptionLookup } from "@glotblocks/glost-plugins/example-data";
  *
  * // Try Thai-specific transcription first, fall back to general IPA
  * const primary = createTranscriptionLookup("th", "paiboon");
@@ -240,7 +240,7 @@ export function createFallbackLookup<T>(
  *
  * @example
  * ```typescript
- * import { createEnrichedLookup } from "glost-plugins/example-data";
+ * import { createEnrichedLookup } from "@glotblocks/glost-plugins/example-data";
  *
  * const lookup = createEnrichedLookup("th");
  * const result = await lookup("สวัสดี", "th");

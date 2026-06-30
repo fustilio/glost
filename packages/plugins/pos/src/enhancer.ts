@@ -6,8 +6,8 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-plugins";
-import type { GLOSTWord } from "glost";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
+import type { GLOSTWord } from "@glotblocks/glost";
 import type { PartOfSpeechMetadata, POSTagInfo } from "./types.js";
 
 /**
@@ -103,7 +103,7 @@ export interface POSEnhancerOptions {
  * 
  * @example
  * ```typescript
- * import { createPOSEnhancerExtension } from "glost-pos";
+ * import { createPOSEnhancerExtension } from "@glotblocks/glost-pos";
  * 
  * const enhancer = createPOSEnhancerExtension({
  *   normalize: true,

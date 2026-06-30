@@ -73,7 +73,7 @@ import { createThaiTranslationExtension } from "./translation";
  * @example
  * ```typescript
  * import { createThaiExtensions } from "glost-plugins-thai";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  *
  * const extensions = createThaiExtensions("en-US");
  * const result = await processGLOSTWithExtensionsAsync(document, extensions);

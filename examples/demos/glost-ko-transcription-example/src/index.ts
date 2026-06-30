@@ -10,7 +10,7 @@
  * Y = glost-transcription (feature-specific)
  */
 
-import { createTranscriptionExtension, type TranscriptionProvider } from "glost-transcription";
+import { createTranscriptionExtension, type TranscriptionProvider } from "@glotblocks/glost-transcription";
 import { getKoreanTranscriptions } from "./demo-data.js";
 
 /**
@@ -48,7 +48,7 @@ const koreanTranscriptionProvider: TranscriptionProvider = {
  * @example
  * ```typescript
  * import { createKoreanTranscriptionExtension } from "./korean-transcription.js";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  * 
  * const extension = createKoreanTranscriptionExtension();
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);

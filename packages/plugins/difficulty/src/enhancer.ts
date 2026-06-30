@@ -6,8 +6,8 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-plugins";
-import type { GLOSTWord } from "glost";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
+import type { GLOSTWord } from "@glotblocks/glost";
 import type { DifficultyLevel, DifficultyMetadata } from "./types.js";
 
 /**

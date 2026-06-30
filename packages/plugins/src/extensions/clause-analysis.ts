@@ -7,7 +7,7 @@
  * @packageDocumentation
  */
 
-import type { GLOSTRoot, GLOSTClause } from "glost-core";
+import type { GLOSTRoot, GLOSTClause } from "@glotblocks/glost-core";
 import { visit } from "unist-util-visit";
 import type { GLOSTExtension, ExtensionContext } from "../types.js";
 import { ExtensionDependencyError } from "../errors.js";
@@ -150,10 +150,10 @@ function calculateComplexity(
  *
  * @example
  * ```typescript
- * import { processGLOSTWithExtensions } from "glost-plugins/processor";
- * import { createClauseAnalysisExtension } from "glost-plugins/extensions/clause-analysis";
- * import { createClauseSegmenterExtension } from "glost-clause-segmenter";
- * import { englishSegmenterProvider } from "glost-en/segmenter";
+ * import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins/processor";
+ * import { createClauseAnalysisExtension } from "@glotblocks/glost-plugins/extensions/clause-analysis";
+ * import { createClauseSegmenterExtension } from "@glotblocks/glost-clause-segmenter";
+ * import { englishSegmenterProvider } from "@glotblocks/glost-en/segmenter";
  *
  * const segmenter = createClauseSegmenterExtension({
  *   targetLanguage: "en",
@@ -269,10 +269,10 @@ export function createClauseAnalysisExtension(
  *
  * @example
  * ```typescript
- * import { processGLOSTWithExtensions } from "glost-plugins/processor";
- * import { ClauseAnalysisExtension } from "glost-plugins/extensions";
- * import { createClauseSegmenterExtension } from "glost-clause-segmenter";
- * import { englishSegmenterProvider } from "glost-en/segmenter";
+ * import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins/processor";
+ * import { ClauseAnalysisExtension } from "@glotblocks/glost-plugins/extensions";
+ * import { createClauseSegmenterExtension } from "@glotblocks/glost-clause-segmenter";
+ * import { englishSegmenterProvider } from "@glotblocks/glost-en/segmenter";
  *
  * const segmenter = createClauseSegmenterExtension({
  *   targetLanguage: "en",

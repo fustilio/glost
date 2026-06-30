@@ -4,7 +4,7 @@
  * Combines glost-transcription framework with Thai transcription data.
  * This demonstrates the X * Y pattern: glost-th + glost-transcription.
  */
-import { type TranscriptionProvider } from "glost-transcription";
+import { type TranscriptionProvider } from "@glotblocks/glost-transcription";
 /**
  * Thai transcription provider implementation
  *
@@ -22,7 +22,7 @@ export declare const thaiTranscriptionProvider: TranscriptionProvider;
  * @example
  * ```typescript
  * import { createThaiTranscriptionExtension } from "./extensions/thai-transcription";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  *
  * const extension = createThaiTranscriptionExtension();
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);

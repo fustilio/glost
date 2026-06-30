@@ -7,9 +7,9 @@
  * @packageDocumentation
  */
 
-import type { GLOSTRoot } from "glost-core";
-import type { GLOSTExtension } from "glost-extensions";
-import { processGLOSTWithExtensionsAsync, extensionRegistry } from "glost-extensions";
+import type { GLOSTRoot } from "@glotblocks/glost-core";
+import type { GLOSTExtension } from "@glotblocks/glost-extensions";
+import { processGLOSTWithExtensionsAsync, extensionRegistry } from "@glotblocks/glost-extensions";
 import type {
   PluginSpec,
   Preset,
@@ -33,7 +33,7 @@ import type {
  * 
  * @example
  * ```typescript
- * import { GLOSTProcessor } from "glost-processor";
+ * import { GLOSTProcessor } from "@glotblocks/glost-processor";
  * 
  * const processor = new GLOSTProcessor()
  *   .use(transcription, { scheme: "ipa" })

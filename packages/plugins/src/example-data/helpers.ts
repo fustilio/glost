@@ -7,7 +7,7 @@
  * @packageDocumentation
  */
 
-import type { GlostLanguage } from "glost-common";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 import type { VocabularyDataset, VocabularyEntry } from "./types.js";
 
 // Import JSON data

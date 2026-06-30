@@ -1,6 +1,6 @@
 import React from "react";
-import type { GLOSTSentence, GLOSTWord } from "glost";
-import { getAllWords, getSentenceTranslation } from "glost";
+import type { GLOSTSentence, GLOSTWord } from "@glotblocks/glost";
+import { getAllWords, getSentenceTranslation } from "@glotblocks/glost";
 import type { DisplayLevel } from "../types/display-level.js";
 import type { LanguageRenderingStrategy } from "../types/rendering-strategy.js";
 import type { GloSTRenderExtension } from "../types/extension.js";

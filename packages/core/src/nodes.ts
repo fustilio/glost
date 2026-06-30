@@ -333,8 +333,8 @@ export function createDocumentFromSentences(
  * 
  * @example
  * ```typescript
- * import { createSimpleDocument } from "glost";
- * import { createThaiWord } from "glost-th";
+ * import { createSimpleDocument } from "@glotblocks/glost";
+ * import { createThaiWord } from "@glotblocks/glost-th";
  * 
  * const words = [
  *   createThaiWord({ text: "สวัสดี" }),

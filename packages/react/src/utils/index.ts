@@ -1,5 +1,5 @@
-import type { GLOSTWord } from "glost";
-import { getWordTranslation } from "glost";
+import type { GLOSTWord } from "@glotblocks/glost";
+import { getWordTranslation } from "@glotblocks/glost";
 
 /**
  * Difficulty level type

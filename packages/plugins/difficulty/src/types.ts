@@ -65,7 +65,7 @@ export interface DifficultyProvider {
 /**
  * Augment GLOSTExtras with difficulty field
  */
-declare module "glost" {
+declare module "@glotblocks/glost" {
   interface GLOSTExtras {
     difficulty?: DifficultyData;
   }

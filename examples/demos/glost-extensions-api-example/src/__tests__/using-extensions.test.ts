@@ -20,17 +20,17 @@ import {
   getFirstWord,
   getWordText,
   NODE_TYPES,
-} from "glost";
+} from "@glotblocks/glost";
 
 import {
   processGLOST,
   processGLOSTWithMeta,
   processGLOSTWithExtensions,
   processGLOSTWithExtensionsAsync,
-} from "glost-plugins";
+} from "@glotblocks/glost-plugins";
 
-import { createFrequencyExtension } from "glost-frequency";
-import { createDifficultyExtension } from "glost-difficulty";
+import { createFrequencyExtension } from "@glotblocks/glost-frequency";
+import { createDifficultyExtension } from "@glotblocks/glost-difficulty";
 
 // Create mock providers for testing (extensions require providers but we'll use empty ones for basic tests)
 const mockFrequencyProvider = {

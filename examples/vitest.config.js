@@ -25,11 +25,11 @@ exports.default = (0, config_1.defineConfig)({
     },
     resolve: {
         alias: {
-            'glost': path_1.default.resolve(__dirname, '../packages/core/src/index.ts'),
-            'glost-plugins': path_1.default.resolve(__dirname, '../packages/plugins/core/src/index.ts'),
-            'glost-th': path_1.default.resolve(__dirname, '../packages/languages/th/src/index.ts'),
-            'glost-ja': path_1.default.resolve(__dirname, '../packages/languages/ja/src/index.ts'),
-            'glost-ko': path_1.default.resolve(__dirname, '../packages/languages/ko/src/index.ts'),
+            '@glotblocks/glost': path_1.default.resolve(__dirname, '../packages/core/src/index.ts'),
+            '@glotblocks/glost-plugins': path_1.default.resolve(__dirname, '../packages/plugins/core/src/index.ts'),
+            '@glotblocks/glost-th': path_1.default.resolve(__dirname, '../packages/languages/th/src/index.ts'),
+            '@glotblocks/glost-ja': path_1.default.resolve(__dirname, '../packages/languages/ja/src/index.ts'),
+            '@glotblocks/glost-ko': path_1.default.resolve(__dirname, '../packages/languages/ko/src/index.ts'),
         }
     }
 });

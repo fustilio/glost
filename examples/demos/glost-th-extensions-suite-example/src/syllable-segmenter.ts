@@ -10,10 +10,10 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-plugins";
-import type { GLOSTRoot, GLOSTWord, GLOSTSyllable, GLOSTCharacter } from "glost";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
+import type { GLOSTRoot, GLOSTWord, GLOSTSyllable, GLOSTCharacter } from "@glotblocks/glost";
 import { visit } from "unist-util-visit";
-import { getWordText } from "glost";
+import { getWordText } from "@glotblocks/glost";
 
 /**
  * Thai Syllable Segmenter options
@@ -405,7 +405,7 @@ export function createThaiSyllableSegmenterExtension(
  * @example
  * ```typescript
  * import { ThaiSyllableSegmenterExtension } from "glost-plugins-thai";
- * import { processGLOSTWithExtensions } from "glost-plugins";
+ * import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
  *
  * const result = processGLOSTWithExtensions(document, [
  *   ThaiSyllableSegmenterExtension,

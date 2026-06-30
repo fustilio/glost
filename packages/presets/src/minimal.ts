@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 
-import type { Preset } from "glost-processor";
+import type { Preset } from "@glotblocks/glost-processor";
 
 /**
  * Minimal Preset
@@ -19,8 +19,8 @@ import type { Preset } from "glost-processor";
  * 
  * @example
  * ```typescript
- * import { glost } from "glost-processor";
- * import { minimalPreset } from "glost-presets";
+ * import { glost } from "@glotblocks/glost-processor";
+ * import { minimalPreset } from "@glotblocks/glost-presets";
  * 
  * const processor = glost()
  *   .use(minimalPreset);

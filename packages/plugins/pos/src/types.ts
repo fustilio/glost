@@ -87,7 +87,7 @@ export interface POSProvider {
 /**
  * Augment GLOSTExtras with part of speech field
  */
-declare module "glost" {
+declare module "@glotblocks/glost" {
   interface GLOSTExtras {
     /** Part of speech information */
     partOfSpeech?: POSData;

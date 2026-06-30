@@ -8,7 +8,7 @@
  *
  * @packageDocumentation
  */
-import { getWordText, isGLOSTWord, createGLOSTWordNode } from "glost";
+import { getWordText, isGLOSTWord, createGLOSTWordNode } from "@glotblocks/glost";
 import { visit } from "unist-util-visit";
 import { getDemoThaiTranscriptions, isWordInDemoVocabulary } from "./demo-data.js";
 /**

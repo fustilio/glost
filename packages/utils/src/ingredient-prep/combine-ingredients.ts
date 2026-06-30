@@ -11,13 +11,13 @@ import type {
   GLOSTWord,
   LanguageCode,
   ScriptSystem,
-} from "glost";
+} from "@glotblocks/glost";
 import {
   createGLOSTRootNode,
   createGLOSTParagraphNode,
   createGLOSTSentenceNode,
-} from "glost/nodes";
-import { getAllWords, getAllParagraphs, getAllSentences, isGLOSTParagraph } from "glost";
+} from "@glotblocks/glost/nodes";
+import { getAllWords, getAllParagraphs, getAllSentences, isGLOSTParagraph } from "@glotblocks/glost";
 
 /**
  * Combination strategy

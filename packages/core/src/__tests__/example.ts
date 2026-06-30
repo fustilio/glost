@@ -8,8 +8,8 @@ import {
   validateGLOSTTree,
   getWordText
 } from '../index';
-import { createThaiWord } from 'glost-th';
-import { createJapaneseWord } from 'glost-ja';
+import { createThaiWord } from '@glotblocks/glost-th';
+import { createJapaneseWord } from '@glotblocks/glost-ja';
 
 // ============================================================================
 // Thai Example: "สวัสดีครับ ผมชื่อสมชาย" (Hello, my name is Somchai)

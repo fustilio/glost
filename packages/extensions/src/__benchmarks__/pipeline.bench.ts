@@ -5,7 +5,7 @@
  */
 
 import { bench, describe } from 'vitest';
-import { createSimpleDocument, createGLOSTWordNode, getAllWords } from 'glost-core';
+import { createSimpleDocument, createGLOSTWordNode, getAllWords } from '@glotblocks/glost-core';
 import { 
   processGLOST,
   processGLOSTWithMeta,

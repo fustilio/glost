@@ -59,7 +59,7 @@ export interface FrequencyProvider {
 /**
  * Augment GLOSTExtras with frequency field
  */
-declare module "glost" {
+declare module "@glotblocks/glost" {
   interface GLOSTExtras {
     frequency?: FrequencyMetadata;
   }

@@ -1,8 +1,8 @@
 /**
  * Korean POS Provider - Korean morphological analyzer integration
  */
-import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "glost-common";
-import type { POSProvider } from "glost-pos";
+import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "@glotblocks/glost-common";
+import type { POSProvider } from "@glotblocks/glost-pos";
 
 export interface KoreanPOSData {
   [word: string]: string;

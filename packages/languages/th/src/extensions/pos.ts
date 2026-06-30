@@ -9,9 +9,9 @@
  * @packageDocumentation
  */
 
-import { BaseDataProvider, type BaseProviderOptions } from "glost-common";
-import type { DataLoader, GlostLanguage } from "glost-common";
-import type { POSProvider } from "glost-pos";
+import { BaseDataProvider, type BaseProviderOptions } from "@glotblocks/glost-common";
+import type { DataLoader, GlostLanguage } from "@glotblocks/glost-common";
+import type { POSProvider } from "@glotblocks/glost-pos";
 
 /**
  * Thai POS data structure
@@ -34,7 +34,7 @@ export interface ThaiPOSProviderOptions extends BaseProviderOptions {
    * 
    * @example
    * ```typescript
-   * import { createJsonLoader } from "glost-common";
+   * import { createJsonLoader } from "@glotblocks/glost-common";
    * 
    * const provider = createThaiPOSProvider({
    *   dataLoader: createJsonLoader({
@@ -58,8 +58,8 @@ export interface ThaiPOSProviderOptions extends BaseProviderOptions {
  * 
  * @example
  * ```typescript
- * import { createThaiPOSProvider } from "glost-th/extensions";
- * import { createJsonLoader } from "glost-common";
+ * import { createThaiPOSProvider } from "@glotblocks/glost-th/extensions";
+ * import { createJsonLoader } from "@glotblocks/glost-common";
  * 
  * const provider = createThaiPOSProvider({
  *   dataLoader: createJsonLoader({
@@ -70,7 +70,7 @@ export interface ThaiPOSProviderOptions extends BaseProviderOptions {
  * });
  * 
  * // Use with extension
- * import { createPOSExtension } from "glost-pos";
+ * import { createPOSExtension } from "@glotblocks/glost-pos";
  * 
  * const extension = createPOSExtension({
  *   targetLanguage: "th",

@@ -30,11 +30,11 @@ export {
   getAllWords,
   getAllSentences,
   getSentenceTranslation,
-} from "glost";
+} from "@glotblocks/glost";
 
 export type {
   GLOSTWord,
   GLOSTSentence,
   GLOSTRoot,
   GLOSTParagraph,
-} from "glost";
+} from "@glotblocks/glost";

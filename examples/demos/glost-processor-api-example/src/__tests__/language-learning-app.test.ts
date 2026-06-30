@@ -15,11 +15,11 @@ import {
   getAllWords,
   getFirstWord,
   NODE_TYPES,
-} from 'glost';
-import { createThaiWord } from 'glost-th';
-import { createJapaneseWord } from 'glost-ja';
-import { createKoreanWord } from 'glost-ko';
-import { processGLOST, type GLOSTExtension } from 'glost-plugins';
+} from '@glotblocks/glost';
+import { createThaiWord } from '@glotblocks/glost-th';
+import { createJapaneseWord } from '@glotblocks/glost-ja';
+import { createKoreanWord } from '@glotblocks/glost-ko';
+import { processGLOST, type GLOSTExtension } from '@glotblocks/glost-plugins';
 import {
   thaiGreetings,
   thaiParagraphs,

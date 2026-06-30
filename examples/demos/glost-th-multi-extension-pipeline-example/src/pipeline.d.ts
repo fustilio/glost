@@ -4,8 +4,8 @@
  * Utilities for composing and analyzing multi-extension pipelines.
  * These help test composition patterns and discover ergonomic issues.
  */
-import type { GLOSTExtension } from "glost-plugins";
-import type { GLOSTRoot } from "glost";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
+import type { GLOSTRoot } from "@glotblocks/glost";
 /**
  * Pipeline execution result with timing and metadata
  */

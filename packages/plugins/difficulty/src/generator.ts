@@ -6,12 +6,12 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-plugins";
-import type { GLOSTWord } from "glost";
-import { getWordText } from "glost";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
+import type { GLOSTWord } from "@glotblocks/glost";
+import { getWordText } from "@glotblocks/glost";
 import type { DifficultyProvider } from "./types.js";
 
-import type { GlostLanguage } from "glost-common";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 
 /**
  * Difficulty generator extension options
@@ -49,8 +49,8 @@ export interface DifficultyGeneratorOptions {
  * 
  * @example
  * ```typescript
- * import { createDifficultyGeneratorExtension } from "glost-difficulty";
- * import { createThaiDifficultyProvider } from "glost-th/extensions";
+ * import { createDifficultyGeneratorExtension } from "@glotblocks/glost-difficulty";
+ * import { createThaiDifficultyProvider } from "@glotblocks/glost-th/extensions";
  * 
  * const provider = createThaiDifficultyProvider(wordLists);
  * const extension = createDifficultyGeneratorExtension({

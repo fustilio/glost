@@ -6,9 +6,9 @@
  * @packageDocumentation
  */
 
-import { BaseDataProvider, type BaseProviderOptions } from "glost-common";
-import type { DataLoader, GlostLanguage } from "glost-common";
-import type { FrequencyProvider, FrequencyLevel } from "glost-frequency";
+import { BaseDataProvider, type BaseProviderOptions } from "@glotblocks/glost-common";
+import type { DataLoader, GlostLanguage } from "@glotblocks/glost-common";
+import type { FrequencyProvider, FrequencyLevel } from "@glotblocks/glost-frequency";
 
 /**
  * Thai frequency data structure
@@ -31,7 +31,7 @@ export interface ThaiFrequencyProviderOptions extends BaseProviderOptions {
    * 
    * @example
    * ```typescript
-   * import { createJsonLoader } from "glost-common";
+   * import { createJsonLoader } from "@glotblocks/glost-common";
    * 
    * const provider = createThaiFrequencyProvider({
    *   dataLoader: createJsonLoader({
@@ -50,8 +50,8 @@ export interface ThaiFrequencyProviderOptions extends BaseProviderOptions {
  * 
  * @example
  * ```typescript
- * import { createThaiFrequencyProvider } from "glost-th/extensions";
- * import { createJsonLoader, createCachedLoader } from "glost-common";
+ * import { createThaiFrequencyProvider } from "@glotblocks/glost-th/extensions";
+ * import { createJsonLoader, createCachedLoader } from "@glotblocks/glost-common";
  * 
  * // With caching
  * const provider = createThaiFrequencyProvider({
@@ -66,7 +66,7 @@ export interface ThaiFrequencyProviderOptions extends BaseProviderOptions {
  * });
  * 
  * // Use with extension
- * import { createFrequencyExtension } from "glost-frequency";
+ * import { createFrequencyExtension } from "@glotblocks/glost-frequency";
  * 
  * const extension = createFrequencyExtension({
  *   targetLanguage: "th",

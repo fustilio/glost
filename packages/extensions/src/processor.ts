@@ -12,7 +12,7 @@ import type {
   GLOSTParagraph,
   GLOSTRoot,
   GLOSTExtras,
-} from "glost-core";
+} from "@glotblocks/glost-core";
 import { visit } from "unist-util-visit";
 import type {
   GLOSTExtension,
@@ -121,8 +121,8 @@ function findProviderForNode(nodeType: string): GLOSTExtension | undefined {
  *
  * @example
  * ```typescript
- * import { processGLOSTWithExtensions } from "glost-extensions/processor";
- * import { ReadingScoreExtension, LearnerHintsExtension } from "glost-extensions/extensions";
+ * import { processGLOSTWithExtensions } from "@glotblocks/glost-extensions/processor";
+ * import { ReadingScoreExtension, LearnerHintsExtension } from "@glotblocks/glost-extensions/extensions";
  *
  * const result = processGLOSTWithExtensions(document, [
  *   ReadingScoreExtension,
@@ -454,8 +454,8 @@ function trackFieldOwnership(
  *
  * @example
  * ```typescript
- * import { processGLOSTWithExtensionIds, registerExtension } from "glost-extensions/processor";
- * import { ReadingScoreExtension } from "glost-extensions/extensions";
+ * import { processGLOSTWithExtensionIds, registerExtension } from "@glotblocks/glost-extensions/processor";
+ * import { ReadingScoreExtension } from "@glotblocks/glost-extensions/extensions";
  *
  * // Register extension first
  * registerExtension(ReadingScoreExtension);
@@ -501,8 +501,8 @@ export function processGLOSTWithExtensionIds(
  *
  * @example
  * ```typescript
- * import { processGLOSTWithExtensionsAsync } from "glost-extensions/processor";
- * import { TranscriptionExtension, TranslationExtension } from "glost-extensions/extensions";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-extensions/processor";
+ * import { TranscriptionExtension, TranslationExtension } from "@glotblocks/glost-extensions/extensions";
  *
  * const result = await processGLOSTWithExtensionsAsync(document, [
  *   TranscriptionExtension,
@@ -653,8 +653,8 @@ export async function processGLOSTWithExtensionsAsync(
  * 
  * @example
  * ```typescript
- * import { processGLOST } from "glost-extensions";
- * import { createTranscriptionExtension } from "glost-transcription";
+ * import { processGLOST } from "@glotblocks/glost-extensions";
+ * import { createTranscriptionExtension } from "@glotblocks/glost-transcription";
  * 
  * const extension = createTranscriptionExtension({ provider, targetLanguage: "th" });
  * const processedDoc = await processGLOST(document, [extension]);
@@ -686,7 +686,7 @@ export async function processGLOST(
  * 
  * @example
  * ```typescript
- * import { processGLOSTWithMeta } from "glost-extensions";
+ * import { processGLOSTWithMeta } from "@glotblocks/glost-extensions";
  * 
  * const result = await processGLOSTWithMeta(document, extensions);
  * 

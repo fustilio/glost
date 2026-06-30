@@ -1,5 +1,5 @@
 {
-  "name": "glost-extensions",
+  "name": "@glotblocks/glost-extensions",
   "version": "0.6.2",
   "description": "Core extension system and built-in extensions for GLOST",
   "author": "fustilio",
@@ -12,6 +12,7 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": ["dist"],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -37,8 +38,8 @@
   "sideEffects": false,
   "dependencies": {
     "unist-util-visit": "^5.0.0",
-    "glost-core": "workspace:*",
-    "glost-common": "workspace:*"
+    "@glotblocks/glost-core": "workspace:*",
+    "@glotblocks/glost-common": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.8.3",
@@ -58,5 +59,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
     "lint": "echo 'No linting configured'"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -12,8 +12,8 @@ import {
   createSentenceFromWords,
   createParagraphFromSentences,
   createGLOSTRootNode,
-} from "glost-core";
-import type { GLOSTExtension } from "glost-extensions";
+} from "@glotblocks/glost-core";
+import type { GLOSTExtension } from "@glotblocks/glost-extensions";
 import { GLOSTProcessor } from "../processor.js";
 import { GLOSTStreamProcessor } from "../stream-processor.js";
 

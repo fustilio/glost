@@ -6,8 +6,8 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-plugins";
-import type { GLOSTWord } from "glost";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
+import type { GLOSTWord } from "@glotblocks/glost";
 import type { FrequencyLevel, FrequencyMetadata } from "./types.js";
 
 /**
@@ -84,7 +84,7 @@ export interface FrequencyEnhancerOptions {
  * 
  * @example
  * ```typescript
- * import { createFrequencyEnhancerExtension } from "glost-frequency";
+ * import { createFrequencyEnhancerExtension } from "@glotblocks/glost-frequency";
  * 
  * const enhancer = createFrequencyEnhancerExtension({
  *   normalize: true,

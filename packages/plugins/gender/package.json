@@ -1,5 +1,5 @@
 {
-  "name": "glost-gender",
+  "name": "@glotblocks/glost-gender",
   "version": "0.2.8",
   "description": "Grammatical gender extension for GLOST - generates and formats gender data",
   "author": "GLOST Contributors",
@@ -24,9 +24,9 @@
     "test": "vitest --passWithNoTests"
   },
   "dependencies": {
-    "glost": "workspace:*",
-    "glost-common": "workspace:*",
-    "glost-plugins": "workspace:*"
+    "@glotblocks/glost": "workspace:*",
+    "@glotblocks/glost-common": "workspace:*",
+    "@glotblocks/glost-plugins": "workspace:*"
   },
   "devDependencies": {
     "typescript": "catalog:",
@@ -37,5 +37,8 @@
     "gender",
     "grammatical-gender",
     "linguistics"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

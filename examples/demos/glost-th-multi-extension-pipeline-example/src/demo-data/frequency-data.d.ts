@@ -4,7 +4,7 @@
  * Sample frequency rankings based on corpus data.
  * This demonstrates frequency categorization for Thai words.
  */
-import type { FrequencyLevel } from "glost-frequency";
+import type { FrequencyLevel } from "@glotblocks/glost-frequency";
 export interface ThaiFrequencyEntry {
     word: string;
     rank: number;

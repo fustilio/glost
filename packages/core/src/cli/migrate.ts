@@ -32,7 +32,7 @@ type GlostUtils = {
 async function loadUtils(): Promise<GlostUtils> {
   try {
     // @ts-expect-error - glost-utils is an optional peer dependency
-    const utils = await import('glost-utils') as any;
+    const utils = await import('@glotblocks/glost-utils') as any;
     return {
       migrateAllLanguageCodes: utils.migrateAllLanguageCodes,
       migrateTranscriptionSchema: utils.migrateTranscriptionSchema,

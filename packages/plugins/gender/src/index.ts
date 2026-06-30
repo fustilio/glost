@@ -25,7 +25,7 @@ export {
 // Import for local use
 import { createGenderGeneratorExtension } from "./generator.js";
 import { createGenderEnhancerExtension } from "./enhancer.js";
-import type { GlostLanguage } from "glost-common";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 
 /**
  * Create a complete gender extension pipeline

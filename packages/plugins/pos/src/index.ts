@@ -18,8 +18,8 @@
  * import {
  *   createPOSGeneratorExtension,
  *   createPOSEnhancerExtension
- * } from "glost-pos";
- * import { createThaiPOSProvider } from "glost-th/extensions";
+ * } from "@glotblocks/glost-pos";
+ * import { createThaiPOSProvider } from "@glotblocks/glost-th/extensions";
  * 
  * // Create provider from language package (with real NLP or dictionary)
  * const provider = createThaiPOSProvider({
@@ -61,7 +61,7 @@ export {
 // Import for local use
 import { createPOSGeneratorExtension } from "./generator.js";
 import { createPOSEnhancerExtension } from "./enhancer.js";
-import type { GlostLanguage } from "glost-common";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 
 /**
  * Create a complete POS extension pipeline
@@ -77,8 +77,8 @@ import type { GlostLanguage } from "glost-common";
  * 
  * @example
  * ```typescript
- * import { createPOSExtension } from "glost-pos";
- * import { createThaiPOSProvider } from "glost-th/extensions";
+ * import { createPOSExtension } from "@glotblocks/glost-pos";
+ * import { createThaiPOSProvider } from "@glotblocks/glost-th/extensions";
  * 
  * const provider = createThaiPOSProvider(datasource);
  * const [generator, enhancer] = createPOSExtension({

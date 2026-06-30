@@ -9,7 +9,7 @@
  * X = glost-ko (language-specific)
  * Y = glost-transcription (feature-specific)
  */
-import { createTranscriptionExtension } from "glost-transcription";
+import { createTranscriptionExtension } from "@glotblocks/glost-transcription";
 import { getKoreanTranscriptions } from "./demo-data.js";
 /**
  * Korean transcription provider implementation
@@ -39,7 +39,7 @@ const koreanTranscriptionProvider = {
  * @example
  * ```typescript
  * import { createKoreanTranscriptionExtension } from "./korean-transcription.js";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  *
  * const extension = createKoreanTranscriptionExtension();
  * const result = await processGLOSTWithExtensionsAsync(document, [extension]);

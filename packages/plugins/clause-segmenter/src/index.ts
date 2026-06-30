@@ -15,10 +15,10 @@
  * @packageDocumentation
  */
 
-import type { GLOSTExtension } from "glost-plugins";
-import type { GLOSTNode, GLOSTRoot, GLOSTSentence, GLOSTWord, GLOSTClause, GLOSTPunctuation } from "glost";
-import { getWordText, NODE_TYPES } from "glost";
-import type { GlostLanguage } from "glost-common";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
+import type { GLOSTNode, GLOSTRoot, GLOSTSentence, GLOSTWord, GLOSTClause, GLOSTPunctuation } from "@glotblocks/glost";
+import { getWordText, NODE_TYPES } from "@glotblocks/glost";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 
 // Export types
 export type {
@@ -45,8 +45,8 @@ export interface ClauseSegmenterOptions {
    * Provider for language-specific segmentation rules
    * 
    * Should be implemented by language packages:
-   * - import { englishSegmenterProvider } from "glost-en/segmenter"
-   * - import { thaiSegmenterProvider } from "glost-th/segmenter"
+   * - import { englishSegmenterProvider } from "@glotblocks/glost-en/segmenter"
+   * - import { thaiSegmenterProvider } from "@glotblocks/glost-th/segmenter"
    */
   provider: ClauseSegmenterProvider;
 
@@ -68,8 +68,8 @@ export interface ClauseSegmenterOptions {
  * 
  * @example
  * ```typescript
- * import { createClauseSegmenterExtension } from "glost-clause-segmenter";
- * import { englishSegmenterProvider } from "glost-en/segmenter";
+ * import { createClauseSegmenterExtension } from "@glotblocks/glost-clause-segmenter";
+ * import { englishSegmenterProvider } from "@glotblocks/glost-en/segmenter";
  * 
  * const segmenter = createClauseSegmenterExtension({
  *   targetLanguage: "en",
@@ -82,8 +82,8 @@ export interface ClauseSegmenterOptions {
  * @example
  * ```typescript
  * // Thai example
- * import { createClauseSegmenterExtension } from "glost-clause-segmenter";
- * import { thaiSegmenterProvider } from "glost-th/segmenter";
+ * import { createClauseSegmenterExtension } from "@glotblocks/glost-clause-segmenter";
+ * import { thaiSegmenterProvider } from "@glotblocks/glost-th/segmenter";
  * 
  * const segmenter = createClauseSegmenterExtension({
  *   targetLanguage: "th",
@@ -104,7 +104,7 @@ export function createClauseSegmenterExtension(
     throw new Error(
       "[Clause Segmenter] Provider is required. " +
       "Import from language package: " +
-      "import { englishSegmenterProvider } from 'glost-en/segmenter'"
+      "import { englishSegmenterProvider } from '@glotblocks/glost-en/segmenter'"
     );
   }
 

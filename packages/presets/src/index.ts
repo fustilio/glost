@@ -7,8 +7,8 @@
  * 
  * @example
  * ```typescript
- * import { glost } from "glost-processor";
- * import { languageLearningPreset } from "glost-presets";
+ * import { glost } from "@glotblocks/glost-processor";
+ * import { languageLearningPreset } from "@glotblocks/glost-presets";
  * 
  * const processor = glost()
  *   .use(languageLearningPreset);

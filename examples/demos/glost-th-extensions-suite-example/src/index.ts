@@ -89,10 +89,10 @@ export {
 // Legacy/Convenience exports
 // ============================================================================
 
-import type { GLOSTASTExtension } from "glost-plugins";
+import type { GLOSTASTExtension } from "@glotblocks/glost-plugins";
 import { createThaiTranscriptionExtension } from "./transcription";
 import { createThaiTranslationExtension } from "./translation";
-import type { GlostLanguage } from "glost-common";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 
 /**
  * Create basic Thai transcription and translation extensions
@@ -107,7 +107,7 @@ import type { GlostLanguage } from "glost-common";
  * @example
  * ```typescript
  * import { createThaiExtensions } from "glost-plugins-thai";
- * import { processGLOSTWithExtensionsAsync } from "glost-plugins";
+ * import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
  *
  * const extensions = createThaiExtensions("en-US");
  * const result = await processGLOSTWithExtensionsAsync(document, extensions);

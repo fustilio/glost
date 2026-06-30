@@ -6,7 +6,7 @@
  * @packageDocumentation
  */
 
-import type { GlostLanguage } from "glost-common";
+import type { GlostLanguage } from "@glotblocks/glost-common";
 
 /**
  * Frequency level (local definition to avoid dependency)

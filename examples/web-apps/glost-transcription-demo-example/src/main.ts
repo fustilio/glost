@@ -8,15 +8,15 @@
  * NOTE: For a more comprehensive demo, see examples/composition-demo
  */
 
-import { processGLOSTWithExtensions } from "glost-plugins";
-import type { GLOSTExtension } from "glost-plugins";
+import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
+import type { GLOSTExtension } from "@glotblocks/glost-plugins";
 import {
   createSimpleWord,
   createSentenceFromWords,
   createParagraphFromSentences,
   createDocumentFromParagraphs,
-} from "glost";
-import type { GLOSTRoot, GLOSTWord } from "glost";
+} from "@glotblocks/glost";
+import type { GLOSTRoot, GLOSTWord } from "@glotblocks/glost";
 
 // Simple IPA dictionary for demo
 const ipaDict: Record<string, string> = {
