@@ -18,7 +18,7 @@
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "lint:publish": "pnpm --filter \"./packages/**\" exec publint",
-    "changeset:release": "changeset publish"
+    "changeset:release": "pnpm lint:publish && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",
