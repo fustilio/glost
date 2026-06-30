@@ -1,6 +1,6 @@
 {
   "name": "@glotblocks/glost-common",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Common utilities and language configs for GLOST",
   "author": "fustilio",
   "license": "MIT",
