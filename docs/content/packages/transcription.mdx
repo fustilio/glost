@@ -5,7 +5,7 @@ Transcription/romanization plugin for GLOST documents.
 ## Installation
 
 ```bash
-pnpm add glost-transcription
+pnpm add @glotblocks/glost-transcription
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ pnpm add glost-transcription
 Create a plugin that adds transcription data to words.
 
 ```typescript
-import { createTranscriptionPlugin } from 'glost-transcription';
+import { createTranscriptionPlugin } from '@glotblocks/glost-transcription';
 
 const transcriptionPlugin = createTranscriptionPlugin({
   targetLanguage: "th",
@@ -47,8 +47,8 @@ interface TranscriptionPluginOptions {
 Use with the v0.5+ processor API:
 
 ```typescript
-import { glost } from 'glost';
-import { createTranscriptionPlugin } from 'glost-transcription';
+import { glost } from '@glotblocks/glost';
+import { createTranscriptionPlugin } from '@glotblocks/glost-transcription';
 
 const transcriptionPlugin = createTranscriptionPlugin({
   targetLanguage: "th",
@@ -99,11 +99,11 @@ The plugin:
 ### Combining with Other Extensions
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
-import { createTranscriptionGeneratorExtension } from 'glost-transcription';
-import { createTranslationGeneratorExtension } from 'glost-translation';
-import { createFrequencyExtension } from 'glost-frequency';
-import { createDifficultyExtension } from 'glost-difficulty';
+import { processGLOSTWithExtensionsAsync } from '@glotblocks/glost-plugins';
+import { createTranscriptionGeneratorExtension } from '@glotblocks/glost-transcription';
+import { createTranslationGeneratorExtension } from '@glotblocks/glost-translation';
+import { createFrequencyExtension } from '@glotblocks/glost-frequency';
+import { createDifficultyExtension } from '@glotblocks/glost-difficulty';
 
 // Create extensions
 const transcription = createTranscriptionGeneratorExtension({

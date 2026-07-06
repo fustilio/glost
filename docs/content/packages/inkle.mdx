@@ -5,7 +5,7 @@ Ink/Inkle interactive fiction integration for GLOST.
 ## Installation
 
 ```bash
-pnpm add glost-inkle
+pnpm add @glotblocks/glost-inkle
 ```
 
 ## Overview
@@ -19,7 +19,7 @@ This package provides integration with [Ink](https://www.inklestudios.com/ink/),
 Parse Ink JSON output to a GLOST document.
 
 ```typescript
-import { parseInkJSON } from 'glost-inkle';
+import { parseInkJSON } from '@glotblocks/glost-inkle';
 
 const inkStory = {
   root: [/* ink JSON structure */],
@@ -61,10 +61,10 @@ Create language learning games using Ink stories:
 Parse Ink stories and enrich them with GLOST extensions:
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
-import { parseInkJSON } from 'glost-inkle';
-import { createFrequencyExtension } from 'glost-frequency';
-import { createDifficultyExtension } from 'glost-difficulty';
+import { processGLOSTWithExtensionsAsync } from '@glotblocks/glost-plugins';
+import { parseInkJSON } from '@glotblocks/glost-inkle';
+import { createFrequencyExtension } from '@glotblocks/glost-frequency';
+import { createDifficultyExtension } from '@glotblocks/glost-difficulty';
 
 // Parse Ink story
 const document = parseInkJSON(inkStory, { language: 'th' });
@@ -110,7 +110,7 @@ inklecate -j story.ink > story.json
 
 ```typescript
 import storyJson from './story.json';
-import { parseInkJSON } from 'glost-inkle';
+import { parseInkJSON } from '@glotblocks/glost-inkle';
 
 const document = parseInkJSON(storyJson, {
   language: "th",

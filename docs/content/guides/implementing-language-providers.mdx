@@ -68,7 +68,7 @@ export class MyLanguageFrequencyProvider extends BaseDataProvider<FrequencyData>
 Best for: Small to medium datasets (< 100MB)
 
 ```typescript
-import { createJsonLoader } from "glost-common";
+import { createJsonLoader } from "@glotblocks/glost-common";
 
 const provider = createMyProvider({
   dataLoader: createJsonLoader({
@@ -86,7 +86,7 @@ const provider = createMyProvider({
 Best for: Dynamic data, cloud services
 
 ```typescript
-import { createApiLoader } from "glost-common";
+import { createApiLoader } from "@glotblocks/glost-common";
 
 const provider = createMyProvider({
   dataLoader: createApiLoader({
@@ -102,7 +102,7 @@ const provider = createMyProvider({
 Best for: Databases, complex sources
 
 ```typescript
-import type { DataLoader } from "glost-common";
+import type { DataLoader } from "@glotblocks/glost-common";
 
 const customLoader: DataLoader<MyData> = {
   async load() {
@@ -126,7 +126,7 @@ const provider = createMyProvider({
 Best for: Slow sources, API rate limits
 
 ```typescript
-import { createCachedLoader, createApiLoader } from "glost-common";
+import { createCachedLoader, createApiLoader } from "@glotblocks/glost-common";
 
 const provider = createMyProvider({
   dataLoader: createCachedLoader({
@@ -244,7 +244,7 @@ this.log(`Failed to load: ${error.message}`, 'error');
 
 ```typescript
 import { describe, it, expect } from 'vitest';
-import { testProvider } from 'glost-common';
+import { testProvider } from '@glotblocks/glost-common';
 
 describe('MyLanguageFrequencyProvider', () => {
   it('returns frequency for known words', async () => {
@@ -283,7 +283,7 @@ describe('MyLanguageFrequencyProvider', () => {
 ### Using Test Utilities
 
 ```typescript
-import { testProvider, testLanguageSupport, testNoDataBadData } from 'glost-common';
+import { testProvider, testLanguageSupport, testNoDataBadData } from '@glotblocks/glost-common';
 
 describe('MyProvider', () => {
   it('passes standard provider tests', async () => {
@@ -327,14 +327,14 @@ Once your provider is complete, use it with GLOST extensions:
 ```typescript
 // 1. Create provider
 import { createMyLanguageFrequencyProvider } from 'glost-my/extensions';
-import { createJsonLoader } from 'glost-common';
+import { createJsonLoader } from '@glotblocks/glost-common';
 
 const provider = createMyLanguageFrequencyProvider({
   dataLoader: createJsonLoader({ path: './data.json' })
 });
 
 // 2. Create extension
-import { createFrequencyExtension } from 'glost-frequency';
+import { createFrequencyExtension } from '@glotblocks/glost-frequency';
 
 const extension = createFrequencyExtension({
   targetLanguage: "my",
@@ -342,7 +342,7 @@ const extension = createFrequencyExtension({
 });
 
 // 3. Use in processor
-import { glost } from 'glost';
+import { glost } from '@glotblocks/glost';
 
 const processor = glost()
   .use(extension)
@@ -357,8 +357,8 @@ const result = await processor.process(document);
 /**
  * Spanish Frequency Provider
  */
-import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "glost-common";
-import type { FrequencyProvider, FrequencyLevel } from "glost-frequency";
+import { BaseDataProvider, type BaseProviderOptions, type DataLoader, type GlostLanguage } from "@glotblocks/glost-common";
+import type { FrequencyProvider, FrequencyLevel } from "@glotblocks/glost-frequency";
 
 export interface SpanishFrequencyData {
   [word: string]: FrequencyLevel;

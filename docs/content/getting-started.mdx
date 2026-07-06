@@ -5,20 +5,20 @@ This guide covers the basics of using GLOST.
 ## Installation
 
 ```bash
-npm install glost
+npm install @glotblocks/glost
 ```
 
 For language-specific features, install the corresponding language package:
 
 ```bash
 # Thai support
-npm install glost-th
+npm install @glotblocks/glost-th
 
 # Japanese support
-npm install glost-ja
+npm install @glotblocks/glost-ja
 
 # Korean support
-npm install glost-ko
+npm install @glotblocks/glost-ko
 ```
 
 ## Basic Usage
@@ -26,7 +26,7 @@ npm install glost-ko
 ### Creating Words
 
 ```typescript
-import { createGLOSTWordNode, createSimpleWord } from 'glost';
+import { createGLOSTWordNode, createSimpleWord } from '@glotblocks/glost';
 
 // Full control with createGLOSTWordNode
 const word = createGLOSTWordNode({
@@ -50,7 +50,7 @@ const simple = createSimpleWord({
 ### Creating Thai Words
 
 ```typescript
-import { createThaiWord } from 'glost-th';
+import { createThaiWord } from '@glotblocks/glost-th';
 
 const thaiWord = createThaiWord({
   text: "สวัสดี",
@@ -67,7 +67,7 @@ const minimalWord = createThaiWord({ text: "สวัสดี" });
 ### Creating Japanese Words
 
 ```typescript
-import { createJapaneseWord } from 'glost-ja';
+import { createJapaneseWord } from '@glotblocks/glost-ja';
 
 const japaneseWord = createJapaneseWord({
   text: "こんにちは",
@@ -88,7 +88,7 @@ import {
   createParagraphFromSentences,
   createDocumentFromParagraphs,
   createSimpleDocument
-} from 'glost';
+} from '@glotblocks/glost';
 
 // Build a sentence from words
 const sentence = createSentenceFromWords(
@@ -121,7 +121,7 @@ const quickDoc = createSimpleDocument(
 ## Traversing Documents
 
 ```typescript
-import { getAllWords, getAllSentences, getWordText, getWordTranscription } from 'glost';
+import { getAllWords, getAllSentences, getWordText, getWordTranscription } from '@glotblocks/glost';
 
 // Get all words in a document
 const words = getAllWords(document);
@@ -141,8 +141,8 @@ const sentences = getAllSentences(document);
 The v0.5+ processor uses a fluent API:
 
 ```typescript
-import { glost, createSimpleDocument } from 'glost';
-import { createThaiWord } from 'glost-th';
+import { glost, createSimpleDocument } from '@glotblocks/glost';
+import { createThaiWord } from '@glotblocks/glost-th';
 
 // Create a document
 const words = [
@@ -164,8 +164,8 @@ const processedDoc = result.document;
 ### Using Presets
 
 ```typescript
-import { glost } from 'glost';
-import { languageLearningPreset } from 'glost/presets';
+import { glost } from '@glotblocks/glost';
+import { languageLearningPreset } from '@glotblocks/glost/presets';
 
 const processor = glost()
   .use(languageLearningPreset)
@@ -181,7 +181,7 @@ const result2 = await processor.process(doc2);
 GLOST accepts multiple language code formats:
 
 ```typescript
-import { getLanguageName, toISO639_3 } from 'glost-common';
+import { getLanguageName, toISO639_3 } from '@glotblocks/glost-common';
 
 getLanguageName("th");      // "Thai"
 getLanguageName("tha");     // "Thai"
@@ -195,7 +195,7 @@ See [API Reference](/docs/api) for complete language code and proficiency level 
 GLOST provides type guards for safe node handling:
 
 ```typescript
-import { isGLOSTWord, isGLOSTSentence } from 'glost';
+import { isGLOSTWord, isGLOSTSentence } from '@glotblocks/glost';
 
 if (isGLOSTWord(node)) {
   // TypeScript knows node is GLOSTWord

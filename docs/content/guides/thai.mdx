@@ -16,7 +16,7 @@ Thai has unique characteristics that GLOST handles:
 ### Basic Thai Word
 
 ```typescript
-import { createThaiWord } from 'glost-th';
+import { createThaiWord } from '@glotblocks/glost-th';
 
 const word = createThaiWord({
   text: "สวัสดี",
@@ -33,7 +33,7 @@ const minimalWord = createThaiWord({ text: "สวัสดี" });
 ### With Multiple Transcriptions
 
 ```typescript
-import { createGLOSTWordNode } from 'glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 const word = createGLOSTWordNode({
   value: "สวัสดี",
@@ -118,8 +118,8 @@ Thai has no spaces, so word segmentation is needed.
 ### Manual Segmentation
 
 ```typescript
-import { createThaiWord } from 'glost-th';
-import { createSentenceFromWords } from 'glost';
+import { createThaiWord } from '@glotblocks/glost-th';
+import { createSentenceFromWords } from '@glotblocks/glost';
 
 const words = [
   createThaiWord({ text: "สวัสดี", rtgs: "sawatdi", partOfSpeech: "interjection" }),
@@ -141,7 +141,7 @@ Thai has 5 tones that change word meaning.
 ### Storing Tone Data
 
 ```typescript
-import { createGLOSTWordNode } from 'glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 const word = createGLOSTWordNode({
   value: "มา",
@@ -173,7 +173,7 @@ const word = createGLOSTWordNode({
 Thai uses gendered politeness particles:
 
 ```typescript
-import { createThaiWord } from 'glost-th';
+import { createThaiWord } from '@glotblocks/glost-th';
 
 // Male speaker
 const khrap = createThaiWord({ text: "ครับ", rtgs: "khrap", partOfSpeech: "particle" });
@@ -185,7 +185,7 @@ const kha = createThaiWord({ text: "ค่ะ", rtgs: "kha", partOfSpeech: "part
 ### Gender Variants
 
 ```typescript
-import { createGLOSTWordNode } from 'glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 const word = createGLOSTWordNode({
   value: "ครับ/ค่ะ",
@@ -209,8 +209,8 @@ const word = createGLOSTWordNode({
 ### Basic Thai Sentence
 
 ```typescript
-import { createThaiWord } from 'glost-th';
-import { createSentenceFromWords } from 'glost';
+import { createThaiWord } from '@glotblocks/glost-th';
+import { createSentenceFromWords } from '@glotblocks/glost';
 
 const words = [
   createThaiWord({ text: "ผม", rtgs: "phom", partOfSpeech: "pronoun" }),      // I (male)
@@ -230,7 +230,7 @@ const sentence = createSentenceFromWords(
 ### With Translations
 
 ```typescript
-import { createGLOSTSentenceNode } from 'glost';
+import { createGLOSTSentenceNode } from '@glotblocks/glost';
 
 const sentence = createGLOSTSentenceNode({
   originalText: "ผมกินข้าวครับ",
@@ -249,12 +249,12 @@ const sentence = createGLOSTSentenceNode({
 ## Document Example
 
 ```typescript
-import { createThaiWord } from 'glost-th';
+import { createThaiWord } from '@glotblocks/glost-th';
 import {
   createSentenceFromWords,
   createParagraphFromSentences,
   createDocumentFromParagraphs
-} from 'glost';
+} from '@glotblocks/glost';
 
 // Create a Thai lesson document
 const greeting = [
@@ -287,7 +287,7 @@ const document = createDocumentFromParagraphs(
 ## Processing Thai Documents
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
+import { processGLOSTWithExtensionsAsync } from '@glotblocks/glost-plugins';
 
 const result = await processGLOSTWithExtensionsAsync(document, [
   transcriptionExtension,

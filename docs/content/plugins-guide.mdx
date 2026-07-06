@@ -24,7 +24,7 @@ Each has a **comprehensive guide** with real examples and working demos:
 
 ### Additional Analyzers & Transformers
 
-Built into `glost-plugins`:
+Built into `@glotblocks/glost-plugins`:
 - `ReadingScorePlugin` - Overall text readability
 - `LearnerHintsPlugin` - Contextual learning hints
 - `ClauseAnalysisPlugin` - Clause relationship analysis
@@ -114,7 +114,7 @@ See it in action:
 ```bash
 cd examples
 npm install
-npm run example:frequency  # Or any other demo
+npm run example:frequency # Or any other demo
 ```
 
 Expected output:
@@ -223,9 +223,9 @@ export const thaiFrequencyProvider: FrequencyProvider = {
 };
 
 // Your app
-import { processGLOSTWithExtensionsAsync } from "glost-plugins";
-import { createFrequencyExtension } from "glost-frequency";
-import { thaiFrequencyProvider } from "glost-th/extensions";
+import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
+import { createFrequencyExtension } from "@glotblocks/glost-frequency";
+import { thaiFrequencyProvider } from "@glotblocks/glost-th/extensions";
 
 const [freqGen, freqEnh] = createFrequencyExtension({
   targetLanguage: "th",

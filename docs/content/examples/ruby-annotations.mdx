@@ -10,8 +10,8 @@ Ruby annotations are small text annotations placed above or below the main text,
 The simplest way to render a word with ruby annotation:
 
 ```tsx
-import { SimpleRubyWord } from "glost-react";
-import { createJapaneseWord } from "glost";
+import { SimpleRubyWord } from "@glotblocks/glost-react";
+import { createJapaneseWord } from "@glotblocks/glost";
 
 // Create a Japanese word with furigana
 const word = createJapaneseWord({
@@ -62,7 +62,7 @@ The `rubyPosition` prop controls where annotations appear:
 ### Thai (Under)
 
 ```tsx
-import { createThaiWord } from "glost";
+import { createThaiWord } from "@glotblocks/glost";
 
 const thaiWord = createThaiWord({
   text: "สวัสดี",
@@ -84,7 +84,7 @@ const thaiWord = createThaiWord({
 For full control over styling, use the `RubyWord` component with render props:
 
 ```tsx
-import { RubyWord } from "glost-react";
+import { RubyWord } from "@glotblocks/glost-react";
 
 function StyledFurigana({ word }) {
   return (
@@ -110,8 +110,8 @@ function StyledFurigana({ word }) {
 For language-specific behavior (like hiding furigana for hiragana-only words), use a language strategy:
 
 ```tsx
-import { RubyWord, containsKanji } from "glost-react";
-import { getWordText } from "glost";
+import { RubyWord, containsKanji } from "@glotblocks/glost-react";
+import { getWordText } from "@glotblocks/glost";
 
 const japaneseStrategy = {
   shouldShowTranscription: (word, system) => {
@@ -137,7 +137,7 @@ const japaneseStrategy = {
 ### Japanese
 
 ```tsx
-import { createJapaneseWord } from "glost";
+import { createJapaneseWord } from "@glotblocks/glost";
 
 const word = createJapaneseWord({
   text: "東京",
@@ -152,7 +152,7 @@ const word = createJapaneseWord({
 ### Chinese
 
 ```tsx
-import { createChineseWord } from "glost";
+import { createChineseWord } from "@glotblocks/glost";
 
 const word = createChineseWord({
   text: "你好",
@@ -166,7 +166,7 @@ const word = createChineseWord({
 ### Thai
 
 ```tsx
-import { createThaiWord } from "glost";
+import { createThaiWord } from "@glotblocks/glost";
 
 const word = createThaiWord({
   text: "ขอบคุณ",
@@ -181,7 +181,7 @@ const word = createThaiWord({
 ### Korean
 
 ```tsx
-import { createKoreanWord } from "glost";
+import { createKoreanWord } from "@glotblocks/glost";
 
 const word = createKoreanWord({
   text: "감사합니다",

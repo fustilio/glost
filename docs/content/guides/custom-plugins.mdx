@@ -193,7 +193,7 @@ const AnalysisPlugin: Plugin = {
 ### Global Registration
 
 ```typescript
-import { pluginRegistry } from 'glost';
+import { pluginRegistry } from '@glotblocks/glost';
 
 // Single plugin
 pluginRegistry.register(MyPlugin);
@@ -205,7 +205,7 @@ pluginRegistry.registerAll([Plugin1, Plugin2, Plugin3]);
 ### Using Registered Extensions
 
 ```typescript
-import { processGLOST, getExtension } from 'glost-plugins';
+import { processGLOST, getExtension } from '@glotblocks/glost-plugins';
 
 // Get extension by ID
 const frequencyExtension = getExtension("frequency");
@@ -242,7 +242,7 @@ const SafePlugin: Plugin = {
 
 ```typescript
 import { describe, it, expect } from 'vitest';
-import { glost, createGLOSTWordNode, createSimpleDocument } from 'glost';
+import { glost, createGLOSTWordNode, createSimpleDocument } from '@glotblocks/glost';
 
 describe('MyPlugin', () => {
   it('should add custom metadata', async () => {
@@ -264,8 +264,8 @@ describe('MyPlugin', () => {
 ## Complete Example
 
 ```typescript
-import type { Plugin, GLOSTWord, GLOSTExtras } from 'glost';
-import { getWordText } from 'glost';
+import type { Plugin, GLOSTWord, GLOSTExtras } from '@glotblocks/glost';
+import { getWordText } from '@glotblocks/glost';
 
 interface ReadingTimeOptions {
   wordsPerMinute?: number;
@@ -322,7 +322,7 @@ export function createReadingTimePlugin(
 ## Using Custom Plugins
 
 ```typescript
-import { processGLOST } from 'glost-plugins';
+import { processGLOST } from '@glotblocks/glost-plugins';
 import { createReadingTimeExtension } from './my-extensions';
 
 const readingTime = createReadingTimeExtension({ wordsPerMinute: 180 });

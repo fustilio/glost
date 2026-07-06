@@ -34,7 +34,7 @@ import {
   // Utilities
   meetsLevel,
   levelProgress,
-} from "glost-common";
+} from "@glotblocks/glost-common";
 
 // CEFR ↔ Numeric
 cefrToNumeric("B1");     // 3
@@ -85,7 +85,7 @@ The base reference for all conversions.
 | C2 | 6 | Mastery |
 
 ```typescript
-import { CEFR_LEVELS, cefrToNumeric, numericToCEFR } from "glost-common";
+import { CEFR_LEVELS, cefrToNumeric, numericToCEFR } from "@glotblocks/glost-common";
 
 CEFR_LEVELS;  // ["Pre-A1", "A1", "A2", "B1", "B2", "C1", "C2"]
 ```
@@ -109,7 +109,7 @@ US Government standard.
 | 5 | 6 | Native/bilingual |
 
 ```typescript
-import { ILR_LEVELS, ilrToNumeric, numericToILR } from "glost-common";
+import { ILR_LEVELS, ilrToNumeric, numericToILR } from "@glotblocks/glost-common";
 
 ilrToNumeric("3");   // 4
 numericToILR(4);     // "3"
@@ -132,7 +132,7 @@ numericToILR(4);     // "3"
 | Distinguished | 6 |
 
 ```typescript
-import { ACTFL_LEVELS, actflToNumeric, numericToACTFL } from "glost-common";
+import { ACTFL_LEVELS, actflToNumeric, numericToACTFL } from "@glotblocks/glost-common";
 
 actflToNumeric("Advanced Low");  // 3
 numericToACTFL(3);               // "Advanced Low"
@@ -150,7 +150,7 @@ numericToACTFL(3);               // "Advanced Low"
 | HSK 6 | 6 | C2 |
 
 ```typescript
-import { HSK_LEVELS, hskToNumeric, numericToHSK } from "glost-common";
+import { HSK_LEVELS, hskToNumeric, numericToHSK } from "@glotblocks/glost-common";
 
 hskToNumeric("HSK 4");  // 4
 numericToHSK(4);        // "HSK 4"
@@ -169,7 +169,7 @@ Note: N5 is easiest, N1 is hardest.
 | N1 | 5.5 | C1-C2 |
 
 ```typescript
-import { JLPT_LEVELS, jlptToNumeric, numericToJLPT } from "glost-common";
+import { JLPT_LEVELS, jlptToNumeric, numericToJLPT } from "@glotblocks/glost-common";
 
 jlptToNumeric("N3");  // 3
 numericToJLPT(3);     // "N3"
@@ -187,7 +187,7 @@ numericToJLPT(3);     // "N3"
 | TOPIK II-6 | 6 | C2 |
 
 ```typescript
-import { TOPIK_LEVELS, topikToNumeric, numericToTOPIK } from "glost-common";
+import { TOPIK_LEVELS, topikToNumeric, numericToTOPIK } from "@glotblocks/glost-common";
 
 topikToNumeric("TOPIK II-4");  // 4
 numericToTOPIK(4);             // "TOPIK II-4"
@@ -206,7 +206,7 @@ numericToTOPIK(4);             // "TOPIK II-4"
 | 8.5-9 | 6 | C2 |
 
 ```typescript
-import { ieltsToNumeric, numericToIELTS } from "glost-common";
+import { ieltsToNumeric, numericToIELTS } from "@glotblocks/glost-common";
 
 ieltsToNumeric(6.5);  // 4
 numericToIELTS(4);    // 6.5
@@ -225,7 +225,7 @@ numericToIELTS(4);    // 6.5
 | 115-120 | 6 | C2 |
 
 ```typescript
-import { toeflToNumeric, numericToTOEFL } from "glost-common";
+import { toeflToNumeric, numericToTOEFL } from "@glotblocks/glost-common";
 
 toeflToNumeric(95);   // 4
 numericToTOEFL(4);    // 109
@@ -242,7 +242,7 @@ numericToTOEFL(4);    // 109
 | CPE | 6 | C2 |
 
 ```typescript
-import { CAMBRIDGE_LEVELS, cambridgeToNumeric, numericToCambridge } from "glost-common";
+import { CAMBRIDGE_LEVELS, cambridgeToNumeric, numericToCambridge } from "@glotblocks/glost-common";
 
 cambridgeToNumeric("FCE");  // 4
 numericToCambridge(4);      // "FCE"
@@ -253,7 +253,7 @@ numericToCambridge(4);      // "FCE"
 DELE aligns directly with CEFR (A1-C2).
 
 ```typescript
-import { DELE_LEVELS, deleToNumeric, numericToDELE } from "glost-common";
+import { DELE_LEVELS, deleToNumeric, numericToDELE } from "@glotblocks/glost-common";
 
 deleToNumeric("B2");  // 4
 numericToDELE(4);     // "B2"
@@ -265,7 +265,7 @@ numericToDELE(4);     // "B2"
 - **DALF**: C1, C2
 
 ```typescript
-import { DELF_LEVELS, DALF_LEVELS, delfDalfToNumeric, numericToDELFDALF } from "glost-common";
+import { DELF_LEVELS, DALF_LEVELS, delfDalfToNumeric, numericToDELFDALF } from "@glotblocks/glost-common";
 
 delfDalfToNumeric("B2");  // 4
 numericToDELFDALF(5);     // "C1"
@@ -283,7 +283,7 @@ numericToDELFDALF(5);     // "C1"
 | Goethe-Zertifikat C2 | 6 | C2 |
 
 ```typescript
-import { GOETHE_LEVELS, goetheToNumeric, numericToGoethe } from "glost-common";
+import { GOETHE_LEVELS, goetheToNumeric, numericToGoethe } from "@glotblocks/glost-common";
 
 goetheToNumeric("Goethe-Zertifikat B2");  // 4
 numericToGoethe(4);                        // "Goethe-Zertifikat B2"
@@ -294,7 +294,7 @@ numericToGoethe(4);                        // "Goethe-Zertifikat B2"
 Convert between any two standards through the numeric scale:
 
 ```typescript
-import { hskToNumeric, numericToJLPT, numericToCEFR } from "glost-common";
+import { hskToNumeric, numericToJLPT, numericToCEFR } from "@glotblocks/glost-common";
 
 // HSK 4 → JLPT equivalent
 const level = hskToNumeric("HSK 4");  // 4
@@ -321,7 +321,7 @@ console.log({
 Check if a proficiency level meets a requirement:
 
 ```typescript
-import { meetsLevel } from "glost-common";
+import { meetsLevel } from "@glotblocks/glost-common";
 
 meetsLevel(3, 2);    // true  (B1 meets A2 requirement)
 meetsLevel(3, 3);    // true  (B1 meets B1 requirement)
@@ -333,7 +333,7 @@ meetsLevel(3, 4);    // false (B1 doesn't meet B2 requirement)
 Calculate progress between two levels:
 
 ```typescript
-import { levelProgress } from "glost-common";
+import { levelProgress } from "@glotblocks/glost-common";
 
 levelProgress(2.5, 2, 3);  // 50  (50% from A2 to B1)
 levelProgress(2.0, 2, 3);  // 0   (at start)
@@ -346,7 +346,7 @@ levelProgress(1.5, 2, 3);  // 0   (clamped - below start)
 Get CEFR levels between two numeric values:
 
 ```typescript
-import { levelsBetween } from "glost-common";
+import { levelsBetween } from "@glotblocks/glost-common";
 
 levelsBetween(1, 3);    // ["A1", "A2", "B1"]
 levelsBetween(0, 6);    // ["Pre-A1", "A1", "A2", "B1", "B2", "C1", "C2"]
@@ -358,7 +358,7 @@ levelsBetween(1.5, 3.5); // ["A2", "B1"]
 Get complete information about a level:
 
 ```typescript
-import { getProficiencyInfo } from "glost-common";
+import { getProficiencyInfo } from "@glotblocks/glost-common";
 
 const info = getProficiencyInfo(4);
 // {

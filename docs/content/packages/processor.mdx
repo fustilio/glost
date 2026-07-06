@@ -5,13 +5,13 @@ Unified-style processor for GLOST documents with a fluent plugin API.
 ## Installation
 
 ```bash
-npm install glost-processor glost-core glost-plugins
+npm install @glotblocks/glost-processor @glotblocks/glost-core @glotblocks/glost-plugins
 ```
 
 Or use the main `glost` package which includes the processor:
 
 ```bash
-npm install glost
+npm install @glotblocks/glost
 ```
 
 ## Features
@@ -25,8 +25,8 @@ npm install glost
 ## Quick Start
 
 ```typescript
-import { glost } from 'glost';
-import { languageLearningPreset } from 'glost/presets';
+import { glost } from '@glotblocks/glost';
+import { languageLearningPreset } from '@glotblocks/glost/presets';
 
 // Create processor
 const processor = glost()
@@ -44,7 +44,7 @@ const result = await processor.process(document);
 Create a new processor instance.
 
 ```typescript
-import { glost } from 'glost';
+import { glost } from '@glotblocks/glost';
 
 const processor = glost();
 ```
@@ -172,8 +172,8 @@ const processor = glost()
 ### Single Extension
 
 ```typescript
-import { processGLOST } from 'glost-plugins';
-import { createFrequencyExtension } from 'glost-frequency';
+import { processGLOST } from '@glotblocks/glost-plugins';
+import { createFrequencyExtension } from '@glotblocks/glost-frequency';
 
 const [freqGen, freqEnh] = createFrequencyExtension({
   targetLanguage: 'th',
@@ -186,7 +186,7 @@ const result = await processGLOST(document, [freqGen, freqEnh]);
 ### Multiple Extensions
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
+import { processGLOSTWithExtensionsAsync } from '@glotblocks/glost-plugins';
 
 const extensions = [
   ...createFrequencyExtension({ ... }),
@@ -200,7 +200,7 @@ const result = await processGLOSTWithExtensionsAsync(document, extensions);
 ## Processor Options
 
 ```typescript
-import { glost } from 'glost';
+import { glost } from '@glotblocks/glost';
 
 const processor = glost({
   // Throw on first error (default: true)
@@ -222,13 +222,13 @@ import type {
   Preset,
   ProcessorOptions,
   ProcessingResult
-} from 'glost-processor';
+} from '@glotblocks/glost-processor';
 ```
 
 ## Example: Custom Processing Pipeline
 
 ```typescript
-import { glost } from 'glost';
+import { glost } from '@glotblocks/glost';
 
 const processor = glost()
   // Add plugins

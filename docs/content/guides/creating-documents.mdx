@@ -11,8 +11,8 @@ For most use cases, use these simplified helper functions:
 The easiest way to create a GLOST document from words:
 
 ```typescript
-import { createSimpleDocument } from 'glost';
-import { createThaiWord } from 'glost-th';
+import { createSimpleDocument } from '@glotblocks/glost';
+import { createThaiWord } from '@glotblocks/glost-th';
 
 const words = [
   createThaiWord({ text: "สวัสดี" }),
@@ -33,7 +33,7 @@ const document = createSimpleDocument(words, "th", "thai", {
 When you have sentences but don't need paragraph structure:
 
 ```typescript
-import { createDocumentFromSentences, createSentenceFromWords } from 'glost';
+import { createDocumentFromSentences, createSentenceFromWords } from '@glotblocks/glost';
 
 const sentence1 = createSentenceFromWords(words1, "th", "thai", "สวัสดี");
 const sentence2 = createSentenceFromWords(words2, "th", "thai", "ขอบคุณ");
@@ -86,7 +86,7 @@ GLOSTRoot (document)
 ### Basic Word
 
 ```typescript
-import { createGLOSTWordNode } from 'glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 const word = createGLOSTWordNode({
   value: "hello",
@@ -103,7 +103,7 @@ const word = createGLOSTWordNode({
 When you just need text and transcription:
 
 ```typescript
-import { createSimpleWord } from 'glost';
+import { createSimpleWord } from '@glotblocks/glost';
 
 const word = createSimpleWord({
   text: "hello",
@@ -117,7 +117,7 @@ const word = createSimpleWord({
 With RTGS romanization:
 
 ```typescript
-import { createThaiWord } from 'glost-th';
+import { createThaiWord } from '@glotblocks/glost-th';
 
 const word = createThaiWord({
   text: "สวัสดี",
@@ -133,7 +133,7 @@ const word = createThaiWord({
 With romaji and furigana:
 
 ```typescript
-import { createJapaneseWord } from 'glost-ja';
+import { createJapaneseWord } from '@glotblocks/glost-ja';
 
 const word = createJapaneseWord({
   text: "今日",
@@ -148,8 +148,8 @@ const word = createJapaneseWord({
 ### From Words
 
 ```typescript
-import { createSentenceFromWords } from 'glost';
-import { createThaiWord } from 'glost-th';
+import { createSentenceFromWords } from '@glotblocks/glost';
+import { createThaiWord } from '@glotblocks/glost-th';
 
 const words = [
   createThaiWord({ text: "สวัสดี", rtgs: "sawatdi", partOfSpeech: "interjection" }),
@@ -174,7 +174,7 @@ import {
   createGLOSTWordNode,
   createGLOSTWhiteSpaceNode,
   createGLOSTPunctuationNode
-} from 'glost';
+} from '@glotblocks/glost';
 
 const sentence = createGLOSTSentenceNode({
   originalText: "Hello, world!",
@@ -193,7 +193,7 @@ const sentence = createGLOSTSentenceNode({
 ## Creating Paragraphs
 
 ```typescript
-import { createParagraphFromSentences, createGLOSTParagraphNode } from 'glost';
+import { createParagraphFromSentences, createGLOSTParagraphNode } from '@glotblocks/glost';
 
 // From sentences helper
 const paragraph = createParagraphFromSentences([sentence1, sentence2]);
@@ -207,7 +207,7 @@ const paragraph = createGLOSTParagraphNode([sentence1, sentence2]);
 ### From Paragraphs
 
 ```typescript
-import { createDocumentFromParagraphs } from 'glost';
+import { createDocumentFromParagraphs } from '@glotblocks/glost';
 
 const document = createDocumentFromParagraphs(
   [paragraph1, paragraph2],
@@ -220,7 +220,7 @@ const document = createDocumentFromParagraphs(
 ### Manual Construction
 
 ```typescript
-import { createGLOSTRootNode } from 'glost';
+import { createGLOSTRootNode } from '@glotblocks/glost';
 
 const document = createGLOSTRootNode({
   lang: "th",
@@ -236,7 +236,7 @@ const document = createGLOSTRootNode({
 ### Word Translations
 
 ```typescript
-import { createGLOSTWordNode } from 'glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 const word = createGLOSTWordNode({
   value: "สวัสดี",
@@ -257,7 +257,7 @@ const word = createGLOSTWordNode({
 ### Extended Metadata
 
 ```typescript
-import { createGLOSTWordNode } from 'glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 const word = createGLOSTWordNode({
   value: "สวัสดี",
@@ -281,7 +281,7 @@ const word = createGLOSTWordNode({
 ### Multiple Transcriptions
 
 ```typescript
-import { createGLOSTWordNode } from 'glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 const word = createGLOSTWordNode({
   value: "สวัสดี",

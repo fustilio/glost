@@ -72,7 +72,7 @@ GLOST follows a composable, principle-driven architecture based on SRP (Single R
 
 ### Layer 1: Foundation
 
-**Packages:** `glost-core`, `glost-common`, `glost-utils`, `glost-plugins`
+**Packages:** `@glotblocks/glost-core`, `@glotblocks/glost-common`, `@glotblocks/glost-utils`, `@glotblocks/glost-plugins`
 
 - Define GLOST node types and interfaces
 - Provide tree traversal and manipulation utilities
@@ -81,7 +81,7 @@ GLOST follows a composable, principle-driven architecture based on SRP (Single R
 
 ### Layer 2: Plugin Packages
 
-**Packages:** `glost-transcription`, `glost-translation`, `glost-frequency`, `glost-difficulty`, `glost-pos`, `glost-gender`, `glost-clause-segmenter`, `glost-inkle`
+**Packages:** `@glotblocks/glost-transcription`, `@glotblocks/glost-translation`, `@glotblocks/glost-frequency`, `@glotblocks/glost-difficulty`, `@glotblocks/glost-pos`, `@glotblocks/glost-gender`, `@glotblocks/glost-clause-segmenter`, `@glotblocks/glost-inkle`
 
 - Implement specific extension functionality
 - Define provider interfaces for data sources
@@ -90,7 +90,7 @@ GLOST follows a composable, principle-driven architecture based on SRP (Single R
 
 ### Layer 3: Language Packages
 
-**Packages:** `glost-th`, `glost-ja`, `glost-ko`, `glost-en`
+**Packages:** `@glotblocks/glost-th`, `@glotblocks/glost-ja`, `@glotblocks/glost-ko`, `@glotblocks/glost-en`
 
 - Compose multiple plugins for a language
 - Provide language-specific providers
@@ -99,7 +99,7 @@ GLOST follows a composable, principle-driven architecture based on SRP (Single R
 
 ### Layer 4: Processing Infrastructure
 
-**Packages:** `glost-processor`, `glost-registry`, `glost-presets`
+**Packages:** `@glotblocks/glost-processor`, `@glotblocks/glost-registry`, `@glotblocks/glost-presets`
 
 - Provide unified-style processing API
 - Enable plugin discovery and validation
@@ -108,7 +108,7 @@ GLOST follows a composable, principle-driven architecture based on SRP (Single R
 
 ### Layer 5: Frontend/Interface
 
-**Packages:** `glost-react`, `glost-dialogue`
+**Packages:** `@glotblocks/glost-react`, `@glotblocks/glost-dialogue`
 
 - Render processed GLOST documents
 - Provide UI components for common patterns
@@ -117,7 +117,7 @@ GLOST follows a composable, principle-driven architecture based on SRP (Single R
 
 ### Layer 6: CLI & Tools
 
-**Packages:** `glost-cli`
+**Packages:** `@glotblocks/glost-cli`
 
 - Provide command-line interface
 - Enable plugin management
@@ -139,11 +139,11 @@ Each package does one thing well:
 
 | Package | Single Responsibility |
 |---------|----------------------|
-| `glost-core` | Define types and nodes |
-| `glost-plugins` | Provide extension architecture |
-| `glost-transcription` | Handle pronunciation data |
-| `glost-processor` | Execute plugin pipelines |
-| `glost-registry` | Discover and validate plugins |
+| `@glotblocks/glost-core` | Define types and nodes |
+| `@glotblocks/glost-plugins` | Provide extension architecture |
+| `@glotblocks/glost-transcription` | Handle pronunciation data |
+| `@glotblocks/glost-processor` | Execute plugin pipelines |
+| `@glotblocks/glost-registry` | Discover and validate plugins |
 
 ### Single Source of Truth (SSOT)
 
@@ -158,7 +158,7 @@ function toPaiboon(word) { /* logic */ }
 function toPaiboon(word) { /* same logic */ }
 
 // GOOD: Import from single source
-import { createTranscriptionExtension } from 'glost-transcription';
+import { createTranscriptionExtension } from '@glotblocks/glost-transcription';
 ```
 
 ### Composition Over Duplication
@@ -167,9 +167,9 @@ Build complex functionality by composing simple components:
 
 ```typescript
 // Language package composes multiple extensions
-import { createFrequencyExtension } from 'glost-frequency';
-import { createTranscriptionExtension } from 'glost-transcription';
-import { createDifficultyExtension } from 'glost-difficulty';
+import { createFrequencyExtension } from '@glotblocks/glost-frequency';
+import { createTranscriptionExtension } from '@glotblocks/glost-transcription';
+import { createDifficultyExtension } from '@glotblocks/glost-difficulty';
 
 // Compose with language-specific providers
 export function createThaiExtensions(providers) {
@@ -185,9 +185,9 @@ export function createThaiExtensions(providers) {
 
 | Type | Pattern | Example |
 |------|---------|---------|
-| Core | `glost-{name}` | `glost-core`, `glost-plugins` |
-| Plugin | `glost-{feature}` | `glost-frequency`, `glost-pos` |
-| Language | `glost-{lang}` | `glost-th`, `glost-ja` |
+| Core | `glost-{name}` | `@glotblocks/glost-core`, `@glotblocks/glost-plugins` |
+| Plugin | `glost-{feature}` | `@glotblocks/glost-frequency`, `@glotblocks/glost-pos` |
+| Language | `glost-{lang}` | `@glotblocks/glost-th`, `@glotblocks/glost-ja` |
 | Data Source | `glost-{lang}-datasource-{source}` | `glost-th-datasource-lexitron` |
 | Transcription | `glost-{lang}-transcription-{system}` | `glost-th-transcription-paiboon` |
 | Lookup | `glost-{lang}-lookup-{type}-{system}-{source}` | `glost-th-lookup-transcription-paiboon-lexitron` |
@@ -198,7 +198,7 @@ export function createThaiExtensions(providers) {
 
 ```typescript
 // Use Lexitron data with different transcription systems
-import { createThaiTranscription } from 'glost-th/transcription';
+import { createThaiTranscription } from '@glotblocks/glost-th/transcription';
 
 // Paiboon+ system
 const paiboonExt = createThaiTranscription({ system: 'paiboon' });
@@ -214,7 +214,7 @@ const ipaExt = createThaiTranscription({ system: 'ipa' });
 
 ```typescript
 // Use same transcription system with different data sources
-import { createTranscriptionExtension } from 'glost-transcription';
+import { createTranscriptionExtension } from '@glotblocks/glost-transcription';
 
 // With Lexitron data
 import { lexitronProvider } from 'glost-th-datasource-lexitron';

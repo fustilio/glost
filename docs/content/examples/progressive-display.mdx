@@ -15,7 +15,7 @@ GloST React includes a 5-level progressive display system that gradually reveals
 ## Basic Usage
 
 ```tsx
-import { RubyWord } from "glost-react";
+import { RubyWord } from "@glotblocks/glost-react";
 
 function ProgressiveWord({ word, level }) {
   return (
@@ -38,7 +38,7 @@ function ProgressiveWord({ word, level }) {
 
 ```tsx
 import { useState } from "react";
-import { RubyWord, DisplayLevel } from "glost-react";
+import { RubyWord, DisplayLevel } from "@glotblocks/glost-react";
 
 function InteractiveExample({ word }) {
   const [level, setLevel] = useState<DisplayLevel>(2);
@@ -74,7 +74,7 @@ function InteractiveExample({ word }) {
 Access level configurations programmatically:
 
 ```tsx
-import { getLevelConfig, shouldShowAtLevel } from "glost-react";
+import { getLevelConfig, shouldShowAtLevel } from "@glotblocks/glost-react";
 
 // Get full config for a level
 const config = getLevelConfig(3);
@@ -90,8 +90,8 @@ shouldShowAtLevel(3, "partOfSpeech");    // false
 For full control, use the `useSpacingFlags` hook:
 
 ```tsx
-import { useSpacingFlags, useWordData } from "glost-react";
-import { getWordText } from "glost";
+import { useSpacingFlags, useWordData } from "@glotblocks/glost-react";
+import { getWordText } from "@glotblocks/glost";
 
 function CustomProgressiveWord({ word, displayLevel, transcriptionSystem }) {
   const flags = useSpacingFlags(displayLevel, transcriptionSystem);
@@ -131,7 +131,7 @@ function CustomProgressiveWord({ word, displayLevel, transcriptionSystem }) {
 The `RubyWord` component accepts render props for each level:
 
 ```tsx
-import { RubyWord, getDifficultyStyles } from "glost-react";
+import { RubyWord, getDifficultyStyles } from "@glotblocks/glost-react";
 
 <RubyWord
   word={word}
@@ -160,7 +160,7 @@ import { RubyWord, getDifficultyStyles } from "glost-react";
 Apply progressive display to entire sentences:
 
 ```tsx
-import { GloSTSentence } from "glost-react";
+import { GloSTSentence } from "@glotblocks/glost-react";
 
 function ProgressiveSentence({ sentence, level }) {
   return (

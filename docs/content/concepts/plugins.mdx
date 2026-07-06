@@ -50,7 +50,7 @@ interface GLOSTExtension {
 ### Basic Usage
 
 ```typescript
-import { processGLOST, type GLOSTExtension } from 'glost-plugins';
+import { processGLOST, type GLOSTExtension } from '@glotblocks/glost-plugins';
 
 const myExtension: GLOSTExtension = {
   id: 'my-extension',
@@ -71,7 +71,7 @@ const result = processGLOST(document, [myExtension]);
 Extensions that fetch data work with the async processor:
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
+import { processGLOSTWithExtensionsAsync } from '@glotblocks/glost-plugins';
 
 const asyncExtension: GLOSTExtension = {
   id: 'async-extension',
@@ -95,7 +95,7 @@ import {
   getExtension,
   getAllExtensions,
   processGLOSTWithExtensionIds
-} from 'glost-plugins';
+} from '@glotblocks/glost-plugins';
 
 // Register an extension globally
 registerExtension(myExtension);
@@ -114,14 +114,14 @@ const result = processGLOSTWithExtensionIds(document, [
 
 ### From glost-plugins
 
-These extensions are included in `glost-plugins`:
+These extensions are included in `@glotblocks/glost-plugins`:
 
 #### CulturalNotesExtension
 
 Adds cultural context display data.
 
 ```typescript
-import { CulturalNotesExtension, createCulturalNotesExtension } from 'glost-plugins';
+import { CulturalNotesExtension, createCulturalNotesExtension } from '@glotblocks/glost-plugins';
 
 const result = processGLOST(document, [CulturalNotesExtension]);
 
@@ -134,7 +134,7 @@ const result = processGLOST(document, [CulturalNotesExtension]);
 Transforms text with gender variants.
 
 ```typescript
-import { createGenderTransformerExtension } from 'glost-plugins';
+import { createGenderTransformerExtension } from '@glotblocks/glost-plugins';
 
 const transformer = createGenderTransformerExtension({
   targetGender: 'female',
@@ -150,7 +150,7 @@ const transformer = createGenderTransformerExtension({
 Marks negated clauses.
 
 ```typescript
-import { NegationTransformerExtension } from 'glost-plugins';
+import { NegationTransformerExtension } from '@glotblocks/glost-plugins';
 
 // Depends on clause analysis
 // Adds negation metadata to clauses containing negative words
@@ -161,7 +161,7 @@ import { NegationTransformerExtension } from 'glost-plugins';
 Computes reading difficulty scores.
 
 ```typescript
-import { createReadingScoreExtension } from 'glost-plugins';
+import { createReadingScoreExtension } from '@glotblocks/glost-plugins';
 
 const scorer = createReadingScoreExtension({ /* options */ });
 ```
@@ -171,7 +171,7 @@ const scorer = createReadingScoreExtension({ /* options */ });
 Generates learner hints based on word metadata.
 
 ```typescript
-import { createLearnerHintsExtension } from 'glost-plugins';
+import { createLearnerHintsExtension } from '@glotblocks/glost-plugins';
 
 const hints = createLearnerHintsExtension({ /* options */ });
 ```
@@ -182,19 +182,19 @@ Data-enrichment extensions are in separate packages:
 
 | Package | Description | Install |
 |---------|-------------|---------|
-| `glost-frequency` | Word frequency data | `pnpm add glost-frequency` |
-| `glost-difficulty` | Difficulty assessment | `pnpm add glost-difficulty` |
-| `glost-pos` | Part-of-speech tagging | `pnpm add glost-pos` |
-| `glost-transcription` | Transcription/romanization | `pnpm add glost-transcription` |
-| `glost-translation` | Translation data | `pnpm add glost-translation` |
-| `glost-clause-segmenter` | Clause segmentation | `pnpm add glost-clause-segmenter` |
+| `@glotblocks/glost-frequency` | Word frequency data | `pnpm add @glotblocks/glost-frequency` |
+| `@glotblocks/glost-difficulty` | Difficulty assessment | `pnpm add @glotblocks/glost-difficulty` |
+| `@glotblocks/glost-pos` | Part-of-speech tagging | `pnpm add @glotblocks/glost-pos` |
+| `@glotblocks/glost-transcription` | Transcription/romanization | `pnpm add @glotblocks/glost-transcription` |
+| `@glotblocks/glost-translation` | Translation data | `pnpm add @glotblocks/glost-translation` |
+| `@glotblocks/glost-clause-segmenter` | Clause segmentation | `pnpm add @glotblocks/glost-clause-segmenter` |
 
 Example using separate packages:
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
-import { createFrequencyExtension } from 'glost-frequency';
-import { createDifficultyExtension } from 'glost-difficulty';
+import { processGLOSTWithExtensionsAsync } from '@glotblocks/glost-plugins';
+import { createFrequencyExtension } from '@glotblocks/glost-frequency';
+import { createDifficultyExtension } from '@glotblocks/glost-difficulty';
 
 const [freqGen, freqEnh] = createFrequencyExtension({
   targetLanguage: 'th',
@@ -233,7 +233,7 @@ See the [Creating Custom Extensions](/docs/guides/custom-plugins) guide.
 ### Quick Example
 
 ```typescript
-import type { GLOSTExtension } from 'glost-plugins';
+import type { GLOSTExtension } from '@glotblocks/glost-plugins';
 
 const MyExtension: GLOSTExtension = {
   id: 'my-extension',
@@ -253,7 +253,7 @@ const MyExtension: GLOSTExtension = {
 };
 
 // Use it
-import { processGLOST } from 'glost-plugins';
+import { processGLOST } from '@glotblocks/glost-plugins';
 const result = processGLOST(document, [MyExtension]);
 ```
 

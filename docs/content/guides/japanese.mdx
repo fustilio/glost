@@ -16,7 +16,7 @@ Japanese has unique characteristics that GLOST handles:
 ### Basic Japanese Word
 
 ```typescript
-import { createJapaneseWord } from 'glost-ja';
+import { createJapaneseWord } from '@glotblocks/glost-ja';
 
 const word = createJapaneseWord({
   text: "今日",
@@ -32,7 +32,7 @@ const minimalWord = createJapaneseWord({ text: "今日" });
 ### With Full Transcription Data
 
 ```typescript
-import { createGLOSTWordNode } from 'glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 const word = createGLOSTWordNode({
   value: "今日",
@@ -57,7 +57,7 @@ const word = createGLOSTWordNode({
 Chinese characters with Japanese readings:
 
 ```typescript
-import { createJapaneseWord } from 'glost-ja';
+import { createJapaneseWord } from '@glotblocks/glost-ja';
 
 const word = createJapaneseWord({
   text: "日本",
@@ -72,7 +72,7 @@ const word = createJapaneseWord({
 Native Japanese syllabary:
 
 ```typescript
-import { createGLOSTWordNode } from 'glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 const word = createGLOSTWordNode({
   value: "これ",
@@ -88,7 +88,7 @@ const word = createGLOSTWordNode({
 Used for foreign words:
 
 ```typescript
-import { createGLOSTWordNode } from 'glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 const word = createGLOSTWordNode({
   value: "コンピューター",
@@ -106,7 +106,7 @@ Furigana shows the reading of kanji.
 ### Simple Furigana
 
 ```typescript
-import { createJapaneseWord } from 'glost-ja';
+import { createJapaneseWord } from '@glotblocks/glost-ja';
 
 const word = createJapaneseWord({
   text: "食べる",
@@ -121,7 +121,7 @@ const word = createJapaneseWord({
 For complex kanji-furigana alignment:
 
 ```typescript
-import { createGLOSTWordNode } from 'glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 const word = createGLOSTWordNode({
   value: "東京",
@@ -148,8 +148,8 @@ Japanese has no spaces between words.
 ### Manual Segmentation
 
 ```typescript
-import { createJapaneseWord } from 'glost-ja';
-import { createSentenceFromWords } from 'glost';
+import { createJapaneseWord } from '@glotblocks/glost-ja';
+import { createSentenceFromWords } from '@glotblocks/glost';
 
 const words = [
   createJapaneseWord({ text: "私", romaji: "watashi", partOfSpeech: "pronoun", furigana: "わたし" }),
@@ -171,7 +171,7 @@ const sentence = createSentenceFromWords(
 Japanese particles are crucial for grammar:
 
 ```typescript
-import { createJapaneseWord } from 'glost-ja';
+import { createJapaneseWord } from '@glotblocks/glost-ja';
 
 // Topic marker
 const wa = createJapaneseWord({ text: "は", romaji: "wa", partOfSpeech: "particle" });
@@ -193,7 +193,7 @@ Japanese has multiple politeness registers:
 ### Plain Form
 
 ```typescript
-import { createJapaneseWord } from 'glost-ja';
+import { createJapaneseWord } from '@glotblocks/glost-ja';
 
 const eat = createJapaneseWord({
   text: "食べる",
@@ -206,7 +206,7 @@ const eat = createJapaneseWord({
 ### Polite Form (ます)
 
 ```typescript
-import { createJapaneseWord } from 'glost-ja';
+import { createJapaneseWord } from '@glotblocks/glost-ja';
 
 const eatPolite = createJapaneseWord({
   text: "食べます",
@@ -219,7 +219,7 @@ const eatPolite = createJapaneseWord({
 ### Marking Formality
 
 ```typescript
-import { createGLOSTWordNode } from 'glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 const word = createGLOSTWordNode({
   value: "食べます",
@@ -240,7 +240,7 @@ Kanji can have multiple readings:
 ### On'yomi (Chinese Reading)
 
 ```typescript
-import { createGLOSTWordNode } from 'glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 const word = createGLOSTWordNode({
   value: "山",
@@ -260,7 +260,7 @@ const word = createGLOSTWordNode({
 ### Kun'yomi (Japanese Reading)
 
 ```typescript
-import { createGLOSTWordNode } from 'glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 const word = createGLOSTWordNode({
   value: "山",
@@ -282,8 +282,8 @@ const word = createGLOSTWordNode({
 ### Basic Sentence
 
 ```typescript
-import { createJapaneseWord } from 'glost-ja';
-import { createSentenceFromWords } from 'glost';
+import { createJapaneseWord } from '@glotblocks/glost-ja';
+import { createSentenceFromWords } from '@glotblocks/glost';
 
 const words = [
   createJapaneseWord({ text: "私", romaji: "watashi", partOfSpeech: "pronoun", furigana: "わたし" }),
@@ -304,7 +304,7 @@ const sentence = createSentenceFromWords(
 ### With Translation
 
 ```typescript
-import { createGLOSTSentenceNode } from 'glost';
+import { createGLOSTSentenceNode } from '@glotblocks/glost';
 
 const sentence = createGLOSTSentenceNode({
   originalText: "私は本を読みます",
@@ -325,7 +325,7 @@ const sentence = createGLOSTSentenceNode({
 Map difficulty to JLPT:
 
 ```typescript
-import { createGLOSTWordNode } from 'glost';
+import { createGLOSTWordNode } from '@glotblocks/glost';
 
 const word = createGLOSTWordNode({
   value: "食べる",
@@ -345,12 +345,12 @@ const word = createGLOSTWordNode({
 ## Document Example
 
 ```typescript
-import { createJapaneseWord } from 'glost-ja';
+import { createJapaneseWord } from '@glotblocks/glost-ja';
 import {
   createSentenceFromWords,
   createParagraphFromSentences,
   createDocumentFromParagraphs
-} from 'glost';
+} from '@glotblocks/glost';
 
 // Create a Japanese lesson document
 const greeting1 = [
@@ -382,7 +382,7 @@ const document = createDocumentFromParagraphs(
 ## Processing Japanese Documents
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
+import { processGLOSTWithExtensionsAsync } from '@glotblocks/glost-plugins';
 
 const result = await processGLOSTWithExtensionsAsync(document, [
   furiganaExtension,

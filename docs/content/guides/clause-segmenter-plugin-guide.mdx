@@ -29,9 +29,9 @@ const sentences = [
 ### With Clause Segmentation
 
 ```typescript
-import { glost } from "glost";
-import { createClauseSegmenterPlugin } from "glost-clause-segmenter";
-import { englishSegmenterProvider } from "glost-en/segmenter";
+import { glost } from "@glotblocks/glost";
+import { createClauseSegmenterPlugin } from "@glotblocks/glost-clause-segmenter";
+import { englishSegmenterProvider } from "@glotblocks/glost-en/segmenter";
 
 // Language-specific segmentation provider
 const clausePlugin = createClauseSegmenterPlugin({
@@ -248,7 +248,7 @@ function identifyClausePatterns(document) {
 
 ```typescript
 // Thai segmenter provider from glost-th
-import { thaiSegmenterProvider } from "glost-th/segmenter";
+import { thaiSegmenterProvider } from "@glotblocks/glost-th/segmenter";
 
 // The provider handles Thai-specific markers:
 // - Causal: "เพราะว่า", "เนื่องจาก", "ด้วยเหตุที่"
@@ -461,9 +461,9 @@ Japanese: Chain actions with て, end with conjugated verb
 ## Integration Example: Complete Reading Assistant
 
 ```typescript
-import { glost } from "glost";
-import { createClauseSegmenterPlugin } from "glost-clause-segmenter";
-import { englishSegmenterProvider } from "glost-en/segmenter";
+import { glost } from "@glotblocks/glost";
+import { createClauseSegmenterPlugin } from "@glotblocks/glost-clause-segmenter";
+import { englishSegmenterProvider } from "@glotblocks/glost-en/segmenter";
 
 // 1. Create and freeze processor for reuse
 const processor = glost()
@@ -566,7 +566,7 @@ function ComplexityBadge({ level }) {
 Language-specific implementation in `glost-en/segmenter`:
 
 ```typescript
-import { englishSegmenterProvider } from "glost-en/segmenter";
+import { englishSegmenterProvider } from "@glotblocks/glost-en/segmenter";
 
 // The provider handles English markers:
 // - Subordinators: "although", "because", "if", "when", etc.
@@ -583,7 +583,7 @@ import { englishSegmenterProvider } from "glost-en/segmenter";
 Language-specific implementation in `glost-th/segmenter`:
 
 ```typescript
-import { thaiSegmenterProvider } from "glost-th/segmenter";
+import { thaiSegmenterProvider } from "@glotblocks/glost-th/segmenter";
 
 // The provider handles Thai markers:
 // - Causal: "เพราะว่า", "เนื่องจาก", "เพราะ", "ด้วยเหตุที่"
@@ -597,7 +597,7 @@ import { thaiSegmenterProvider } from "glost-th/segmenter";
 ### Creating a Custom Provider
 
 ```typescript
-import type { ClauseSegmenterProvider, SegmentationResult } from "glost-clause-segmenter";
+import type { ClauseSegmenterProvider, SegmentationResult } from "@glotblocks/glost-clause-segmenter";
 
 const myLanguageProvider: ClauseSegmenterProvider = {
   async segmentSentence(words, language) {

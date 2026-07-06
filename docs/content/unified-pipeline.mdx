@@ -8,7 +8,7 @@ GLOST v0.5.0 implements a comprehensive unified/remark-style pipeline and regist
 
 ### 1. Unified-Style Processor API ✅
 
-**Package:** `glost-processor`
+**Package:** `@glotblocks/glost-processor`
 
 Fluent processor API similar to unified/remark:
 
@@ -35,7 +35,7 @@ const result = await processor.process(document);
 
 ### 2. Enhanced Plugin Registry ✅
 
-**Package:** `glost-registry`
+**Package:** `@glotblocks/glost-registry`
 
 Comprehensive plugin registry with discovery, metadata, and validation:
 
@@ -63,7 +63,7 @@ const report = pluginRegistry.checkConflicts(["plugin1", "plugin2"]);
 
 ### 3. CLI Tools ✅
 
-**Package:** `glost-cli`
+**Package:** `@glotblocks/glost-cli`
 
 Command-line tools for plugin management:
 
@@ -79,12 +79,12 @@ glost plugins create MyPlugin
 
 ### 4. Presets System ✅
 
-**Package:** `glost-presets`
+**Package:** `@glotblocks/glost-presets`
 
 Pre-configured plugin combinations for common use cases:
 
 ```typescript
-import { languageLearningPreset } from "glost-presets";
+import { languageLearningPreset } from "@glotblocks/glost-presets";
 
 const processor = glost()
   .use(languageLearningPreset);
@@ -139,11 +139,11 @@ The old API still works but is deprecated:
 
 ```typescript
 // Old API (deprecated, will be removed in v1.0)
-import { processGLOSTWithExtensions } from "glost-plugins";
+import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
 const result = processGLOSTWithExtensions(doc, [ext1, ext2]);
 
 // New API (recommended)
-import { glost } from "glost";
+import { glost } from "@glotblocks/glost";
 const result = await glost().use(ext1).use(ext2).process(document);
 ```
 

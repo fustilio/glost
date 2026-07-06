@@ -5,7 +5,7 @@ GloST Dialogue provides support for rendering conversations and dialogues, perfe
 ## Installation
 
 ```bash
-npm install glost-dialogue glost glost-react
+npm install @glotblocks/glost-dialogue @glotblocks/glost @glotblocks/glost-react
 ```
 
 ## Creating a Dialogue
@@ -13,8 +13,8 @@ npm install glost-dialogue glost glost-react
 A dialogue groups multiple sentences into a conversation with speaker attribution:
 
 ```typescript
-import { createDialogueFromTurns } from "glost-dialogue";
-import { createSentenceFromWords, createThaiWord } from "glost";
+import { createDialogueFromTurns } from "@glotblocks/glost-dialogue";
+import { createSentenceFromWords, createThaiWord } from "@glotblocks/glost";
 
 // Define the participants
 const participants = [
@@ -67,8 +67,8 @@ const dialogue = createDialogueFromTurns({
 ### Basic Rendering
 
 ```tsx
-import { DialogueContainer, DialogueTurn } from "glost-dialogue/react";
-import { GloSTSentence } from "glost-react";
+import { DialogueContainer, DialogueTurn } from "@glotblocks/glost-dialogue/react";
+import { GloSTSentence } from "@glotblocks/glost-react";
 
 function ConversationExample({ dialogue }) {
   const participants = dialogue.extras?.dialogue?.participants ?? [];
@@ -176,7 +176,7 @@ interface SentenceDialogueInfo {
 ## Adding Dialogue Info to Sentences
 
 ```typescript
-import { addDialogueInfoToSentence } from "glost-dialogue";
+import { addDialogueInfoToSentence } from "@glotblocks/glost-dialogue";
 
 const sentenceWithDialogue = addDialogueInfoToSentence(sentence, {
   role: "customer",
@@ -189,7 +189,7 @@ const sentenceWithDialogue = addDialogueInfoToSentence(sentence, {
 ## Type Guards
 
 ```typescript
-import { isDialogueNode, hasSentenceDialogueInfo } from "glost-dialogue";
+import { isDialogueNode, hasSentenceDialogueInfo } from "@glotblocks/glost-dialogue";
 
 // Check if a node is a DialogueNode
 if (isDialogueNode(node)) {

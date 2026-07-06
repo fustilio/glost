@@ -5,13 +5,13 @@ Pre-configured plugin combinations for common use cases.
 ## Installation
 
 ```bash
-npm install glost-presets glost-core glost-processor
+npm install @glotblocks/glost-presets @glotblocks/glost-core @glotblocks/glost-processor
 ```
 
 Or use the main `glost` package which includes presets:
 
 ```bash
-npm install glost
+npm install @glotblocks/glost
 ```
 
 ## Features
@@ -24,8 +24,8 @@ npm install glost
 ## Quick Start
 
 ```typescript
-import { glost } from 'glost';
-import { languageLearningPreset } from 'glost/presets';
+import { glost } from '@glotblocks/glost';
+import { languageLearningPreset } from '@glotblocks/glost/presets';
 
 const processor = glost()
   .use(languageLearningPreset)
@@ -47,7 +47,7 @@ Comprehensive preset for language learning applications.
 - Transcription support
 
 ```typescript
-import { languageLearningPreset } from 'glost/presets';
+import { languageLearningPreset } from '@glotblocks/glost/presets';
 
 const processor = glost()
   .use(languageLearningPreset)
@@ -70,7 +70,7 @@ Optimized for reading comprehension platforms.
 - Translation support
 
 ```typescript
-import { readingAppPreset } from 'glost/presets';
+import { readingAppPreset } from '@glotblocks/glost/presets';
 
 const processor = glost()
   .use(readingAppPreset)
@@ -93,7 +93,7 @@ Focused on vocabulary acquisition.
 - Spaced repetition metadata
 
 ```typescript
-import { vocabularyBuilderPreset } from 'glost/presets';
+import { vocabularyBuilderPreset } from '@glotblocks/glost/presets';
 
 const processor = glost()
   .use(vocabularyBuilderPreset)
@@ -116,7 +116,7 @@ For grammar analysis and teaching.
 - Grammatical gender (where applicable)
 
 ```typescript
-import { grammarAnalyzerPreset } from 'glost/presets';
+import { grammarAnalyzerPreset } from '@glotblocks/glost/presets';
 
 const processor = glost()
   .use(grammarAnalyzerPreset)
@@ -138,7 +138,7 @@ Lightweight preset with basic functionality.
 - No external data dependencies
 
 ```typescript
-import { minimalPreset } from 'glost/presets';
+import { minimalPreset } from '@glotblocks/glost/presets';
 
 const processor = glost()
   .use(minimalPreset)
@@ -165,8 +165,8 @@ const processor = glost()
 Add additional plugins to a preset:
 
 ```typescript
-import { glost } from 'glost';
-import { languageLearningPreset } from 'glost/presets';
+import { glost } from '@glotblocks/glost';
+import { languageLearningPreset } from '@glotblocks/glost/presets';
 import { myCustomPlugin } from './my-plugin';
 
 const processor = glost()
@@ -180,9 +180,9 @@ const processor = glost()
 Define your own preset:
 
 ```typescript
-import type { Preset } from 'glost-presets';
-import { createFrequencyExtension } from 'glost-frequency';
-import { createPosExtension } from 'glost-pos';
+import type { Preset } from '@glotblocks/glost-presets';
+import { createFrequencyExtension } from '@glotblocks/glost-frequency';
+import { createPosExtension } from '@glotblocks/glost-pos';
 
 export const myCustomPreset: Preset = {
   name: 'my-custom-preset',
@@ -204,7 +204,7 @@ const processor = glost()
 Some presets accept configuration:
 
 ```typescript
-import { createLanguageLearningPreset } from 'glost/presets';
+import { createLanguageLearningPreset } from '@glotblocks/glost/presets';
 
 const customPreset = createLanguageLearningPreset({
   targetLanguage: 'th',
@@ -221,7 +221,7 @@ const processor = glost()
 ## TypeScript
 
 ```typescript
-import type { Preset, PresetOptions } from 'glost-presets';
+import type { Preset, PresetOptions } from '@glotblocks/glost-presets';
 ```
 
 ## See Also
