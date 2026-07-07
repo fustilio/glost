@@ -18,9 +18,9 @@ Comprehensive naming conventions for the GLOST ecosystem following SRP (Single R
 | Package | Responsibility | Example |
 |---------|----------------|---------|
 | `glost` | Core types and node creation | Node factories, type definitions |
-| `glost-common` | Shared utilities and language codes | Language info, validators |
-| `glost-utils` | Text parsing and manipulation | Text utilities, parsers |
-| `glost-plugins` | Extension system | Extension interface, processor |
+| `@glotblocks/glost-common` | Shared utilities and language codes | Language info, validators |
+| `@glotblocks/glost-utils` | Text parsing and manipulation | Text utilities, parsers |
+| `@glotblocks/glost-plugins` | Extension system | Extension interface, processor |
 
 **Naming Rules:**
 - Simple, descriptive names
@@ -288,7 +288,7 @@ For multi-language packages, use `multi`:
 
 | What | Pattern | Example |
 |------|---------|---------|
-| Core package | `glost-[name]` | `glost-common` |
+| Core package | `glost-[name]` | `@glotblocks/glost-common` |
 | Extension package | `glost-plugins-[type]` | `glost-plugins-transcription` |
 | Data source | `glost-[lang]-datasource-[source]` | `glost-th-datasource-lexitron` |
 | Transcription | `glost-[lang]-transcription-[system]` | `glost-th-transcription-paiboon` |

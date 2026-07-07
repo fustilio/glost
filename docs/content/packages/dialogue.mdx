@@ -5,7 +5,7 @@ Dialogue syntax definitions and helper functions for creating conversations in G
 ## Installation
 
 ```bash
-npm install glost-dialogue glost
+npm install @glotblocks/glost-dialogue @glotblocks/glost
 ```
 
 ## Features
@@ -19,8 +19,8 @@ npm install glost-dialogue glost
 ## Quick Start
 
 ```typescript
-import { createDialogueFromTurns } from 'glost-dialogue';
-import { createSentenceFromWords, createThaiWord } from 'glost';
+import { createDialogueFromTurns } from '@glotblocks/glost-dialogue';
+import { createSentenceFromWords, createThaiWord } from '@glotblocks/glost';
 
 // Define participants
 const participants = [
@@ -108,7 +108,7 @@ interface SentenceDialogueInfo {
 Create a dialogue node manually.
 
 ```typescript
-import { createDialogueNode } from 'glost-dialogue';
+import { createDialogueNode } from '@glotblocks/glost-dialogue';
 
 const dialogue = createDialogueNode({
   children: [sentence1, sentence2],
@@ -124,7 +124,7 @@ const dialogue = createDialogueNode({
 Create a dialogue with automatic turn indexing.
 
 ```typescript
-import { createDialogueFromTurns } from 'glost-dialogue';
+import { createDialogueFromTurns } from '@glotblocks/glost-dialogue';
 
 const dialogue = createDialogueFromTurns({
   lang: 'ja',
@@ -145,7 +145,7 @@ const dialogue = createDialogueFromTurns({
 Add dialogue info to an existing sentence.
 
 ```typescript
-import { addDialogueInfoToSentence } from 'glost-dialogue';
+import { addDialogueInfoToSentence } from '@glotblocks/glost-dialogue';
 
 const sentenceWithInfo = addDialogueInfoToSentence(sentence, {
   role: 'customer',
@@ -162,7 +162,7 @@ const sentenceWithInfo = addDialogueInfoToSentence(sentence, {
 Check if a node is a dialogue.
 
 ```typescript
-import { isDialogueNode } from 'glost-dialogue';
+import { isDialogueNode } from '@glotblocks/glost-dialogue';
 
 if (isDialogueNode(node)) {
   // node is GLOSTDialogue
@@ -175,7 +175,7 @@ if (isDialogueNode(node)) {
 Check if a sentence has dialogue info.
 
 ```typescript
-import { hasSentenceDialogueInfo } from 'glost-dialogue';
+import { hasSentenceDialogueInfo } from '@glotblocks/glost-dialogue';
 
 if (hasSentenceDialogueInfo(sentence)) {
   // sentence has extras.dialogue
@@ -188,7 +188,7 @@ if (hasSentenceDialogueInfo(sentence)) {
 ### getDialogueParticipants
 
 ```typescript
-import { getDialogueParticipants } from 'glost-dialogue';
+import { getDialogueParticipants } from '@glotblocks/glost-dialogue';
 
 const participants = getDialogueParticipants(dialogue);
 // [{ id: 'customer', name: 'You' }, { id: 'shopkeeper', name: 'Shopkeeper' }]
@@ -197,7 +197,7 @@ const participants = getDialogueParticipants(dialogue);
 ### getDialogueContext
 
 ```typescript
-import { getDialogueContext } from 'glost-dialogue';
+import { getDialogueContext } from '@glotblocks/glost-dialogue';
 
 const context = getDialogueContext(dialogue);
 // 'Greeting at a shop'
@@ -206,7 +206,7 @@ const context = getDialogueContext(dialogue);
 ### getDialogueTitle
 
 ```typescript
-import { getDialogueTitle } from 'glost-dialogue';
+import { getDialogueTitle } from '@glotblocks/glost-dialogue';
 
 const title = getDialogueTitle(dialogue);
 // 'Lesson 1: Greetings'
@@ -215,7 +215,7 @@ const title = getDialogueTitle(dialogue);
 ### getSentenceSpeaker
 
 ```typescript
-import { getSentenceSpeaker } from 'glost-dialogue';
+import { getSentenceSpeaker } from '@glotblocks/glost-dialogue';
 
 const speaker = getSentenceSpeaker(sentence, participants);
 // 'You' or 'Shopkeeper'
@@ -231,7 +231,7 @@ import {
   getDialogueParticipants,
   getSentenceSpeaker,
   hasSentenceDialogueInfo
-} from 'glost-dialogue';
+} from '@glotblocks/glost-dialogue';
 
 // Framework-agnostic rendering logic
 function renderDialogue(dialogue: GLOSTDialogue) {
@@ -271,7 +271,7 @@ function renderDialogue(dialogue: GLOSTDialogue) {
 
 ### Interactive Fiction
 
-Combine with `glost-inkle` for interactive stories with dialogue.
+Combine with `@glotblocks/glost-inkle` for interactive stories with dialogue.
 
 ## See Also
 

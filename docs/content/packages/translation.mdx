@@ -5,7 +5,7 @@ Translation plugin for GLOST documents.
 ## Installation
 
 ```bash
-pnpm add glost-translation
+pnpm add @glotblocks/glost-translation
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ pnpm add glost-translation
 Create a plugin that adds translations to words.
 
 ```typescript
-import { createTranslationPlugin } from 'glost-translation';
+import { createTranslationPlugin } from '@glotblocks/glost-translation';
 
 const translationPlugin = createTranslationPlugin({
   targetLanguage: "th",
@@ -49,8 +49,8 @@ interface TranslationPluginOptions {
 Use with the v0.5+ processor API:
 
 ```typescript
-import { glost } from 'glost';
-import { createTranslationPlugin } from 'glost-translation';
+import { glost } from '@glotblocks/glost';
+import { createTranslationPlugin } from '@glotblocks/glost-translation';
 
 const translationPlugin = createTranslationPlugin({
   targetLanguage: "th",
@@ -99,8 +99,8 @@ After processing, words will have translations in extras:
 You can add translations for multiple languages by using multiple plugins:
 
 ```typescript
-import { glost } from 'glost';
-import { createTranslationPlugin } from 'glost-translation';
+import { glost } from '@glotblocks/glost';
+import { createTranslationPlugin } from '@glotblocks/glost-translation';
 
 const toEnglish = createTranslationPlugin({
   targetLanguage: "th",
@@ -125,10 +125,10 @@ const result = await glost()
 ### Combining with Other Extensions
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
-import { createTranslationGeneratorExtension } from 'glost-translation';
-import { createTranscriptionGeneratorExtension } from 'glost-transcription';
-import { createFrequencyExtension } from 'glost-frequency';
+import { processGLOSTWithExtensionsAsync } from '@glotblocks/glost-plugins';
+import { createTranslationGeneratorExtension } from '@glotblocks/glost-translation';
+import { createTranscriptionGeneratorExtension } from '@glotblocks/glost-transcription';
+import { createFrequencyExtension } from '@glotblocks/glost-frequency';
 
 // Create extensions
 const translation = createTranslationGeneratorExtension({

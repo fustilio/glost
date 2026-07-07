@@ -23,8 +23,8 @@ const text = "The ephemeral nature of social media posts makes archival challeng
 ### With Frequency Data
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from "glost-plugins";
-import { createFrequencyExtension } from "glost-frequency";
+import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
+import { createFrequencyExtension } from "@glotblocks/glost-frequency";
 import { createEnglishFrequencyProvider } from "./my-corpus-provider";
 
 // Real corpus data (example from BNC)
@@ -269,9 +269,9 @@ const corpusData = {
 ## Integration Example: Complete App
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from "glost-plugins";
-import { createFrequencyExtension } from "glost-frequency";
-import { convertTextToGLOST } from "glost-utils";
+import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
+import { createFrequencyExtension } from "@glotblocks/glost-frequency";
+import { convertTextToGLOST } from "@glotblocks/glost-utils";
 
 // 1. Load corpus data
 const corpusData = await loadBritishNationalCorpus();

@@ -21,10 +21,10 @@ This modular pattern enables:
 
 | Language | Package | Example | Status |
 |----------|---------|---------|--------|
-| **Thai** | `glost-th` | [`glost-th-transcription-example`](./demos/glost-th-transcription-example/) | ✓ Implemented |
-| **Japanese** | `glost-ja` | [`glost-ja-transcription-example`](./demos/glost-ja-transcription-example/) | ✓ Implemented |
-| **Korean** | `glost-ko` | [`glost-ko-transcription-example`](./demos/glost-ko-transcription-example/) | ✓ Implemented |
-| **English** | `glost-en` | [`glost-en-transcription-example`](./demos/glost-en-transcription-example/) | ✓ Implemented |
+| **Thai** | `@glotblocks/glost-th` | [`glost-th-transcription-example`](./demos/glost-th-transcription-example/) | ✓ Implemented |
+| **Japanese** | `@glotblocks/glost-ja` | [`glost-ja-transcription-example`](./demos/glost-ja-transcription-example/) | ✓ Implemented |
+| **Korean** | `@glotblocks/glost-ko` | [`glost-ko-transcription-example`](./demos/glost-ko-transcription-example/) | ✓ Implemented |
+| **English** | `@glotblocks/glost-en` | — | Not yet implemented |
 
 ### Full Extension Suites
 
@@ -39,22 +39,22 @@ Comprehensive examples showing multiple extensions working together:
 
 | Package | Description | Script Systems |
 |---------|-------------|----------------|
-| [`glost-th`](../packages/languages/th/) | Thai language support | Thai script, RTGS romanization |
-| [`glost-ja`](../packages/languages/ja/) | Japanese language support | Hiragana, Katakana, Kanji, Romaji |
-| [`glost-ko`](../packages/languages/ko/) | Korean language support | Hangul, Romanization |
-| [`glost-en`](../packages/languages/en/) | English language support | Latin script, IPA |
+| [`@glotblocks/glost-th`](../packages/languages/th/) | Thai language support | Thai script, RTGS romanization |
+| [`@glotblocks/glost-ja`](../packages/languages/ja/) | Japanese language support | Hiragana, Katakana, Kanji, Romaji |
+| [`@glotblocks/glost-ko`](../packages/languages/ko/) | Korean language support | Hangul, Romanization |
+| [`@glotblocks/glost-en`](../packages/languages/en/) | English language support | Latin script, IPA |
 
 ## Available Feature Frameworks (Y)
 
 | Package | Description | Use Cases |
 |---------|-------------|-----------|
-| [`glost-transcription`](../packages/extensions/transcription/) | Add transcription/transliteration | Romanization, phonetic notation |
-| [`glost-translation`](../packages/extensions/translation/) | Add translations | Glosses, definitions |
-| [`glost-frequency`](../packages/extensions/frequency/) | Word frequency analysis | Difficulty assessment |
-| [`glost-pos`](../packages/extensions/pos/) | Part-of-speech tagging | Grammar analysis |
-| [`glost-difficulty`](../packages/extensions/difficulty/) | Difficulty scoring | Learning materials |
-| [`glost-gender`](../packages/extensions/gender/) | Grammatical gender | Language learning |
-| [`glost-clause-segmenter`](../packages/extensions/clause-segmenter/) | Clause segmentation | Syntax analysis |
+| [`@glotblocks/glost-transcription`](../packages/plugins/transcription/) | Add transcription/transliteration | Romanization, phonetic notation |
+| [`@glotblocks/glost-translation`](../packages/plugins/translation/) | Add translations | Glosses, definitions |
+| [`@glotblocks/glost-frequency`](../packages/plugins/frequency/) | Word frequency analysis | Difficulty assessment |
+| [`@glotblocks/glost-pos`](../packages/plugins/pos/) | Part-of-speech tagging | Grammar analysis |
+| [`@glotblocks/glost-difficulty`](../packages/plugins/difficulty/) | Difficulty scoring | Learning materials |
+| [`@glotblocks/glost-gender`](../packages/plugins/gender/) | Grammatical gender | Language learning |
+| [`@glotblocks/glost-clause-segmenter`](../packages/plugins/clause-segmenter/) | Clause segmentation | Syntax analysis |
 
 ## Possible Combinations
 
@@ -96,10 +96,10 @@ Each combination is created by:
 
 ```typescript
 // 1. Import language support
-import { createThaiProcessor } from "glost-th";
+import { createThaiProcessor } from "@glotblocks/glost-th";
 
 // 2. Import feature framework
-import { createTranscriptionExtension } from "glost-transcription";
+import { createTranscriptionExtension } from "@glotblocks/glost-transcription";
 
 // 3. Create provider
 const provider = {
@@ -127,7 +127,7 @@ To add a new language + feature combination:
 3. Combine the language package with the feature framework
 4. Add tests to verify functionality
 
-See [Creating Custom Extensions](../docs/guides/custom-extensions.md) for detailed instructions.
+See [Creating Custom Extensions](../docs/content/guides/custom-plugins.mdx) for detailed instructions.
 
 ## Benefits
 
@@ -146,6 +146,6 @@ See [Creating Custom Extensions](../docs/guides/custom-extensions.md) for detail
 ## See Also
 
 - [Examples README](./README.md) - Full list of examples
-- [GLOST Architecture](../docs/ARCHITECTURE_SUMMARY.md) - System overview
-- [Extension Guide](../docs/guides/custom-extensions.md) - Creating extensions
-- [Multi-Language Architecture](../docs/guides/multi-language-architecture.md) - Design patterns
+- [GLOST Architecture](../docs/content/architecture-summary.mdx) - System overview
+- [Extension Guide](../docs/content/guides/custom-plugins.mdx) - Creating extensions
+- [Multi-Language Architecture](../docs/content/guides/multi-language-architecture.mdx) - Design patterns

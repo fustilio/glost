@@ -21,14 +21,14 @@ Create and render conversational dialogues with speaker attribution, perfect for
 Install the packages:
 
 ```bash
-npm install glost glost-react
+npm install @glotblocks/glost @glotblocks/glost-react
 ```
 
 Create a simple word with ruby annotation:
 
 ```tsx
-import { SimpleRubyWord } from "glost-react";
-import { createJapaneseWord } from "glost";
+import { SimpleRubyWord } from "@glotblocks/glost-react";
+import { createJapaneseWord } from "@glotblocks/glost";
 
 const word = createJapaneseWord({
   text: "日本語",
@@ -55,9 +55,9 @@ function Example() {
 | Package | Purpose |
 |---------|---------|
 | `glost` | Core types, document creation, tree traversal |
-| `glost-react` | React components for rendering with ruby annotations |
-| `glost-dialogue` | Dialogue and conversation support |
-| `glost-processor` | Unified-style processor for plugins |
+| `@glotblocks/glost-react` | React components for rendering with ruby annotations |
+| `@glotblocks/glost-dialogue` | Dialogue and conversation support |
+| `@glotblocks/glost-processor` | Unified-style processor for plugins |
 
 ## Live Examples
 

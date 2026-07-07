@@ -12,19 +12,19 @@ This document contains the latest migration guide for upgrading to the current G
 
 **Key Changes:**
 - Unified-style processor API with fluent `.use()` chaining
-- Package restructure: `glost` (core) → `glost-core`, new `glost` facade package
+- Package restructure: `glost` (core) → `@glotblocks/glost-core`, new `glost` facade package
 - Enhanced plugin registry with discovery and validation
-- New packages: `glost-processor`, `glost-registry`, `glost-presets`, `glost-cli`
+- New packages: `@glotblocks/glost-processor`, `@glotblocks/glost-registry`, `@glotblocks/glost-presets`, `@glotblocks/glost-cli`
 - Async-only processing (add `await` to all `.process()` calls)
 
 **Quick Start:**
 ```typescript
 // Old (v0.4)
-import { processGLOSTWithExtensions } from "glost-plugins";
+import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
 const result = processGLOSTWithExtensions(doc, [ext1, ext2]);
 
 // New (v0.5)
-import { glost } from "glost";
+import { glost } from "@glotblocks/glost";
 const result = await glost().use(ext1).use(ext2).process(doc);
 ```
 

@@ -5,13 +5,13 @@ Plugin discovery, validation, and conflict detection for GLOST.
 ## Installation
 
 ```bash
-npm install glost-registry glost-core glost-plugins
+npm install @glotblocks/glost-registry @glotblocks/glost-core @glotblocks/glost-plugins
 ```
 
 Or use the main `glost` package which includes the registry:
 
 ```bash
-npm install glost
+npm install @glotblocks/glost
 ```
 
 ## Features
@@ -25,7 +25,7 @@ npm install glost
 ## Quick Start
 
 ```typescript
-import { pluginRegistry } from 'glost';
+import { pluginRegistry } from '@glotblocks/glost';
 
 // Register a plugin
 pluginRegistry.register({
@@ -50,7 +50,7 @@ const plugin = pluginRegistry.get('my-plugin');
 Singleton registry instance.
 
 ```typescript
-import { pluginRegistry } from 'glost';
+import { pluginRegistry } from '@glotblocks/glost';
 ```
 
 ### register(metadata)
@@ -227,7 +227,7 @@ Common plugin categories:
 ## Example: Plugin Discovery UI
 
 ```typescript
-import { pluginRegistry } from 'glost';
+import { pluginRegistry } from '@glotblocks/glost';
 
 function PluginBrowser({ language }) {
   const plugins = pluginRegistry.search({ language });

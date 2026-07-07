@@ -12,7 +12,9 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -58,7 +60,8 @@
     "build:all": "pnpm run build && pnpm run build:example-data",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
-    "lint": "echo 'No linting configured'"
+    "lint": "echo 'No linting configured'",
+    "bench": "vitest bench --run"
   },
   "publishConfig": {
     "access": "public"

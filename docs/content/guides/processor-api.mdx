@@ -17,9 +17,9 @@ The GLOST processor provides a unified/remark-style fluent API for processing do
 ## Quick Start
 
 ```typescript
-import { glost } from "glost-processor";
-import { transcription } from "glost-transcription";
-import { translation } from "glost-translation";
+import { glost } from "@glotblocks/glost-processor";
+import { transcription } from "@glotblocks/glost-transcription";
+import { translation } from "@glotblocks/glost-translation";
 
 const processor = glost()
   .use(transcription, { scheme: "ipa" })
@@ -33,7 +33,7 @@ const result = await processor.process(document);
 ### Basic Creation
 
 ```typescript
-import { glost } from "glost-processor";
+import { glost } from "@glotblocks/glost-processor";
 
 const processor = glost();
 ```
@@ -65,7 +65,7 @@ const processor = glost({
 Recommended approach - plugins as functions:
 
 ```typescript
-import { transcription } from "glost-transcription";
+import { transcription } from "@glotblocks/glost-transcription";
 
 processor.use(transcription, {
   scheme: "ipa",
@@ -78,7 +78,7 @@ processor.use(transcription, {
 Direct extension objects (backwards compatible):
 
 ```typescript
-import { transcriptionExtension } from "glost-transcription";
+import { transcriptionExtension } from "@glotblocks/glost-transcription";
 
 processor.use(transcriptionExtension);
 ```
@@ -96,7 +96,7 @@ processor.use("transcription");
 Use preset configurations:
 
 ```typescript
-import { languageLearningPreset } from "glost-presets";
+import { languageLearningPreset } from "@glotblocks/glost-presets";
 
 processor.use(languageLearningPreset);
 ```
@@ -526,7 +526,7 @@ for (const doc of documents) {
 
 ```typescript
 // Good
-import { languageLearningPreset } from "glost-presets";
+import { languageLearningPreset } from "@glotblocks/glost-presets";
 processor.use(languageLearningPreset);
 
 // Less good

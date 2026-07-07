@@ -51,54 +51,54 @@ LAYER 1: FOUNDATION
 
 | Package | Version | Description |
 |---------|---------|-------------|
-| `glost-core` | 0.5.0 | Core types, nodes, validators, and tree traversal utilities |
-| `glost-common` | 0.2.0 | Common utilities and language configurations |
-| `glost-utils` | 0.2.0 | Framework-agnostic utilities for text manipulation |
-| `glost-plugins` | 0.5.0 | Plugin architecture and extension system |
+| `@glotblocks/glost-core` | 0.5.0 | Core types, nodes, validators, and tree traversal utilities |
+| `@glotblocks/glost-common` | 0.2.0 | Common utilities and language configurations |
+| `@glotblocks/glost-utils` | 0.2.0 | Framework-agnostic utilities for text manipulation |
+| `@glotblocks/glost-plugins` | 0.5.0 | Plugin architecture and extension system |
 
 ### Plugin Packages
 
 | Package | Version | Description |
 |---------|---------|-------------|
-| `glost-transcription` | 0.4.0 | Pronunciation and transcription data (IPA, romanization) |
-| `glost-translation` | 0.4.0 | Multilingual glosses and translations |
-| `glost-frequency` | 0.4.0 | Word frequency metrics and prioritization |
-| `glost-difficulty` | 0.4.0 | CEFR levels and difficulty scoring |
-| `glost-pos` | 0.4.0 | Part-of-speech tagging and formatting |
-| `glost-gender` | 0.2.1 | Grammatical gender metadata |
-| `glost-clause-segmenter` | 0.2.1 | Sentence segmentation into clauses |
-| `glost-inkle` | 0.2.0 | Inkle/Ink interactive fiction integration |
+| `@glotblocks/glost-transcription` | 0.4.0 | Pronunciation and transcription data (IPA, romanization) |
+| `@glotblocks/glost-translation` | 0.4.0 | Multilingual glosses and translations |
+| `@glotblocks/glost-frequency` | 0.4.0 | Word frequency metrics and prioritization |
+| `@glotblocks/glost-difficulty` | 0.4.0 | CEFR levels and difficulty scoring |
+| `@glotblocks/glost-pos` | 0.4.0 | Part-of-speech tagging and formatting |
+| `@glotblocks/glost-gender` | 0.2.1 | Grammatical gender metadata |
+| `@glotblocks/glost-clause-segmenter` | 0.2.1 | Sentence segmentation into clauses |
+| `@glotblocks/glost-inkle` | 0.2.0 | Inkle/Ink interactive fiction integration |
 
 ### Language Packages
 
 | Package | Version | Description |
 |---------|---------|-------------|
-| `glost-th` | 0.4.1 | Thai language support (RTGS, Paiboon+, segmentation) |
-| `glost-ja` | 0.4.0 | Japanese language support (furigana, romaji, JLPT) |
-| `glost-ko` | 0.1.0 | Korean language support (romanization) |
-| `glost-en` | 0.4.0 | English language support (segmentation) |
+| `@glotblocks/glost-th` | 0.4.1 | Thai language support (RTGS, Paiboon+, segmentation) |
+| `@glotblocks/glost-ja` | 0.4.0 | Japanese language support (furigana, romaji, JLPT) |
+| `@glotblocks/glost-ko` | 0.1.0 | Korean language support (romanization) |
+| `@glotblocks/glost-en` | 0.4.0 | English language support (segmentation) |
 
 ### Processing Infrastructure
 
 | Package | Version | Description |
 |---------|---------|-------------|
-| `glost-processor` | 0.5.0 | Unified-style processor with `.use()` API |
-| `glost-registry` | 0.5.0 | Plugin discovery, validation, conflict detection |
-| `glost-presets` | 0.5.0 | Pre-configured plugin combinations |
+| `@glotblocks/glost-processor` | 0.5.0 | Unified-style processor with `.use()` API |
+| `@glotblocks/glost-registry` | 0.5.0 | Plugin discovery, validation, conflict detection |
+| `@glotblocks/glost-presets` | 0.5.0 | Pre-configured plugin combinations |
 
 ### Interface Packages
 
 | Package | Version | Description |
 |---------|---------|-------------|
-| `glost-react` | 0.5.0 | React components for rendering with ruby annotations |
-| `glost-dialogue` | 0.5.0 | Dialogue syntax and helper functions |
+| `@glotblocks/glost-react` | 0.5.0 | React components for rendering with ruby annotations |
+| `@glotblocks/glost-dialogue` | 0.5.0 | Dialogue syntax and helper functions |
 
 ### Main Package & Tools
 
 | Package | Version | Description |
 |---------|---------|-------------|
 | `glost` | 0.5.0 | Main entry point combining all GLOST functionality |
-| `glost-cli` | 0.5.0 | CLI for plugin management and discovery |
+| `@glotblocks/glost-cli` | 0.5.0 | CLI for plugin management and discovery |
 
 ## Package Relationships
 
@@ -144,14 +144,14 @@ glost-en ─────────── glost
 
 ### 1. Foundation → Plugins
 
-The foundation layer provides core types and utilities. The plugin system (`glost-plugins`) builds on this to enable extensible processing.
+The foundation layer provides core types and utilities. The plugin system (`@glotblocks/glost-plugins`) builds on this to enable extensible processing.
 
 ```typescript
 // Foundation provides types
-import { GLOSTWord, GLOSTSentence } from 'glost-core';
+import { GLOSTWord, GLOSTSentence } from '@glotblocks/glost-core';
 
 // Plugin system provides extension architecture
-import { processGLOST, type GLOSTExtension } from 'glost-plugins';
+import { processGLOST, type GLOSTExtension } from '@glotblocks/glost-plugins';
 ```
 
 ### 2. Plugins → Language Packages
@@ -160,8 +160,8 @@ Individual plugins (frequency, transcription, etc.) are composed into language-s
 
 ```typescript
 // Language package composes multiple plugins
-import { thaiFrequencyProvider } from 'glost-th/extensions';
-import { createFrequencyExtension } from 'glost-frequency';
+import { thaiFrequencyProvider } from '@glotblocks/glost-th/extensions';
+import { createFrequencyExtension } from '@glotblocks/glost-frequency';
 
 const [freqGen, freqEnh] = createFrequencyExtension({
   targetLanguage: 'th',
@@ -174,8 +174,8 @@ const [freqGen, freqEnh] = createFrequencyExtension({
 The processor, registry, and presets provide the runtime infrastructure for using plugins.
 
 ```typescript
-import { glost } from 'glost';
-import { languageLearningPreset } from 'glost/presets';
+import { glost } from '@glotblocks/glost';
+import { languageLearningPreset } from '@glotblocks/glost/presets';
 
 const processor = glost()
   .use(languageLearningPreset)
@@ -190,10 +190,10 @@ Frontend packages consume processed documents for rendering.
 
 ```typescript
 // React rendering
-import { GloSTWord, GloSTSentence } from 'glost-react';
+import { GloSTWord, GloSTSentence } from '@glotblocks/glost-react';
 
 // Dialogue structures
-import { createDialogueFromTurns } from 'glost-dialogue';
+import { createDialogueFromTurns } from '@glotblocks/glost-dialogue';
 ```
 
 ## Use Cases by Package Combination
@@ -240,7 +240,7 @@ glost + glost-pos + glost-clause-segmenter
 
 | Type | Pattern | Example |
 |------|---------|---------|
-| Language | `glost-{lang}` | `glost-th`, `glost-ja` |
+| Language | `glost-{lang}` | `@glotblocks/glost-th`, `@glotblocks/glost-ja` |
 | Data Source | `glost-{lang}-datasource-{source}` | `glost-th-datasource-lexitron` |
 | Transcription | `glost-{lang}-transcription-{system}` | `glost-th-transcription-paiboon` |
 | Lookup | `glost-{lang}-lookup-{type}-{system}-{source}` | `glost-th-lookup-transcription-paiboon-lexitron` |

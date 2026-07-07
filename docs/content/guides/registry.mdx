@@ -16,7 +16,7 @@ The GLOST plugin registry provides discovery, metadata management, validation, a
 ## Quick Start
 
 ```typescript
-import { pluginRegistry } from "glost-registry";
+import { pluginRegistry } from "@glotblocks/glost-registry";
 
 // Register a plugin
 pluginRegistry.register(myExtension, {
@@ -42,7 +42,7 @@ const report = pluginRegistry.checkConflicts(["plugin1", "plugin2"]);
 ### Basic Registration
 
 ```typescript
-import { pluginRegistry } from "glost-registry";
+import { pluginRegistry } from "@glotblocks/glost-registry";
 
 pluginRegistry.register(myExtension, {
   version: "1.0.0",
@@ -120,8 +120,8 @@ pluginRegistry.register(myExtension, {
       title: "Basic Usage",
       description: "Transcribe with IPA",
       code: `
-import { glost } from "glost-processor";
-import { transcription } from "glost-transcription";
+import { glost } from "@glotblocks/glost-processor";
+import { transcription } from "@glotblocks/glost-transcription";
 
 const processor = glost()
   .use(transcription, { scheme: "ipa" });
@@ -395,7 +395,7 @@ console.log("Top tags:", stats.topTags);
 Create an isolated registry:
 
 ```typescript
-import { PluginRegistry } from "glost-registry";
+import { PluginRegistry } from "@glotblocks/glost-registry";
 
 const myRegistry = new PluginRegistry();
 
@@ -408,7 +408,7 @@ const plugins = myRegistry.search({ keyword: "test" });
 ### Plugin Discovery Utilities
 
 ```typescript
-import { PluginDiscovery } from "glost-registry";
+import { PluginDiscovery } from "@glotblocks/glost-registry";
 
 // Find related plugins
 const related = PluginDiscovery.findRelated(
@@ -439,7 +439,7 @@ const suggestions = PluginDiscovery.suggestPlugins(
 ### Filtering and Sorting
 
 ```typescript
-import { PluginFilter, PluginSorter } from "glost-registry";
+import { PluginFilter, PluginSorter } from "@glotblocks/glost-registry";
 
 let plugins = pluginRegistry.list();
 
@@ -457,7 +457,7 @@ plugins = PluginSorter.byCategory(plugins);
 ### Custom Validation
 
 ```typescript
-import { PluginValidator } from "glost-registry";
+import { PluginValidator } from "@glotblocks/glost-registry";
 
 const metadata = pluginRegistry.getMetadata("my-plugin");
 
@@ -484,7 +484,7 @@ const depResult = PluginValidator.validateDependencies(
 
 ```typescript
 // In your app initialization
-import { pluginRegistry } from "glost-registry";
+import { pluginRegistry } from "@glotblocks/glost-registry";
 import { allPlugins } from "./plugins";
 
 for (const [extension, metadata] of allPlugins) {

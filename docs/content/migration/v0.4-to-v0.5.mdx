@@ -17,10 +17,10 @@ GLOST v0.5 introduces a unified/remark-style processor API with:
 ### Before (v0.4.x)
 
 ```typescript
-import { processGLOSTWithExtensions } from "glost-plugins";
-import { transcriptionExtension } from "glost-transcription";
-import { translationExtension } from "glost-translation";
-import { frequencyExtension } from "glost-frequency";
+import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
+import { transcriptionExtension } from "@glotblocks/glost-transcription";
+import { translationExtension } from "@glotblocks/glost-translation";
+import { frequencyExtension } from "@glotblocks/glost-frequency";
 
 const result = processGLOSTWithExtensions(document, [
   transcriptionExtension,
@@ -34,10 +34,10 @@ const processed = result.document;
 ### After (v0.5.0)
 
 ```typescript
-import { glost } from "glost-processor";
-import { transcription } from "glost-transcription";
-import { translation } from "glost-translation";
-import { frequency } from "glost-frequency";
+import { glost } from "@glotblocks/glost-processor";
+import { transcription } from "@glotblocks/glost-transcription";
+import { translation } from "@glotblocks/glost-translation";
+import { frequency } from "@glotblocks/glost-frequency";
 
 const result = await glost()
   .use(transcription)
@@ -163,7 +163,7 @@ console.log(result.metadata);
 Group plugins into reusable configurations:
 
 ```typescript
-import { languageLearningPreset } from "glost-presets";
+import { languageLearningPreset } from "@glotblocks/glost-presets";
 
 const processor = glost()
   .use(languageLearningPreset);
@@ -241,7 +241,7 @@ const result2 = await frozen.process(doc2);
 Register plugins with rich metadata:
 
 ```typescript
-import { pluginRegistry } from "glost-registry";
+import { pluginRegistry } from "@glotblocks/glost-registry";
 
 pluginRegistry.register(myExtension, {
   version: "1.0.0",
@@ -309,13 +309,13 @@ Some import paths have changed:
 #### Old
 
 ```typescript
-import { processGLOSTWithExtensions } from "glost-plugins";
+import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
 ```
 
 #### New
 
 ```typescript
-import { glost } from "glost-processor";
+import { glost } from "@glotblocks/glost-processor";
 ```
 
 ### 3. Plugin Registration
@@ -325,7 +325,7 @@ Extensions are now automatically registered when used:
 #### Old
 
 ```typescript
-import { registerExtension } from "glost-plugins";
+import { registerExtension } from "@glotblocks/glost-plugins";
 
 registerExtension(myExtension);
 ```
@@ -337,7 +337,7 @@ registerExtension(myExtension);
 processor.use(myExtension);
 
 // Or explicit registration in enhanced registry
-import { pluginRegistry } from "glost-registry";
+import { pluginRegistry } from "@glotblocks/glost-registry";
 pluginRegistry.register(myExtension, metadata);
 ```
 
@@ -362,7 +362,7 @@ The old API still works in v0.5:
 
 ```typescript
 // This still works!
-import { processGLOSTWithExtensions } from "glost-plugins";
+import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
 
 const result = processGLOSTWithExtensions(doc, [ext1, ext2]);
 ```
@@ -380,17 +380,17 @@ See migration guide: https://glost.dev/migration
 ### Step 1: Install New Packages
 
 ```bash
-pnpm add glost-processor glost-registry glost-presets
+pnpm add @glotblocks/glost-processor @glotblocks/glost-registry @glotblocks/glost-presets
 ```
 
 ### Step 2: Update Imports
 
 ```typescript
 // Before
-import { processGLOSTWithExtensions } from "glost-plugins";
+import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
 
 // After
-import { glost } from "glost-processor";
+import { glost } from "@glotblocks/glost-processor";
 ```
 
 ### Step 3: Convert to Fluent API
@@ -448,7 +448,7 @@ const result = processGLOSTWithExtensions(doc, [
 ]);
 
 // After - use preset
-import { languageLearningPreset } from "glost-presets";
+import { languageLearningPreset } from "@glotblocks/glost-presets";
 
 const doc = await glost()
   .use(languageLearningPreset)
@@ -536,7 +536,7 @@ await processor.process(doc);
 **Solution:** Register the plugin first:
 
 ```typescript
-import { pluginRegistry } from "glost-registry";
+import { pluginRegistry } from "@glotblocks/glost-registry";
 pluginRegistry.register(myExtension, metadata);
 ```
 

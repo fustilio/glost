@@ -50,7 +50,7 @@ import {
 
   // Info
   getLanguageInfo,
-} from "glost-common";
+} from "@glotblocks/glost-common";
 
 // All formats accepted
 toISO639_3("en");      // "eng"
@@ -103,7 +103,7 @@ GLOST v0.4.0 introduces comprehensive utilities for working with BCP-47 language
 Convert language codes to standard BCP-47 format:
 
 ```typescript
-import { normalizeLanguageCode } from "glost-common";
+import { normalizeLanguageCode } from "@glotblocks/glost-common";
 
 // Add default regions
 normalizeLanguageCode("en");      // "en-US"
@@ -125,7 +125,7 @@ normalizeLanguageCode("zh-CN");   // "zh-CN"
 Parse BCP-47 codes into components:
 
 ```typescript
-import { parseLanguageCode } from "glost-common";
+import { parseLanguageCode } from "@glotblocks/glost-common";
 
 parseLanguageCode("en-US");
 // { language: "en", region: "US" }
@@ -142,7 +142,7 @@ parseLanguageCode("sr-Latn-RS");
 Compare language codes with flexible matching:
 
 ```typescript
-import { matchLanguage } from "glost-common";
+import { matchLanguage } from "@glotblocks/glost-common";
 
 // Exact match
 matchLanguage("en-US", "en-US");  // true
@@ -162,7 +162,7 @@ matchLanguage("en-GB", "en-US", { ignoreRegion: true });  // true
 Find the best matching language code from available options:
 
 ```typescript
-import { findBestMatch } from "glost-common";
+import { findBestMatch } from "@glotblocks/glost-common";
 
 const available = ["en-US", "en-GB", "fr-FR", "th-TH"];
 
@@ -176,7 +176,7 @@ findBestMatch("en", available);     // "en-US" (fallback)
 Get fallback language codes in order of preference:
 
 ```typescript
-import { getLanguageFallbacks } from "glost-common";
+import { getLanguageFallbacks } from "@glotblocks/glost-common";
 
 getLanguageFallbacks("en-GB");
 // ["en-GB", "en-US", "en"]
@@ -190,7 +190,7 @@ getLanguageFallbacks("zh-Hans-CN");
 Validate BCP-47 format:
 
 ```typescript
-import { isValidBCP47, asBCP47 } from "glost-common";
+import { isValidBCP47, asBCP47 } from "@glotblocks/glost-common";
 
 isValidBCP47("en-US");      // true
 isValidBCP47("tha-TH");     // true
@@ -205,7 +205,7 @@ const code = asBCP47("en-US");  // Returns BCP47LanguageCode type
 Migrate existing documents to BCP-47 standard:
 
 ```typescript
-import { migrateAllLanguageCodes } from "glost-utils";
+import { migrateAllLanguageCodes } from "@glotblocks/glost-utils";
 
 const result = migrateAllLanguageCodes(document, {
   addDefaultRegions: true,
@@ -223,7 +223,7 @@ result.changes.forEach(change => {
 Use branded types for compile-time safety:
 
 ```typescript
-import type { BCP47LanguageCode } from "glost-common";
+import type { BCP47LanguageCode } from "@glotblocks/glost-common";
 
 function processLanguage(code: BCP47LanguageCode) {
   // Type-safe language code handling
@@ -239,7 +239,7 @@ processLanguage(code);  // ✓ Type-safe
 If you're upgrading from v0.3.x, use the migration utility to update your documents:
 
 ```typescript
-import { migrateAllLanguageCodes } from "glost-utils";
+import { migrateAllLanguageCodes } from "@glotblocks/glost-utils";
 import fs from "fs";
 
 // Read existing document
@@ -260,7 +260,7 @@ if (result.hasChanges) {
 | `zxx` | No linguistic content |
 
 ```typescript
-import { isSpecialCode, SPECIAL_CODES } from "glost-common";
+import { isSpecialCode, SPECIAL_CODES } from "@glotblocks/glost-common";
 
 isSpecialCode("ipa");  // true
 isSpecialCode("en");   // false
@@ -444,7 +444,7 @@ type LanguageEntry = {
 ## Validation
 
 ```typescript
-import { languageCodeSchema, isValidLanguageCode } from "glost-common";
+import { languageCodeSchema, isValidLanguageCode } from "@glotblocks/glost-common";
 
 // Runtime validation
 isValidLanguageCode("en");     // true

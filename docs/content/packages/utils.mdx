@@ -5,20 +5,20 @@ Framework-agnostic utilities for GLOST manipulation, conversion, and merging.
 ## Installation
 
 ```bash
-pnpm add glost-utils
+pnpm add @glotblocks/glost-utils
 ```
 
 ## Exports
 
 ```typescript
 // Main entry
-import { ... } from 'glost-utils';
+import { ... } from '@glotblocks/glost-utils';
 
 // Subpath exports
-import { convertTextToGLOST } from 'glost-utils/text-to-glost';
-import { mergeTranscriptionData } from 'glost-utils/merger';
-import { getAllWordsFromDocument } from 'glost-utils/document';
-import { convertScriptToString } from 'glost-utils/script';
+import { convertTextToGLOST } from '@glotblocks/glost-utils/text-to-glost';
+import { mergeTranscriptionData } from '@glotblocks/glost-utils/merger';
+import { getAllWordsFromDocument } from '@glotblocks/glost-utils/document';
+import { convertScriptToString } from '@glotblocks/glost-utils/script';
 ```
 
 ## Text-to-GLOST Conversion
@@ -44,7 +44,7 @@ interface ConvertTextToGLOSTOptions {
 **Example:**
 
 ```typescript
-import { convertTextToGLOST } from 'glost-utils';
+import { convertTextToGLOST } from '@glotblocks/glost-utils';
 
 const document = convertTextToGLOST("Hello world!", {
   language: "en",

@@ -5,7 +5,7 @@ This guide covers processing GLOST documents with extensions.
 ## Basic Usage
 
 ```typescript
-import { processGLOST, type GLOSTExtension } from 'glost-plugins';
+import { processGLOST, type GLOSTExtension } from '@glotblocks/glost-plugins';
 
 // Define extensions
 const myExtension: GLOSTExtension = {
@@ -28,7 +28,7 @@ const result = processGLOST(document, [myExtension]);
 For extensions that fetch external data:
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
+import { processGLOSTWithExtensionsAsync } from '@glotblocks/glost-plugins';
 
 const result = await processGLOSTWithExtensionsAsync(document, [
   asyncExtension1,
@@ -41,9 +41,9 @@ const result = await processGLOSTWithExtensionsAsync(document, [
 Data-enrichment extensions (frequency, difficulty, etc.) are in separate packages:
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
-import { createFrequencyExtension } from 'glost-frequency';
-import { createDifficultyExtension } from 'glost-difficulty';
+import { processGLOSTWithExtensionsAsync } from '@glotblocks/glost-plugins';
+import { createFrequencyExtension } from '@glotblocks/glost-frequency';
+import { createDifficultyExtension } from '@glotblocks/glost-difficulty';
 
 // Create extensions with providers
 const [freqGen, freqEnh] = createFrequencyExtension({
@@ -73,7 +73,7 @@ import {
   registerExtensions,
   getExtension,
   getAllExtensions
-} from 'glost-plugins';
+} from '@glotblocks/glost-plugins';
 
 // Register globally
 registerExtension(myExtension);
@@ -87,7 +87,7 @@ const all = getAllExtensions();
 ### Process by ID
 
 ```typescript
-import { processGLOSTWithExtensionIds } from 'glost-plugins';
+import { processGLOSTWithExtensionIds } from '@glotblocks/glost-plugins';
 
 // Process using registered extension IDs
 const result = processGLOSTWithExtensionIds(document, [
@@ -123,10 +123,10 @@ The processor automatically:
 ### All at Once
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
-import { CulturalNotesExtension, createGenderTransformerExtension } from 'glost-plugins';
-import { createTranscriptionGeneratorExtension } from 'glost-transcription';
-import { createFrequencyExtension } from 'glost-frequency';
+import { processGLOSTWithExtensionsAsync } from '@glotblocks/glost-plugins';
+import { CulturalNotesExtension, createGenderTransformerExtension } from '@glotblocks/glost-plugins';
+import { createTranscriptionGeneratorExtension } from '@glotblocks/glost-transcription';
+import { createFrequencyExtension } from '@glotblocks/glost-frequency';
 
 const genderTransformer = createGenderTransformerExtension({
   targetGender: 'female',
@@ -154,7 +154,7 @@ const result = await processGLOSTWithExtensionsAsync(document, [
 ### In Stages
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from 'glost-plugins';
+import { processGLOSTWithExtensionsAsync } from '@glotblocks/glost-plugins';
 
 // Stage 1: Fetch external data
 const withTranslations = await processGLOSTWithExtensionsAsync(document, [
@@ -177,7 +177,7 @@ const final = await processGLOSTWithExtensionsAsync(withStructure, [
 ## Accessing Enriched Data
 
 ```typescript
-import { getAllWords } from 'glost-core';
+import { getAllWords } from '@glotblocks/glost-core';
 
 const words = getAllWords(result);
 
@@ -193,13 +193,13 @@ words.forEach(word => {
 
 | Package | Description |
 |---------|-------------|
-| `glost-plugins` | Core extensions (cultural notes, gender transformer, etc.) |
-| `glost-frequency` | Word frequency data |
-| `glost-difficulty` | Difficulty assessment |
-| `glost-pos` | Part-of-speech tagging |
-| `glost-transcription` | Transcription/romanization |
-| `glost-translation` | Translation data |
-| `glost-clause-segmenter` | Clause segmentation |
+| `@glotblocks/glost-plugins` | Core extensions (cultural notes, gender transformer, etc.) |
+| `@glotblocks/glost-frequency` | Word frequency data |
+| `@glotblocks/glost-difficulty` | Difficulty assessment |
+| `@glotblocks/glost-pos` | Part-of-speech tagging |
+| `@glotblocks/glost-transcription` | Transcription/romanization |
+| `@glotblocks/glost-translation` | Translation data |
+| `@glotblocks/glost-clause-segmenter` | Clause segmentation |
 
 ## Performance Tips
 

@@ -107,8 +107,8 @@ All plugins follow the philosophy: **"No data is better than bad data."**
 ### Pattern 1: Basic Usage
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from "glost-plugins";
-import { createFrequencyExtension } from "glost-frequency";
+import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
+import { createFrequencyExtension } from "@glotblocks/glost-frequency";
 import { createFrequencyProvider } from "./my-provider";
 
 // 1. Create provider with real data
@@ -127,9 +127,9 @@ const result = await processGLOSTWithExtensionsAsync(doc, [freqGen, freqEnh]);
 ### Pattern 2: Multi-Extension Pipeline
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from "glost-plugins";
-import { createFrequencyExtension } from "glost-frequency";
-import { createDifficultyExtension } from "glost-difficulty";
+import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
+import { createFrequencyExtension } from "@glotblocks/glost-frequency";
+import { createDifficultyExtension } from "@glotblocks/glost-difficulty";
 
 // Create extensions
 const [freqGen, freqEnh] = createFrequencyExtension({
@@ -152,9 +152,9 @@ const result = await processGLOSTWithExtensionsAsync(doc, [
 ### Pattern 3: Language-Specific Providers
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from "glost-plugins";
-import { createFrequencyExtension } from "glost-frequency";
-import { thaiFrequencyProvider } from "glost-th/extensions";
+import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
+import { createFrequencyExtension } from "@glotblocks/glost-frequency";
+import { thaiFrequencyProvider } from "@glotblocks/glost-th/extensions";
 
 // Thai processing
 const [freqGen, freqEnh] = createFrequencyExtension({

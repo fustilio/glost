@@ -42,8 +42,8 @@ const texts = [
 ### With Difficulty Assessment (Based on CEFR Word Lists)
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from "glost-plugins";
-import { createDifficultyExtension } from "glost-difficulty";
+import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
+import { createDifficultyExtension } from "@glotblocks/glost-difficulty";
 import { createCEFRDifficultyProvider } from "./my-wordlist-provider";
 
 // Real CEFR word lists
@@ -366,8 +366,8 @@ Overall: 50% intermediate vocabulary → INTERMEDIATE LEVEL
 ## Integration Example: Complete Adaptive System
 
 ```typescript
-import { glost } from "glost";
-import { createDifficultyPlugin } from "glost-difficulty";
+import { glost } from "@glotblocks/glost";
+import { createDifficultyPlugin } from "@glotblocks/glost-difficulty";
 
 // 1. Load difficulty data (CEFR, JLPT, or custom)
 const wordLists = await loadCEFRWordLists();

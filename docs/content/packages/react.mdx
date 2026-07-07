@@ -5,7 +5,7 @@ React components for rendering GloST documents with ruby annotations and progres
 ## Installation
 
 ```bash
-npm install glost-react glost react
+npm install @glotblocks/glost-react @glotblocks/glost react
 ```
 
 ## Features
@@ -18,7 +18,7 @@ npm install glost-react glost react
 ## Quick Start
 
 ```tsx
-import { GloSTWord, GloSTSentence, GloSTDocument } from 'glost-react';
+import { GloSTWord, GloSTSentence, GloSTDocument } from '@glotblocks/glost-react';
 
 function MyApp({ document }) {
   return (
@@ -46,7 +46,7 @@ function MyApp({ document }) {
 Renders a single word with optional ruby annotation.
 
 ```tsx
-import { GloSTWord } from 'glost-react';
+import { GloSTWord } from '@glotblocks/glost-react';
 
 <GloSTWord
   word={word}
@@ -71,7 +71,7 @@ import { GloSTWord } from 'glost-react';
 Renders a sentence with its child words.
 
 ```tsx
-import { GloSTSentence } from 'glost-react';
+import { GloSTSentence } from '@glotblocks/glost-react';
 
 <GloSTSentence
   sentence={sentence}
@@ -96,7 +96,7 @@ import { GloSTSentence } from 'glost-react';
 Context provider for document-level settings.
 
 ```tsx
-import { GloSTDocument } from 'glost-react';
+import { GloSTDocument } from '@glotblocks/glost-react';
 
 <GloSTDocument
   document={document}
@@ -130,7 +130,7 @@ Control how much information is shown:
 Access document-level settings.
 
 ```tsx
-import { useGloSTContext } from 'glost-react/hooks';
+import { useGloSTContext } from '@glotblocks/glost-react/hooks';
 
 function MyComponent() {
   const { displayLevel, transcriptionSystem } = useGloSTContext();
@@ -143,7 +143,7 @@ function MyComponent() {
 Extract metadata from a word.
 
 ```tsx
-import { useWordMetadata } from 'glost-react/hooks';
+import { useWordMetadata } from '@glotblocks/glost-react/hooks';
 
 function WordDetails({ word }) {
   const { frequency, difficulty, pos } = useWordMetadata(word);
@@ -191,13 +191,13 @@ import type {
   GloSTWordProps,
   GloSTSentenceProps,
   GloSTDocumentProps
-} from 'glost-react/types';
+} from '@glotblocks/glost-react/types';
 ```
 
 ## Example: Thai Learning App
 
 ```tsx
-import { GloSTDocument, GloSTSentence, GloSTWord } from 'glost-react';
+import { GloSTDocument, GloSTSentence, GloSTWord } from '@glotblocks/glost-react';
 
 function ThaiLesson({ document }) {
   const [displayLevel, setDisplayLevel] = useState(2);

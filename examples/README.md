@@ -33,7 +33,7 @@ Examples that work with any language:
 |---------|-------------|-------|
 | [`glost-quick-start-example`](./demos/glost-quick-start-example/) | Basic GLOST operations and document creation | ✓ |
 | [`glost-core-api-example`](./demos/glost-core-api-example/) | Core API usage with large documents | ✓ |
-| [`glost-plugins-api-example`](./demos/glost-plugins-api-example/) | Extension system patterns and composition | ✓ |
+| [`glost-extensions-api-example`](./demos/glost-extensions-api-example/) | Extension system patterns and composition | ✓ |
 | [`glost-processor-api-example`](./demos/glost-processor-api-example/) | Unified-style processor API with pipelines | ✓ |
 
 ### Language-Specific Demos
@@ -56,6 +56,7 @@ Full-featured web applications with UI:
 |---------|-------------|------------|
 | [`glost-composition-demo-example`](./web-apps/glost-composition-demo-example/) | Interactive composition patterns demo | Vite + TypeScript |
 | [`glost-transcription-demo-example`](./web-apps/glost-transcription-demo-example/) | Interactive transcription playground | Vite + TypeScript |
+| [`glost-thai-extensions-demo`](./web-apps/glost-thai-extensions-demo/) | Thai extensions showcase | Vite + TypeScript |
 
 ### Performance & Benchmarks
 

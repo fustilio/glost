@@ -245,9 +245,9 @@ For batch metadata management, use JSON format:
 Use extensions from separate packages to enhance metadata display:
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from "glost-plugins";
-import { createFrequencyExtension } from "glost-frequency";
-import { createDifficultyExtension } from "glost-difficulty";
+import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
+import { createFrequencyExtension } from "@glotblocks/glost-frequency";
+import { createDifficultyExtension } from "@glotblocks/glost-difficulty";
 
 // Create extensions with providers
 const [freqGen, freqEnh] = createFrequencyExtension({
@@ -305,7 +305,7 @@ For language-specific metadata fields, use separate namespaces:
 Basic validation helper:
 
 ```typescript
-import { isValidMetadata } from "glost-utils";
+import { isValidMetadata } from "@glotblocks/glost-utils";
 
 const metadata = {
   frequency: "very-common",

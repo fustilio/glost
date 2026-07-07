@@ -4,7 +4,7 @@
 
 ### Package Names
 
-- **`packages/core`** → Now named **`glost-core`** in package.json
+- **`packages/core`** → Now named **`@glotblocks/glost-core`** in package.json
 - **`packages/glost`** → Now the **main facade package** named **`glost`**
 
 ### New Structure
@@ -50,7 +50,7 @@ All packages that previously depended on `"glost": "workspace:*"` now depend on 
 ### Users Install One Package
 
 ```bash
-npm install glost
+npm install @glotblocks/glost
 ```
 
 ### Everything Available from One Import
@@ -63,38 +63,38 @@ import {
   getAllWords,              // From glost-core
   pluginRegistry,           // From glost-registry
   languageLearningPreset    // From glost-presets
-} from "glost";
+} from "@glotblocks/glost";
 ```
 
 ### Or Granular Imports
 
 ```typescript
 // Just the core
-import { createSimpleDocument } from "glost-core";
+import { createSimpleDocument } from "@glotblocks/glost-core";
 
 // With processor
-import { glost } from "glost-processor";
+import { glost } from "@glotblocks/glost-processor";
 ```
 
 ### Subpath Exports
 
 ```typescript
 // Explicit subpaths
-import { glost } from "glost/processor";
-import { pluginRegistry } from "glost/registry";
-import { languageLearningPreset } from "glost/presets";
+import { glost } from "@glotblocks/glost/processor";
+import { pluginRegistry } from "@glotblocks/glost/registry";
+import { languageLearningPreset } from "@glotblocks/glost/presets";
 ```
 
 ## Next Steps
 
 1. **Run `pnpm install`** to update workspace dependencies
 2. **Build the packages**: `pnpm build -r`
-3. **Test the changes**: Import from `glost` instead of `glost-core`
+3. **Test the changes**: Import from `glost` instead of `@glotblocks/glost-core`
 
 ## Benefits
 
-✅ **Clear Naming** - `glost-core` clearly indicates it's the core implementation  
-✅ **Convenience** - Users can `npm install glost` and get everything  
+✅ **Clear Naming** - `@glotblocks/glost-core` clearly indicates it's the core implementation  
+✅ **Convenience** - Users can `npm install glost` and get everything
 ✅ **Flexibility** - Advanced users can install specific packages  
 ✅ **Standard Pattern** - Follows monorepo best practices (like babel, unified)  
 ✅ **Clean API** - Main package is the public interface  
@@ -103,16 +103,16 @@ import { languageLearningPreset } from "glost/presets";
 
 ### Before
 ```typescript
-import { createSimpleDocument } from "glost";
+import { createSimpleDocument } from "@glotblocks/glost";
 ```
 
 ### After (both work!)
 ```typescript
 // Option 1: From main package (recommended)
-import { createSimpleDocument } from "glost";
+import { createSimpleDocument } from "@glotblocks/glost";
 
 // Option 2: From core directly
-import { createSimpleDocument } from "glost-core";
+import { createSimpleDocument } from "@glotblocks/glost-core";
 ```
 
-The main `glost` package re-exports everything from `glost-core`, so existing code using `import from "glost"` will continue to work!
+The main `glost` package re-exports everything from `@glotblocks/glost-core`, so existing code using `import from "@glotblocks/glost"` will continue to work!

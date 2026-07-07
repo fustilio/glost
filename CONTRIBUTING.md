@@ -2,8 +2,6 @@
 
 Thank you for your interest in contributing to GLOST! We appreciate your help.
 
-## Current Version: v0.5.0
-
 GLOST is a framework for processing multilingual text with language learning annotations using a unified/remark-style plugin system.
 
 ## Development Setup
@@ -15,26 +13,9 @@ GLOST is a framework for processing multilingual text with language learning ann
 
 ## Package Structure
 
-GLOST v0.5.0 is a monorepo with the following key packages:
-
-### Main Packages
-- **glost** - Main facade package
-- **glost-core** - Core types and nodes  
-- **glost-processor** - Unified-style processor API
-- **glost-registry** - Plugin discovery and validation
-- **glost-presets** - Pre-configured plugin combinations
-- **glost-cli** - Command-line tools
-
-### Supporting Packages
-- **glost-common** - Language utilities
-- **glost-plugins** - Extension system
-- **glost-utils** - Text utilities
-
-### Language Packages
-- **glost-th** - Thai language support
-- **glost-ja** - Japanese language support
-- **glost-ko** - Korean language support
-- **glost-en** - English language support
+GLOST is a monorepo published under the `@glotblocks/` npm scope. See the
+[package index in the README](./README.md#packages) for the full, current list —
+it is not duplicated here.
 
 ## Making Changes
 
@@ -80,8 +61,8 @@ pnpm test:coverage
 pnpm bench
 
 # Specific package
-pnpm bench:core
 pnpm bench:extensions
+pnpm bench:plugins
 ```
 
 ## Documentation
@@ -89,13 +70,14 @@ pnpm bench:extensions
 - Update README files when adding features
 - Add examples for new functionality
 - Keep API documentation up to date
-- Follow the [Documentation Guide](./docs/index.md)
+- Follow the docs site structure under `docs/content/`
 
 ### Documentation Structure
 
 - **README.md** - Project overview
-- **docs/index.md** - Documentation hub
-- **docs/guides/** - Implementation guides
+- **docs/content/** - Documentation site content (Nextra)
+- **docs/content/guides/** - Implementation guides
+- **docs/adr/** - Architecture decision records
 - **Package READMEs** - Package-specific documentation
 
 ## Contributing to the Ecosystem
@@ -107,7 +89,7 @@ Beyond core GLOST contributions, you can also contribute to the ecosystem:
 Create new extensions for the GLOST plugin ecosystem:
 
 ```typescript
-import { GLOSTExtension } from "glost-core";
+import { GLOSTExtension } from "@glotblocks/glost-core";
 
 export const myPlugin: GLOSTExtension = {
   id: "my-plugin",
@@ -121,15 +103,15 @@ export const myPlugin: GLOSTExtension = {
 ```
 
 **See:**
-- [Custom Extensions Guide](./docs/guides/custom-extensions.md)
-- [Extension Guide](./docs/concepts/extensions.md)
+- [Custom Plugins Guide](./docs/content/guides/custom-plugins.mdx)
+- [Plugins Guide](./docs/content/plugins-guide.mdx)
 
 ### 2. Create Language Packages
 
 Add support for new languages:
 
 ```typescript
-import { GLOSTWord } from "glost-core";
+import { GLOSTWord } from "@glotblocks/glost-core";
 
 export function createMyLangWord(props: MyLangWordProps): GLOSTWord {
   // Language-specific word creation
@@ -137,7 +119,7 @@ export function createMyLangWord(props: MyLangWordProps): GLOSTWord {
 ```
 
 **See:**
-- [Multi-Language Architecture](./docs/guides/multi-language-architecture.md)
+- [Multi-Language Architecture](./docs/content/guides/multi-language-architecture.mdx)
 - [Thai Package](./packages/languages/th) (example)
 - [Japanese Package](./packages/languages/ja) (example)
 
@@ -146,8 +128,8 @@ export function createMyLangWord(props: MyLangWordProps): GLOSTWord {
 Build packages that provide dictionary data, frequency lists, or other language resources:
 
 **See:**
-- [Creating Data Source Packages](./docs/guides/creating-data-source-packages.md)
-- [Implementing Transcription Providers](./docs/guides/implementing-transcription-providers.md)
+- [Creating Data Source Packages](./docs/content/guides/creating-data-source-packages.mdx)
+- [Implementing Transcription Providers](./docs/content/guides/implementing-transcription-providers.mdx)
 
 ### 4. Create Presets
 
@@ -169,7 +151,7 @@ export function myPreset(options) {
 Built something with GLOST? We'd be happy to feature it:
 
 1. Document your implementation and patterns
-2. Submit PR to add to [Ecosystem](./docs/ecosystem.md)
+2. Submit PR to add to [Ecosystem](./docs/content/ecosystem.mdx)
 3. Share insights that might benefit others
 
 ## Development Workflow
@@ -214,7 +196,7 @@ cd packages/my-package
 pnpm add dependency-name
 
 # Add workspace dependency
-pnpm add glost-core
+pnpm add @glotblocks/glost-core --workspace
 ```
 
 ## Architecture Principles
@@ -227,7 +209,7 @@ GLOST follows these principles:
 4. **No Data > Bad Data** - Extensions gracefully handle missing data
 5. **Language Agnostic Core** - Language-specific logic in language packages
 
-**See:** [Architecture Summary](./docs/ARCHITECTURE_SUMMARY.md)
+**See:** [Architecture Summary](./docs/content/architecture-summary.mdx)
 
 ## Pull Request Process
 
@@ -258,19 +240,29 @@ GLOST follows these principles:
 
 ## Release Process
 
-(For maintainers)
+Releases are automated with [Changesets](https://github.com/changesets/changesets) +
+GitHub Actions (`.github/workflows/release.yml`). Nobody publishes from a laptop.
 
-1. Update version numbers
-2. Update CHANGELOG files
-3. Create release notes
-4. Tag release
-5. Publish to npm
+1. **In your PR**, add a changeset describing the change and bump type:
+   ```bash
+   pnpm changeset
+   ```
+   Commit the generated `.changeset/*.md` file with your change.
+2. **On merge to `main`**, the release workflow opens (or refreshes) a
+   "Version Packages" PR that applies all pending changesets: version bumps +
+   `CHANGELOG.md` entries.
+3. **Merging the Version Packages PR publishes to npm.** The workflow runs
+   `pnpm changeset:release` (publint gate + `changeset publish`) using npm
+   **OIDC trusted publishing** — there is no `NPM_TOKEN` secret. Each package
+   must have a trusted publisher configured on npmjs.com for
+   `fustilio/glost` / `release.yml`; brand-new packages need one manual first
+   publish before OIDC can take over.
 
 ## Questions?
 
 - 💬 [GitHub Discussions](https://github.com/fustilio/glost/discussions) - Ask questions
 - 🐛 [Issue Tracker](https://github.com/fustilio/glost/issues) - Report bugs
-- 📖 [Documentation](./docs/index.md) - Read the docs
+- 📖 [Documentation](./docs/content/index.mdx) - Read the docs
 
 Open an issue for discussion before making major changes.
 

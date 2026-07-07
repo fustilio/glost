@@ -39,25 +39,32 @@ pnpm build
 
 ```
 docs/
-├── app/                # Next.js App Router
-│   ├── layout.tsx     # Root layout
-│   ├── globals.css    # Global styles
-│   ├── page.mdx       # Home page
-│   ├── guides/        # User guides
-│   ├── concepts/      # Core concepts
-│   ├── packages/      # Package documentation
+├── app/               # Next.js App Router shell
+│   ├── layout.jsx     # Root layout
+│   ├── page.jsx       # Home page
+│   ├── docs/          # Docs route ([[...mdxPath]] catch-all)
 │   └── _meta.ts       # Navigation configuration
-├── theme.config.tsx   # Nextra theme configuration
+├── content/           # All documentation content (MDX)
+│   ├── getting-started.mdx
+│   ├── api/           # API reference (BCP-47, language codes, proficiency)
+│   ├── concepts/      # Core concepts
+│   ├── conventions/   # Conventions
+│   ├── examples/      # Example walkthroughs
+│   ├── guides/        # User guides
+│   ├── migration/     # Migration guides
+│   ├── packages/      # Package documentation
+│   ├── releases/      # Release notes
+│   └── _meta.ts       # Per-directory navigation
+├── adr/               # Architecture decision records
 ├── next.config.mjs    # Next.js configuration
-├── tailwind.config.ts # Tailwind CSS configuration
-├── mdx-components.tsx # MDX components configuration
+├── mdx-components.js  # MDX components configuration
 └── package.json       # Dependencies
 ```
 
 ## Writing Documentation
 
 - All documentation files are in MDX format (`.mdx`)
-- Place files in the `app/` directory following Next.js App Router conventions
+- Place files in the `content/` directory (Nextra v4 content convention)
 - Update `_meta.ts` files to configure navigation
 - Use Nextra components for enhanced documentation features
 

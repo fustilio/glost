@@ -11,8 +11,8 @@ GLOST v0.5.0 is a major release that transforms GLOST into a unified/remark-styl
 Fluent API for plugin composition inspired by unified/remark:
 
 ```typescript
-import { glost } from "glost";
-import { languageLearningPreset } from "glost/presets";
+import { glost } from "@glotblocks/glost";
+import { languageLearningPreset } from "@glotblocks/glost/presets";
 
 const processor = glost()
   .use(languageLearningPreset)
@@ -26,7 +26,7 @@ const result = await processor.process(document);
 Comprehensive plugin discovery and validation:
 
 ```typescript
-import { pluginRegistry } from "glost/registry";
+import { pluginRegistry } from "@glotblocks/glost/registry";
 
 const plugins = pluginRegistry.search({ language: "th" });
 const report = pluginRegistry.checkConflicts(["plugin1", "plugin2"]);
@@ -57,7 +57,7 @@ glost plugins validate transcription translation frequency
 
 Complete provider infrastructure for language-specific features:
 
-**Base Classes** (`glost-common`):
+**Base Classes** (`@glotblocks/glost-common`):
 - `BaseLanguageProvider` - Language validation, logging, error handling
 - `BaseDataProvider<TData>` - Lazy loading, caching, resource management
 
@@ -76,12 +76,12 @@ See [Implementing Language Providers](/docs/guides/implementing-language-provide
 ### 🎯 Package Restructure
 
 - **`glost`** - Main facade package (new)
-- **`glost-core`** - Core types and nodes (renamed from `glost`)
-- **`glost-processor`** - Processor API (new)
-- **`glost-registry`** - Plugin registry (new)
-- **`glost-presets`** - Preset configurations (new)
-- **`glost-cli`** - CLI tools (new)
-- **`glost-common`** - Enhanced with provider base classes and data loaders
+- **`@glotblocks/glost-core`** - Core types and nodes (renamed from `glost`)
+- **`@glotblocks/glost-processor`** - Processor API (new)
+- **`@glotblocks/glost-registry`** - Plugin registry (new)
+- **`@glotblocks/glost-presets`** - Preset configurations (new)
+- **`@glotblocks/glost-cli`** - CLI tools (new)
+- **`@glotblocks/glost-common`** - Enhanced with provider base classes and data loaders
 
 ## Breaking Changes
 
@@ -89,17 +89,17 @@ See [Implementing Language Providers](/docs/guides/implementing-language-provide
 
 The core package has been renamed:
 - **Before:** `glost` (the core package)
-- **After:** `glost-core` (core implementation), `glost` (facade package)
+- **After:** `@glotblocks/glost-core` (core implementation), `glost` (facade package)
 
 ### Import Changes
 
 ```typescript
 // v0.4.x - Still works but deprecated
-import { processGLOSTWithExtensions } from "glost-plugins";
+import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
 const result = processGLOSTWithExtensions(doc, [ext1, ext2]);
 
 // v0.5.0 - Recommended
-import { glost } from "glost";
+import { glost } from "@glotblocks/glost";
 const result = await glost().use(ext1).use(ext2).process(doc);
 ```
 
@@ -126,10 +126,10 @@ npm install glost@0.5.0
 2. Update imports:
 ```typescript
 // Old
-import { processGLOSTWithExtensions } from "glost-plugins";
+import { processGLOSTWithExtensions } from "@glotblocks/glost-plugins";
 
 // New
-import { glost } from "glost";
+import { glost } from "@glotblocks/glost";
 ```
 
 3. Convert to fluent API:

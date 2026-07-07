@@ -58,7 +58,7 @@ const CAMBRIDGE_LEVELS = ["KET", "PET", "FCE", "CAE", "CPE"] as const
 Validates common language codes.
 
 ```typescript
-import { languageCodeSchema } from "glost-common"
+import { languageCodeSchema } from "@glotblocks/glost-common"
 
 languageCodeSchema.safeParse("en").success   // true
 languageCodeSchema.safeParse("eng").success  // true

@@ -28,8 +28,8 @@ const sentence = "The quick brown fox jumps over the lazy dog.";
 ### With POS Tagging
 
 ```typescript
-import { processGLOSTWithExtensionsAsync } from "glost-plugins";
-import { createPOSExtension } from "glost-pos";
+import { processGLOSTWithExtensionsAsync } from "@glotblocks/glost-plugins";
+import { createPOSExtension } from "@glotblocks/glost-pos";
 import { createEnglishPOSProvider } from "./my-nlp-provider";
 
 // Real POS tagger (e.g., from dictionary or NLP model)
@@ -366,8 +366,8 @@ async function goodPOSTagger(word, context) {
 ## Integration Example: Grammar Dashboard
 
 ```typescript
-import { glost } from "glost";
-import { createPOSPlugin } from "glost-pos";
+import { glost } from "@glotblocks/glost";
+import { createPOSPlugin } from "@glotblocks/glost-pos";
 
 // 1. Setup POS provider
 const posProvider = createEnglishPOSProvider({

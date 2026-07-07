@@ -5,20 +5,20 @@ The core package providing types, node factories, and tree utilities.
 ## Installation
 
 ```bash
-pnpm add glost
+pnpm add @glotblocks/glost
 ```
 
 ## Exports
 
 ```typescript
 // Main entry
-import { ... } from 'glost';
+import { ... } from '@glotblocks/glost';
 
 // Subpath exports
-import { ... } from 'glost/nodes';
-import { ... } from 'glost/utils';
-import { ... } from 'glost/guards';
-import { ... } from 'glost/validators';
+import { ... } from '@glotblocks/glost/nodes';
+import { ... } from '@glotblocks/glost/utils';
+import { ... } from '@glotblocks/glost/guards';
+import { ... } from '@glotblocks/glost/validators';
 ```
 
 ## Node Factory Functions
@@ -69,15 +69,15 @@ function createSimpleWord(
 
 Language-specific helper functions have been moved to dedicated packages:
 
-- **Thai:** `glost-th` package - See [glost-th](https://github.com/fustilio/glost/tree/main/packages/languages/th)
-- **Japanese:** `glost-ja` package - See [glost-ja](https://github.com/fustilio/glost/tree/main/packages/languages/ja)
+- **Thai:** `@glotblocks/glost-th` package - See [glost-th](https://github.com/fustilio/glost/tree/main/packages/languages/th)
+- **Japanese:** `@glotblocks/glost-ja` package - See [glost-ja](https://github.com/fustilio/glost/tree/main/packages/languages/ja)
 
 ```typescript
 // Install language packages
-// npm install glost-th glost-ja
+// npm install @glotblocks/glost-th @glotblocks/glost-ja
 
-import { createThaiWord } from 'glost-th';
-import { createJapaneseWord } from 'glost-ja';
+import { createThaiWord } from '@glotblocks/glost-th';
+import { createJapaneseWord } from '@glotblocks/glost-ja';
 ```
 
 See [Migration Guide](/docs/migration/v0.4-to-v0.5) for upgrading.
