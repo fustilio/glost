@@ -1,5 +1,16 @@
 # glost-ko
 
+## 0.1.10
+
+### Patch Changes
+
+- Updated dependencies [14f0a12]
+  - @glotblocks/glost-translation@0.4.8
+  - @glotblocks/glost-difficulty@0.4.8
+  - @glotblocks/glost-frequency@0.4.8
+  - @glotblocks/glost-pos@0.4.8
+  - @glotblocks/glost-transcription@0.4.10
+
 ## 0.1.9
 
 ### Patch Changes

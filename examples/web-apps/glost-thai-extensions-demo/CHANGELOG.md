@@ -1,5 +1,11 @@
 # glost-thai-extensions-demo
 
+## 0.0.11
+
+### Patch Changes
+
+- @glotblocks/glost-th@0.4.11
+
 ## 0.0.10
 
 ### Patch Changes
