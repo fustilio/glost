@@ -1,5 +1,15 @@
 # glost-plugins-api-example
 
+## 0.0.11
+
+### Patch Changes
+
+- Updated dependencies [14f0a12]
+  - @glotblocks/glost-difficulty@0.4.8
+  - @glotblocks/glost-frequency@0.4.8
+  - @glotblocks/glost-pos@0.4.8
+  - @glotblocks/glost-transcription@0.4.10
+
 ## 0.0.10
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # glost-th-transcription-example
 
+## 0.0.11
+
+### Patch Changes
+
+- Updated dependencies [14f0a12]
+  - @glotblocks/glost-transcription@0.4.10
+  - @glotblocks/glost-th@0.4.11
+
 ## 0.0.10
 
 ### Patch Changes

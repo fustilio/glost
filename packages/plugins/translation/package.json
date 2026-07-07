@@ -1,6 +1,6 @@
 {
   "name": "@glotblocks/glost-translation",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "description": "Translation extension for GLOST - adds multilingual glosses",
   "author": "fustilio",
   "license": "MIT",
