@@ -3,6 +3,7 @@ name: Release
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 concurrency:
   group: release-${{ github.ref }}
@@ -32,7 +33,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22" # >=22.14 required for npm OIDC
+          # Node 24 ships npm >= 11.5.1, required for the OIDC publish handshake.
+          # Node 22 / npm 10 fails it with a misleading ENEEDAUTH / 404 (this bit
+          # us on 2026-07-07: every package failed with "need auth" despite
+          # trusted publishers being configured).
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
           cache: pnpm
 
       - name: Install dependencies
