@@ -24,6 +24,11 @@
     "ast"
   ],
   "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fustilio/glost.git",
+    "directory": "packages/processor"
+  },
   "license": "MIT",
   "dependencies": {
     "@glotblocks/glost-core": "workspace:*",
