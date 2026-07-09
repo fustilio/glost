@@ -1,5 +1,15 @@
 # glost-ko-transcription-example
 
+## 0.0.12
+
+### Patch Changes
+
+- Updated dependencies [46619d3]
+  - @glotblocks/glost-plugins@0.6.7
+  - @glotblocks/glost-transcription@0.4.11
+  - @glotblocks/glost@0.8.5
+  - @glotblocks/glost-ko@0.1.11
+
 ## 0.0.11
 
 ### Patch Changes

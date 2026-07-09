@@ -1,5 +1,11 @@
 # glost-react
 
+## 0.6.5
+
+### Patch Changes
+
+- @glotblocks/glost@0.8.5
+
 ## 0.6.4
 
 ### Patch Changes

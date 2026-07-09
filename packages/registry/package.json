@@ -1,6 +1,6 @@
 {
   "name": "@glotblocks/glost-registry",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Plugin registry with discovery, metadata, and validation for GLOST",
   "type": "module",
   "main": "./dist/index.js",

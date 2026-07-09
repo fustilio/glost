@@ -1,6 +1,6 @@
 {
   "name": "@glotblocks/glost-clause-segmenter",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Clause segmentation extension for GLOST - segments sentences into clauses",
   "author": "GLOST Contributors",
   "license": "MIT",
@@ -12,7 +12,9 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

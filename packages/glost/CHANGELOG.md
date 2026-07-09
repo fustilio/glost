@@ -1,5 +1,13 @@
 # glost
 
+## 0.8.5
+
+### Patch Changes
+
+- @glotblocks/glost-processor@1.0.3
+- @glotblocks/glost-registry@1.0.3
+- @glotblocks/glost-presets@0.6.3
+
 ## 0.8.4
 
 ### Patch Changes

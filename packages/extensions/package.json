@@ -1,6 +1,6 @@
 {
   "name": "@glotblocks/glost-extensions",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Core extension system and built-in extensions for GLOST",
   "author": "fustilio",
   "license": "MIT",

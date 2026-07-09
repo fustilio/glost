@@ -1,6 +1,6 @@
 {
   "name": "@glotblocks/glost-en",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "type": "module",
   "description": "English language support for GLOST - segmentation providers and helpers",
   "keywords": [
