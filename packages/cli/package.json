@@ -25,6 +25,11 @@
     "plugins"
   ],
   "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fustilio/glost.git",
+    "directory": "packages/cli"
+  },
   "license": "MIT",
   "dependencies": {
     "@glotblocks/glost-registry": "workspace:*",
