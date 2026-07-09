@@ -1,5 +1,19 @@
 # glost-th
 
+## 0.4.12
+
+### Patch Changes
+
+- Updated dependencies [46619d3]
+  - @glotblocks/glost-plugins@0.6.7
+  - @glotblocks/glost-clause-segmenter@0.2.9
+  - @glotblocks/glost-difficulty@0.4.9
+  - @glotblocks/glost-frequency@0.4.9
+  - @glotblocks/glost-pos@0.4.9
+  - @glotblocks/glost-transcription@0.4.11
+  - @glotblocks/glost-translation@0.4.9
+  - @glotblocks/glost@0.8.5
+
 ## 0.4.11
 
 ### Patch Changes

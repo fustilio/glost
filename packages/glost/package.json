@@ -1,6 +1,6 @@
 {
   "name": "@glotblocks/glost",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "description": "GLOST - Glossed Syntax Tree for language learning and multilingual text processing",
   "author": "fustilio",
   "license": "MIT",
@@ -12,7 +12,9 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

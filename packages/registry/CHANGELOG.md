@@ -1,5 +1,12 @@
 # glost-registry
 
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies [46619d3]
+  - @glotblocks/glost-extensions@0.6.3
+
 ## 1.0.2
 
 ### Patch Changes

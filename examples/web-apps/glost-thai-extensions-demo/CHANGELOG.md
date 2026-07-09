@@ -1,5 +1,14 @@
 # glost-thai-extensions-demo
 
+## 0.0.12
+
+### Patch Changes
+
+- Updated dependencies [46619d3]
+  - @glotblocks/glost-plugins@0.6.7
+  - @glotblocks/glost-th@0.4.12
+  - @glotblocks/glost@0.8.5
+
 ## 0.0.11
 
 ### Patch Changes

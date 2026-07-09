@@ -1,5 +1,13 @@
 # glost-stress-tests-example
 
+## 0.0.9
+
+### Patch Changes
+
+- Updated dependencies [46619d3]
+  - @glotblocks/glost-plugins@0.6.7
+  - @glotblocks/glost@0.8.5
+
 ## 0.0.8
 
 ### Patch Changes

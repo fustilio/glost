@@ -1,5 +1,17 @@
 # glost-th-multi-extension-pipeline-example
 
+## 0.0.12
+
+### Patch Changes
+
+- Updated dependencies [46619d3]
+  - @glotblocks/glost-plugins@0.6.7
+  - @glotblocks/glost-th@0.4.12
+  - @glotblocks/glost-frequency@0.4.9
+  - @glotblocks/glost-transcription@0.4.11
+  - @glotblocks/glost-translation@0.4.9
+  - @glotblocks/glost@0.8.5
+
 ## 0.0.11
 
 ### Patch Changes
