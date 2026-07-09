@@ -1,5 +1,14 @@
 # glost-ja-transcription-example
 
+## 0.0.13
+
+### Patch Changes
+
+- @glotblocks/glost@0.8.6
+- @glotblocks/glost-ja@0.4.12
+- @glotblocks/glost-transcription@0.4.12
+- @glotblocks/glost-plugins@0.6.8
+
 ## 0.0.12
 
 ### Patch Changes

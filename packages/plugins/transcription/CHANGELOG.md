@@ -1,5 +1,13 @@
 # glost-transcription
 
+## 0.4.12
+
+### Patch Changes
+
+- @glotblocks/glost@0.8.6
+- @glotblocks/glost-utils@0.3.8
+- @glotblocks/glost-plugins@0.6.8
+
 ## 0.4.11
 
 ### Patch Changes

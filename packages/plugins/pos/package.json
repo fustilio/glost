@@ -1,6 +1,6 @@
 {
   "name": "@glotblocks/glost-pos",
-  "version": "0.4.9",
+  "version": "0.4.10",
   "description": "Part-of-speech extension for GLOST - generates and formats POS data",
   "author": "GLOST Contributors",
   "license": "MIT",

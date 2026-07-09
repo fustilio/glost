@@ -1,5 +1,13 @@
 # glost-presets
 
+## 0.6.4
+
+### Patch Changes
+
+- b72190c: Add the `repository` field (with `directory`) to these four packages. They were the only publishable packages missing it, which caused npm to reject their OIDC provenance publish with `E422 ... "repository.url" is "", expected to match "https://github.com/fustilio/glost"`. Every other package already carries this field.
+- Updated dependencies [b72190c]
+  - @glotblocks/glost-processor@1.0.4
+
 ## 0.6.3
 
 ### Patch Changes

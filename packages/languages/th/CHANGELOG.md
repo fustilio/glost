@@ -1,5 +1,18 @@
 # glost-th
 
+## 0.4.13
+
+### Patch Changes
+
+- @glotblocks/glost@0.8.6
+- @glotblocks/glost-clause-segmenter@0.2.10
+- @glotblocks/glost-difficulty@0.4.10
+- @glotblocks/glost-frequency@0.4.10
+- @glotblocks/glost-pos@0.4.10
+- @glotblocks/glost-transcription@0.4.12
+- @glotblocks/glost-translation@0.4.10
+- @glotblocks/glost-plugins@0.6.8
+
 ## 0.4.12
 
 ### Patch Changes

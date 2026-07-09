@@ -1,6 +1,6 @@
 {
   "name": "@glotblocks/glost",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "description": "GLOST - Glossed Syntax Tree for language learning and multilingual text processing",
   "author": "fustilio",
   "license": "MIT",

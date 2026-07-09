@@ -1,6 +1,6 @@
 {
   "name": "@glotblocks/glost-processor",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Unified-style processor API for GLOST documents",
   "type": "module",
   "main": "./dist/index.js",

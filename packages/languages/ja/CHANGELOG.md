@@ -1,5 +1,16 @@
 # glost-ja
 
+## 0.4.12
+
+### Patch Changes
+
+- @glotblocks/glost@0.8.6
+- @glotblocks/glost-difficulty@0.4.10
+- @glotblocks/glost-frequency@0.4.10
+- @glotblocks/glost-pos@0.4.10
+- @glotblocks/glost-transcription@0.4.12
+- @glotblocks/glost-translation@0.4.10
+
 ## 0.4.11
 
 ### Patch Changes

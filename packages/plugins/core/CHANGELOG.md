@@ -1,5 +1,11 @@
 # glost-plugins
 
+## 0.6.8
+
+### Patch Changes
+
+- @glotblocks/glost-utils@0.3.8
+
 ## 0.6.7
 
 ### Patch Changes
