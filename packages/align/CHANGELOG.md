@@ -1,5 +1,11 @@
 # glost-align
 
+## 0.2.2
+
+### Patch Changes
+
+- @glotblocks/glost@0.8.6
+
 ## 0.2.1
 
 ### Patch Changes

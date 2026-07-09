@@ -1,6 +1,6 @@
 {
   "name": "@glotblocks/glost-transcription",
-  "version": "0.4.11",
+  "version": "0.4.12",
   "description": "Transcription extension for GLOST - adds pronunciation data",
   "author": "fustilio",
   "license": "MIT",

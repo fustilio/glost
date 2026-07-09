@@ -1,6 +1,6 @@
 {
   "name": "@glotblocks/glost-utils",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "Framework-agnostic utilities for GLOST manipulation, conversion, and merging",
   "author": "fustilio",
   "license": "MIT",

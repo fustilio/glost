@@ -1,5 +1,12 @@
 # glost-difficulty
 
+## 0.4.10
+
+### Patch Changes
+
+- @glotblocks/glost@0.8.6
+- @glotblocks/glost-plugins@0.6.8
+
 ## 0.4.9
 
 ### Patch Changes

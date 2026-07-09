@@ -1,5 +1,13 @@
 # glost-thai-extensions-demo
 
+## 0.0.13
+
+### Patch Changes
+
+- @glotblocks/glost@0.8.6
+- @glotblocks/glost-th@0.4.13
+- @glotblocks/glost-plugins@0.6.8
+
 ## 0.0.12
 
 ### Patch Changes

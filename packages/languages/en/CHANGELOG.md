@@ -1,5 +1,12 @@
 # glost-en
 
+## 0.4.9
+
+### Patch Changes
+
+- @glotblocks/glost@0.8.6
+- @glotblocks/glost-clause-segmenter@0.2.10
+
 ## 0.4.8
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # glost-dialogue
 
+## 0.8.4
+
+### Patch Changes
+
+- @glotblocks/glost@0.8.6
+
 ## 0.8.3
 
 ### Patch Changes

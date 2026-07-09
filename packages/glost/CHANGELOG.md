@@ -1,5 +1,14 @@
 # glost
 
+## 0.8.6
+
+### Patch Changes
+
+- Updated dependencies [b72190c]
+  - @glotblocks/glost-presets@0.6.4
+  - @glotblocks/glost-processor@1.0.4
+  - @glotblocks/glost-registry@1.0.4
+
 ## 0.8.5
 
 ### Patch Changes

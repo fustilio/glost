@@ -1,5 +1,12 @@
 # glost-stress-tests-example
 
+## 0.0.10
+
+### Patch Changes
+
+- @glotblocks/glost@0.8.6
+- @glotblocks/glost-plugins@0.6.8
+
 ## 0.0.9
 
 ### Patch Changes

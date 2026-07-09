@@ -1,6 +1,6 @@
 {
   "name": "@glotblocks/glost-react",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "description": "React utilities for rendering GloST documents with ruby annotations and progressive display",
   "type": "module",
   "main": "./dist/index.js",
