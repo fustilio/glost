@@ -74,6 +74,12 @@ const result = await processor.process(document);
 - **[@glotblocks/glost-ko](./packages/languages/ko)** - Korean language support
 - **[@glotblocks/glost-en](./packages/languages/en)** - English language support
 
+The unscoped `glost-fr@0.1.0` on npm has no scoped successor and no source in
+this repository; it is retired with the other unscoped packages (decision
+2026-09-13). French consumers compose `@glotblocks/glost` with content from
+`@polyglot-bundles/fr-lang` instead (polyglot-tools tracks its own move in
+task #126).
+
 ### Plugins
 - **[@glotblocks/glost-transcription](./packages/plugins/transcription)** - Phonetic transcription
 - **[@glotblocks/glost-translation](./packages/plugins/translation)** - Text translation
